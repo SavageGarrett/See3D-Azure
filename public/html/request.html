@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>contact</h3>
+                        <h3>Request a Model</h3>
                     </div>
                 </div>
             </div>
@@ -108,92 +108,218 @@
   <!-- ================ contact section start ================= -->
   <section class="contact-section section_padding">
     <div class="container">
-      <div class="d-none d-sm-block mb-5 pb-4">
-        <div id="map" style="height: 480px;"></div>
-        <script>
-          function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
-            var grayStyles = [
-              {
-                featureType: "all",
-                stylers: [
-                  { saturation: -90 },
-                  { lightness: 50 }
-                ]
-              },
-              {elementType: 'labels.text.fill', stylers: [{color: '#ccdee9'}]}
-            ];
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: -31.197, lng: 150.744},
-              zoom: 9,
-              styles: grayStyles,
-              scrollwheel:  false
-            });
-          }
-          
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
-        
-      </div>
-
-
       <div class="row">
-        <div class="col-12">
-          <h2 class="contact-title">Get in Touch</h2>
+        <div class="col-lg-10">
+            <h3 class="mb-30">Request Form</h3>
+            <script>
+                function submit_form() {
+                    document.getElementById('model_form').submit();
+                }
+            </script>
+            <form action="http://40.76.54.72/mdrequest" method="POST" id="model_form">
+                <!-- Begin Personal Information -->
+                <div class="mt-10">
+                    <input type="text" name="first_name" placeholder="First Name"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required
+                        class="single-input">
+                </div>
+                <div class="mt-10">
+                    <input type="email" name="EMAIL" placeholder="Email address"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required
+                        class="single-input">
+                </div>
+                <div class="input-group-icon mt-10">
+                    <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+                    <input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Address'" required class="single-input">
+                </div>
+                <div class="input-group-icon mt-10">
+                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                    <input type="text" name="city" placeholder="City" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'City'" required class="single-input">
+                </div>
+                <div class="input-group-icon mt-10">
+                    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                    <div class="form-select" id="default-select">
+                        <select>
+                            <option value=" 1">United States</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <p>Braille Label</p>
+                    <div class="primary-switch">
+                        <input name="braille_label" type="checkbox" id="default-switch">
+                        <label for="default-switch"></label>
+                    </div>
+                </div>
+                <!-- End personal information -->
+
+                <br>
+
+                <!-- Model Information -->
+                <div class="mt-10">
+                    <textarea name="model_details" class="single-textarea" placeholder="What model would you like? (Include details about quantity, size, and any special considerations we made need to make)" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'What model would you like? (Include details about quantity, size, and any special considerations we made need to make)'" required></textarea>
+                </div>
+                <div class="mt-10">
+                    <textarea name="understand" class="single-textarea" placeholder="What part of this model are you trying to understand better?" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'What part of this model are you trying to understand better?'" required></textarea>
+                </div>
+                <div class="mt-10">
+                    <input type="text" name="iam" placeholder="I am"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'I am'" required
+                        class="single-input">
+                </div>
+                <div class="mt-10">
+                    <input type="text" name="model_description" placeholder="Model Description"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Model Description'" required
+                        class="single-input">
+                </div>
+                <!-- End Model Information -->
+
+                <br>
+
+                <!-- Internal Data -->
+                <div class="mt-10">
+                    <input type="text" name="school" placeholder="School (If Applicable)"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'School (If Applicable)'" required
+                        class="single-input">
+                </div>
+                <div class="mt-10">
+                    <input type="text" name="publicity" placeholder="How did you hear about See3D?"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'How did you hear about See3D?'" required
+                        class="single-input">
+                </div>
+                <div class="mt-10">
+                    <p>Would you like to provide feedback</p>
+                    <div class="primary-switch">
+                        <input name="feedback" type="checkbox">
+                        <label for="default-switch"></label>
+                    </div>
+                </div>
+                <!-- End Internal Data -->
+
+                <br>
+
+                <!-- Submit -->
+                <a onclick="submit_form()" class="genric-btn info">Submit</a>
+            </form>
         </div>
-        <div class="col-lg-8">
-          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  
-                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder = 'Enter Message'></textarea>
+        <!-- <div class="col-lg-3 col-md-4 mt-sm-30">
+            <div class="single-element-widget">
+                <h3 class="mb-30">Switches</h3>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>01. Sample Switch</p>
+                    <div class="primary-switch">
+                        <input type="checkbox" id="default-switch">
+                        <label for="default-switch"></label>
+                    </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder = 'Enter your name'>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>02. Primary Color Switch</p>
+                    <div class="primary-switch">
+                        <input type="checkbox" id="primary-switch" checked>
+                        <label for="primary-switch"></label>
+                    </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder = 'Enter email address'>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>03. Confirm Color Switch</p>
+                    <div class="confirm-switch">
+                        <input type="checkbox" id="confirm-switch" checked>
+                        <label for="confirm-switch"></label>
+                    </div>
                 </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder = 'Enter Subject'>
+            </div>
+            <div class="single-element-widget mt-30">
+                <h3 class="mb-30">Selectboxes</h3>
+                <div class="default-select" id="default-select"">
+                            <select>
+                                <option value=" 1">English</option>
+                    <option value="1">Spanish</option>
+                    <option value="1">Arabic</option>
+                    <option value="1">Portuguise</option>
+                    <option value="1">Bengali</option>
+                    </select>
                 </div>
-              </div>
             </div>
-            <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_4 boxed-btn">Send Message</button>
+            <div class="single-element-widget mt-30">
+                <h3 class="mb-30">Checkboxes</h3>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>01. Sample Checkbox</p>
+                    <div class="primary-checkbox">
+                        <input type="checkbox" id="default-checkbox">
+                        <label for="default-checkbox"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>02. Primary Color Checkbox</p>
+                    <div class="primary-checkbox">
+                        <input type="checkbox" id="primary-checkbox" checked>
+                        <label for="primary-checkbox"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>03. Confirm Color Checkbox</p>
+                    <div class="confirm-checkbox">
+                        <input type="checkbox" id="confirm-checkbox">
+                        <label for="confirm-checkbox"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>04. Disabled Checkbox</p>
+                    <div class="disabled-checkbox">
+                        <input type="checkbox" id="disabled-checkbox" disabled>
+                        <label for="disabled-checkbox"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>05. Disabled Checkbox active</p>
+                    <div class="disabled-checkbox">
+                        <input type="checkbox" id="disabled-checkbox-active" checked disabled>
+                        <label for="disabled-checkbox-active"></label>
+                    </div>
+                </div>
             </div>
-          </form>
-        </div>
-        <div class="col-lg-4">
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-home"></i></span>
-            <div class="media-body">
-              <h3>Buttonwood, California.</h3>
-              <p>Rosemead, CA 91770</p>
+            <div class="single-element-widget mt-30">
+                <h3 class="mb-30">Radios</h3>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>01. Sample radio</p>
+                    <div class="primary-radio">
+                        <input type="checkbox" id="default-radio">
+                        <label for="default-radio"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>02. Primary Color radio</p>
+                    <div class="primary-radio">
+                        <input type="checkbox" id="primary-radio" checked>
+                        <label for="primary-radio"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>03. Confirm Color radio</p>
+                    <div class="confirm-radio">
+                        <input type="checkbox" id="confirm-radio" checked>
+                        <label for="confirm-radio"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>04. Disabled radio</p>
+                    <div class="disabled-radio">
+                        <input type="checkbox" id="disabled-radio" disabled>
+                        <label for="disabled-radio"></label>
+                    </div>
+                </div>
+                <div class="switch-wrap d-flex justify-content-between">
+                    <p>05. Disabled radio active</p>
+                    <div class="disabled-radio">
+                        <input type="checkbox" id="disabled-radio-active" checked disabled>
+                        <label for="disabled-radio-active"></label>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-            <div class="media-body">
-              <h3>00 (440) 9865 562</h3>
-              <p>Mon to Fri 9am to 6pm</p>
-            </div>
-          </div>
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-email"></i></span>
-            <div class="media-body">
-              <h3>support@colorlib.com</h3>
-              <p>Send us your query anytime!</p>
-            </div>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
