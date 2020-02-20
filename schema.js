@@ -1,24 +1,10 @@
 let model_request = {
-    "heaader": true,
+    "header": true,
 
     // Page Request Fields
     "request_params": {
-        request_id: 0,
         date: "",
-        completed: 0,
-        name: "",
-        email: "",
-        iam: "",
-        description: "",
-        telephone: "",
-        school: "",
-        feedback: 0,
-        stl_file: "",
-        model_size: "",
-        considerations: "",
-        how_found: "",
-        address: "",
-        label: 0
+        completed: 0
     },
 
     // Parameter 

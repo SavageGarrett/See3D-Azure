@@ -2,80 +2,40 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 const request = require('request');
-
-var admin_users = {
-
-}
-
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+let mongoFunctions = require('../mongo.js');
+let request_help = require('../public/command_help/request_help.js');
+let hooks = require('../secret/hooks.js');
+let verify_admin = require('../secret/users.js');
 
 // GET index page
 router.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname + '/../public/html/index.html'));
 })
 
+// GET favicon
 router.get('/favicon.ico', (req, res, next) => {
   res.sendFile(path.join(__dirname + '/../public/favicon.ico'));
 })
 
+// Log id to console
 router.post('/getid', (req, res) => {
   console.log(req.body)
   res.send("User id logged")
 })
 
-router.post('/test', (req, res) => {
-  console.log(req.body)
-  res.send({
-    "channel": "CTE2Z75RD",
-    "blocks": [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "Danny Torrence left the following review for your property:"
-        }
-      },
-      {
-        "type": "section",
-        "block_id": "section567",
-        "text": {
-          "type": "mrkdwn",
-          "text": "<https://google.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
-        },
-        "accessory": {
-          "type": "image",
-          "image_url": "https://is5-ssl.mzstatic.com/image/thumb/Purple3/v4/d3/72/5c/d3725c8f-c642-5d69-1904-aa36e4297885/source/256x256bb.jpg",
-          "alt_text": "Haunted hotel image"
-        }
-      },
-      {
-        "type": "section",
-        "block_id": "section789",
-        "fields": [
-          {
-            "type": "mrkdwn",
-            "text": "*Average Rating*\n1.0"
-          }
-        ]
-      }
-    ]
-  })
-})
-
-router.post('/mdrequest', (req, res) => {
-  console.log(req.body);
-  request.post('https://hooks.slack.com/services/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', {
+router.post('/button', (req, res) => {
+  request.post(JSON.parse(req.body.payload).response_url, {
     json: {
       "blocks": [
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": `Model requested by ${req.body.first_name}`
+            "text": `Model requested by Test`
           }
+        },
+        {
+          type: "divider"
         },
         {
           "type": "section",
@@ -96,38 +56,46 @@ router.post('/mdrequest', (req, res) => {
               "emoji": true
             }
           ]
-        },
-        {
-          "type": "divider"
-        },
+        }
+      ]
+    }
+  });
+});
+
+// Handle form submits
+router.post('/mdrequest', (req, res) => {
+  console.log(req.body);
+  mongoFunctions.sendRequest(req.body)
+  request.post(hooks['model-requests'], {
+    json: {
+      "blocks": [
         {
           "type": "section",
           "text": {
-            "type": "plain_text",
-            "text": "This is a plain text section block.",
-            "emoji": true
+            "type": "mrkdwn",
+            "text": `Model requested by ${req.body.name}`
           }
         },
         {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-              "text": {
-                "type": "plain_text",
-                "text": "Button",
-                "emoji": true
-              },
-              "value": "click_me_123"
-            }
-          ]
+          type: "divider"
         },
         {
-          "type": "context",
-          "elements": [
+          "type": "section",
+          "fields": [
             {
-              "type": "mrkdwn",
-              "text": "For more info, contact <support@acme.inc>"
+              "type": "plain_text",
+              "text": "*this is plain_text text*",
+              "emoji": true
+            },
+            {
+              "type": "plain_text",
+              "text": "test",
+              "emoji": true
+            },
+            {
+              "type": "plain_text",
+              "text": "*this is plain_text text*",
+              "emoji": true
             }
           ]
         }
@@ -140,23 +108,45 @@ router.post('/mdrequest', (req, res) => {
     }
     console.log(`Model Request Message Sent: ${res.statusCode}`)
   })
-  
-  res.render('donate', {name: req.body['first_name']})
+  res.render('donate', {name: req.body.name})
 })
 
+// Handle /requests user commands
 router.post('/requests', (req, res) => {
-  if (req.body["text"] === "") res.send("Use \"/requests help\" for instructions");
-  else if(req.body["text"] === "help") res.send("List of Commands: ");
+  let splitCommand = req.body.text.split(' ');
+  let uid = req.body.user_id
 
-  let splitCommand = req.body["text"].split(' ');
+  if (splitCommand[0] === "") res.send("Use \"/requests help\" for instructions");
+  else if (splitCommand[0] === "help") { // Help command
+    if (verify_admin(uid)) {
+      res.send(request_help['request_help_admin']);
+    } else {
+      res.send(request_help['request_help_designer']);
+    }
+  } else if (splitCommand[0] === 'get-current') { // Get current model requests
+    if (verify_admin(uid)) {
+      mongoFunctions.getOpenRequests(res);
+    } else {
+      res.send("You do not have permission to use this command.");
+    }
+  } else if (splitCommand[0] === 'add-printer') { // Add printer to model request
+    if (verify_admin(uid)) {
 
-  if(splitCommand[0] === "assign") {
+    } else {
+      res.send("You do not have permission to use this command.");
+    }
+  } else if (splitCommand[0] === 'add-designer') { // Add designer to model request
+    if (verify_admin(uid)) {
 
-  } else if (splitCommand[0] === "complete");
-
-  console.log(req.body["text"]);
+    } else {
+      res.send("You do not have permission to use this command.");
+    }
+  } else { // No command found
+    res.send("Command Not Found! Use /requests help for a list of ");
+  }
 });
 
+// Fulfill get requests for .html files
 router.get('/:fname', (req, res, next) => {
   let fname = req.params['fname'];
   res.sendFile(path.join(__dirname + '/../public/html/' + fname));

@@ -119,12 +119,12 @@
             <form action="http://40.76.54.72/mdrequest" method="POST" id="model_form">
                 <!-- Begin Personal Information -->
                 <div class="mt-10">
-                    <input type="text" name="first_name" placeholder="First Name"
+                    <input type="text" name="name" placeholder="First Name"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required
                         class="single-input">
                 </div>
                 <div class="mt-10">
-                    <input type="email" name="EMAIL" placeholder="Email address"
+                    <input type="email" name="email" placeholder="Email address"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required
                         class="single-input">
                 </div>
@@ -140,15 +140,12 @@
                 </div>
                 <div class="input-group-icon mt-10">
                     <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
-                    <div class="form-select" id="default-select">
-                        <select>
-                            <option value=" 1">United States</option>
-                        </select>
-                    </div>
+                    <input type="text" name="state" placeholder="State" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'State'" required class="single-input">
                 </div>
                 <div class="mt-10">
                     <p>Braille Label</p>
-                    <div class="primary-switch">
+                    <div class="confirm-switch">
                         <input name="braille_label" type="checkbox" id="default-switch">
                         <label for="default-switch"></label>
                     </div>
@@ -193,9 +190,9 @@
                 </div>
                 <div class="mt-10">
                     <p>Would you like to provide feedback</p>
-                    <div class="primary-switch">
-                        <input name="feedback" type="checkbox">
-                        <label for="default-switch"></label>
+                    <div class="confirm-switch">
+                        <input name="feedback" type="checkbox" id="primary-switch">
+                        <label for="primary-switch"></label>
                     </div>
                 </div>
                 <!-- End Internal Data -->
