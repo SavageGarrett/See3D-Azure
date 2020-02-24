@@ -1,7 +1,9 @@
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
+var ObjectId = require('mongodb').ObjectID
 var url = "mongodb://localhost:27017/";
 var model_request = require('./schema.js');
+const request = require('request');
 
 var mongoFunctions = {
     "sendRequest": function(request_params) {
@@ -11,6 +13,7 @@ var mongoFunctions = {
 
         // Send Model Request Object
         MongoClient.connect(url, function(err, db) {
+            {useUnifiedTopology: true}
             if (err) throw err;
         
             var dbo = db.db("model_request")
@@ -23,13 +26,29 @@ var mongoFunctions = {
             db.close();
         });
     },
+
+    "registerAdmin": function(id, res) {
+        MongoClient.connect(url, (err, db) => {
+            {useUnifiedTopology: true}
+            if (err) throw err;
+
+            var dbo = db.db("roles")
+            dbo.collection("users").insertOne({"user_id": id}, (err, res) => {
+                if (err) throw err;
+                console.log("New Admin User Registered");
+            })
+        })
+
+        res.send("New admin user created successfully")
+    },
+
     "getOpenRequests": function(res) {
         // Get open requests
-        MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(url, (err, db) => {
             if (err) throw err;
         
             var dbo = db.db("model_request")
-            let current = dbo.collection("model_requests").find({"request_params.completed": 0}).toArray((err, result) => {
+            dbo.collection("model_requests").find({"request_params.completed": 0}).toArray((err, result) => {
                 if (err) throw err;
                 let payload = {
                     "blocks": [
@@ -67,7 +86,7 @@ var mongoFunctions = {
                             "text": individual['request_params']['request_body']['name'],
                             "emoji": true
                         },
-                        "value": individual['_id']
+                        "value": JSON.stringify({"_id": individual['_id'], "action": "request_get"})
                     })
                 }
                 res.send(payload);
@@ -75,10 +94,57 @@ var mongoFunctions = {
             });
         });
     },
-    "getRequestInfo": function() {
 
+    "getRequestInfo": function(interactionParams, responseUrl) {
+        MongoClient.connect(url, (err, db) => {
+            {useUnifiedTopology: true}
+            if(err) throw err;
+            var dbo = db.db("model_request")
+            dbo.collection("model_requests").find(ObjectId(interactionParams._id)).toArray((err, result) => {
+                if (err) throw err;
+                request.post(responseUrl, {
+                    json: {
+                    "blocks": [
+                        {
+                        "type": "section",
+                        "text": {
+                            "type": "mrkdwn",
+                            "text": result[0].request_params.request_body.name
+                        }
+                        },
+                        {
+                        type: "divider"
+                        },
+                        {
+                        "type": "section",
+                        "fields": [
+                            {
+                            "type": "plain_text",
+                            "text": result[0].request_params.request_body.email,
+                            "emoji": true
+                            }
+                        ]
+                        },
+                        {
+                            type: "divider"
+                        },
+                        {
+                            "type": "section",
+                            "text": {
+                                "type": "plain_text",
+                                "text": "User Provided Request Details: " + result[0].request_params.request_body.model_details,
+                                "emoji": true
+                            }
+                        }
+                    ]
+                    }
+                });
+            });
+        });
+    },
+
+    "getShippingInfo": function(payload) {
     }
-    
 }
 
-module.exports = mongoFunctions
+module.exports = mongoFunctions;

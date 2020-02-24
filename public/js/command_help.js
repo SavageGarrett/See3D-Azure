@@ -1,4 +1,4 @@
-let request_help = {
+let command_help = {
     request_help_admin: {
         "blocks": [
         {
@@ -56,6 +56,36 @@ let request_help = {
     
     request_help_designer: {
     
+    },
+
+    register_help: {
+        "blocks": [
+        {
+            "type": "section",
+            "text": {
+            "type": "mrkdwn",
+            "text": '/register command help'
+            }
+        },
+        {
+            type: "divider"
+        },
+        {
+            "type": "section",
+            "fields": [
+            {
+                "type": "plain_text",
+                "text": "/register {@user} admin",
+                "emoji": true
+            },
+            {
+                "type": "plain_text",
+                "text": "Makes {@user} an admin. Admin users can see all request information :smile:",
+                "emoji": true
+            }
+            ]
+        }
+        ]
     }
 }
-module.exports = request_help
+module.exports = command_help

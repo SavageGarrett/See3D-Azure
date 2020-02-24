@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 const request = require('request');
 let mongoFunctions = require('../mongo.js');
-let request_help = require('../public/command_help/request_help.js');
+let command_help = require('../public/js/command_help.js');
 let hooks = require('../secret/hooks.js');
 let verify_admin = require('../secret/users.js');
 
@@ -23,43 +23,30 @@ router.post('/getid', (req, res) => {
   res.send("User id logged")
 })
 
+// Register admin user
+router.post('/register', (req, res) => {
+  let splitCommand = req.body.text.split(' ');
+  let pattern = new RegExp(/<@(.*)\|/g);
+  
+  if (splitCommand[0] === "") {
+    res.send("Use \"/register help\" for more info")
+  } else if (splitCommand[0] === "help") {
+    res.send(command_help.register_help)
+  } else if (splitCommand.length == 2 && splitCommand[1] === "admin"){
+    let uid = pattern.exec(splitCommand[0]);
+    mongoFunctions.registerAdmin(uid[1], res);
+  } else {
+    res.send("Invalid Command :white_frowning_face:");
+  }
+})
+
+// Interactivce Components Request URI
 router.post('/button', (req, res) => {
-  request.post(JSON.parse(req.body.payload).response_url, {
-    json: {
-      "blocks": [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": `Model requested by Test`
-          }
-        },
-        {
-          type: "divider"
-        },
-        {
-          "type": "section",
-          "fields": [
-            {
-              "type": "plain_text",
-              "text": "*this is plain_text text*",
-              "emoji": true
-            },
-            {
-              "type": "plain_text",
-              "text": "test",
-              "emoji": true
-            },
-            {
-              "type": "plain_text",
-              "text": "*this is plain_text text*",
-              "emoji": true
-            }
-          ]
-        }
-      ]
-    }
-  });
+  let payload = JSON.parse(req.body.payload);
+  let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
+  if (interactionParams.action === "request_get"){
+    mongoFunctions.getRequestInfo(interactionParams, payload.response_url);
+  }
 });
 
 // Handle form submits
@@ -119,9 +106,9 @@ router.post('/requests', (req, res) => {
   if (splitCommand[0] === "") res.send("Use \"/requests help\" for instructions");
   else if (splitCommand[0] === "help") { // Help command
     if (verify_admin(uid)) {
-      res.send(request_help['request_help_admin']);
+      res.send(command_help['request_help_admin']);
     } else {
-      res.send(request_help['request_help_designer']);
+      res.send(command_help['request_help_designer']);
     }
   } else if (splitCommand[0] === 'get-current') { // Get current model requests
     if (verify_admin(uid)) {
