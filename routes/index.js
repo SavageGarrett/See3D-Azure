@@ -42,16 +42,29 @@ router.post('/register', (req, res) => {
 
 // Interactivce Components Request URI
 router.post('/button', (req, res) => {
-  let payload = JSON.parse(req.body.payload);
-  let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
-  if (interactionParams.action === "request_get"){
-    mongoFunctions.getRequestInfo(interactionParams, payload.response_url);
+  try {
+    let payload = JSON.parse(req.body.payload);
+
+    if (payload.hasOwnProperty('actions')) {
+      let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
+      if (interactionParams.action === "request_get"){
+        mongoFunctions.getRequestInfo(interactionParams, payload.response_url);
+      } else if (interactionParams.action === "add_models") {
+        mongoFunctions.sendDialogue(payload, interactionParams._id);
+      }
+    }
+    
+    if (payload.type === "view_submission" && JSON.parse(payload.view.private_metadata).action === "add_models_value") {
+      console.log("we made it")
+      mongoFunctions.sendModelQuantity(payload);
+    }
+  } catch (err) {
+    console.log(err)
   }
 });
 
 // Handle form submits
 router.post('/mdrequest', (req, res) => {
-  console.log(req.body);
   mongoFunctions.sendRequest(req.body)
   request.post(hooks['model-requests'], {
     json: {
