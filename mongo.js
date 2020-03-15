@@ -292,29 +292,32 @@ var mongoFunctions = {
 
         // Verify Input Values
         if (typeof link !== undefined || typeof qty !== undefined || !isNaN(qty)) {
-            MongoClient.connect(url, (err, db) => {
+            MongoClient.connect(url, {
+                useUnifiedTopology: true
+            },(err, db) => { 
                 if(err) throw err;
 
                 // Create Database object
                 var dbo = db.db("model_request")
 
                 // Retrieved from private_metadata 
-                console.log(JSON.parse(payload.view.private_metadata)._id)
-                dbo.collection("model_requests").updateOne({"_id": ObjectID(JSON.parse(payload.view.private_metadata)._id)},
+                let id = JSON.parse(payload.view.private_metadata)._id;
+                dbo.collection("model_requests").updateOne({"_id": new ObjectId(id)},
                 {
                     $push: {
-                        request_state: {
-                            modelsWanted: {
-                                available: [{
-                                    // Corresponding Array Indices
-                                    model_links: [link],
-                                    model_count: [qty]
-                                }]
-                            }
+                        "request_state.modelsWanted.availableModels": {
+                            model_link: link,
+                            model_count: qty,
+                            completed: 0
                         }
                     }
-                }).then((res) => {
-                    console.log(res)
+                },
+                {upsert: true}).then((res) => {
+                    if (res.modifiedCount != 1) {
+                        console.log(`Error: ${res.modifiedCount} database entries edited`)
+                    }
+                }).catch((err) => {
+                    console.log(err)
                 })
             });
         }
