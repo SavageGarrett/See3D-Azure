@@ -49,14 +49,22 @@ router.post('/button', (req, res) => {
       let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
       if (interactionParams.action === "request_get"){
         mongoFunctions.getRequestInfo(interactionParams, payload.response_url);
+        res.sendStatus(200);
+        console.log("Successfully retrieved request info")
       } else if (interactionParams.action === "add_models") {
         mongoFunctions.sendDialogue(payload, interactionParams._id);
+        res.sendStatus(200);
+        console.log("Successfully sent add models dialogue");
+      } else if (interactionParams.action === "add_design_request") {
+        // TODO
+        // Handle someone adding a design request
       }
     }
     
     if (payload.type === "view_submission" && JSON.parse(payload.view.private_metadata).action === "add_models_value") {
-      console.log("we made it")
-      mongoFunctions.sendModelQuantity(payload);
+      //mongoFunctions.sendModelQuantity(payload);
+      res.send({response_action: "clear"})
+      console.log("Successfully stored new models")
     }
   } catch (err) {
     console.log(err)

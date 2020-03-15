@@ -9,6 +9,11 @@ let hooks = require('./secret/hooks.js');
 const token = require('./secret/token.js')
 
 var mongoFunctions = {
+    /**
+     * Send request posted from website to mongo
+     * 
+     * @param {*} request_params 
+     */
     "sendRequest": function(request_params) {
         model_request['header'] = false;
         model_request['request_params']['date'] = Date.now();
@@ -30,6 +35,12 @@ var mongoFunctions = {
         });
     },
 
+    /**
+     * Register admin users
+     * 
+     * @param {*} id 
+     * @param {*} res 
+     */
     "registerAdmin": function(id, res) {
         MongoClient.connect(url, (err, db) => {
             {useUnifiedTopology: true}
@@ -45,6 +56,11 @@ var mongoFunctions = {
         res.send("New admin user created successfully")
     },
 
+    /**
+     * Gets incomplete requests and spits them out into a message
+     * 
+     * @param res response object provided by express
+     */
     "getOpenRequests": function(res) {
         // Get open requests
         MongoClient.connect(url, (err, db) => {
@@ -98,6 +114,12 @@ var mongoFunctions = {
         });
     },
 
+    /**
+     * Send options once model request is selected
+     * 
+     * @param {*} interactionParams 
+     * @param {*} responseUrl 
+     */
     "getRequestInfo": function(interactionParams, responseUrl) {
         MongoClient.connect(url, (err, db) => {
             if(err) throw err;
@@ -158,31 +180,15 @@ var mongoFunctions = {
                                             "emoji": true
                                         },
                                         "value": JSON.stringify({"_id": interactionParams._id, "action": "add_models"})
-                                    }//,
-                                    // {
-                                    //     "text": {
-                                    //         "type": "plain_text",
-                                    //         "text": "Add Designer",
-                                    //         "emoji": true
-                                    //     },
-                                    //     "value": "value-1"
-                                    // },
-                                    // {
-                                    //     "text": {
-                                    //         "type": "plain_text",
-                                    //         "text": "Add Printer",
-                                    //         "emoji": true
-                                    //     },
-                                    //     "value": "value-2"
-                                    // },
-                                    // {
-                                    //     "text": {
-                                    //         "type": "plain_text",
-                                    //         "text": "Get Shipping Info",
-                                    //         "emoji": true
-                                    //     },
-                                    //     "value": "value-3"
-                                    // }
+                                    },
+                                    {
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "Add Design Request",
+                                            "emoji": true
+                                        },
+                                        "value": JSON.stringify({"_id": interactionParams._id, "action": "add_design_request"})
+                                    }
                                 ]
                             }
                         }
@@ -193,7 +199,12 @@ var mongoFunctions = {
         });
     },
 
-
+    /**
+     * Open add models view
+     * 
+     * @param {*} payload 
+     * @param {*} id 
+     */
     "sendDialogue": function(payload, id) {
         axios.post("https://slack.com/api/views.open",
         {
@@ -264,7 +275,7 @@ var mongoFunctions = {
             }
         })
         .then((res) => {
-            console.log(res)
+            //console.log(res)
         })
         .catch((err) => {
             //console.log(err)
@@ -323,6 +334,20 @@ var mongoFunctions = {
         }
     },
 
+    /**
+     * Open design request view
+     * 
+     * @param {*} payload 
+     */
+    "addDesignRequest": function(payload) {
+
+    },
+
+    /**
+     * Get model shipping info
+     * 
+     * @param {*} payload 
+     */
     "getShippingInfo": function(payload) {
     }
 }
