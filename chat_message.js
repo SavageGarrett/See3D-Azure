@@ -1,4 +1,42 @@
-let command_help = {
+const axios = require('axios')
+let chat_message = {
+    send_message: (hook, blocks) => {
+        axios.post(hook, blocks)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
+
+    print_accept: {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "New Model Request:\n*<thingiverse.com|Fred Enriquez - New device request>*"
+                }
+            },
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Accept"
+                        },
+                        "style": "primary",
+                        "value": "click_me_123"
+                    }
+                ]
+            }
+        ]
+    },
+
     request_help_admin: {
         "blocks": [
         {
@@ -88,4 +126,5 @@ let command_help = {
         ]
     }
 }
-module.exports = command_help
+
+module.exports = chat_message;

@@ -3,9 +3,11 @@ var router = express.Router();
 var path = require('path');
 const request = require('request');
 let mongoFunctions = require('../mongo.js');
-let command_help = require('../public/js/command_help.js');
+let chat_message = require('../chat_message.js');
 let hooks = require('../secret/hooks.js');
 let verify_admin = require('../secret/users.js');
+let modal = require('../modal.js')
+const token = require('../secret/token.js')
 
 // GET index page
 router.get('/', (req, res, next) => {
@@ -31,7 +33,7 @@ router.post('/register', (req, res) => {
   if (splitCommand[0] === "") {
     res.send("Use \"/register help\" for more info")
   } else if (splitCommand[0] === "help") {
-    res.send(command_help.register_help)
+    res.send(chat_message.register_help)
   } else if (splitCommand.length == 2 && splitCommand[1] === "admin"){
     let uid = pattern.exec(splitCommand[0]);
     mongoFunctions.registerAdmin(uid[1], res);
@@ -46,25 +48,40 @@ router.post('/button', (req, res) => {
     let payload = JSON.parse(req.body.payload);
 
     if (payload.hasOwnProperty('actions')) {
-      let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
-      if (interactionParams.action === "request_get"){
-        mongoFunctions.getRequestInfo(interactionParams, payload.response_url);
-        res.sendStatus(200);
-        console.log("Successfully retrieved request info")
-      } else if (interactionParams.action === "add_models") {
-        mongoFunctions.sendDialogue(payload, interactionParams._id);
-        res.sendStatus(200);
-        console.log("Successfully sent add models dialogue");
-      } else if (interactionParams.action === "add_design_request") {
-        // TODO
-        // Handle someone adding a design request
+      // Payload for chat interactions
+      if (payload.type === "block_actions") {
+        let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
+        console.log(interactionParams.action)
+        if (interactionParams.action === "request_get"){
+          mongoFunctions.getRequestInfo(interactionParams, payload.response_url);
+          res.sendStatus(200);
+          console.log("Successfully retrieved request info")
+        } else if (interactionParams.action === "add_models") {
+          modal.open_modal(interactionParams._id, "add_models", payload, token, modal.model_request_view);
+          res.sendStatus(200);
+          console.log("Successfully sent add models dialogue");
+          chat_message.send_message(hooks["print-request"], chat_message.print_accept);
+        } else if (interactionParams.action === "add_design_request") {
+          modal.open_modal(interactionParams._id, "add_design_request", payload, token, modal.design_request_view);
+          res.sendStatus(200);
+          console.log("Successfully sent add design request dialogue");
+        }
       }
     }
-    
-    if (payload.type === "view_submission" && JSON.parse(payload.view.private_metadata).action === "add_models_value") {
-      //mongoFunctions.sendModelQuantity(payload);
-      res.send({response_action: "clear"})
-      console.log("Successfully stored new models")
+
+    // Payload for modal view submission
+    if (payload.type === "view_submission") {
+      // Data sent with submission
+      let private_metadata = JSON.parse(payload.view.private_metadata);
+      if (private_metadata.action === "add_models") {
+        mongoFunctions.sendModelQuantity(payload);
+        res.send({response_action: "clear"});
+        console.log("Successfully stored new models")
+      } else if (private_metadata.action === "add_design_request") {
+        mongoFunctions.addDesignRequest(payload);
+        res.send({response_action: "clear"});
+        console.log("Succesfully stored design request")
+      }
     }
   } catch (err) {
     console.log(err)
@@ -127,9 +144,9 @@ router.post('/requests', (req, res) => {
   if (splitCommand[0] === "") res.send("Use \"/requests help\" for instructions");
   else if (splitCommand[0] === "help") { // Help command
     if (verify_admin(uid)) {
-      res.send(command_help['request_help_admin']);
+      res.send(chat_message['request_help_admin']);
     } else {
-      res.send(command_help['request_help_designer']);
+      res.send(chat_message['request_help_designer']);
     }
   } else if (splitCommand[0] === 'get-current') { // Get current model requests
     if (verify_admin(uid)) {

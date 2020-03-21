@@ -3,7 +3,6 @@ var MongoClient = mongo.MongoClient;
 let ObjectId = require('mongodb').ObjectID;
 var url = "mongodb://localhost:27017/";
 var model_request = require('./schema.js');
-var axios = require('axios');
 var request = require('request');
 let hooks = require('./secret/hooks.js');
 const token = require('./secret/token.js')
@@ -14,7 +13,7 @@ var mongoFunctions = {
      * 
      * @param {*} request_params 
      */
-    "sendRequest": function(request_params) {
+    sendRequest: function(request_params) {
         model_request['header'] = false;
         model_request['request_params']['date'] = Date.now();
         model_request['request_params']['request_body'] = request_params;
@@ -197,89 +196,6 @@ var mongoFunctions = {
                 });
             });
         });
-    },
-
-    /**
-     * Open add models view
-     * 
-     * @param {*} payload 
-     * @param {*} id 
-     */
-    "sendDialogue": function(payload, id) {
-        axios.post("https://slack.com/api/views.open",
-        {
-            "trigger_id": payload.trigger_id,
-            "view": {
-                "private_metadata": JSON.stringify({_id: id, action: "add_models_value"}),
-                "type": "modal",
-                "title": {
-                    "type": "plain_text",
-                    "text": "Add Models ",
-                    "emoji": true
-                },
-                "submit": {
-                    "type": "plain_text",
-                    "text": "Submit",
-                    "emoji": true
-                },
-                "close": {
-                    "type": "plain_text",
-                    "text": "Cancel",
-                    "emoji": true
-                },
-                "blocks": [
-                    {
-                        "type": "input",
-                        "element": {
-                            "type": "plain_text_input",
-                            "action_id": "link_input",
-                            "placeholder": {
-                                "type": "plain_text",
-                                "text": "Thingiverse model link"
-                            }
-                        },
-                        "label": {
-                            "type": "plain_text",
-                            "text": "Model"
-                        }//,
-                        // "hint": {
-                        //     "type": "plain_text",
-                        //     "text": "Hint text"
-                        // }
-                    },
-                    {
-                        "type": "input",
-                        "element": {
-                            "type": "plain_text_input",
-                            "action_id": "qty_input",
-                            "placeholder": {
-                                "type": "plain_text",
-                                "text": "Number of Models"
-                            }
-                        },
-                        "label": {
-                            "type": "plain_text",
-                            "text": "Quantity"
-                        }//, 
-                        // "hint": {
-                        //     "type": "plain_text",
-                        //     "text": "Hint text"
-                        // }
-                    }
-                ]
-            }
-        },
-        {
-            headers: {
-                "Authorization": "Bearer " + token
-            }
-        })
-        .then((res) => {
-            //console.log(res)
-        })
-        .catch((err) => {
-            //console.log(err)
-        })
     },
 
     /*
