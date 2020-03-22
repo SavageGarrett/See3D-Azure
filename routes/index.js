@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path');
 const request = require('request');
 let mongoFunctions = require('../mongo.js');
 let chat_message = require('../chat_message.js');
@@ -8,16 +7,6 @@ let hooks = require('../secret/hooks.js');
 let verify_admin = require('../secret/users.js');
 let modal = require('../modal.js')
 const token = require('../secret/token.js')
-
-// GET index page
-router.get('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname + '/../public/html/index.html'));
-})
-
-// GET favicon
-router.get('/favicon.ico', (req, res, next) => {
-  res.sendFile(path.join(__dirname + '/../public/favicon.ico'));
-})
 
 // Log id to console
 router.post('/getid', (req, res) => {
@@ -170,11 +159,5 @@ router.post('/requests', (req, res) => {
     res.send("Command Not Found! Use /requests help for a list of ");
   }
 });
-
-// Fulfill get requests for .html files
-router.get('/:fname', (req, res, next) => {
-  let fname = req.params['fname'];
-  res.sendFile(path.join(__dirname + '/../public/html/' + fname));
-})
 
 module.exports = router;

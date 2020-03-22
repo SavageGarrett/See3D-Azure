@@ -1,0 +1,48 @@
+table, td, th {
+  border: 2px solid black;
+  color: black;
+}
+th span{
+  margin-left: 10px;
+}
+td {
+  vertical-align: middle;
+  width: 240px;
+  height: 50px;
+}
+tr:nth-child(even) {
+  background-color: white;
+}
+tr:nth-child(odd) {
+  background-color: grey;
+}
+.date {
+  text-align: center;
+}
+.completed-col {
+  text-align: center;
+  width: 40px !important;
+}
+.collapse-list {
+  cursor: pointer;
+}
+.collapse-text {
+  margin-left: 10px;
+  float: left;
+}
+.plus-sign {
+  margin-right: 10px;
+  float: right;
+}
+.long-mailing-info {
+  display: none;
+  border: none;
+  height: auto;
+  width: auto;
+}
+.align-table {
+  margin: 0px auto;
+}
+.form-move {
+  padding-top: 100px;
+}
