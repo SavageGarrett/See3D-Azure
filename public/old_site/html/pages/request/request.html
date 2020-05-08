@@ -87,7 +87,7 @@
                         <div class="form-group">
                             <label for="usr">
                                 <h5 style="margin: 0">Name <span style="color:red;">*</span></h5></label>
-                            <input type="text" class="form-control" placeholder="John Doe" id="usr" name="usr" maxlength="128" required>
+                            <input type="text" class="form-control" placeholder="John Doe" id="name" name="name" maxlength="128" required>
                         </div>
                         <!-- Order E-Mail Field -->
                         <div class="form-group">
@@ -301,6 +301,7 @@
         <script>
             // Called when submit button is pressed
             function submit() {
+                
               // Gather form variables
               var name = document.getElementById('usr');
               var email = document.getElementById('email');

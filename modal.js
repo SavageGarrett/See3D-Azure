@@ -93,6 +93,47 @@ let modal = {
         ]
     },
 
+    accept_print: {
+        "type": "modal",
+        "title": {
+            "type": "plain_text",
+            "text": "Accept Print",
+            "emoji": true
+        },
+        "submit": {
+            "type": "plain_text",
+            "text": "Submit",
+            "emoji": true
+        },
+        "close": {
+            "type": "plain_text",
+            "text": "Cancel",
+            "emoji": true
+        },
+        "blocks": [
+            {
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input"
+                },
+                "label": {
+                    "type": "plain_text",
+                    "text": "Quantity",
+                    "emoji": true
+                }
+            }
+        ]
+    },
+
+    /**
+     * Open a Modal
+     * 
+     * @param id id sent in private metadata
+     * @param action action sent in private metadata
+     * @param payload payload to get trigger id from
+     * @param token bot token
+     * @param view modal view to send to user
+     */
     open_modal: (id, action, payload, token, view) => {
 
         axios.post("https://slack.com/api/views.open",

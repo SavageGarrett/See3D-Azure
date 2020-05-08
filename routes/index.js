@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const request = require('request');
-let mongoFunctions = require('../mongo.js');
+let interaction_handler = require('../interaction_handler.js');
 let chat_message = require('../chat_message.js');
 let hooks = require('../secret/hooks.js');
 let verify_admin = require('../secret/users.js');
 let modal = require('../modal.js')
 const token = require('../secret/token.js')
+require('dotenv').config()
 
 // Log id to console
 router.post('/getid', (req, res) => {
@@ -25,7 +26,7 @@ router.post('/register', (req, res) => {
     res.send(chat_message.register_help)
   } else if (splitCommand.length == 2 && splitCommand[1] === "admin"){
     let uid = pattern.exec(splitCommand[0]);
-    mongoFunctions.registerAdmin(uid[1], res);
+    interaction_handler.registerAdmin(uid[1], res);
   } else {
     res.send("Invalid Command :white_frowning_face:");
   }
@@ -34,27 +35,53 @@ router.post('/register', (req, res) => {
 // Interactivce Components Request URI
 router.post('/button', (req, res) => {
   try {
+    // Parse payload
     let payload = JSON.parse(req.body.payload);
 
+    // Check for actions property before continuing
     if (payload.hasOwnProperty('actions')) {
+
       // Payload for chat interactions
       if (payload.type === "block_actions") {
-        let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
-        console.log(interactionParams.action)
-        if (interactionParams.action === "request_get"){
-          mongoFunctions.getRequestInfo(interactionParams, payload.response_url);
-          res.sendStatus(200);
-          console.log("Successfully retrieved request info")
-        } else if (interactionParams.action === "add_models") {
-          modal.open_modal(interactionParams._id, "add_models", payload, token, modal.model_request_view);
-          res.sendStatus(200);
-          console.log("Successfully sent add models dialogue");
-          chat_message.send_message(hooks["print-request"], chat_message.print_accept);
-        } else if (interactionParams.action === "add_design_request") {
-          modal.open_modal(interactionParams._id, "add_design_request", payload, token, modal.design_request_view);
-          res.sendStatus(200);
-          console.log("Successfully sent add design request dialogue");
+        // Check selected options (debug)
+        console.log(payload.actions)
+
+        // Handle Selection Payloads
+        if (payload.actions[0].type === "static_select") {
+          // Get request data sent with payload
+          let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
+        
+          // Log the action value (debug)
+          console.log(interactionParams.action)
+
+          // Do correct action
+          if (interactionParams.action === "request_get"){
+            interaction_handler.getRequestInfo(interactionParams, payload.response_url);
+            res.sendStatus(200);
+            console.log("Successfully retrieved request info")
+          } else if (interactionParams.action === "add_models") {
+            modal.open_modal(interactionParams._id, "add_models", payload, process.env.BOT_TOKEN, modal.model_request_view);
+            res.sendStatus(200);
+            console.log("Successfully sent add models dialogue");
+            chat_message.send_message(hooks["print-request"], chat_message.print_accept);
+          } else if (interactionParams.action === "add_design_request") {
+            modal.open_modal(interactionParams._id, "add_design_request", payload, process.env.BOT_TOKEN, modal.design_request_view);
+            res.sendStatus(200);
+            console.log("Successfully sent add design request dialogue");
+          }
+          // Handle Button Payloads
+        } else if (payload.actions[0].type === "button") {
+          // Get request data sent with payload
+          let interactionParams = JSON.parse(payload.actions[0].value);
+
+          // Handle when someone is adding print responsibility
+          if (interactionParams.action === "add_print_responsibility") {
+            modal.open_modal(interactionParams._id, "accept_print", payload, process.env.BOT_TOKEN, modal.accept_print);
+            res.sendStatus(200);
+            console.log("Successfully sent accept print dialogue")
+          }
         }
+        
       }
     }
 
@@ -62,12 +89,16 @@ router.post('/button', (req, res) => {
     if (payload.type === "view_submission") {
       // Data sent with submission
       let private_metadata = JSON.parse(payload.view.private_metadata);
+
+      // Find which action we're going to do
       if (private_metadata.action === "add_models") {
-        mongoFunctions.sendModelQuantity(payload);
+        // Submit a dialog to add model
+        interaction_handler.sendModelQuantity(payload);
         res.send({response_action: "clear"});
         console.log("Successfully stored new models")
       } else if (private_metadata.action === "add_design_request") {
-        mongoFunctions.addDesignRequest(payload);
+        // Submit a dialog to add design request
+        interaction_handler.addDesignRequest(payload);
         res.send({response_action: "clear"});
         console.log("Succesfully stored design request")
       }
@@ -79,7 +110,7 @@ router.post('/button', (req, res) => {
 
 // Handle form submits
 router.post('/mdrequest', (req, res) => {
-  mongoFunctions.sendRequest(req.body)
+  interaction_handler.sendRequest(req.body)
   request.post(hooks['model-requests'], {
     json: {
       "blocks": [
@@ -132,14 +163,16 @@ router.post('/requests', (req, res) => {
 
   if (splitCommand[0] === "") res.send("Use \"/requests help\" for instructions");
   else if (splitCommand[0] === "help") { // Help command
+
     if (verify_admin(uid)) {
       res.send(chat_message['request_help_admin']);
     } else {
       res.send(chat_message['request_help_designer']);
     }
   } else if (splitCommand[0] === 'get-current') { // Get current model requests
+    // Sends user current model request selection
     if (verify_admin(uid)) {
-      mongoFunctions.getOpenRequests(res);
+      interaction_handler.getOpenRequests(res);
     } else {
       res.send("You do not have permission to use this command.");
     }
