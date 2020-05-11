@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('slackintegration:server');
 var http = require('http');
+var worker = require('../worker_scripts/worker');
 
 /**
  * Get port from environment and store in Express.
@@ -29,6 +30,11 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Run Worker Scripts
+ */
+//setInterval(worker.checkPrintRequests, 3000);
 
 /**
  * Normalize a port into a number, string, or false.

@@ -4,8 +4,8 @@ let ObjectId = require('mongodb').ObjectID;
 var url = "mongodb://localhost:27017/";
 var model_request = require('./model_request.js');
 var request = require('request');
+var axios = require('axios');
 require('dotenv').config()
-const token = require('./secret/token.js')
 const fs = require('fs')
 var path = require('path')
 
@@ -243,6 +243,7 @@ var interaction_handler = {
                                 id: sub_id,
                                 model_link: link,
                                 model_count: qty,
+                                assigned_users: [{}], //TODO
                                 completed: 0
                             }
                         }
@@ -285,13 +286,111 @@ var interaction_handler = {
                                     "text": "Print"
                                 },
                                 "style": "primary",
-                                "value": JSON.stringify({_id: id, action: "add_print_responsibility"})
+                                "value": JSON.stringify({_id: id, action: "add_print_responsibility", total_quantity: qty})
                             }
                         ]
                     }
                 ]
             }
         });
+    },
+
+    "acceptPrint": function(payload, private_metadata) {
+        let values = payload.view.state.values;
+        let v1 = values[Object.keys(values)[0]];
+        let v2 = v1[Object.keys(v1)[0]];
+        let numPrint = v2.value;
+        let quantity = private_metadata.total_quantity;
+
+        //console.log(quantity)
+        //console.log(numPrint)
+
+        if (isNaN(numPrint) || numPrint < 0 || numPrint > quantity) {
+            // Return not nan error
+            return "errNotNan";
+        }
+
+        axios.post("https://slack.com/api/chat.postMessage",
+        {
+            channel: payload.user.id,
+            username: "See3D Bot",
+            blocks: [
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": `You have accepted to print ${numPrint} Models.`
+                    }
+                },
+                {
+                    "type": "section",
+                    "fields": [
+                        {
+                            "type": "mrkdwn",
+                            "text": "*File:*\n<google.com|Download>"
+                        },
+                        {
+                            "type": "mrkdwn",
+                            "text": "*When:*\nSubmitted Aut 10"
+                        }
+                    ]
+                },
+                {
+                    "type": "actions",
+                    "elements": [
+                        {
+                            "type": "button",
+                            "text": {
+                                "type": "plain_text",
+                                "emoji": true,
+                                "text": "Done"
+                            },
+                            "style": "primary",
+                            "value": "click_me_123"
+                        },
+                        {
+                            "type": "button",
+                            "text": {
+                                "type": "plain_text",
+                                "emoji": true,
+                                "text": "Cancel"
+                            },
+                            "style": "danger",
+                            "value": "click_me_123"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            headers: {
+                "Authorization": "Bearer " + process.env.BOT_TOKEN
+            }
+        })
+        .then((res) => {
+            //console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+
+        // Log to database TODO
+        MongoClient.connect(url, (err, db) => {
+            {useUnifiedTopology: true}
+            if (err) throw err;
+        
+            var dbo = db.db("model_request")
+            dbo.collection("model_requests").find({"request_params.completed": 0}).toArray((err, result) => {
+                if (err) throw err;
+                
+
+
+                db.close();
+            });
+        });
+
+
+        return "clear"
     },
 
     /**

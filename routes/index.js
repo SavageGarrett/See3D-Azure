@@ -52,7 +52,7 @@ router.post('/button', (req, res) => {
           let interactionParams = JSON.parse(payload.actions[0].selected_option.value);
         
           // Log the action value (debug)
-          console.log(interactionParams.action)
+          //console.log(interactionParams.action)
 
           // Do correct action
           if (interactionParams.action === "request_get"){
@@ -60,12 +60,12 @@ router.post('/button', (req, res) => {
             res.sendStatus(200);
             console.log("Successfully retrieved request info")
           } else if (interactionParams.action === "add_models") {
-            modal.open_modal(interactionParams._id, "add_models", payload, process.env.BOT_TOKEN, modal.model_request_view);
+            modal.open_modal(JSON.stringify({_id: interactionParams._id, action: "add_models"}), payload, process.env.BOT_TOKEN, modal.model_request_view);
             res.sendStatus(200);
             console.log("Successfully sent add models dialogue");
             chat_message.send_message(hooks["print-request"], chat_message.print_accept);
           } else if (interactionParams.action === "add_design_request") {
-            modal.open_modal(interactionParams._id, "add_design_request", payload, process.env.BOT_TOKEN, modal.design_request_view);
+            modal.open_modal(JSON.stringify({_id: interactionParams._id, action: "add_design_request"}), payload, process.env.BOT_TOKEN, modal.design_request_view);
             res.sendStatus(200);
             console.log("Successfully sent add design request dialogue");
           }
@@ -75,13 +75,13 @@ router.post('/button', (req, res) => {
           let interactionParams = JSON.parse(payload.actions[0].value);
 
           // Handle when someone is adding print responsibility
+          console.log(interactionParams.total_quantity)
           if (interactionParams.action === "add_print_responsibility") {
-            modal.open_modal(interactionParams._id, "accept_print", payload, process.env.BOT_TOKEN, modal.accept_print);
+            modal.open_modal(JSON.stringify({_id: interactionParams._id, action: "accept_print", total_quantity: interactionParams.total_quantity}), payload, process.env.BOT_TOKEN, modal.accept_print);
             res.sendStatus(200);
             console.log("Successfully sent accept print dialogue")
           }
         }
-        
       }
     }
 
@@ -91,17 +91,46 @@ router.post('/button', (req, res) => {
       let private_metadata = JSON.parse(payload.view.private_metadata);
 
       // Find which action we're going to do
-      if (private_metadata.action === "add_models") {
+      if (private_metadata.action === "add_models") { // Submit Add Models
         // Submit a dialog to add model
         interaction_handler.sendModelQuantity(payload);
         res.send({response_action: "clear"});
         console.log("Successfully stored new models")
-      } else if (private_metadata.action === "add_design_request") {
+      } else if (private_metadata.action === "accept_print") { // Submit Accept Number of Models
+        let response_action = interaction_handler.acceptPrint(payload, private_metadata);
+
+        // Error When Invalid Number
+        if (response_action === "errNotNan") {
+          // Update View
+          //console.log(payload)
+          res.send({
+            "response_action": "errors",
+            "errors": {
+              "num-models-input": `You must enter a number less than or equal to ${private_metadata.total_quantity}`
+            }
+          })
+          console.log("Invalid View Error Sent to User")
+
+        // Correct Number
+        } else if (response_action === "clear") {
+          // Save to Database and Update Print Chat Message Quantity
+
+          // Clear Modal Stack
+          res.send({response_action: "clear"});
+          console.log("Successfully Updated Print Quantity In Database")
+
+        // Error
+        } else {
+          console.log("Unknown Response")
+        }
+      } else if (private_metadata.action === "add_design_request") { // Submit Add Design Request
         // Submit a dialog to add design request
         interaction_handler.addDesignRequest(payload);
-        res.send({response_action: "clear"});
+
+        // Handle Add Design Request (Send message to chat then follow up with direct message)
+
         console.log("Succesfully stored design request")
-      }
+      } 
     }
   } catch (err) {
     console.log(err)

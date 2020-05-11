@@ -112,9 +112,10 @@ let modal = {
         },
         "blocks": [
             {
+                "block_id": "num-models-input",
                 "type": "input",
                 "element": {
-                    "type": "plain_text_input"
+                    "type": "plain_text_input",
                 },
                 "label": {
                     "type": "plain_text",
@@ -128,14 +129,48 @@ let modal = {
     /**
      * Open a Modal
      * 
-     * @param id id sent in private metadata
-     * @param action action sent in private metadata
+     * @param private_metadata metadata attached to view
      * @param payload payload to get trigger id from
      * @param token bot token
      * @param view modal view to send to user
      */
-    open_modal: (id, action, payload, token, view) => {
+    open_modal: (private_metadata, payload, token, view) => {
+        console.log(private_metadata)
+        axios.post("https://slack.com/api/views.open",
+        {
+            "trigger_id": payload.trigger_id,
+            "view": {
+                "private_metadata": private_metadata,
+                "type": view.type,
+                "title": view.title,
+                "submit": view.submit,
+                "close": view.close,
+                "blocks": view.blocks
+            }
+        },
+        {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+        .then((res) => {
+            //console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    },
 
+    /**
+     * Update a modal view
+     * 
+     * @param id id to store in metadata
+     * @param action action to store in metadata
+     * @param payload payload sent on button post
+     * @param token modal id token
+     * @param view view block kit
+     */
+    update_modal: (id, action, payload, token, view) => {
         axios.post("https://slack.com/api/views.open",
         {
             "trigger_id": payload.trigger_id,
