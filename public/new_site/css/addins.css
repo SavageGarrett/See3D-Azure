@@ -1,0 +1,33 @@
+/*
+    Custom CSS Addins for See3D
+    Created 06/03/2020
+*/
+
+.tagline-addin {
+    margin-bottom: .75rem !important;
+    font-size: 22px !important;
+}
+
+.fix-top {
+    padding-top: 0px !important;
+}
+
+.fix-bottom {
+    padding-bottom: 0px !important;
+}
+
+.fix-font-20 {
+    font-size: 20px !important;
+}
+
+.text-link {
+    color: #7cc8ff;
+}
+
+.text-link:hover {
+    color: #7A838B;
+}
+
+.button-offset {
+    padding-right: 100px;
+}

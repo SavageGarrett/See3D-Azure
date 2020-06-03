@@ -8,12 +8,62 @@ let verify_admin = require('../secret/users.js');
 let modal = require('../modal.js')
 const token = require('../secret/token.js')
 require('dotenv').config()
+var path = require('path');
+
+router.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+});
+
+router.get('/index', (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+});
+
+router.get('/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  if (fname.includes(".html")) {
+    res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
+  } else {
+    next();
+  }
+});
+
+router.get('/css/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/css/${fname}`));
+});
+
+router.get('/js/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/js/${fname}`));
+});
+
+router.get('/js/:dirname/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  let dirname = req.params.dirname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/js/${dirname}/${fname}`));
+});
+
+router.get('/fonts/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/fonts/${fname}`));
+});
+
+router.get('/img/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/img/${fname}`));
+});
+
+router.get('/img/:dirname/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  let dirname = req.params.dirname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${fname}`));
+});
 
 // Log id to console
 router.post('/getid', (req, res) => {
   console.log(req.body)
   res.send("User id logged")
-})
+});
 
 // Register admin user
 router.post('/register', (req, res) => {
@@ -30,7 +80,7 @@ router.post('/register', (req, res) => {
   } else {
     res.send("Invalid Command :white_frowning_face:");
   }
-})
+});
 
 // Interactivce Components Request URI
 router.post('/button', (req, res) => {
@@ -183,7 +233,7 @@ router.post('/mdrequest', (req, res) => {
     console.log(`Model Request Message Sent: ${res.statusCode}`)
   })
   res.render('donate', {name: req.body.name})
-})
+});
 
 // Handle /requests user commands
 router.post('/requests', (req, res) => {
