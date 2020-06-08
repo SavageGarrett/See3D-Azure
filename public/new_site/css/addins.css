@@ -3,9 +3,17 @@
     Created 06/03/2020
 */
 
+.testimonial_area {
+    background: #F5F7FA !important;
+}
+
 .tagline-addin {
     margin-bottom: .75rem !important;
     font-size: 22px !important;
+}
+
+.pad-top {
+    padding-top: 100px !important;
 }
 
 .fix-top {
@@ -18,6 +26,7 @@
 
 .fix-font-20 {
     font-size: 20px !important;
+    color: #001D38 !important;
 }
 
 .text-link {
