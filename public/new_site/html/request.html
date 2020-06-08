@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job Board</title>
+    <title>See3D - Request a Model</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/addins.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -50,21 +51,17 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">home</a></li>
-                                            <li><a href="jobs.html">Browse Job</a></li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="team.html">Our Team</a></li>
+                                            <li><a href="gallery.html">Photos</a></li>
+                                            <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="candidate.html">Candidates </a></li>
                                                     <li><a href="job_details.html">job details </a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul>
-                                            </li>
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">blog</a></li>
-                                                    <li><a href="single-blog.html">single-blog</a></li>
-                                                </ul>
-                                            </li>
+                                            </li> -->
+                                            <li><a href="blog.html">Blog</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                         </ul>
                                     </nav>
@@ -72,11 +69,8 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
-                                    <div class="phone_num d-none d-xl-block">
-                                        <a href="#">Log in</a>
-                                    </div>
                                     <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="#">Post a Job</a>
+                                        <a class="boxed-btn3" href="#">Request a Model</a>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +104,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-10">
-            <h3 class="mb-30">Request Form</h3>
+            <h2 class="mb-30">Request Form</h2>
             <script>
                 function submit_form() {
                     document.getElementById('model_form').submit();
@@ -119,34 +113,34 @@
             <form action="http://40.76.54.72/mdrequest" method="POST" id="model_form">
                 <!-- Begin Personal Information -->
                 <div class="mt-10">
-                    <input type="text" name="name" placeholder="First Name"
+                    <input aria-label="name input field" type="text" name="name" placeholder="First Name"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required
                         class="single-input">
                 </div>
                 <div class="mt-10">
-                    <input type="email" name="email" placeholder="Email address"
+                    <input aria-label="email input field" type="email" name="email" placeholder="Email address"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required
                         class="single-input">
                 </div>
                 <div class="input-group-icon mt-10">
                     <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-                    <input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
+                    <input aria-label="address input field" type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Address'" required class="single-input">
                 </div>
                 <div class="input-group-icon mt-10">
                     <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
-                    <input type="text" name="city" placeholder="City" onfocus="this.placeholder = ''"
+                    <input aria-label="city input field" type="text" name="city" placeholder="City" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'City'" required class="single-input">
                 </div>
                 <div class="input-group-icon mt-10">
                     <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
-                    <input type="text" name="state" placeholder="State" onfocus="this.placeholder = ''"
+                    <input aria-label="state input field" type="text" name="state" placeholder="State" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'State'" required class="single-input">
                 </div>
                 <div class="mt-10">
-                    <p>Braille Label</p>
+                    <p style="color: black;">Braille Label</p>
                     <div class="confirm-switch">
-                        <input name="braille_label" type="checkbox" id="default-switch">
+                        <input aria-label="braille shipping label checkbox" name="braille_label" type="checkbox" id="default-switch">
                         <label for="default-switch"></label>
                     </div>
                 </div>
@@ -156,20 +150,20 @@
 
                 <!-- Model Information -->
                 <div class="mt-10">
-                    <textarea name="model_details" class="single-textarea" placeholder="What model would you like? (Include details about quantity, size, and any special considerations we made need to make)" onfocus="this.placeholder = ''"
+                    <textarea aria-label="model details including quantity size shape and type of model input field" name="model_details" class="single-textarea" placeholder="What model would you like? (Include details about quantity, size, and any special considerations we made need to make)" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'What model would you like? (Include details about quantity, size, and any special considerations we made need to make)'" required></textarea>
                 </div>
                 <div class="mt-10">
-                    <textarea name="understand" class="single-textarea" placeholder="What part of this model are you trying to understand better?" onfocus="this.placeholder = ''"
+                    <textarea aria-label="part of model you are seeking understanding of input field" name="understand" class="single-textarea" placeholder="What part of this model are you trying to understand better?" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'What part of this model are you trying to understand better?'" required></textarea>
                 </div>
                 <div class="mt-10">
-                    <input type="text" name="iam" placeholder="I am"
+                    <input aria-label="relation to person who is blind input field" type="text" name="iam" placeholder="Relation to Blindness (i.e. Parent of someone who is blind)"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'I am'" required
                         class="single-input">
                 </div>
                 <div class="mt-10">
-                    <input type="text" name="model_description" placeholder="Model Description"
+                    <input aria-label="model description input field" type="text" name="model_description" placeholder="Model Description"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Model Description'" required
                         class="single-input">
                 </div>
@@ -179,19 +173,19 @@
 
                 <!-- Internal Data -->
                 <div class="mt-10">
-                    <input type="text" name="school" placeholder="School (If Applicable)"
+                    <input aria-label="school input field" type="text" name="school" placeholder="School (If Applicable)"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'School (If Applicable)'" required
                         class="single-input">
                 </div>
                 <div class="mt-10">
-                    <input type="text" name="publicity" placeholder="How did you hear about See3D?"
+                    <input aria-label="how did you hear about see3d input field" type="text" name="publicity" placeholder="How did you hear about See3D?"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'How did you hear about See3D?'" required
                         class="single-input">
                 </div>
                 <div class="mt-10">
-                    <p>Would you like to provide feedback</p>
+                    <p style="color: black;">Would you like to provide feedback</p>
                     <div class="confirm-switch">
-                        <input name="feedback" type="checkbox" id="primary-switch">
+                        <input aria-label="checkbox if you would like to provide feedback about the model" name="feedback" type="checkbox" id="primary-switch">
                         <label for="primary-switch"></label>
                     </div>
                 </div>
@@ -330,33 +324,32 @@
                         <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="img/logo.png" alt="">
+                                    <img src="img/logo.png" alt="white See3D logo">
                                 </a>
                             </div>
                             <p>
-                                finloan@support.com <br>
-                                +10 873 672 6782 <br>
-                                600/D, Green road, NewYork
+                                info@see3d.org <br>
+                                Columbus, Ohio
                             </p>
                             <div class="socail_links">
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a aria-label="see3d facebook page" href="https://www.facebook.com/See3Dprintingfortheblind">
                                             <i class="ti-facebook"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-google-plus"></i>
+                                        <a aria-label="see3d linkedin page" href="https://www.linkedin.com/company/34946156">
+                                            <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a aria-label="see3d twitter page" href="https://twitter.com/See3Dprinting">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a aria-label="see3d instagram page" href="https://www.instagram.com/see.3d/">
                                             <i class="fa fa-instagram"></i>
                                         </a>
                                     </li>
@@ -371,10 +364,10 @@
                                 Company
                             </h3>
                             <ul>
-                                <li><a href="#">About </a></li>
-                                <li><a href="#"> Pricing</a></li>
-                                <li><a href="#">Carrier Tips</a></li>
-                                <li><a href="#">FAQ</a></li>
+                                <li><a href="team.html">Our Team </a></li>
+                                <li><a href="gallery.html"> Photos</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
                         </div>
@@ -385,10 +378,10 @@
                                 Category
                             </h3>
                             <ul>
-                                <li><a href="#">Design & Art</a></li>
-                                <li><a href="#">Engineering</a></li>
-                                <li><a href="#">Sales & Marketing</a></li>
-                                <li><a href="#">Finance</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="get_involved.html">Get Involved</a></li>
+                                <li><a href="request.html">Request a Model</a></li>
+                                <li><a href="donate.html">Donate</a></li>
                             </ul>
                         </div>
                     </div>
@@ -397,12 +390,11 @@
                             <h3 class="footer_title">
                                 Subscribe
                             </h3>
-                            <form action="#" class="newsletter_form">
-                                <input type="text" placeholder="Enter your mail">
-                                <button type="submit">Subscribe</button>
+                            <form aria-label="form to subscribe to see3d blog" action="subscribe" class="newsletter_form">
+                                <input aria-label="email text input field" type="text" placeholder="Enter your e-mail">
+                                <button aria-label="submit button to add to blog mailing list" type="submit">Subscribe</button>
                             </form>
-                            <p class="newsletter_text">Esteem spirit temper too say adieus who direct esteem esteems
-                                luckily.</p>
+                            <p class="newsletter_text">Subscribe to our Blog</p>
                         </div>
                     </div>
                 </div>
