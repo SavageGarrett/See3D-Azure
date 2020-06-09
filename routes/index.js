@@ -5,10 +5,10 @@ let interaction_handler = require('../interaction_handler.js');
 let chat_message = require('../chat_message.js');
 let hooks = require('../secret/hooks.js');
 let verify_admin = require('../secret/users.js');
-let modal = require('../modal.js')
-const token = require('../secret/token.js')
-require('dotenv').config()
+let modal = require('../modal.js');
+require('dotenv').config();
 var path = require('path');
+let template_handler = require('./template_handler.js');
 
 router.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
@@ -21,7 +21,11 @@ router.get('/index', (req, res, next) => {
 router.get('/:fname', (req, res, next) => {
   let fname = req.params.fname;
   if (fname.includes(".html")) {
-    res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
+    if (fname === "gallery.html") {
+      template_handler.gallery(res, req.query.p);
+    } else {
+      res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
+    }
   } else {
     next();
   }
