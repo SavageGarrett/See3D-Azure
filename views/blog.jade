@@ -1,0 +1,388 @@
+doctype html
+html.no-js(lang='zxx')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    title See3D - Blog
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // <link rel="manifest" href="site.webmanifest">
+    link(rel='shortcut icon', type='image/x-icon', href='img/favicon.png')
+    // Place favicon.ico in the root directory
+    // CSS here
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/owl.carousel.min.css')
+    link(rel='stylesheet', href='css/magnific-popup.css')
+    link(rel='stylesheet', href='css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/themify-icons.css')
+    link(rel='stylesheet', href='css/nice-select.css')
+    link(rel='stylesheet', href='css/flaticon.css')
+    link(rel='stylesheet', href='css/gijgo.css')
+    link(rel='stylesheet', href='css/animate.css')
+    link(rel='stylesheet', href='css/slicknav.css')
+    link(rel='stylesheet', href='css/style.css')
+    // <link rel="stylesheet" href="css/responsive.css">
+  body
+    //if lte IE 9
+      p.browserupgrade
+        | You are using an 
+        strong outdated
+        |  browser. Please 
+        a(href='https://browsehappy.com/') upgrade your browser
+        |  to improve your experience and security.
+    // header-start
+    header
+      .header-area
+        #sticky-header.main-header-area
+          .container-fluid
+            .header_bottom_border
+              .row.align-items-center
+                .col-xl-3.col-lg-2
+                  .logo
+                    a(href='index.html')
+                      img(src='img/logo.png', alt='')
+                .col-xl-6.col-lg-7
+                  .main-menu.d-none.d-lg-block
+                    nav
+                      ul#navigation
+                        li
+                          a(href='index.html') home
+                        li
+                          a(href='jobs.html') Browse Job
+                        li
+                          a(href='#')
+                            | pages 
+                            i.ti-angle-down
+                          ul.submenu
+                            li
+                              a(href='candidate.html') Candidates 
+                            li
+                              a(href='job_details.html') job details 
+                            li
+                              a(href='elements.html') elements
+                        li
+                          a(href='#')
+                            | blog 
+                            i.ti-angle-down
+                          ul.submenu
+                            li
+                              a(href='blog.html') blog
+                            li
+                              a(href='single-blog.html') single-blog
+                        li
+                          a(href='contact.html') Contact
+                .col-xl-3.col-lg-3.d-none.d-lg-block
+                  .Appointment
+                    .phone_num.d-none.d-xl-block
+                      a(href='#') Log in
+                    .d-none.d-lg-block
+                      a.boxed-btn3(href='#') Post a Job
+                .col-12
+                  .mobile_menu.d-block.d-lg-none
+    // header-end
+    // bradcam_area
+    .bradcam_area.bradcam_bg_1
+      .container
+        .row
+          .col-xl-12
+            .bradcam_text
+              h3 blog
+    // / bradcam_area
+    // ================Blog Area =================
+    section.blog_area.section-padding
+      .container
+        .row
+          .col-lg-8.mb-5.mb-lg-0
+            .blog_left_sidebar
+            each val in result
+              article.blog_item
+                .blog_item_img
+                  img.card-img.rounded-0(src='img/blog/single_blog_1.png', alt='')
+                  a.blog_item_date(href='#')
+                    h3 #{new Date(val.date).getDate()}
+                    p #{val.month}
+                .blog_details
+                  a.d-inline-block(href='blog.html?id=#{val._id}')
+                    h2 #{val.title}
+                  p
+                    | #{val.article_description}
+                  ul.blog-info-link
+                    li
+                      a(href='#')
+                        i.fa.fa-user
+                        |  #{val.category.split(',')[0]}
+                    li
+                      a(href='#')
+                        i.fa.fa-comments
+                        |  #{val.comments.length} Comments
+
+              nav.blog-pagination.justify-content-center.d-flex
+                ul.pagination
+                  li.page-item
+                    a.page-link(href='#', aria-label='Previous')
+                      i.ti-angle-left
+                  li.page-item
+                    a.page-link(href='#') 1
+                  li.page-item.active
+                    a.page-link(href='#') 2
+                  li.page-item
+                    a.page-link(href='#', aria-label='Next')
+                      i.ti-angle-right
+          .col-lg-4
+            .blog_right_sidebar
+              aside.single_sidebar_widget.search_widget
+                form(action='#')
+                  .form-group
+                    .input-group.mb-3
+                      input.form-control(type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
+                      .input-group-append
+                        button.btn(type='button')
+                          i.ti-search
+                  button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit') Search
+              //
+                <aside class="single_sidebar_widget post_category_widget">
+                <h4 class="widget_title">Category</h4>
+                <ul class="list cat-list">
+                <li>
+                <a href="#" class="d-flex">
+                <p>Resaurant food</p>
+                <p>(37)</p>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="d-flex">
+                <p>Travel news</p>
+                <p>(10)</p>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="d-flex">
+                <p>Modern technology</p>
+                <p>(03)</p>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="d-flex">
+                <p>Product</p>
+                <p>(11)</p>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="d-flex">
+                <p>Inspiration</p>
+                <p>21</p>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="d-flex">
+                <p>Health Care (21)</p>
+                <p>09</p>
+                </a>
+                </li>
+                </ul>
+                </aside>
+              aside.single_sidebar_widget.popular_post_widget
+                h3.widget_title Recent Post
+                .media.post_item
+                  img(src='img/post/post_1.png', alt='post')
+                  .media-body
+                    a(href='single-blog.html')
+                      h3 From life was you fish...
+                    p January 12, 2019
+                .media.post_item
+                  img(src='img/post/post_2.png', alt='post')
+                  .media-body
+                    a(href='single-blog.html')
+                      h3 The Amazing Hubble
+                    p 02 Hours ago
+                .media.post_item
+                  img(src='img/post/post_3.png', alt='post')
+                  .media-body
+                    a(href='single-blog.html')
+                      h3 Astronomy Or Astrology
+                    p 03 Hours ago
+                .media.post_item
+                  img(src='img/post/post_4.png', alt='post')
+                  .media-body
+                    a(href='single-blog.html')
+                      h3 Asteroids telescope
+                    p 01 Hours ago
+              //
+                <aside class="single_sidebar_widget tag_cloud_widget">
+                <h4 class="widget_title">Tag Clouds</h4>
+                <ul class="list">
+                <li>
+                <a href="#">project</a>
+                </li>
+                <li>
+                <a href="#">love</a>
+                </li>
+                <li>
+                <a href="#">technology</a>
+                </li>
+                <li>
+                <a href="#">travel</a>
+                </li>
+                <li>
+                <a href="#">restaurant</a>
+                </li>
+                <li>
+                <a href="#">life style</a>
+                </li>
+                <li>
+                <a href="#">design</a>
+                </li>
+                <li>
+                <a href="#">illustration</a>
+                </li>
+                </ul>
+                </aside>
+              aside.single_sidebar_widget.instagram_feeds
+                h4.widget_title Instagram Feeds
+                ul.instagram_row.flex-wrap
+                  li
+                    a(href='#')
+                      img.img-fluid(src='img/post/post_5.png', alt='')
+                  li
+                    a(href='#')
+                      img.img-fluid(src='img/post/post_6.png', alt='')
+                  li
+                    a(href='#')
+                      img.img-fluid(src='img/post/post_7.png', alt='')
+                  li
+                    a(href='#')
+                      img.img-fluid(src='img/post/post_8.png', alt='')
+                  li
+                    a(href='#')
+                      img.img-fluid(src='img/post/post_9.png', alt='')
+                  li
+                    a(href='#')
+                      img.img-fluid(src='img/post/post_10.png', alt='')
+              aside.single_sidebar_widget.newsletter_widget
+                h4.widget_title Newsletter
+                form(action='#')
+                  .form-group
+                    input.form-control(type='email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter email'", placeholder='Enter email', required='')
+                  button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit') Subscribe
+    // ================Blog Area =================
+    // footer start
+    footer.footer
+      .footer_top
+        .container
+          .row
+            .col-xl-3.col-md-6.col-lg-3
+              .footer_widget.wow.fadeInUp(data-wow-duration='1s', data-wow-delay='.3s')
+                .footer_logo
+                  a(href='#')
+                    img(src='img/logo.png', alt='')
+                p
+                  | finloan@support.com 
+                  br
+                  |                                 +10 873 672 6782 
+                  br
+                  |                                 600/D, Green road, NewYork
+                .socail_links
+                  ul
+                    li
+                      a(href='#')
+                        i.ti-facebook
+                    li
+                      a(href='#')
+                        i.fa.fa-google-plus
+                    li
+                      a(href='#')
+                        i.fa.fa-twitter
+                    li
+                      a(href='#')
+                        i.fa.fa-instagram
+            .col-xl-2.col-md-6.col-lg-2
+              .footer_widget.wow.fadeInUp(data-wow-duration='1.1s', data-wow-delay='.4s')
+                h3.footer_title
+                  | Company
+                ul
+                  li
+                    a(href='#') About 
+                  li
+                    a(href='#')  Pricing
+                  li
+                    a(href='#') Carrier Tips
+                  li
+                    a(href='#') FAQ
+            .col-xl-3.col-md-6.col-lg-3
+              .footer_widget.wow.fadeInUp(data-wow-duration='1.2s', data-wow-delay='.5s')
+                h3.footer_title
+                  | Category
+                ul
+                  li
+                    a(href='#') Design & Art
+                  li
+                    a(href='#') Engineering
+                  li
+                    a(href='#') Sales & Marketing
+                  li
+                    a(href='#') Finance
+            .col-xl-4.col-md-6.col-lg-4
+              .footer_widget.wow.fadeInUp(data-wow-duration='1.3s', data-wow-delay='.6s')
+                h3.footer_title
+                  | Subscribe
+                form.newsletter_form(action='#')
+                  input(type='text', placeholder='Enter your mail')
+                  button(type='submit') Subscribe
+                p.newsletter_text
+                  | Esteem spirit temper too say adieus who direct esteem esteems
+                  | luckily.
+      .copy-right_text.wow.fadeInUp(data-wow-duration='1.4s', data-wow-delay='.3s')
+        .container
+          .footer_border
+          .row
+            .col-xl-12
+              p.copy_right.text-center
+                // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+                | Copyright ©
+                script.
+                  document.write(new Date().getFullYear());
+                |  All rights reserved | This template is made with 
+                i.fa.fa-heart-o(aria-hidden='true')
+                |  by 
+                a(href='https://colorlib.com', target='_blank') Colorlib
+                // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+                // / footer end
+                // JS here
+                script(src='js/vendor/modernizr-3.5.0.min.js')
+                script(src='js/vendor/jquery-1.12.4.min.js')
+                script(src='js/popper.min.js')
+                script(src='js/bootstrap.min.js')
+                script(src='js/owl.carousel.min.js')
+                script(src='js/isotope.pkgd.min.js')
+                script(src='js/ajax-form.js')
+                script(src='js/waypoints.min.js')
+                script(src='js/jquery.counterup.min.js')
+                script(src='js/imagesloaded.pkgd.min.js')
+                script(src='js/scrollIt.js')
+                script(src='js/jquery.scrollUp.min.js')
+                script(src='js/wow.min.js')
+                script(src='js/nice-select.min.js')
+                script(src='js/jquery.slicknav.min.js')
+                script(src='js/jquery.magnific-popup.min.js')
+                script(src='js/plugins.js')
+                script(src='js/gijgo.min.js')
+                // contact js
+                script(src='js/contact.js')
+                script(src='js/jquery.ajaxchimp.min.js')
+                script(src='js/jquery.form.js')
+                script(src='js/jquery.validate.min.js')
+                script(src='js/mail-script.js')
+                script(src='js/main.js')
+                script.
+                  $('#datepicker').datepicker({
+                  iconsLibrary: 'fontawesome',
+                  icons: {
+                  rightIcon: '<span class="fa fa-caret-down"></span>'
+                  }
+                  });
+                  $('#datepicker2').datepicker({
+                  iconsLibrary: 'fontawesome',
+                  icons: {
+                  rightIcon: '<span class="fa fa-caret-down"></span>'
+                  }
+                  });

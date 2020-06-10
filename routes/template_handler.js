@@ -1,5 +1,23 @@
 var fs = require('fs')
 var path = require('path');
+var mongo = require('mongodb');
+var MongoClient = mongo.MongoClient;
+let ObjectId = require('mongodb').ObjectID;
+var url = "mongodb://localhost:27017/";
+
+var month = new Array();
+month[0] = "January";
+month[1] = "February";
+month[2] = "March";
+month[3] = "April";
+month[4] = "May";
+month[5] = "June";
+month[6] = "July";
+month[7] = "August";
+month[8] = "September";
+month[9] = "October";
+month[10] = "November";
+month[11] = "December";
 
 let template_handler = {
     /**
@@ -63,6 +81,55 @@ let template_handler = {
         }
 
         res.render('gallery', {filenames, display, number_active, number, arrow_disp, plus_arrow, minus_arrow});        
+    },
+
+    "blog": (res, query) => {
+        MongoClient.connect(url, (err, db) => {
+            {useUnifiedTopology: true}
+            if (err) throw err;
+        
+            var dbo = db.db("blog")
+            dbo.collection("blog").find({}).sort({date: -1}).toArray((err, result) => {
+                if (err) throw err;
+                
+                let display = [], single = false;
+
+                // Loop through all results from db
+                for (let i = 0; i < result.length; i++) {
+                    // Set proper month name to display
+                    result[i].month = month[new Date(result[i].date).getMonth()]
+                    if (result[i].month.length > 3) {
+                        result[i].month = result[i].month.slice(result[i].month.length - 4, result[i].month.length - 1)
+                    }
+
+                    // Look for articles to include from search query
+                    if (query.hasOwnProperty('search') && (result[i].title.includes(query.search) 
+                        || result[i].paragraph.includes(query.search) 
+                        || result[i].article_description.includes(query.search))) {
+                        display.push(result[i]);
+                    } else if (query.hasOwnProperty('category') && result[i].toLowerCase().includes(query.category.toLowerCase())) {
+                        // Look for category in comma separated list of categories if queried (2nd priority)
+                        display.push(result[i]);
+                    } else if (query.hasOwnProperty('id') && result[i]._id == query.id) {
+                        display.push(result[i]);
+                        single = true;
+                    }
+                }
+
+                
+
+                console.log(query)
+
+
+                if (single) {
+                    res.render('blog-single', {result})
+                } else {
+                    res.render('blog', {result})
+                }
+
+                db.close();
+            });
+        });
     }
 }
 

@@ -9,6 +9,7 @@ let modal = require('../modal.js');
 require('dotenv').config();
 var path = require('path');
 let template_handler = require('./template_handler.js');
+let Blog_Post = require('./blog/blog.js')
 
 router.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
@@ -23,6 +24,8 @@ router.get('/:fname', (req, res, next) => {
   if (fname.includes(".html")) {
     if (fname === "gallery.html") {
       template_handler.gallery(res, req.query.p);
+    } else if(fname === "blog.html") {
+      template_handler.blog(res, req.query);
     } else {
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
     }
@@ -61,6 +64,14 @@ router.get('/img/:dirname/:fname', (req, res, next) => {
   let fname = req.params.fname;
   let dirname = req.params.dirname;
   res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${fname}`));
+});
+
+// Post Blog
+router.post('/post_blog', (req, res) => {
+  console.log(req.body);
+  let blog_post = new Blog_Post(req.body.article_title, req.body.categories, req.body.paragraph, req.body.article_description);
+  blog_post.store();
+  res.sendFile(path.join(__dirname, '../public/new_site/html/blog.html'))
 });
 
 // Log id to console
