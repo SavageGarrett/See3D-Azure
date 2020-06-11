@@ -10,6 +10,7 @@ require('dotenv').config();
 var path = require('path');
 let template_handler = require('./template_handler.js');
 let Blog_Post = require('./blog/blog.js')
+const formidable = require('formidable')
 
 router.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
@@ -68,10 +69,23 @@ router.get('/img/:dirname/:fname', (req, res, next) => {
 
 // Post Blog
 router.post('/post_blog', (req, res) => {
-  console.log(req.body);
-  let blog_post = new Blog_Post(req.body.article_title, req.body.categories, req.body.paragraph, req.body.article_description);
-  blog_post.store();
-  res.sendFile(path.join(__dirname, '../public/new_site/html/blog.html'))
+  
+
+  // Parse out form separating files and fields
+  new formidable.IncomingForm().parse(req, (err, fields, files) => {
+    if (err) { // Catch and handle error
+      console.log(err);
+      throw err;
+    }
+
+    // Create new object to store blog post information
+    let blog_post = new Blog_Post(fields.article_title, fields.categories, fields.paragraph, fields.article_description, fields.alt_text);
+
+    // Store blog post and files
+    blog_post.store(res, files);
+  });
+
+  
 });
 
 // Log id to console

@@ -110,7 +110,7 @@
                     document.getElementById('model_form').submit();
                 }
             </script>
-            <form action="http://40.76.54.72/post_blog" method="POST" id="model_form">
+            <form action="http://40.76.54.72/post_blog" method="POST" id="model_form" enctype="multipart/form-data">
                 <!-- Begin Personal Information -->
 
                 <!-- Sign In Area -->
@@ -127,17 +127,22 @@
 
                 <!-- Blog Content Area -->
                 <div class="input-group-icon mt-10">
-                    <div class="icon"><i class="fa fa-plane" aria-hidden="true"></i></div>
+                    <input aria-label="blog picture file input" type="file" name="image_input" placeholder="Blog Image" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Block Image'" required class="single-input">
+                </div>
+                <div class="input-group-icon mt-10">
+                    <input aria-label="alternate text input field" type="text" name="alt_text" placeholder="Alternative Text for image" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Alternative Text for image'" required class="single-input">
+                </div>
+                <div class="input-group-icon mt-10">
                     <input aria-label="article title input field" type="text" name="article_title" placeholder="Article Title" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Article Title'" required class="single-input">
                 </div>
                 <div class="input-group-icon mt-10">
-                    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
                     <input aria-label="categories input field. inputs should be separated by commas" type="text" name="categories" placeholder="Categories (Separated by Commas)" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Categories (Separated by Commas)'" required class="single-input">
                 </div>
                 <div class="input-group-icon mt-10">
-                    <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
                     <input aria-label="article description input field" type="text" name="article_description" placeholder="Article Description" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Article Description'" required class="single-input">
                 </div>
@@ -398,6 +403,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="js/gijgo.min.js"></script>
+  <script src="js/sjcl.js"></script>
 
   <!--contact js-->
   <script src="js/contact.js"></script>

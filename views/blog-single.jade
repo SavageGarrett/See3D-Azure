@@ -95,7 +95,7 @@ html.no-js(lang='zxx')
           .col-lg-8.posts-list
             .single-post
               .feature-img
-                img.img-fluid(src='img/blog/single_blog_1.png', alt='')
+                img.img-fluid(src='img/blog_posts/#{result[0]._id}.jpg', alt='#{result[0].alt_text}')
               .blog_details
                 h2
                   | #{result[0].title}
@@ -110,6 +110,7 @@ html.no-js(lang='zxx')
                       |  #{result[0].comments.length} Comments
                 p.excert
                   | #{result[0].paragraph}
+                  
             .navigation-top
               .d-sm-flex.justify-content-between.text-center
                 p.like-info

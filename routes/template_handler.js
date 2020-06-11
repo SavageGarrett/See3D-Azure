@@ -83,6 +83,7 @@ let template_handler = {
         res.render('gallery', {filenames, display, number_active, number, arrow_disp, plus_arrow, minus_arrow});        
     },
 
+    // Handles blog pages with their respective queries
     "blog": (res, query) => {
         MongoClient.connect(url, (err, db) => {
             {useUnifiedTopology: true}
@@ -116,14 +117,9 @@ let template_handler = {
                     }
                 }
 
-                
-
-                console.log(query)
-
-
                 if (single) {
                     res.render('blog-single', {result})
-                } else {
+                } else if (query) {
                     res.render('blog', {result})
                 }
 

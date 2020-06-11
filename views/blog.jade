@@ -97,7 +97,7 @@ html.no-js(lang='zxx')
             each val in result
               article.blog_item
                 .blog_item_img
-                  img.card-img.rounded-0(src='img/blog/single_blog_1.png', alt='')
+                  img.card-img.rounded-0(src='img/blog_posts/#{val._id}.jpg', alt='#{val.alt_text}')
                   a.blog_item_date(href='#')
                     h3 #{new Date(val.date).getDate()}
                     p #{val.month}
@@ -116,29 +116,29 @@ html.no-js(lang='zxx')
                         i.fa.fa-comments
                         |  #{val.comments.length} Comments
 
-              nav.blog-pagination.justify-content-center.d-flex
-                ul.pagination
-                  li.page-item
-                    a.page-link(href='#', aria-label='Previous')
-                      i.ti-angle-left
-                  li.page-item
-                    a.page-link(href='#') 1
-                  li.page-item.active
-                    a.page-link(href='#') 2
-                  li.page-item
-                    a.page-link(href='#', aria-label='Next')
-                      i.ti-angle-right
+            nav.blog-pagination.justify-content-center.d-flex
+              ul.pagination
+                li.page-item
+                  a.page-link(href='#', aria-label='Previous')
+                    i.ti-angle-left
+                li.page-item
+                  a.page-link(href='#') 1
+                li.page-item.active
+                  a.page-link(href='#') 2
+                li.page-item
+                  a.page-link(href='#', aria-label='Next')
+                    i.ti-angle-right
           .col-lg-4
             .blog_right_sidebar
               aside.single_sidebar_widget.search_widget
                 form(action='#')
                   .form-group
                     .input-group.mb-3
-                      input.form-control(type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
+                      input.form-control(id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
                       .input-group-append
-                        button.btn(type='button')
+                        button.btn(type='button', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`")
                           i.ti-search
-                  button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit') Search
+                  button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`") Search
               //
                 <aside class="single_sidebar_widget post_category_widget">
                 <h4 class="widget_title">Category</h4>

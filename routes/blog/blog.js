@@ -2,38 +2,8 @@ var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 let ObjectId = require('mongodb').ObjectID;
 var url = "mongodb://localhost:27017/";
-
-class Comment {
-    constructor(name, email, text, id) {
-        this.name = name;
-        this.email = email;
-        this.text = text;
-    }
-}
-
-class Like {
-    constructor(name, email) {
-        this.name = name;
-        this.email = email;
-    }
-
-    store() {
-        // Add like to database
-        MongoClient.connect(url, (err, db) => {
-            {useUnifiedTopology: true}
-            if (err) throw err;
-        
-            var dbo = db.db("blog")
-            dbo.collection("blog").insertOne(this ,(err, result) => {
-                if (err) throw err;
-
-                console.log(result)
-                
-                db.close();
-            });
-        });
-    }
-}
+const fs = require('fs');
+let path = require('path');
 
 class Blog_Post {
     /**
@@ -43,50 +13,41 @@ class Blog_Post {
      * @param {*} category 
      * @param {*} paragraph 
      */
-    constructor(title, category, paragraph, article_description) {
+    constructor(title, category, paragraph, article_description, alt_text) {
         this.title = title;
         this.article_description = article_description;
         this.category = category;
         this.paragraph = paragraph;
+        this.alt_text = alt_text;
         this.likes = [];
         this.comments = [];
         this.date = Date.now();
-    }
-
-    /**
-     * Add like to blog post
-     * @param {Like} like like object
-     */
-    add_like(like) {
-        this.likes.push(like)
-    }
-
-    /**
-     * Add Comment to Blog Post
-     * @param {Comment} comment comment object
-     */
-    add_comment(comment) {
-        this.comments.push(comment);
+        this.id;
     }
 
     /**
      * Store blog object to mongodb
      */
-    store() {
+    store(res, image) {
         // Add blog post to database
         MongoClient.connect(url, (err, db) => {
             {useUnifiedTopology: true}
             if (err) throw err;
         
             var dbo = db.db("blog")
-            dbo.collection("blog").insertOne(this ,(err, result) => {
+            dbo.collection("blog").insertOne(this, (err, result) => {
                 if (err) throw err;
+
+                fs.renameSync(image.image_input.path, path.join(__dirname, `../../public/new_site/img/blog_posts/${result.insertedId}.jpg`), (err) => {
+                    if (err) throw err
+                })
                 
+                res.redirect(`/blog.html?id=${result.insertedId}`)
+
                 db.close();
             });
         });
     }
-    
 }
 
 module.exports = Blog_Post;
