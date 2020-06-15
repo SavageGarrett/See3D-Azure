@@ -38,6 +38,7 @@ class Blog_Post {
             dbo.collection("blog").insertOne(this, (err, result) => {
                 if (err) throw err;
 
+                // Save image as objectid name
                 fs.renameSync(image.image_input.path, path.join(__dirname, `../../public/new_site/img/blog_posts/${result.insertedId}.jpg`), (err) => {
                     if (err) throw err
                 })

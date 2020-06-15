@@ -12,6 +12,10 @@ let template_handler = require('./template_handler.js');
 let Blog_Post = require('./blog/blog.js')
 const formidable = require('formidable')
 
+/*
+ * Begin Web Routes
+ */
+
 router.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
 });
@@ -69,7 +73,7 @@ router.get('/img/:dirname/:fname', (req, res, next) => {
 
 // Post Blog
 router.post('/post_blog', (req, res) => {
-  
+  // Validate Username and Password
 
   // Parse out form separating files and fields
   new formidable.IncomingForm().parse(req, (err, fields, files) => {
@@ -87,6 +91,14 @@ router.post('/post_blog', (req, res) => {
 
   
 });
+
+/*
+ * End Web Routes
+ */
+
+/*
+ * Start Slack Bot Routes
+ */
 
 // Log id to console
 router.post('/getid', (req, res) => {
@@ -116,6 +128,7 @@ router.post('/button', (req, res) => {
   try {
     // Parse payload
     let payload = JSON.parse(req.body.payload);
+    console.log(payload)
 
     // Check for actions property before continuing
     if (payload.hasOwnProperty('actions')) {
@@ -297,8 +310,12 @@ router.post('/requests', (req, res) => {
       res.send("You do not have permission to use this command.");
     }
   } else { // No command found
-    res.send("Command Not Found! Use /requests help for a list of ");
+    res.send("Command Not Found! Use /requests help for a list of commands.");
   }
 });
+
+/*
+ * End Slack Bot Routes
+ */
 
 module.exports = router;

@@ -243,7 +243,7 @@ var interaction_handler = {
                                 id: sub_id,
                                 model_link: link,
                                 model_count: qty,
-                                assigned_users: [{}], //TODO
+                                assigned_users: [], //TODO
                                 completed: 0
                             }
                         }
@@ -265,7 +265,7 @@ var interaction_handler = {
 
     "sendPrintMessage": function(id, link, qty) {
         // Send message to printers
-        request.post(process.env.PRINT_REQUESTS_CHANNEL, {
+        axios.post(process.env.PRINT_REQUESTS_CHANNEL, {
             json: {
                 "blocks": [
                     {
@@ -346,7 +346,7 @@ var interaction_handler = {
                                 "text": "Done"
                             },
                             "style": "primary",
-                            "value": "click_me_123"
+                            "value": "accepted_done"
                         },
                         {
                             "type": "button",
@@ -356,7 +356,7 @@ var interaction_handler = {
                                 "text": "Cancel"
                             },
                             "style": "danger",
-                            "value": "click_me_123"
+                            "value": "accepted_cancel"
                         }
                     ]
                 }
