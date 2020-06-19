@@ -16,12 +16,23 @@ const formidable = require('formidable')
  * Begin Web Routes
  */
 
+// Acme Challenge for SSL
+router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
+  let id = req.params.id;
+  res.sendFile(path.join(__dirname, `../public/.well-known/acme-challenge/${id}`))
+})
+
 router.get('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+  res.redirect('/index.html')
 });
 
-router.get('/index', (req, res, next) => {
-  res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+router.get('/index.html', (req, res, next) => {
+  let query = req.query;
+  if (query.hasOwnProperty('testimony')) {
+    res.render('testimony', {query});
+  } else {
+    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+  }
 });
 
 router.get('/:fname', (req, res, next) => {
@@ -34,10 +45,23 @@ router.get('/:fname', (req, res, next) => {
     } else {
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
     }
+  } else if (fname.includes(".php")) {
+    // Route php not found to index
+    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
   } else {
     next();
   }
 });
+
+// Route php requests to index
+router.get('/:dirname/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  if (fname.includes('.php')) {
+    res.redirect('/')
+  } else {
+    next();
+  }
+})
 
 router.get('/css/:fname', (req, res, next) => {
   let fname = req.params.fname;
@@ -88,8 +112,15 @@ router.post('/post_blog', (req, res) => {
     // Store blog post and files
     blog_post.store(res, files);
   });
+});
 
-  
+// Get Contact Form
+router.post('/contact_process', (req, res) => {
+  new formidable.IncomingForm().parse(req, (err, fields, files) => {
+    if (err) throw err;
+
+    console.log(fields)
+  });
 });
 
 /*
@@ -128,7 +159,7 @@ router.post('/button', (req, res) => {
   try {
     // Parse payload
     let payload = JSON.parse(req.body.payload);
-    console.log(payload)
+    //console.log(payload)
 
     // Check for actions property before continuing
     if (payload.hasOwnProperty('actions')) {
@@ -160,7 +191,14 @@ router.post('/button', (req, res) => {
             modal.open_modal(JSON.stringify({_id: interactionParams._id, action: "add_design_request"}), payload, process.env.BOT_TOKEN, modal.design_request_view);
             res.sendStatus(200);
             console.log("Successfully sent add design request dialogue");
+          } else if (interactionParams.action === "more_info") {
+            interaction_handler.sendMoreInfo(interactionParams, payload.response_url);
+            res.sendStatus(200)
+          } else if (interactionParams.action === "mark_complete") {
+            interaction_handler.markComplete(interactionParams, payload.response_url);
+            res.sendStatus(200);
           }
+
           // Handle Button Payloads
         } else if (payload.actions[0].type === "button") {
           // Get request data sent with payload
@@ -282,36 +320,39 @@ router.post('/requests', (req, res) => {
   let splitCommand = req.body.text.split(' ');
   let uid = req.body.user_id
 
-  if (splitCommand[0] === "") res.send("Use \"/requests help\" for instructions");
-  else if (splitCommand[0] === "help") { // Help command
+  if (splitCommand[0] === "") { 
+    interaction_handler.getOpenRequests(res);
+  } 
 
-    if (verify_admin(uid)) {
-      res.send(chat_message['request_help_admin']);
-    } else {
-      res.send(chat_message['request_help_designer']);
-    }
-  } else if (splitCommand[0] === 'get-current') { // Get current model requests
-    // Sends user current model request selection
-    if (verify_admin(uid)) {
-      interaction_handler.getOpenRequests(res);
-    } else {
-      res.send("You do not have permission to use this command.");
-    }
-  } else if (splitCommand[0] === 'add-printer') { // Add printer to model request
-    if (verify_admin(uid)) {
+  // Commented out to temporarily simplify
+  //else if (splitCommand[0] === "help") { // Help command
+  //   if (verify_admin(uid)) {
+  //     res.send(chat_message['request_help_admin']);
+  //   } else {
+  //     res.send(chat_message['request_help_designer']);
+  //   }
+  // } else if (splitCommand[0] === 'get-current') { // Get current model requests
+  //   // Sends user current model request selection
+  //   if (verify_admin(uid)) {
+  //     interaction_handler.getOpenRequests(res);
+  //   } else {
+  //     res.send("You do not have permission to use this command.");
+  //   }
+  // } else if (splitCommand[0] === 'add-printer') { // Add printer to model request
+  //   if (verify_admin(uid)) {
 
-    } else {
-      res.send("You do not have permission to use this command.");
-    }
-  } else if (splitCommand[0] === 'add-designer') { // Add designer to model request
-    if (verify_admin(uid)) {
+  //   } else {
+  //     res.send("You do not have permission to use this command.");
+  //   }
+  // } else if (splitCommand[0] === 'add-designer') { // Add designer to model request
+  //   if (verify_admin(uid)) {
 
-    } else {
-      res.send("You do not have permission to use this command.");
-    }
-  } else { // No command found
-    res.send("Command Not Found! Use /requests help for a list of commands.");
-  }
+  //   } else {
+  //     res.send("You do not have permission to use this command.");
+  //   }
+  // } else { // No command found
+  //   res.send("Command Not Found! Use /requests help for a list of commands.");
+  // }
 });
 
 /*

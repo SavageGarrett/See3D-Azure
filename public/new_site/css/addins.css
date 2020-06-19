@@ -64,3 +64,33 @@
 :-moz-placeholder {
     color: black;
 }
+
+/*
+ * News Section
+ */
+ .popular_catagory_area .single_catagory:hover {
+    border-color: #7cc8ff;
+ }
+
+/*
+ * Footer Styling
+ */
+.socail_links ul li a i {
+    color: white;
+}
+
+.socail_links ul li a {
+    border-color: white !important;
+}
+
+.footer_widget ul li a{
+    color: white !important;
+}
+
+.footer_widget ul li a:hover{
+    color: #7cc8ff !important;
+}
+
+.footer_widget p {
+    color: white !important;
+}

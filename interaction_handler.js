@@ -179,19 +179,36 @@ var interaction_handler = {
                                     {
                                         "text": {
                                             "type": "plain_text",
-                                            "text": "Add Models",
+                                            "text": "More Info",
                                             "emoji": true
                                         },
-                                        "value": JSON.stringify({"_id": interactionParams._id, "action": "add_models"})
+                                        "value": JSON.stringify({"_id": interactionParams._id, "action": "more_info"})
                                     },
                                     {
                                         "text": {
                                             "type": "plain_text",
-                                            "text": "Add Design Request",
+                                            "text": "Mark Complete",
                                             "emoji": true
                                         },
-                                        "value": JSON.stringify({"_id": interactionParams._id, "action": "add_design_request"})
+                                        "value": JSON.stringify({"_id": interactionParams._id, "action": "mark_complete"})
                                     }
+                                    // Temporarily Simplify
+                                    // {
+                                    //     "text": {
+                                    //         "type": "plain_text",
+                                    //         "text": "Add Models",
+                                    //         "emoji": true
+                                    //     },
+                                    //     "value": JSON.stringify({"_id": interactionParams._id, "action": "add_models"})
+                                    // },
+                                    // {
+                                    //     "text": {
+                                    //         "type": "plain_text",
+                                    //         "text": "Add Design Request",
+                                    //         "emoji": true
+                                    //     },
+                                    //     "value": JSON.stringify({"_id": interactionParams._id, "action": "add_design_request"})
+                                    // }
                                 ]
                             }
                         }
@@ -200,6 +217,87 @@ var interaction_handler = {
                 });
             });
         });
+    },
+
+    "sendMoreInfo": function(payload, res_url) {
+        MongoClient.connect(url, (err, db) => {
+            if (err) throw err;
+
+            // Declare Db object
+            var dbo = db.db("model_request")
+
+            dbo.collection("model_requests").find(ObjectId(payload._id)).toArray((err, result) => {
+                console.log(result[0].request_params)
+                params = result[0].request_params.request_body;
+
+                // Update Braille Label Yes/No
+                if (params.braille_label === "on") {
+                    params.braille_label = "Yes";
+                } else {
+                    params.braille_label = "No";
+                }
+
+                request.post(res_url,{
+                    json: {
+                        "blocks": [
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "More Info"
+                                }
+                            },
+                            {
+                                "type": "divider"
+                            },
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": `Address: ${params.address}\nCity: ${params.city}\nState: ${params.state}\nBraille Label: ${params.braille_label}\nUnderstand Better: ${params.understand}`
+                                }
+                            },
+                            {
+                                "type": "divider"
+                            }
+                        ]
+                    }
+                });
+            });
+        })
+    },
+
+    "markComplete": function(payload, res_url) {
+        MongoClient.connect(url, (err, db) => {
+            if (err) throw err;
+
+            // Declare Db object
+            var dbo = db.db("model_request")
+            
+            dbo.collection("model_requests").updateOne({"_id": new ObjectId(payload._id)}, {$set: {"request_params.completed": 1}})
+                .then((res) => {
+                    if (res.modifiedCount != 1) {
+                        console.log(`Error: ${res.modifiedCount} database entries edited`)
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+
+            axios.post(res_url, {
+                json: {
+                    "blocks": [
+                        {
+                            "type": "section",
+                            "text": {
+                                "type": "mrkdwn",
+                                "text": "Request Completed"
+                            }
+                        }
+                    ]
+                }
+            })
+        })
     },
 
     /*
@@ -392,23 +490,6 @@ var interaction_handler = {
 
         return "clear"
     },
-
-    /**
-     * Open design request view
-     * 
-     * @param {*} payload 
-     */
-    "addDesignRequest": function(payload) {
-
-    },
-
-    /**
-     * Get model shipping info
-     * 
-     * @param {*} payload 
-     */
-    "getShippingInfo": function(payload) {
-    }
 }
 
 module.exports = interaction_handler;
