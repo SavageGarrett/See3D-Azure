@@ -45,6 +45,10 @@
     color: #005999 !important;
 }
 
+/*
+ * Input Styling
+ */
+
 .mt-10 {
     filter: drop-shadow(-4px 4px 4px gray);
 }
@@ -68,9 +72,22 @@
 /*
  * News Section
  */
+
  .popular_catagory_area .single_catagory:hover {
     border-color: #7cc8ff;
  }
+
+/*
+ * Team Page Tweeks
+ */
+
+.team_social li a i {
+    color: #005999 !important;
+}
+
+.footer-rst {
+    background-color: rgba(255,255,255,0);
+}
 
 /*
  * Footer Styling
