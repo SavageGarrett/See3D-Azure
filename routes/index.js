@@ -42,6 +42,9 @@ router.get('/:fname', (req, res, next) => {
       template_handler.gallery(res, req.query.p);
     } else if(fname === "blog.html") {
       template_handler.blog(res, req.query);
+    } else if (fname === "donate.html") {
+      res.sendFile(path.join(__dirname, '../public/new_site/html/donate.html'))
+      //res.render('donate', {title: "See3D - Donate"});
     } else {
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
     }
@@ -94,6 +97,11 @@ router.get('/img/:dirname/:fname', (req, res, next) => {
   let dirname = req.params.dirname;
   res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${fname}`));
 });
+
+router.get('/resume/:name', (req, res, next) => {
+  let name = req.params.name;
+  res.sendFile(path.join(__dirname, `/../public/new_site/resume/${name}`));
+})
 
 // Post Blog
 router.post('/post_blog', (req, res) => {

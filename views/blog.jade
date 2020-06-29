@@ -93,10 +93,11 @@ html.no-js(lang='zxx')
                       a(href='#')
                         i.fa.fa-user
                         |  #{val.category.split(',')[0]}
-                    li
-                      a(href='#')
-                        i.fa.fa-comments
-                        |  #{val.comments.length} Comments
+                    //
+                      li
+                        a(href='#')
+                          i.fa.fa-comments
+                          |  #{val.comments.length} Comments
 
             nav.blog-pagination.justify-content-center.d-flex
               ul.pagination
@@ -163,32 +164,32 @@ html.no-js(lang='zxx')
                 </li>
                 </ul>
                 </aside>
-              aside.single_sidebar_widget.popular_post_widget
-                h3.widget_title Recent Post
-                .media.post_item
-                  img(src='img/post/post_1.png', alt='post')
-                  .media-body
-                    a(href='single-blog.html')
-                      h3 From life was you fish...
-                    p January 12, 2019
-                .media.post_item
-                  img(src='img/post/post_2.png', alt='post')
-                  .media-body
-                    a(href='single-blog.html')
-                      h3 The Amazing Hubble
-                    p 02 Hours ago
-                .media.post_item
-                  img(src='img/post/post_3.png', alt='post')
-                  .media-body
-                    a(href='single-blog.html')
-                      h3 Astronomy Or Astrology
-                    p 03 Hours ago
-                .media.post_item
-                  img(src='img/post/post_4.png', alt='post')
-                  .media-body
-                    a(href='single-blog.html')
-                      h3 Asteroids telescope
-                    p 01 Hours ago
+              //- aside.single_sidebar_widget.popular_post_widget
+              //-   h3.widget_title Recent Post
+              //-   .media.post_item
+              //-     img(src='img/post/post_1.png', alt='post')
+              //-     .media-body
+              //-       a(href='single-blog.html')
+              //-         h3 From life was you fish...
+              //-       p January 12, 2019
+              //-   .media.post_item
+              //-     img(src='img/post/post_2.png', alt='post')
+              //-     .media-body
+              //-       a(href='single-blog.html')
+              //-         h3 The Amazing Hubble
+              //-       p 02 Hours ago
+              //-   .media.post_item
+              //-     img(src='img/post/post_3.png', alt='post')
+              //-     .media-body
+              //-       a(href='single-blog.html')
+              //-         h3 Astronomy Or Astrology
+              //-       p 03 Hours ago
+              //-   .media.post_item
+              //-     img(src='img/post/post_4.png', alt='post')
+              //-     .media-body
+              //-       a(href='single-blog.html')
+              //-         h3 Asteroids telescope
+              //-       p 01 Hours ago
               //
                 <aside class="single_sidebar_widget tag_cloud_widget">
                 <h4 class="widget_title">Tag Clouds</h4>
@@ -219,33 +220,34 @@ html.no-js(lang='zxx')
                 </li>
                 </ul>
                 </aside>
-              aside.single_sidebar_widget.instagram_feeds
-                h4.widget_title Instagram Feeds
-                ul.instagram_row.flex-wrap
-                  li
-                    a(href='#')
-                      img.img-fluid(src='img/post/post_5.png', alt='')
-                  li
-                    a(href='#')
-                      img.img-fluid(src='img/post/post_6.png', alt='')
-                  li
-                    a(href='#')
-                      img.img-fluid(src='img/post/post_7.png', alt='')
-                  li
-                    a(href='#')
-                      img.img-fluid(src='img/post/post_8.png', alt='')
-                  li
-                    a(href='#')
-                      img.img-fluid(src='img/post/post_9.png', alt='')
-                  li
-                    a(href='#')
-                      img.img-fluid(src='img/post/post_10.png', alt='')
-              aside.single_sidebar_widget.newsletter_widget
-                h4.widget_title Newsletter
-                form(action='#')
-                  .form-group
-                    input.form-control(type='email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter email'", placeholder='Enter email', required='')
-                  button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit') Subscribe
+              //- aside.single_sidebar_widget.instagram_feeds
+              //-   h4.widget_title Instagram Feeds
+              //-   ul.instagram_row.flex-wrap
+              //-     li
+              //-       a(href='#')
+              //-         img.img-fluid(src='img/post/post_5.png', alt='')
+              //-     li
+              //-       a(href='#')
+              //-         img.img-fluid(src='img/post/post_6.png', alt='')
+              //-     li
+              //-       a(href='#')
+              //-         img.img-fluid(src='img/post/post_7.png', alt='')
+              //-     li
+              //-       a(href='#')
+              //-         img.img-fluid(src='img/post/post_8.png', alt='')
+              //-     li
+              //-       a(href='#')
+              //-         img.img-fluid(src='img/post/post_9.png', alt='')
+              //-     li
+              //-       a(href='#')
+              //-         img.img-fluid(src='img/post/post_10.png', alt='')
+              //
+                aside.single_sidebar_widget.newsletter_widget
+                  h4.widget_title Newsletter
+                  form(action='#')
+                    .form-group
+                      input.form-control(type='email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter email'", placeholder='Enter email', required='')
+                    button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit') Subscribe
     // ================Blog Area =================
     // footer start
     footer.footer

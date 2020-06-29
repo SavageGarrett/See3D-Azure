@@ -2,7 +2,16 @@
     Custom CSS Addins for See3D
     Created 06/03/2020
 */
-
+.a{
+    color: #001d38;
+}
+.testimonial_area .single_testmonial .info{
+    font-size: 24px;
+}
+.header-area .main-header-area.sticky {
+    max-height: 89px;
+    overflow: hidden;
+}
 .testimonial_area {
     background: #F5F7FA !important;
 }

@@ -19,6 +19,82 @@ month[9] = "October";
 month[10] = "November";
 month[11] = "December";
 
+let alt_text = {
+    "Alligator 1.jpg": "Alligator 3D model",
+    "Brainstem 1.jpg": "Brainstem with Braille",
+    "Butterfly Chrysalis.jpg": "Butterfly Chrysalis 3D Print",
+    "Butterfly Life Cycle.jpg": "Stages of Butterfly lifecycle 3D Print",
+    "CABVI Logo 2.jpg": "3D Logo raised of CABVI",
+    "COVID 2.jpg": "3D model of COVID-19",
+    "Cassandra Castle Brighter.jpg": "a",
+    "Caterpillar Articulated 3.jpg": "s",
+    "Caterpillar Half 1.jpg": "d",
+    "Caterpillar Half 2.jpg": "f",
+    "Chicken Footprint.jpg": "g",
+    "Chinese Dragon.jpg": "h",
+    "Chloroplast.jpg": "j",
+    "Chromosomes 4.jpg": "k",
+    "Constellation Centaurus.jpg": "l",
+    "Constellation Dome.jpg": ";",
+    "Curiosity Rover.jpg": "q",
+    "DDI I-44 and MO-13 #2.jpg": "w",
+    "DNA Green.jpg": "e",
+    "DSCF1742.jpg": "r",
+    "DSCF1743.jpg": "",
+    "DSCF1754.jpg": "",
+    "DSCF1790.jpg": "",
+    "DSCF1794.jpg": "",
+    "DSCF1806.jpg": "",
+    "DSCF1815.jpg": "",
+    "Dodecahedron.jpg": "",
+    "EFEA1D04-BD01-4551-A6D1-1B6E12624170.jpg": "",
+    "Eye Model Cropped.jpg": "",
+    "Fish in Anemone.jpg": "",
+    "IMG_1047_Facetune_14-05-2020-12-06-21.jpg": "",
+    "IMG_1210.jpg": "",
+    "IMG_1212.jpg": "",
+    "IMG_1466_Facetune_08-06-2020-18-18-52.jpg": "",
+    "IMG_1469.jpg": "",
+    "JWST.jpg": "",
+    "K-9 Garrett 2.jpg": "",
+    "Klein Bottle Photo.jpg": "",
+    "Lighthouse.jpg": "",
+    "MakerX Brailler.jpg": "",
+    "MakerX Models.jpg": "",
+    "MakerX Table 2.jpg": "",
+    "Milky Way Side 5.jpg": "",
+    "Mt. Vesuvius.jpg": "",
+    "Orlando International Airport.jpg": "",
+    "Party Models.jpg": "",
+    "Planets.jpg": "",
+    "Platonic Shapes.jpg": "",
+    "Protein Yellow Bigger.jpg": "",
+    "Roof 1.jpg": "",
+    "Roof 6.jpg": "",
+    "Rose Model Full.jpg": "",
+    "Rose Model Top.jpg": "",
+    "Rose.jpg": "",
+    "Rosen Shingle Creek Hotel big site of 2018 Convention.jpg": "",
+    "Sea Creatures Blue Seahorse Fish Frog Whaleshark Toad.jpg": "",
+    "See3D banner.jpg": "",
+    "Snowman Crater.jpg": "",
+    "Statue of Liberty 2.jpg": "",
+    "TEDx 4.png": "",
+    "TEDx far 1.png": "",
+    "Taj Mahal.jpg": "",
+    "Tesseract.jpg": "",
+    "USA Flag Model.jpg": "",
+    "USA Precipitation Map.jpg": "",
+    "USA Topographical blue 2.jpg": "",
+    "USA Topographical.jpg": "",
+    "UT Tower.jpg": "",
+    "Water Drop 2.jpg": "",
+    "butterfly eggs on leaf.jpg": "",
+    "butterfly monarch egg.jpg": "",
+    "iPhone Jamie 1.jpg": "",
+    "iPhone Jamie updated volume.jpg": ""
+}
+
 let template_handler = {
     /**
      * Serves gallery pages
@@ -80,7 +156,17 @@ let template_handler = {
             minus_arrow = pagenum - 1;
         }
 
-        res.render('gallery', {filenames, display, number_active, number, arrow_disp, plus_arrow, minus_arrow});        
+        // Add alt text to images
+        let arr_alt = [];
+        for (let j = 0; j < filenames.length; j++) {
+            if (alt_text.hasOwnProperty(filenames[j])) {
+                arr_alt.push(alt_text[filenames[j]]);
+            } else {
+                arr_alt.push("");
+            }
+        }
+
+        res.render('gallery', {filenames, arr_alt, display, number_active, number, arrow_disp, plus_arrow, minus_arrow});        
     },
 
     // Handles blog pages with their respective queries
@@ -118,6 +204,30 @@ let template_handler = {
                 }
 
                 if (single) {
+                    // let new_paragraph = result[0].paragraph.split(/\<link\>.+\<\/link\>/), links = [], final = [];
+
+                    // // Remove all links and add to array
+                    // while (result[0].paragraph.includes('<link>')) {
+                    //     let match_data = result[0].paragraph.match(/\<link\>.+\<\/link\>/);
+                    //     links.push(result[0].paragraph.substr(match_data.index, match_data[0].length));
+                    //     result[0].paragraph = result[0].paragraph.replace(/\<link\>.+\<\/link\>/, '');
+                    // }
+
+                    // // Sanitize Links
+                    // for (let i = 0; i < links.length; i++) {
+                    //     links[i] = links[i].replace('<link>', '');
+                    //     links[i] = links[i].replace('</link>', '');
+                    // }
+
+                    // // Add to array in order
+                    // for (let j = 0; j < new_paragraph.length; j++) {
+                    //     final.push({paragraph: new_paragraph[j]});
+
+                    //     if (j in links) {
+                    //         final.push({link: links[j]});
+                    //     }
+                    // }
+
                     res.render('blog-single', {result})
                 } else if (query) {
                     res.render('blog', {result})
