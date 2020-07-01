@@ -5,6 +5,7 @@ var MongoClient = mongo.MongoClient;
 let ObjectId = require('mongodb').ObjectID;
 var url = "mongodb://localhost:27017/";
 
+// Month array to reference
 var month = new Array();
 month[0] = "January";
 month[1] = "February";
@@ -19,6 +20,7 @@ month[9] = "October";
 month[10] = "November";
 month[11] = "December";
 
+// Alt text of 94 images with their respective alt text
 let alt_text = {
     "Alligator 1.jpg": "Alligator 3D model",
     "Brainstem 1.jpg": "Brainstem with Braille",
@@ -208,26 +210,26 @@ let template_handler = {
                     // let new_paragraph = result[0].paragraph.split(/\<link\>.+\<\/link\>/), links = [], final = [];
 
                     // // Remove all links and add to array
-                    // while (result[0].paragraph.includes('<link>')) {
-                    //     let match_data = result[0].paragraph.match(/\<link\>.+\<\/link\>/);
-                    //     links.push(result[0].paragraph.substr(match_data.index, match_data[0].length));
-                    //     result[0].paragraph = result[0].paragraph.replace(/\<link\>.+\<\/link\>/, '');
-                    // }
+                    while (result[0].paragraph.includes('<link>')) {
+                        let match_data = result[0].paragraph.match(/\<link\>.+\<\/link\>/);
+                        links.push(result[0].paragraph.substr(match_data.index, match_data[0].length));
+                        result[0].paragraph = result[0].paragraph.replace(/\<link\>.+\<\/link\>/, '');
+                    }
 
-                    // // Sanitize Links
-                    // for (let i = 0; i < links.length; i++) {
-                    //     links[i] = links[i].replace('<link>', '');
-                    //     links[i] = links[i].replace('</link>', '');
-                    // }
+                    // Sanitize Links
+                    for (let i = 0; i < links.length; i++) {
+                        links[i] = links[i].replace('<link>', '');
+                        links[i] = links[i].replace('</link>', '');
+                    }
 
-                    // // Add to array in order
-                    // for (let j = 0; j < new_paragraph.length; j++) {
-                    //     final.push({paragraph: new_paragraph[j]});
+                    // Add to array in order
+                    for (let j = 0; j < new_paragraph.length; j++) {
+                        final.push({paragraph: new_paragraph[j]});
 
-                    //     if (j in links) {
-                    //         final.push({link: links[j]});
-                    //     }
-                    // }
+                        if (j in links) {
+                            final.push({link: links[j]});
+                        }
+                    }
 
                     res.render('blog-single', {result})
                 } else if (query) {

@@ -40,7 +40,7 @@ router.get('/:fname', (req, res, next) => {
   if (fname.includes(".html")) {
     if (fname === "gallery.html") {
       template_handler.gallery(res, req.query.p);
-    } else if(fname === "blog.html") {
+    } else if (fname === "blog.html") {
       template_handler.blog(res, req.query);
     } else if (fname === "donate.html") {
       res.sendFile(path.join(__dirname, '../public/new_site/html/donate.html'))
@@ -51,6 +51,8 @@ router.get('/:fname', (req, res, next) => {
   } else if (fname.includes(".php")) {
     // Route php not found to index
     res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+  } else if (fname === "donate"){
+    res.render('donate');
   } else {
     next();
   }
