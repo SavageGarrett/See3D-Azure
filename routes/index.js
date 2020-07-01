@@ -13,131 +13,6 @@ let Blog_Post = require('./blog/blog.js')
 const formidable = require('formidable')
 
 /*
- * Begin Web Routes
- */
-
-// Acme Challenge for SSL
-router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
-  let id = req.params.id;
-  res.sendFile(path.join(__dirname, `../public/.well-known/acme-challenge/${id}`))
-})
-
-router.get('/', (req, res, next) => {
-  res.redirect('/index.html')
-});
-
-router.get('/index.html', (req, res, next) => {
-  let query = req.query;
-  if (query.hasOwnProperty('testimony')) {
-    res.render('testimony', {query});
-  } else {
-    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
-  }
-});
-
-router.get('/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  if (fname.includes(".html")) {
-    if (fname === "gallery.html") {
-      template_handler.gallery(res, req.query.p);
-    } else if (fname === "blog.html") {
-      template_handler.blog(res, req.query);
-    } else if (fname === "donate.html") {
-      res.sendFile(path.join(__dirname, '../public/new_site/html/donate.html'))
-      //res.render('donate', {title: "See3D - Donate"});
-    } else {
-      res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
-    }
-  } else if (fname.includes(".php")) {
-    // Route php not found to index
-    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
-  } else if (fname === "donate"){
-    res.render('donate');
-  } else {
-    next();
-  }
-});
-
-// Route php requests to index
-router.get('/:dirname/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  if (fname.includes('.php')) {
-    res.redirect('/')
-  } else {
-    next();
-  }
-})
-
-router.get('/css/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/new_site/css/${fname}`));
-});
-
-router.get('/js/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/new_site/js/${fname}`));
-});
-
-router.get('/js/:dirname/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  let dirname = req.params.dirname;
-  res.sendFile(path.join(__dirname, `/../public/new_site/js/${dirname}/${fname}`));
-});
-
-router.get('/fonts/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/new_site/fonts/${fname}`));
-});
-
-router.get('/img/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/new_site/img/${fname}`));
-});
-
-router.get('/img/:dirname/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  let dirname = req.params.dirname;
-  res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${fname}`));
-});
-
-router.get('/resume/:name', (req, res, next) => {
-  let name = req.params.name;
-  res.sendFile(path.join(__dirname, `/../public/new_site/resume/${name}`));
-})
-
-// Post Blog
-router.post('/post_blog', (req, res) => {
-  // Validate Username and Password
-
-  // Parse out form separating files and fields
-  new formidable.IncomingForm().parse(req, (err, fields, files) => {
-    if (err) { // Catch and handle error
-      console.log(err);
-      throw err;
-    }
-
-    // Create new object to store blog post information
-    let blog_post = new Blog_Post(fields.article_title, fields.categories, fields.paragraph, fields.article_description, fields.alt_text);
-
-    // Store blog post and files
-    blog_post.store(res, files);
-  });
-});
-
-// Get Contact Form
-router.post('/contact_process', (req, res) => {
-  new formidable.IncomingForm().parse(req, (err, fields, files) => {
-    if (err) throw err;
-
-    console.log(fields)
-  });
-});
-
-/*
- * End Web Routes
- */
-
-/*
  * Start Slack Bot Routes
  */
 
@@ -169,7 +44,7 @@ router.post('/button', (req, res) => {
   try {
     // Parse payload
     let payload = JSON.parse(req.body.payload);
-    //console.log(payload)
+    console.log(payload)
 
     // Check for actions property before continuing
     if (payload.hasOwnProperty('actions')) {
@@ -177,7 +52,7 @@ router.post('/button', (req, res) => {
       // Payload for chat interactions
       if (payload.type === "block_actions") {
         // Check selected options (debug)
-        console.log(payload.actions)
+        //console.log(payload.actions)
 
         // Handle Selection Payloads
         if (payload.actions[0].type === "static_select") {
@@ -186,7 +61,6 @@ router.post('/button', (req, res) => {
         
           // Log the action value (debug)
           //console.log(interactionParams.action)
-
           // Do correct action
           if (interactionParams.action === "request_get"){
             interaction_handler.getRequestInfo(interactionParams, payload.response_url);
@@ -367,6 +241,131 @@ router.post('/requests', (req, res) => {
 
 /*
  * End Slack Bot Routes
+ */
+
+/*
+ * Begin Web Routes
+ */
+
+// Acme Challenge for SSL
+router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
+  let id = req.params.id;
+  res.sendFile(path.join(__dirname, `../public/.well-known/acme-challenge/${id}`))
+})
+
+router.get('/', (req, res, next) => {
+  res.redirect('/index.html')
+});
+
+router.get('/index.html', (req, res, next) => {
+  let query = req.query;
+  if (query.hasOwnProperty('testimony')) {
+    res.render('testimony', {query});
+  } else {
+    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+  }
+});
+
+router.get('/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  if (fname.includes(".html")) {
+    if (fname === "gallery.html") {
+      template_handler.gallery(res, req.query.p);
+    } else if (fname === "blog.html") {
+      template_handler.blog(res, req.query);
+    } else if (fname === "donate.html") {
+      res.sendFile(path.join(__dirname, '../public/new_site/html/donate.html'))
+      //res.render('donate', {title: "See3D - Donate"});
+    } else {
+      res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
+    }
+  } else if (fname.includes(".php")) {
+    // Route php not found to index
+    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
+  } else if (fname === "donate"){
+    res.render('donate');
+  } else {
+    next();
+  }
+});
+
+// Route php requests to index
+router.get('/:dirname/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  if (fname.includes('.php')) {
+    res.redirect('/')
+  } else {
+    next();
+  }
+})
+
+router.get('/css/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/css/${fname}`));
+});
+
+router.get('/js/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/js/${fname}`));
+});
+
+router.get('/js/:dirname/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  let dirname = req.params.dirname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/js/${dirname}/${fname}`));
+});
+
+router.get('/fonts/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/fonts/${fname}`));
+});
+
+router.get('/img/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/img/${fname}`));
+});
+
+router.get('/img/:dirname/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  let dirname = req.params.dirname;
+  res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${fname}`));
+});
+
+router.get('/resume/:name', (req, res, next) => {
+  let name = req.params.name;
+  res.sendFile(path.join(__dirname, `/../public/new_site/resume/${name}`));
+})
+
+// Post Blog
+router.post('/post_blog', (req, res) => {
+  // Validate Username and Password
+
+  // Parse out form separating files and fields
+  new formidable.IncomingForm().parse(req, (err, fields, files) => {
+    if (err) { // Catch and handle error
+      console.log(err);
+      throw err;
+    }
+
+    // Create new object to store blog post information
+    let blog_post = new Blog_Post(fields.article_title, fields.categories, fields.paragraph, fields.article_description, fields.alt_text);
+
+    // Store blog post and files
+    blog_post.store(res, files);
+  });
+});
+
+// Get Contact Form
+router.post('/contact_process', (req, res) => {
+  new formidable.IncomingForm().parse(req, (err, fields, files) => {
+    if (err) throw err;
+
+    console.log(fields)
+  });
+});
+
+/*
+ * End Web Routes
  */
 
 module.exports = router;

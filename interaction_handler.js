@@ -124,6 +124,7 @@ var interaction_handler = {
      * @param {*} responseUrl 
      */
     "getRequestInfo": function(interactionParams, responseUrl) {
+        console.log(responseUrl)
         MongoClient.connect(url, (err, db) => {
             if(err) throw err;
             var dbo = db.db("model_request")
@@ -136,11 +137,11 @@ var interaction_handler = {
                         "type": "section",
                         "text": {
                             "type": "mrkdwn",
-                            "text": result[0].request_params.request_body.name
+                            "text": result[0].request_params.request_body.name || result[0].request_params.request_body.usr
                         }
                         },
                         {
-                        type: "divider"
+                        "type": "divider"
                         },
                         {
                         "type": "section",
@@ -153,7 +154,7 @@ var interaction_handler = {
                         ]
                         },
                         {
-                            type: "divider"
+                            "type": "divider"
                         },
                         {
                             "type": "section",
@@ -214,7 +215,13 @@ var interaction_handler = {
                         }
                     ]
                     }
-                });
+                }, (err, httpResponse, body) => {
+                    if (err) console.log(err)
+                    console.log(result[0].request_params.request_body)
+                    //console.log(httpResponse)
+
+                    //console.log(body)
+                })
             });
         });
     },

@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var slackRouter = require('./routes/slack_routes')
 var indexRouter = require('./routes/index');
 var webRouter = require('./routes/web_routes');
 
@@ -30,6 +31,7 @@ app.use ((req, res, next) => {
   }
 });
 
+app.use('/', slackRouter);
 app.use('/', indexRouter);
 //app.use('/', webRouter);
 
