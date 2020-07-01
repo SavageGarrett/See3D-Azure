@@ -44,7 +44,8 @@
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
                                     <a href="index">
-                                        <img src="img/logo.png" alt="White See3D logo">
+                                        <!-- Changed the description to describe the logo more clearly - Viren 6/29-->
+                                        <img src="img/logo.png" alt="See3D Logo: The words See3D in blue being 3D printed. The black extruder hangs from a grey bar and extrudes blue filament that snakes down to the top of the letter D since See3D has finished printing.">
                                     </a>
                                 </div>
                             </div>
@@ -165,6 +166,37 @@
         </div>
     </div>
     <!-- get_involved_end -->
+
+    <!-- model_kits_start  -->
+    <div class="fix-top popular_catagory_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section_title mb-40">
+                        <h3>Model Kits</h3>
+                    </div>
+                    <p style="margin-bottom: 30px;" class="fix-font-20">See3D now offers educational model kits that walk you through the model piece by piece. If you would like to request a model kit indicate that in the model description on the request form.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="https://www.thingiverse.com/see3dprinting/collections/united-states-kit"><h4>United States Kit</h4></a>
+                        <img src="img/thingiverse/united-states-kit.jpg" alt="State of Liberty 3D Model">
+                        <!-- <p> <span>50</span> Available position</p> -->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xl-3 col-md-6">
+                    <div class="single_catagory">
+                        <a href="https://www.thingiverse.com/see3dprinting/collections/anatomy-kit"><h4>Anatomy Kit</h4></a>
+                        <img src="img/thingiverse/anatomy-kit.jpg" alt="Intestine 3D Model">
+                        <!-- <p> <span>50</span> Available position</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- model_kits_end  -->
 
     <!-- request_start -->
     <div class="popular_catagory_area fix-top">
@@ -550,9 +582,11 @@
                                                 <i class="Flaticon flaticon-quote"></i>
                                             </div>
                                         </div>
-                                        <div class="info">
+                                        <!-- Added the class fix-font-20 to change font size - Viren -->
+                                        <div class="info fix-font-20">
                                             <p>"I had a vague idea what a castle looked like in terms of the base. The top and towers were completely new to me; I'd always heard of towers and castles but didn't imagine the towers were a part of the castle."</p>
-                                            <a href="/index.html?testimony=karen_arcos">Read More...</a>
+                                            <!-- Added the class text-link to all Read More Links - Viren -->
+                                            <a href="/index.html?testimony=karen_arcos"  class="text-link">Read More... </a>
                                             <span>- Karen Arcos</span>
                                         </div>
                                     </div>
@@ -569,7 +603,7 @@
                                                 <i class=" Flaticon flaticon-quote"></i>
                                             </div>
                                         </div>
-                                        <div class="info">
+                                        <div class="info fix-font-20">
                                             <p>"This is a great organization, and I continue to promote it to other blind/visually impaired individuals to use as a source for learning tactilely."</p>
                                             <a href="?testimony=rachel_hage">Read More...</a>
                                             <span>- Rachel Hage</span>
@@ -588,7 +622,7 @@
                                                 <i class="Flaticon flaticon-quote"></i>
                                             </div>
                                         </div>
-                                        <div class="info">
+                                        <div class="info fix-font-20">
                                             <p>"See3D has been a wonderful and valuable resource for my students who are blind and visually impaired. They absolutely love the tactual models of their favorite movie characters such as R2D2 from Star Wars and the Minions."</p>
                                             <a href="?testimony=michelle_quinn">Read More...</a>
                                             <span>- Michelle Quinn</span>
@@ -607,7 +641,7 @@
                                                 <i class="Flaticon flaticon-quote"></i>
                                             </div>
                                         </div>
-                                        <div class="info">
+                                        <div class="info fix-font-20">
                                             <p>"These weird shapes are fascinating and I find myself exploring the model while my brain is busy doing its thing. Thanks Caroline, all you other volunteers and those who contribute financially to this project. Very helpful and enlightening."</p>
                                             <a href="?testimony=winslow_parker">Read More...</a>
                                             <span>- Winslow Parker</span>
@@ -732,9 +766,16 @@
                             <h3 class="footer_title">
                                 Subscribe
                             </h3>
-                            <form aria-label="form to subscribe to see3d blog" action="subscribe" class="newsletter_form">
-                                <input aria-label="email text input field" type="text" placeholder="Enter your e-mail">
-                                <button aria-label="submit button to add to blog mailing list" type="submit">Subscribe</button>
+                            <script>
+                                function submit_form() {
+                                    document.getElementById('model_form').submit();
+                                }
+                            </script>
+                            <form action="/subscribe" method="POST" id="model_form" class="newsletter_form">
+                                <input aria-label="name input field" type="email" name="email" placeholder="E-Mail"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-Mail'" required
+                                    class="single-input">
+                                <button onclick="submit_form()" aria-label="submit button to add to blog mailing list">Subscribe</button>
                             </form>
                             <p class="newsletter_text">Subscribe to our Blog</p>
                         </div>

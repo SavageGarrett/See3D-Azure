@@ -10,7 +10,9 @@ require('dotenv').config();
 var path = require('path');
 let template_handler = require('./template_handler.js');
 let Blog_Post = require('./blog/blog.js')
-const formidable = require('formidable')
+const formidable = require('formidable');
+const fs = require('fs');
+const { blogSubscribe } = require('../interaction_handler.js');
 
 /*
  * Start Slack Bot Routes
@@ -256,6 +258,13 @@ router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
 router.get('/', (req, res, next) => {
   res.redirect('/index.html')
 });
+
+router.post('/subscribe', (req, res) => {
+  console.log(req.body)
+  let email = req.body.email;
+  interaction_handler.blogSubscribe(email);
+  res.render('subscribe', {email});
+})
 
 router.get('/index.html', (req, res, next) => {
   let query = req.query;

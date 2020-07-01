@@ -497,6 +497,20 @@ var interaction_handler = {
 
         return "clear"
     },
+
+    "blogSubscribe": function(email) {
+        MongoClient.connect(url, (err, db) => {
+            {useUnifiedTopology: true}
+            if (err) throw err;
+        
+            var dbo = db.db("blog")
+            dbo.collection("subscriptions").insertOne({ "email": email }, (err, res) => {
+                if (err) throw err;
+                else console.log("Blog Subscriber Added")
+                db.close();
+            })
+        });
+    }
 }
 
 module.exports = interaction_handler;
