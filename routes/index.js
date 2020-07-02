@@ -255,50 +255,53 @@ router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
   res.sendFile(path.join(__dirname, `../public/.well-known/acme-challenge/${id}`))
 })
 
+// Get Index Page
 router.get('/', (req, res, next) => {
-  res.redirect('/index.html')
+  let title = "See3D - 3D Printing for the Blind"
+  res.render('index', { title })
 });
 
+// Post Blog Subscribe Form on Page Footer
 router.post('/subscribe', (req, res) => {
   console.log(req.body)
   let email = req.body.email;
   interaction_handler.blogSubscribe(email);
   res.render('subscribe', {email});
-})
-
-router.get('/index.html', (req, res, next) => {
-  let query = req.query;
-  if (query.hasOwnProperty('testimony')) {
-    res.render('testimony', {query});
-  } else {
-    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
-  }
 });
 
+// Serve Page Routes
 router.get('/:fname', (req, res, next) => {
+  // Get File Name from Request Parameters
+  let fname_split = req.params.fname.split('.');
   let fname = req.params.fname;
-  if (fname.includes(".html")) {
-    if (fname === "gallery.html") {
-      template_handler.gallery(res, req.query.p);
-    } else if (fname === "blog.html") {
-      template_handler.blog(res, req.query);
-    } else if (fname === "donate.html") {
-      res.sendFile(path.join(__dirname, '../public/new_site/html/donate.html'))
-      //res.render('donate', {title: "See3D - Donate"});
-    } else {
-      res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
+
+  // Check no extension or html extension or php extension
+  if (fname_split[1] === void 0 || fname_split[1] === "html" || fname_split[1] === "php" ) {
+    // Serve Pages Based on Their Name
+    switch (fname_split[0]) {
+      case "index":
+        let title = "See3D - 3D Printing for the Blind"
+        res.render('index', { title })
+        break;
+      case "gallery":
+        template_handler.gallery(res, req.query.p);
+        break;
+      case "blog":
+        template_handler.blog(res, req.query);
+        break;
+      case "donate":
+        res.render('donate');
+        break;
+      default:
+        res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
+        break;
     }
-  } else if (fname.includes(".php")) {
-    // Route php not found to index
-    res.sendFile(path.join(__dirname, "../public/new_site/html/index.html"));
-  } else if (fname === "donate"){
-    res.render('donate');
-  } else {
-    next();
+  } else { // Else forward request to error
+    next()
   }
 });
 
-// Route php requests to index
+// Route php requests that had directory on old server to index
 router.get('/:dirname/:fname', (req, res, next) => {
   let fname = req.params.fname;
   if (fname.includes('.php')) {
@@ -308,44 +311,51 @@ router.get('/:dirname/:fname', (req, res, next) => {
   }
 })
 
+// Serve CSS Files
 router.get('/css/:fname', (req, res, next) => {
   let fname = req.params.fname;
   res.sendFile(path.join(__dirname, `/../public/new_site/css/${fname}`));
 });
 
+// Serve JavaScript Files
 router.get('/js/:fname', (req, res, next) => {
   let fname = req.params.fname;
   res.sendFile(path.join(__dirname, `/../public/new_site/js/${fname}`));
 });
 
+// Serve Javascript Files
 router.get('/js/:dirname/:fname', (req, res, next) => {
   let fname = req.params.fname;
   let dirname = req.params.dirname;
   res.sendFile(path.join(__dirname, `/../public/new_site/js/${dirname}/${fname}`));
 });
 
+// Serve Font Files
 router.get('/fonts/:fname', (req, res, next) => {
   let fname = req.params.fname;
   res.sendFile(path.join(__dirname, `/../public/new_site/fonts/${fname}`));
 });
 
+// Serve Image Files
 router.get('/img/:fname', (req, res, next) => {
   let fname = req.params.fname;
   res.sendFile(path.join(__dirname, `/../public/new_site/img/${fname}`));
 });
 
+// Serve Image Files
 router.get('/img/:dirname/:fname', (req, res, next) => {
   let fname = req.params.fname;
   let dirname = req.params.dirname;
   res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${fname}`));
 });
 
+// Serve Resume Files
 router.get('/resume/:name', (req, res, next) => {
   let name = req.params.name;
   res.sendFile(path.join(__dirname, `/../public/new_site/resume/${name}`));
 })
 
-// Post Blog
+// Post Blog form
 router.post('/post_blog', (req, res) => {
   // Validate Username and Password
 
@@ -364,7 +374,7 @@ router.post('/post_blog', (req, res) => {
   });
 });
 
-// Get Contact Form
+// Post Contact Form
 router.post('/contact_process', (req, res) => {
   new formidable.IncomingForm().parse(req, (err, fields, files) => {
     if (err) throw err;

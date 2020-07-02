@@ -1,3 +1,85 @@
+// Tab Title
+mixin index_header(title)
+  doctype html
+  meta(charset='utf-8')
+  meta(http-equiv='x-ua-compatible', content='ie=edge')
+  title See3D - 3D Printing for the Blind
+  meta(name='description', content='')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  // <link rel="manifest" href="site.webmanifest">
+  link(rel='shortcut icon', type='image/x-icon', href='img/favicon.png')
+  // Place favicon.ico in the root directory
+  // CSS here
+  link(rel='stylesheet', href='css/bootstrap.min.css')
+  link(rel='stylesheet', href='css/owl.carousel.min.css')
+  link(rel='stylesheet', href='css/magnific-popup.css')
+  link(rel='stylesheet', href='css/font-awesome.min.css')
+  link(rel='stylesheet', href='css/themify-icons.css')
+  link(rel='stylesheet', href='css/nice-select.css')
+  link(rel='stylesheet', href='css/flaticon.css')
+  link(rel='stylesheet', href='css/gijgo.css')
+  link(rel='stylesheet', href='css/animate.min.css')
+  link(rel='stylesheet', href='css/slicknav.css')
+  link(rel='stylesheet', href='css/style.css')
+  link(rel='stylesheet', href='css/addins.css')
+  // <link rel="stylesheet" href="css/responsive.css">
+  //if lte IE 9
+    p.browserupgrade
+      | You are using an 
+      strong outdated
+      |  browser. Please 
+      a(href='https://browsehappy.com/') upgrade your browser
+      |  to improve your experience and security.
+  // header-start
+  header
+    .header-area
+      #sticky-header.main-header-area
+        .container-fluid
+          .header_bottom_border
+            .row.align-items-center
+              .col-xl-3.col-lg-2
+                .logo
+                  a(href='index')
+                    // Changed the description to describe the logo more clearly - Viren 6/29
+                    img(src='img/logo.png', alt='See3D Logo: The words See3D in blue being 3D printed. The black extruder hangs from a grey bar and extrudes blue filament that snakes down to the top of the letter D since See3D has finished printing.')
+              .col-xl-6.col-lg-7
+                .main-menu.d-none.d-lg-block
+                  nav
+                    ul#navigation
+                      li
+                        a(href='index.html') Home
+                      li
+                        a(href='team.html') Our Team
+                      li
+                        a(href='gallery.html') Photos
+                      //
+                        <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                        <ul class="submenu">
+                        <li><a href="candidate.html">Candidates </a></li>
+                        <li><a href="job_details.html">job details </a></li>
+                        <li><a href="elements.html">elements</a></li>
+                        </ul>
+                        </li>
+                      li
+                        a(href='blog.html') Blog
+                      li
+                        a(href='donate.html') Donate
+                      li
+                        a(href='contact.html') Contact
+              .col-xl-3.col-lg-3.d-none.d-lg-block
+                .Appointment
+                  //
+                    <div class="phone_num d-none d-xl-block">
+                    <a href="#">Log in</a>
+                    </div>
+                  .d-none.d-lg-block
+                    a.boxed-btn3(href='request_info.html') Request a Model
+              .col-12
+                .mobile_menu.d-block.d-lg-none
+// header-end
+
+
+// Tab Title, H3 Displayed on Image
 mixin header(title, heading)
   doctype html
   html.no-js(lang='zxx')
@@ -82,6 +164,7 @@ mixin header(title, heading)
       // / bradcam_area
       // about_start
 
+// Page Footer
 mixin footer()
   // about_end
   // footer start
@@ -142,10 +225,15 @@ mixin footer()
             .footer_widget.wow.fadeInUp(data-wow-duration='1.3s', data-wow-delay='.6s')
               h3.footer_title
                 | Subscribe
-              form.newsletter_form(aria-label='form to subscribe to see3d blog', action='subscribe')
-                input(aria-label='email text input field', type='text', placeholder='Enter your e-mail')
-                button(aria-label='submit button to add to blog mailing list', type='submit') Subscribe
+              script.
+                function submit_form() {
+                document.getElementById('model_form').submit();
+                }
+              form#model_form.newsletter_form(action='/subscribe', method='POST')
+                input.single-input(aria-label='name input field', type='email', name='email', placeholder='E-Mail', onfocus="this.placeholder = ''", onblur="this.placeholder = 'E-Mail'", required='')
+                button(onclick='submit_form()', aria-label='submit button to add to blog mailing list') Subscribe
               p.newsletter_text Subscribe to our Blog
+              
     .copy-right_text.wow.fadeInUp(data-wow-duration='1.4s', data-wow-delay='.3s')
       .container
         .footer_border
