@@ -172,16 +172,17 @@ section.blog_area.single-post-area.section-padding
               .form-group
                 button.button.button-contactForm.btn_1.boxed-btn(type='submit') Send Message
       .col-lg-4
-        .blog_right_sidebar
-          aside.single_sidebar_widget.search_widget
-            form(action='#')
-                  .form-group
-                    .input-group.mb-3
-                      input.form-control(id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
-                      .input-group-append
-                        button.btn(type='button', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`")
-                          i.ti-search
-                  button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`") Search
+        //
+          .blog_right_sidebar
+            aside.single_sidebar_widget.search_widget
+              form(action='#')
+                    .form-group
+                      .input-group.mb-3
+                        input.form-control(id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
+                        .input-group-append
+                          button.btn(type='button', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`")
+                            i.ti-search
+                    button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`") Search
           
           //
             aside.single_sidebar_widget.post_category_widget
