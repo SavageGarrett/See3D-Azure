@@ -3573,7 +3573,6 @@ h6 {
   margin-bottom: 70px; }
 
 .blog_area a {
-  color: #666666 !important;
   text-decoration: none;
   -webkit-transition: 0.5s;
   transition: 0.5s; }
@@ -3884,7 +3883,7 @@ h6 {
     margin-bottom: 30px;
     font-family: "Roboto", sans-serif; }
   .blog_details a {
-    color: #ff8b23; }
+    color: #7cc8ff !important; }
     .blog_details a:hover {
       color: #7cc8ff; }
   .blog_details h2 {

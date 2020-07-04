@@ -117,7 +117,7 @@ html.no-js(lang='zxx')
                 form(action='#')
                   .form-group
                     .input-group.mb-3
-                      input.form-control(id='', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
+                      input.form-control(id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
                       .input-group-append
                         button.btn(type='button', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`")
                           i.ti-search

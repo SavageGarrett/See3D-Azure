@@ -13,6 +13,7 @@ let Blog_Post = require('./blog/blog.js')
 const formidable = require('formidable');
 const fs = require('fs');
 const { blogSubscribe } = require('../interaction_handler.js');
+const { query } = require('express');
 
 /*
  * Start Slack Bot Routes
@@ -258,14 +259,28 @@ router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
 // Get Index Page
 router.get('/', (req, res, next) => {
   let title = "See3D - 3D Printing for the Blind"
-  res.render('index', { title })
+
+  // If Query is Defined Create Query
+  if (req.query !== void 0) var query = req.query;
+
+  // Serve Testimony Page If Query Exists and fname is correct
+  if (query.testimony !== void 0) {
+    res.render('testimony', { query });
+  } else {
+    res.render('index', { title })
+  }
+  
 });
 
 // Post Blog Subscribe Form on Page Footer
 router.post('/subscribe', (req, res) => {
-  console.log(req.body)
+  // Get Email From Post Body
   let email = req.body.email;
+
+  // Log Email to Database
   interaction_handler.blogSubscribe(email);
+
+  // Render Subscribe Page
   res.render('subscribe', {email});
 });
 
@@ -274,6 +289,18 @@ router.get('/:fname', (req, res, next) => {
   // Get File Name from Request Parameters
   let fname_split = req.params.fname.split('.');
   let fname = req.params.fname;
+
+  // If Query is Defined Create Query
+  if (req.query !== void 0) {
+    var query = req.query
+  }
+
+
+  // Serve Testimony Page If Query Exists and fname is correct
+  if (query.testimony !== void 0 && fname_split[0] === "index") {
+    res.render('testimony', { query });
+  }
+
 
   // Check no extension or html extension or php extension
   if (fname_split[1] === void 0 || fname_split[1] === "html" || fname_split[1] === "php" ) {

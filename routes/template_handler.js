@@ -193,9 +193,7 @@ let template_handler = {
                     }
 
                     // Look for articles to include from search query
-                    if (query.hasOwnProperty('search') && (result[i].title.includes(query.search) 
-                        || result[i].paragraph.includes(query.search) 
-                        || result[i].article_description.includes(query.search))) {
+                    if (query.hasOwnProperty('search') && (result[i].title.includes(query.search) || result[i].paragraph.includes(query.search) || result[i].article_description.includes(query.search))) {
                         display.push(result[i]);
                     } else if (query.hasOwnProperty('category') && result[i].toLowerCase().includes(query.category.toLowerCase())) {
                         // Look for category in comma separated list of categories if queried (2nd priority)
@@ -203,13 +201,18 @@ let template_handler = {
                     } else if (query.hasOwnProperty('id') && result[i]._id == query.id) {
                         display.push(result[i]);
                         single = true;
+                    } else if (!query.hasOwnProperty('search') && !query.hasOwnProperty('category') && !query.hasOwnProperty('id')) {
+                        display.push(result[i])
                     }
                 }
 
-                if (single) {
-                    // let new_paragraph = result[0].paragraph.split(/\<link\>.+\<\/link\>/), links = [], final = [];
+                if (single && (!query.hasOwnProperty('search') && !query.hasOwnProperty('category'))) {
+                    // Create Split Version of Paragraph, list of links, an array to store the text contained in posts
+                    let new_paragraph = result[0].paragraph.split(/\<link\>.+\<\/link\>/), links = [], post_body_text = [];
+                    
+                    // Create array to store whether each section of text is a link or a regular blog of text
 
-                    // // Remove all links and add to array
+                    // Remove all links and add to array
                     while (result[0].paragraph.includes('<link>')) {
                         let match_data = result[0].paragraph.match(/\<link\>.+\<\/link\>/);
                         links.push(result[0].paragraph.substr(match_data.index, match_data[0].length));
@@ -224,15 +227,17 @@ let template_handler = {
 
                     // Add to array in order
                     for (let j = 0; j < new_paragraph.length; j++) {
-                        final.push({paragraph: new_paragraph[j]});
+                        post_body_text.push({paragraph: new_paragraph[j]});
 
                         if (j in links) {
-                            final.push({link: links[j]});
+                            post_body_text.push({link: links[j]});
                         }
                     }
 
-                    res.render('blog-single', {result})
-                } else if (query) {
+                    // Send Individual post result and the fake tags injected in the text
+                    res.render('blog-single', {result, post_body_text})
+                } else {
+                    result = display;
                     res.render('blog', {result})
                 }
 
