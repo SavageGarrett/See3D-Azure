@@ -303,21 +303,47 @@ router.get('/:fname', (req, res, next) => {
 
 
   // Check no extension or html extension or php extension
-  if (fname_split[1] === void 0 || fname_split[1] === "html" || fname_split[1] === "php" ) {
+  if (fname_split[1] === void 0 || fname_split[1] === "html" || fname_split[1] === "php" || fname_split[1] === "ico") {
     // Serve Pages Based on Their Name
     switch (fname_split[0]) {
+      case "favicon":
+        res.sendFile(path.join(__dirname, "../public/favicon.ico"));
+        break;
       case "index":
         let title = "See3D - 3D Printing for the Blind"
         res.render('index', { title })
         break;
+      case "elements":
+        // Send Elements Page
+        res.sendFile(path.join(__dirname, "../public/new_site/html/elements.html"))
       case "gallery":
+        // Handle Gallery
         template_handler.gallery(res, req.query.p);
         break;
       case "blog":
+        // Handle Blog
         template_handler.blog(res, req.query);
         break;
       case "donate":
         res.render('donate');
+        break;
+      case "about":
+        res.render('about');
+        break;
+      case "contact":
+        res.render('contact');
+        break;
+      case "get_involved":
+        res.render('get_involved');
+        break;
+      case "request_info":
+        res.render('request_info');
+        break;
+      case "team":
+        res.render('team');
+        break;
+      case "request":
+        res.render('request');
         break;
       default:
         res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));

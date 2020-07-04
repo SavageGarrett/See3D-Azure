@@ -1,0 +1,44 @@
+include ./layout.jade
+include ./mixins.jade 
+
++header("See3D - Contact", "contact")
+
+// ================ contact section start =================
+section.contact-section.section_padding
+  .container
+    .row
+      .col-12
+        h2.contact-title Get in Touch
+      .col-lg-8
+        form#contactForm.form-contact.contact_form(action='contact_process.php', method='post', novalidate='novalidate')
+          .row
+            .col-12
+              .form-group
+                textarea#message.form-control.w-100(name='message', cols='30', rows='9', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter Message'", placeholder='Enter Message')
+            .col-sm-6
+              .form-group
+                input#name.form-control(name='name', type='text', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter your name'", placeholder='Enter your name')
+            .col-sm-6
+              .form-group
+                input#email.form-control(name='email', type='email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter email address'", placeholder='Enter email address')
+            .col-12
+              .form-group
+                input#subject.form-control(name='subject', type='text', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter Subject'", placeholder='Enter Subject')
+          .form-group.mt-3
+            a.genric-btn.info(onclick='submit_form()') Send Message
+      .col-lg-4
+        .media.contact-info
+          span.contact-info__icon
+            i.ti-home
+          .media-body
+            h3 The Ohio State University
+            p Columbus, OH 43210
+        .media.contact-info
+          span.contact-info__icon
+            i.ti-email
+          .media-body
+            h3 info@see3d.org
+            p Feel Free to Reach out Via E-Mail!
+// ================ contact section end =================
+
++footer()

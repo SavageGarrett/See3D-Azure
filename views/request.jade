@@ -1,0 +1,184 @@
+// Includes for page layout and individual widgets
+include ./layout.jade
+include ./mixins.jade
+
++header("See3D - Request a Model")
+
+// ================ contact section start =================
+section.contact-section.section_padding
+  .container
+    .row
+      .col-lg-10
+        h2.mb-30 Request Form
+        script.
+          function submit_form() {
+          document.getElementById('model_form').submit();
+          }
+        form#model_form(action='/mdrequest', method='POST')
+          // Begin Personal Information
+          .mt-10
+            input.single-input(aria-label='name input field', type='text', name='name', placeholder='First Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Name'", required='')
+          .mt-10
+            input.single-input(aria-label='email input field', type='email', name='email', placeholder='Email address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Email address'", required='')
+          .input-group-icon.mt-10
+            .icon
+              i.fa.fa-thumb-tack(aria-hidden='true')
+            input.single-input(aria-label='address input field', type='text', name='address', placeholder='Address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Address'", required='')
+          .input-group-icon.mt-10
+            .icon
+              i.fa.fa-plane(aria-hidden='true')
+            input.single-input(aria-label='city input field', type='text', name='city', placeholder='City', onfocus="this.placeholder = ''", onblur="this.placeholder = 'City'", required='')
+          .input-group-icon.mt-10
+            .icon
+              i.fa.fa-globe(aria-hidden='true')
+            input.single-input(aria-label='state input field', type='text', name='state', placeholder='State', onfocus="this.placeholder = ''", onblur="this.placeholder = 'State'", required='')
+          .mt-10
+            p(style='color: black;') Braille Label
+            .confirm-switch
+              input#default-switch(aria-label='braille shipping label checkbox', name='braille_label', type='checkbox')
+              label(for='default-switch')
+          // End personal information
+          br
+          // Model Information
+          .mt-10
+            textarea.single-textarea(aria-label='model details including quantity size shape and type of model input field', name='model_details', placeholder='What model would you like? (Include details about quantity, size, and any special considerations we made need to make)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What model would you like? (Include details about quantity, size, and any special considerations we made need to make)'", required='')
+          .mt-10
+            textarea.single-textarea(aria-label='part of model you are seeking understanding of input field', name='understand', placeholder='What part of this model are you trying to understand better?', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What part of this model are you trying to understand better?'", required='')
+          .mt-10
+            input.single-input(aria-label='relation to person who is blind input field', type='text', name='iam', placeholder='Relation to Blindness (i.e. Parent of someone who is blind)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'I am'", required='')
+          .mt-10
+            input.single-input(aria-label='model description input field', type='text', name='model_description', placeholder='Model Description', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Model Description'", required='')
+          // End Model Information
+          br
+          // Internal Data
+          .mt-10
+            input.single-input(aria-label='school input field', type='text', name='school', placeholder='School (If Applicable)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'School (If Applicable)'", required='')
+          .mt-10
+            input.single-input(aria-label='how did you hear about see3d input field', type='text', name='publicity', placeholder='How did you hear about See3D?', onfocus="this.placeholder = ''", onblur="this.placeholder = 'How did you hear about See3D?'", required='')
+          .mt-10
+            p(style='color: black;') Would you like to provide feedback
+            .confirm-switch
+              input#primary-switch(aria-label='checkbox if you would like to provide feedback about the model', name='feedback', type='checkbox')
+              label(for='primary-switch')
+          // End Internal Data
+          br
+          // Submit
+          a.genric-btn.info(onclick='submit_form()') Submit
+      //
+        <div class="col-lg-3 col-md-4 mt-sm-30">
+        <div class="single-element-widget">
+        <h3 class="mb-30">Switches</h3>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>01. Sample Switch</p>
+        <div class="primary-switch">
+        <input type="checkbox" id="default-switch">
+        <label for="default-switch"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>02. Primary Color Switch</p>
+        <div class="primary-switch">
+        <input type="checkbox" id="primary-switch" checked>
+        <label for="primary-switch"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>03. Confirm Color Switch</p>
+        <div class="confirm-switch">
+        <input type="checkbox" id="confirm-switch" checked>
+        <label for="confirm-switch"></label>
+        </div>
+        </div>
+        </div>
+        <div class="single-element-widget mt-30">
+        <h3 class="mb-30">Selectboxes</h3>
+        <div class="default-select" id="default-select"">
+        <select>
+        <option value=" 1">English</option>
+        <option value="1">Spanish</option>
+        <option value="1">Arabic</option>
+        <option value="1">Portuguise</option>
+        <option value="1">Bengali</option>
+        </select>
+        </div>
+        </div>
+        <div class="single-element-widget mt-30">
+        <h3 class="mb-30">Checkboxes</h3>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>01. Sample Checkbox</p>
+        <div class="primary-checkbox">
+        <input type="checkbox" id="default-checkbox">
+        <label for="default-checkbox"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>02. Primary Color Checkbox</p>
+        <div class="primary-checkbox">
+        <input type="checkbox" id="primary-checkbox" checked>
+        <label for="primary-checkbox"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>03. Confirm Color Checkbox</p>
+        <div class="confirm-checkbox">
+        <input type="checkbox" id="confirm-checkbox">
+        <label for="confirm-checkbox"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>04. Disabled Checkbox</p>
+        <div class="disabled-checkbox">
+        <input type="checkbox" id="disabled-checkbox" disabled>
+        <label for="disabled-checkbox"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>05. Disabled Checkbox active</p>
+        <div class="disabled-checkbox">
+        <input type="checkbox" id="disabled-checkbox-active" checked disabled>
+        <label for="disabled-checkbox-active"></label>
+        </div>
+        </div>
+        </div>
+        <div class="single-element-widget mt-30">
+        <h3 class="mb-30">Radios</h3>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>01. Sample radio</p>
+        <div class="primary-radio">
+        <input type="checkbox" id="default-radio">
+        <label for="default-radio"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>02. Primary Color radio</p>
+        <div class="primary-radio">
+        <input type="checkbox" id="primary-radio" checked>
+        <label for="primary-radio"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>03. Confirm Color radio</p>
+        <div class="confirm-radio">
+        <input type="checkbox" id="confirm-radio" checked>
+        <label for="confirm-radio"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>04. Disabled radio</p>
+        <div class="disabled-radio">
+        <input type="checkbox" id="disabled-radio" disabled>
+        <label for="disabled-radio"></label>
+        </div>
+        </div>
+        <div class="switch-wrap d-flex justify-content-between">
+        <p>05. Disabled radio active</p>
+        <div class="disabled-radio">
+        <input type="checkbox" id="disabled-radio-active" checked disabled>
+        <label for="disabled-radio-active"></label>
+        </div>
+        </div>
+        </div>
+        </div>
+// ================ contact section end =================
+
++footer()

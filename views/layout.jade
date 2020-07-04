@@ -7,7 +7,7 @@ mixin index_header(title)
   meta(name='description', content='')
   meta(name='viewport', content='width=device-width, initial-scale=1')
   // <link rel="manifest" href="site.webmanifest">
-  link(rel='shortcut icon', type='image/x-icon', href='img/favicon.png')
+  link(rel='icon', href='favicon.ico', type="image/icon")
   // Place favicon.ico in the root directory
   // CSS here
   link(rel='stylesheet', href='css/bootstrap.min.css')
@@ -47,25 +47,25 @@ mixin index_header(title)
                   nav
                     ul#navigation
                       li
-                        a(href='index.html') Home
+                        a(href='index') Home
                       li
-                        a(href='team.html') Our Team
+                        a(href='team') Our Team
                       li
-                        a(href='gallery.html') Photos
+                        a(href='gallery') Photos
                       //
                         <li><a href="#">pages <i class="ti-angle-down"></i></a>
                         <ul class="submenu">
-                        <li><a href="candidate.html">Candidates </a></li>
-                        <li><a href="job_details.html">job details </a></li>
-                        <li><a href="elements.html">elements</a></li>
+                        <li><a href="candidate">Candidates </a></li>
+                        <li><a href="job_details">job details </a></li>
+                        <li><a href="elements">elements</a></li>
                         </ul>
                         </li>
                       li
-                        a(href='blog.html') Blog
+                        a(href='blog') Blog
                       li
-                        a(href='donate.html') Donate
+                        a(href='donate') Donate
                       li
-                        a(href='contact.html') Contact
+                        a(href='contact') Contact
               .col-xl-3.col-lg-3.d-none.d-lg-block
                 .Appointment
                   //
@@ -73,7 +73,7 @@ mixin index_header(title)
                     <a href="#">Log in</a>
                     </div>
                   .d-none.d-lg-block
-                    a.boxed-btn3(href='request_info.html') Request a Model
+                    a.boxed-btn3(href='request_info') Request a Model
               .col-12
                 .mobile_menu.d-block.d-lg-none
 // header-end
@@ -90,6 +90,7 @@ mixin header(title, heading)
       meta(name='description', content='')
       meta(name='viewport', content='width=device-width, initial-scale=1')
       // <link rel="manifest" href="site.webmanifest">
+      link(rel='shortcut icon', type='image/x-icon', href='favicon.ico')
       // Place favicon.ico in the root directory
       // CSS here
       link(rel='stylesheet', href='css/bootstrap.min.css')
@@ -123,34 +124,36 @@ mixin header(title, heading)
                 .row.align-items-center
                   .col-xl-3.col-lg-2
                     .logo
-                      a(href='index.html')
+                      a(href='index')
                         img(src='img/logo.png', alt='')
                   .col-xl-6.col-lg-7
                     .main-menu.d-none.d-lg-block
                       nav
                         ul#navigation
                           li
-                            a(href='index.html') Home
+                            a(href='index') Home
                           li
-                            a(href='team.html') Our Team
+                            a(href='team') Our Team
                           li
-                            a(href='gallery.html') Photos
+                            a(href='gallery') Photos
                           //
                             <li><a href="#">pages <i class="ti-angle-down"></i></a>
                             <ul class="submenu">
-                            <li><a href="candidate.html">Candidates </a></li>
-                            <li><a href="job_details.html">job details </a></li>
-                            <li><a href="elements.html">elements</a></li>
+                            <li><a href="candidate">Candidates </a></li>
+                            <li><a href="job_details">job details </a></li>
+                            <li><a href="elements">elements</a></li>
                             </ul>
                             </li>
                           li
-                            a(href='blog.html') Blog
+                            a(href='blog') Blog
                           li
-                            a(href='contact.html') Contact
+                            a(href='donate') Donate
+                          li
+                            a(href='contact') Contact
                   .col-xl-3.col-lg-3.d-none.d-lg-block
                     .Appointment
                       .d-none.d-lg-block
-                        a.boxed-btn3(href='request.html') Request a Model
+                        a.boxed-btn3(href='request') Request a Model
                   .col-12
                     .mobile_menu.d-block.d-lg-none
       // header-end
@@ -201,26 +204,26 @@ mixin footer()
                 | Company
               ul
                 li
-                  a(href='team.html') Our Team 
+                  a(href='team') Our Team 
                 li
-                  a(href='gallery.html')  Photos
+                  a(href='gallery')  Photos
                 li
-                  a(href='blog.html') Blog
+                  a(href='blog') Blog
                 li
-                  a(href='contact.html') Contact
+                  a(href='contact') Contact
           .col-xl-3.col-md-6.col-lg-3
             .footer_widget.wow.fadeInUp(data-wow-duration='1.2s', data-wow-delay='.5s')
               h3.footer_title
                 | Category
               ul
                 li
-                  a(href='about.html') About
+                  a(href='about') About
                 li
-                  a(href='get_involved.html') Get Involved
+                  a(href='get_involved') Get Involved
                 li
-                  a(href='request.html') Request a Model
+                  a(href='request') Request a Model
                 li
-                  a(href='donate.html') Donate
+                  a(href='donate') Donate
           .col-xl-4.col-md-6.col-lg-4
             .footer_widget.wow.fadeInUp(data-wow-duration='1.3s', data-wow-delay='.6s')
               h3.footer_title
