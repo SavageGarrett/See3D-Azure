@@ -17,49 +17,141 @@ section.contact-section.section_padding
         form#model_form(action='/mdrequest', method='POST')
           // Begin Personal Information
           .mt-10
-            input.single-input(aria-label='name input field', type='text', name='name', placeholder='First Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Name'", required='')
+            input.single-input(aria-label='first name input field', type='text', name='first_name', placeholder='First Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Name'", required='')
+          .mt-10
+            input.single-input(aria-label='last name input field', type='text', name='last_name', placeholder='Last Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Last Name'", required='')
           .mt-10
             input.single-input(aria-label='email input field', type='email', name='email', placeholder='Email address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Email address'", required='')
           .input-group-icon.mt-10
             .icon
               i.fa.fa-thumb-tack(aria-hidden='true')
-            input.single-input(aria-label='address input field', type='text', name='address', placeholder='Address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Address'", required='')
+            input.single-input(aria-label='address input field', type='text', name='address', placeholder='Street Address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Street Address'", required='')
           .input-group-icon.mt-10
             .icon
               i.fa.fa-plane(aria-hidden='true')
             input.single-input(aria-label='city input field', type='text', name='city', placeholder='City', onfocus="this.placeholder = ''", onblur="this.placeholder = 'City'", required='')
           .input-group-icon.mt-10
             .icon
-              i.fa.fa-globe(aria-hidden='true')
+              i.fa.fa-map-marker(aria-hidden='true')
             input.single-input(aria-label='state input field', type='text', name='state', placeholder='State', onfocus="this.placeholder = ''", onblur="this.placeholder = 'State'", required='')
+          .input-group-icon.mt-10
+            .icon
+              i.fa.fa-globe(aria-hidden='true')
+            input.single-input(aria-label='zip code input field', type='text', name='zip_code', placeholder='Zip Code', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Zip Code'", required='')
           .mt-10
-            p(style='color: black;') Braille Label
+            p(style='color: black;') Braille Label for Shipping Box
             .confirm-switch
-              input#default-switch(aria-label='braille shipping label checkbox', name='braille_label', type='checkbox')
+              input#default-switch(aria-label='Braille labels on the shipping box', name='braille_label', type='checkbox')
               label(for='default-switch')
           // End personal information
           br
           // Model Information
           .mt-10
+            input.single-input(aria-label='link to stl file input field', type='text', name='stl_file', placeholder='Link to STL File', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Link to STL File'") 
+          .mt-10
             textarea.single-textarea(aria-label='model details including quantity size shape and type of model input field', name='model_details', placeholder='What model would you like? (Include details about quantity, size, and any special considerations we made need to make)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What model would you like? (Include details about quantity, size, and any special considerations we made need to make)'", required='')
           .mt-10
-            textarea.single-textarea(aria-label='part of model you are seeking understanding of input field', name='understand', placeholder='What part of this model are you trying to understand better?', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What part of this model are you trying to understand better?'", required='')
+            textarea.single-textarea(aria-label='part of model you are seeking understanding of input field', name='understand', placeholder='What part of this model are you trying to understand better?', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What part of this model are you trying to understand better?'")
+          br
+          // I am: Button Enable/Disable Script
+          script(type='text/javascript').
+            function textEnable(id) {
+            let textfield = document.getElementById(id);
+            textfield.disabled = false;
+            }
+            function textDisable(id) {
+            let textfield = document.getElementById(id);
+            textfield.disabled = true;
+            textfield.value = "";
+            }
+
+          //Styles for  I am: section of the form
+          style.
+            .radio-input {
+              color: black;
+              width: unset;
+              padding-right: 5px;
+              padding-left: 5px;
+              float: left;
+              margin: 0 !important;
+            }
+            .iamLabel {
+              margin-top: 7px;
+              margin-left: 10px;
+              color: black;
+            }
+            .tabbed-group {
+              margin-left: 25px;
+            }
+            .textbox-resize{
+              width: 40%;
+            }
+            #iAm3Label {
+              float:left;
+            }
+            .form-control {
+              margin-top: 9px !important;
+            }
+            div #iAm2, div #iAm3 {
+              margin-top: 10px;
+            }
+            #iAm {
+              margin-bottom: 0px !important;
+              margin-top: 13px !important;
+            }
+            .tabbed-group {
+              margin-top: 8px;
+            }
+
+          
           .mt-10
-            input.single-input(aria-label='relation to person who is blind input field', type='text', name='iam', placeholder='Relation to Blindness (i.e. Parent of someone who is blind)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'I am'", required='')
+            p#iAm(style='color: black;') I am:
+            .form-group.tabbed-group
+              div
+                input#iAm1.form-control.radio-input(onclick="textDisable('otherInput');", type='radio', name='iam', value='blind')
+                label.iamLabel(for='iAm1') A person who is blind or visually impaired
+              div
+                input#iAm2.form-control.radio-input(onclick="textDisable('otherInput');", type='radio', name='iam', value='parent')
+                label.iamLabel(for='iAm2') A parent, guardian, or teacher of someone who is blind or visually impaired
+              div
+                input#iAm3.form-control.radio-input(onclick="textEnable('otherInput');", type='radio', name='iam', value='other')
+                label#iAm3Label.iamLabel(style='margin-right: 20px;', for='iAm3') Other: 
+                input#otherInput.form-control.textbox-resize(onclick="textEnable('otherInput');", type='text', name='otherPerson', maxlength='128' disabled='')
+
           .mt-10
-            input.single-input(aria-label='model description input field', type='text', name='model_description', placeholder='Model Description', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Model Description'", required='')
+            // Model Description
+            p#iAm(style='color: black;') Would you like a model description? (Models with descriptions may take longer to ship)
+            .form-group.tabbed-group
+              div
+                input#desc1.form-control.radio-input(type='radio', name='description', value='no description')
+                label.iamLabel(for='desc5') No Description
+              div
+                input#desc2.form-control.radio-input(type='radio', name='description', value='email')
+                label.iamLabel(for='desc1') Email Description
+              div
+                input#desc3.form-control.radio-input(type='radio', name='description', value='braille')
+                label.iamLabel(for='desc2') Braille Description (Hard Copy)
+              div
+                input#desc4.form-control.radio-input(type='radio', name='description', value='large print')
+                label.iamLabel(for='desc3') Large Print Description (Hard Copy)
+
           // End Model Information
           br
           // Internal Data
           .mt-10
-            input.single-input(aria-label='school input field', type='text', name='school', placeholder='School (If Applicable)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'School (If Applicable)'", required='')
+            input.single-input(aria-label='school input field', type='text', name='school', placeholder='School (If Applicable)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'School (If Applicable)'")
           .mt-10
-            input.single-input(aria-label='how did you hear about see3d input field', type='text', name='publicity', placeholder='How did you hear about See3D?', onfocus="this.placeholder = ''", onblur="this.placeholder = 'How did you hear about See3D?'", required='')
+            input.single-input(aria-label='how did you hear about see3d input field', type='text', name='publicity', placeholder='How did you hear about See3D?', onfocus="this.placeholder = ''", onblur="this.placeholder = 'How did you hear about See3D?'")
           .mt-10
             p(style='color: black;') Would you like to provide feedback
             .confirm-switch
               input#primary-switch(aria-label='checkbox if you would like to provide feedback about the model', name='feedback', type='checkbox')
               label(for='primary-switch')
+          .mt-10
+            p(style='color: black;') Would you like to be featured in a See3D social media post?
+            .confirm-switch
+              input#confirm-switch(aria-label='checkbox if you would like to be featured in a see3d social media post', name='social_media', type='checkbox')
+              label(for='confirm-switch')
           // End Internal Data
           br
           // Submit

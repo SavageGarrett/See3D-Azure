@@ -156,49 +156,50 @@ router.post('/button', (req, res) => {
 
 // Handle form submits
 router.post('/mdrequest', (req, res) => {
+  console.log(req.body);
   interaction_handler.sendRequest(req.body)
-  request.post(hooks['model-requests'], {
-    json: {
-      "blocks": [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": `Model requested by ${req.body.name}`
-          }
-        },
-        {
-          type: "divider"
-        },
-        {
-          "type": "section",
-          "fields": [
-            {
-              "type": "plain_text",
-              "text": "*this is plain_text text*",
-              "emoji": true
-            },
-            {
-              "type": "plain_text",
-              "text": "test",
-              "emoji": true
-            },
-            {
-              "type": "plain_text",
-              "text": "*this is plain_text text*",
-              "emoji": true
-            }
-          ]
-        }
-      ]
-    }
-  }, (error, res, body) => {
-    if (error) {
-      console.error(error)
-      return
-    }
-    console.log(`Model Request Message Sent: ${res.statusCode}`)
-  })
+  // request.post(hooks['model-requests'], {
+  //   json: {
+  //     "blocks": [
+  //       {
+  //         "type": "section",
+  //         "text": {
+  //           "type": "mrkdwn",
+  //           "text": `Model requested by ${req.body.name}`
+  //         }
+  //       },
+  //       {
+  //         type: "divider"
+  //       },
+  //       {
+  //         "type": "section",
+  //         "fields": [
+  //           {
+  //             "type": "plain_text",
+  //             "text": "*this is plain_text text*",
+  //             "emoji": true
+  //           },
+  //           {
+  //             "type": "plain_text",
+  //             "text": "test",
+  //             "emoji": true
+  //           },
+  //           {
+  //             "type": "plain_text",
+  //             "text": "*this is plain_text text*",
+  //             "emoji": true
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // }, (error, res, body) => {
+  //   if (error) {
+  //     console.error(error)
+  //     return
+  //   }
+  //   console.log(`Model Request Message Sent: ${res.statusCode}`)
+  // })
   res.render('donate', {name: req.body.name})
 });
 
@@ -315,7 +316,8 @@ router.get('/:fname', (req, res, next) => {
         break;
       case "elements":
         // Send Elements Page
-        res.sendFile(path.join(__dirname, "../public/new_site/html/elements.html"))
+        res.sendFile(path.join(__dirname, "../public/new_site/html/elements.html"));
+        break;
       case "gallery":
         // Handle Gallery
         template_handler.gallery(res, req.query.p);

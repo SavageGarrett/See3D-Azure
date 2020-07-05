@@ -101,10 +101,11 @@ var interaction_handler = {
                 };
 
                 for (let individual of result) {
+                    console.log(individual['request_params']['request_body']['first_name'] + individual['request_params']['request_body']['last_name'])
                     payload['blocks'][1]['accessory']['options'].push({
                         "text": {
                             "type": "plain_text",
-                            "text": individual['request_params']['request_body']['name'] || individual['request_params']['request_body']['usr'],
+                            "text": individual['request_params']['request_body']['name'] || individual['request_params']['request_body']['usr'] || individual['request_params']['request_body']['first_name'] + individual['request_params']['request_body']['last_name'],
                             "emoji": true
                         },
                         "value": JSON.stringify({"_id": individual['_id'], "action": "request_get"})
