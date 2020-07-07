@@ -158,48 +158,48 @@ router.post('/button', (req, res) => {
 router.post('/mdrequest', (req, res) => {
   console.log(req.body);
   interaction_handler.sendRequest(req.body)
-  // request.post(hooks['model-requests'], {
-  //   json: {
-  //     "blocks": [
-  //       {
-  //         "type": "section",
-  //         "text": {
-  //           "type": "mrkdwn",
-  //           "text": `Model requested by ${req.body.name}`
-  //         }
-  //       },
-  //       {
-  //         type: "divider"
-  //       },
-  //       {
-  //         "type": "section",
-  //         "fields": [
-  //           {
-  //             "type": "plain_text",
-  //             "text": "*this is plain_text text*",
-  //             "emoji": true
-  //           },
-  //           {
-  //             "type": "plain_text",
-  //             "text": "test",
-  //             "emoji": true
-  //           },
-  //           {
-  //             "type": "plain_text",
-  //             "text": "*this is plain_text text*",
-  //             "emoji": true
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // }, (error, res, body) => {
-  //   if (error) {
-  //     console.error(error)
-  //     return
-  //   }
-  //   console.log(`Model Request Message Sent: ${res.statusCode}`)
-  // })
+  request.post(hooks['model-requests'], {
+    json: {
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": `Model requested by ${req.body.first_name} ${req.body.last_name}`
+          }
+        },
+        {
+          type: "divider"
+        },
+        {
+          "type": "section",
+          "fields": [
+            {
+              "type": "plain_text",
+              "text": `Email: ${req.body.email}`,
+              "emoji": true
+            },
+            {
+              "type": "plain_text",
+              "text": ` `,
+              "emoji": true
+            },
+            {
+              "type": "plain_text",
+              "text": `Details: ${req.body.stl_file || req.body.model_details}`,
+              "emoji": true
+            }
+          ]
+        }
+      ]
+    }
+  }, (error, res, body) => {
+    if (error) {
+      console.error(error)
+      return
+    }
+    console.log(`Model Request Message Sent: ${res.statusCode}`)
+  })
   res.render('donate', {name: req.body.name})
 });
 
