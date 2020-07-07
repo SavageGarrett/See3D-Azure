@@ -7,6 +7,7 @@ var logger = require('morgan');
 var slackRouter = require('./routes/slack_routes')
 var indexRouter = require('./routes/index');
 var webRouter = require('./routes/web_routes');
+require('dotenv').config()
 
 var app = express();
 
@@ -21,15 +22,17 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 // Redirect to https
-app.use ((req, res, next) => {
-  if (req.secure) {
-          // request was via https, so do no special handling
-          next();
-  } else {
-          // request was via http, so redirect to https
-          res.redirect('https://' + req.headers.host + req.url);
-  }
-});
+if (process.env.NODE_ENV == "production") {
+  app.use ((req, res, next) => {
+    if (req.secure) {
+            // request was via https, so do no special handling
+            next();
+    } else {
+            // request was via http, so redirect to https
+            res.redirect('https://' + req.headers.host + req.url);
+    }
+  });
+}
 
 app.use('/', slackRouter);
 app.use('/', indexRouter);

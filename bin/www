@@ -10,37 +10,42 @@ var http = require('http');
 var https = require('https');
 const fs = require('fs');
 var worker = require('../worker_scripts/worker');
+require('dotenv').config()
 
 // Certs
-const options = {
-  cert: fs.readFileSync('/etc/letsencrypt/live/see3d.org/fullchain.pem'),
-  key: fs.readFileSync('/etc/letsencrypt/live/see3d.org/privkey.pem')
-};
-
+if (process.env.NODE_ENV == "production") {
+  const options = {
+    cert: fs.readFileSync('/etc/letsencrypt/live/see3d.org/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/see3d.org/privkey.pem')
+  };
+  var secure_port = normalizePort(process.env.SECURE_PORT || '8081');
+  console.log('Secure Server started on ' + normalizePort(process.env.SECURE_PORT || '8081'))
+  var secure_server = https.createServer(options, app);
+  secure_server.listen(secure_port)
+}
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '8080');
-var secure_port = normalizePort(process.env.SECURE_PORT || '8081');
+
 
 app.set('port', port);
 console.log('Server started on ' + normalizePort(process.env.PORT || '8080'))
-console.log('Secure Server started on ' + normalizePort(process.env.SECURE_PORT || '8081'))
+
 
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
-var secure_server = https.createServer(options, app);
+
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
-secure_server.listen(secure_port)
 server.on('error', onError);
 server.on('listening', onListening);
 
