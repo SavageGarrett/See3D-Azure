@@ -12,7 +12,7 @@ const fs = require('fs');
 var worker = require('../worker_scripts/worker');
 require('dotenv').config()
 
-// Certs
+// SSL Certs on Production
 if (process.env.NODE_ENV == "production") {
   const options = {
     cert: fs.readFileSync('/etc/letsencrypt/live/see3d.org/fullchain.pem'),
@@ -23,10 +23,10 @@ if (process.env.NODE_ENV == "production") {
   var secure_server = https.createServer(options, app);
   secure_server.listen(secure_port)
 }
+
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '8080');
 
 

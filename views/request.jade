@@ -17,27 +17,27 @@ section.contact-section.section_padding
         form#model_form(action='/mdrequest', method='POST')
           // Begin Personal Information
           .mt-10
-            input.single-input(aria-label='first name input field', type='text', name='first_name', placeholder='First Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Name'", required='')
+            input.single-input(aria-label='first name input field', type='text', name='first_name', placeholder='First Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Name'", required)
           .mt-10
-            input.single-input(aria-label='last name input field', type='text', name='last_name', placeholder='Last Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Last Name'", required='')
+            input.single-input(aria-label='last name input field', type='text', name='last_name', placeholder='Last Name', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Last Name'", required)
           .mt-10
-            input.single-input(aria-label='email input field', type='email', name='email', placeholder='Email address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Email address'", required='')
+            input.single-input(aria-label='email input field', type='email', name='email', placeholder='Email address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Email address'", required)
           .input-group-icon.mt-10
             .icon
               i.fa.fa-thumb-tack(aria-hidden='true')
-            input.single-input(aria-label='address input field', type='text', name='address', placeholder='Street Address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Street Address'", required='')
+            input.single-input(aria-label='address input field', type='text', name='address', placeholder='Street Address', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Street Address'", required)
           .input-group-icon.mt-10
             .icon
               i.fa.fa-plane(aria-hidden='true')
-            input.single-input(aria-label='city input field', type='text', name='city', placeholder='City', onfocus="this.placeholder = ''", onblur="this.placeholder = 'City'", required='')
+            input.single-input(aria-label='city input field', type='text', name='city', placeholder='City', onfocus="this.placeholder = ''", onblur="this.placeholder = 'City'", required)
           .input-group-icon.mt-10
             .icon
               i.fa.fa-map-marker(aria-hidden='true')
-            input.single-input(aria-label='state input field', type='text', name='state', placeholder='State', onfocus="this.placeholder = ''", onblur="this.placeholder = 'State'", required='')
+            input.single-input(aria-label='state input field', type='text', name='state', placeholder='State', onfocus="this.placeholder = ''", onblur="this.placeholder = 'State'", required)
           .input-group-icon.mt-10
             .icon
               i.fa.fa-globe(aria-hidden='true')
-            input.single-input(aria-label='zip code input field', type='text', name='zip_code', placeholder='Zip Code', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Zip Code'", required='')
+            input.single-input(aria-label='zip code input field', type='text', name='zip_code', placeholder='Zip Code', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Zip Code'", required)
           .mt-10
             p(style='color: black;') Braille Label for Shipping Box
             .confirm-switch
@@ -49,7 +49,7 @@ section.contact-section.section_padding
           .mt-10
             input.single-input(aria-label='link to stl file input field', type='text', name='stl_file', placeholder='Link to STL File', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Link to STL File'") 
           .mt-10
-            textarea.single-textarea(aria-label='model details including quantity size shape and type of model input field', name='model_details', placeholder='What model would you like? (Include details about quantity, size, and any special considerations we made need to make)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What model would you like? (Include details about quantity, size, and any special considerations we made need to make)'", required='')
+            textarea.single-textarea(aria-label='model details including quantity size shape and type of model input field', name='model_details', placeholder='What model would you like? (Include details about quantity, size, and any special considerations we made need to make)', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What model would you like? (Include details about quantity, size, and any special considerations we made need to make)'", required)
           .mt-10
             textarea.single-textarea(aria-label='part of model you are seeking understanding of input field', name='understand', placeholder='What part of this model are you trying to understand better?', onfocus="this.placeholder = ''", onblur="this.placeholder = 'What part of this model are you trying to understand better?'")
           br

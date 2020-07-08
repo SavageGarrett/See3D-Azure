@@ -28,7 +28,7 @@ var interaction_handler = {
             var dbo = db.db("model_request")
             dbo.collection("model_requests").insertOne(model_request, (err, res) => {
                 if (err) throw err;
-                console.log("Model Request Inserted with Id: " + model_request["request_params"]["request_id"]);
+                console.log("Model Request Inserted with Id: " + model_request._id);
                 db.close();
             })
 
@@ -124,103 +124,184 @@ var interaction_handler = {
      * @param {*} responseUrl 
      */
     "getRequestInfo": function(interactionParams, responseUrl) {
-        console.log(responseUrl)
         MongoClient.connect(url, (err, db) => {
             if(err) throw err;
             var dbo = db.db("model_request")
             dbo.collection("model_requests").find(ObjectId(interactionParams._id)).toArray((err, result) => {
                 if (err) throw err;
+
+                // Log Id
+                //console.log(interactionParams._id)
+                console.log(interactionParams)
+                
+                // Get Request Params from DB
+                let body = result[0].request_params.request_body;
+
+                // Sanitize Slider Slack Emojis
+                let braille_slider, feedback_slider, social_slider;
+                if (body.braille_label === "on") braille_slider = ":heavy_check_mark:"; else braille_slider = ":no_entry_sign:";
+                if (body.feedback === "on") feedback_slider = ":heavy_check_mark:"; else feedback_slider = ":no_entry_sign:";
+                if (body.social_media === "on") social_slider = ":heavy_check_mark:"; else social_slider = ":no_entry_sign:";
+
+                // Post Request Details with Actions Options
                 request.post(responseUrl, {
                     json: {
-                    "blocks": [
-                        {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": result[0].request_params.request_body.name || result[0].request_params.request_body.usr
-                        }
-                        },
-                        {
-                        "type": "divider"
-                        },
-                        {
-                        "type": "section",
-                        "fields": [
+                        "blocks": [
                             {
-                            "type": "plain_text",
-                            "text": result[0].request_params.request_body.email,
-                            "emoji": true
-                            }
-                        ]
-                        },
-                        {
-                            "type": "divider"
-                        },
-                        {
-                            "type": "section",
-                            "text": {
-                                "type": "plain_text",
-                                "text": "User Provided Request Details: " + result[0].request_params.request_body.model_details,
-                                "emoji": true
-                            }
-                        }, {
-                            "type": "section",
-                            "text": {
-                                "type": "mrkdwn",
-                                "text": "Pick an action"
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": body.name || body.usr || `${body.first_name} ${body.last_name}`
+                                }
                             },
-                            "accessory": {
-                                "type": "static_select",
-                                "placeholder": {
-                                    "type": "plain_text",
-                                    "text": "Select an item",
-                                    "emoji": true
-                                },
-                                "options": [
+                            {
+                                "type": "divider"
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
                                     {
-                                        "text": {
-                                            "type": "plain_text",
-                                            "text": "More Info",
-                                            "emoji": true
-                                        },
-                                        "value": JSON.stringify({"_id": interactionParams._id, "action": "more_info"})
+                                        "type": "plain_text",
+                                        "text": body.email,
+                                        "emoji": true
                                     },
                                     {
-                                        "text": {
-                                            "type": "plain_text",
-                                            "text": "Mark Complete",
-                                            "emoji": true
-                                        },
-                                        "value": JSON.stringify({"_id": interactionParams._id, "action": "mark_complete"})
+                                        "type": "plain_text",
+                                        "text": `Address: ${body.address} ${body.city} ${body.state} ${body.zip_code || ""}`,
+                                        "emoji": true
                                     }
-                                    // Temporarily Simplify
-                                    // {
-                                    //     "text": {
-                                    //         "type": "plain_text",
-                                    //         "text": "Add Models",
-                                    //         "emoji": true
-                                    //     },
-                                    //     "value": JSON.stringify({"_id": interactionParams._id, "action": "add_models"})
-                                    // },
-                                    // {
-                                    //     "text": {
-                                    //         "type": "plain_text",
-                                    //         "text": "Add Design Request",
-                                    //         "emoji": true
-                                    //     },
-                                    //     "value": JSON.stringify({"_id": interactionParams._id, "action": "add_design_request"})
-                                    // }
                                 ]
+                            },
+                            {
+                                "type": "divider"
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "plain_text",
+                                        "text": `Braille Label: ${braille_slider}`,
+                                        "emoji": true
+                                    },
+                                    {
+                                        "type": "plain_text",
+                                        "text": `Wants to Provide Feed Back: ${feedback_slider}`,
+                                        "emoji": true
+                                    },
+                                    {
+                                        "type": "plain_text",
+                                        "text": `Wants to be in Social Media: ${social_slider}`,
+                                        "emoji": true
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "divider"
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "plain_text",
+                                        "text": `STL File: ${body.stl_file || ""}`,
+                                        "emoji": true
+                                    },
+                                    {
+                                        "type": "plain_text",
+                                        "text": `User Provided Request Details: ${body.model_details || ""}`,
+                                        "emoji": true
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "divider"
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "plain_text",
+                                        "text": `Wants to better understand: ${body.understand || ""}`,
+                                        "emoji": true
+                                    },
+                                    {
+                                        "type": "plain_text",
+                                        "text": `I am: ${body.iam || ""}`,
+                                        "emoji": true
+                                    },
+                                    {
+                                        "type": "plain_text",
+                                        "text": `Wants Description: ${body.description || ""}`,
+                                        "emoji": true
+                                    },
+                                    {
+                                        "type": "plain_text",
+                                        "text": `School: ${body.school || ""}`,
+                                        "emoji": true
+                                    },
+                                    {
+                                        "type": "plain_text",
+                                        "text": `Where Heard About See3D: ${body.publicity || ""}`,
+                                        "emoji": true
+                                    }
+                                ]
+                            }, 
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "Pick an action"
+                                },
+                                "accessory": {
+                                    "type": "static_select",
+                                    "placeholder": {
+                                        "type": "plain_text",
+                                        "text": "Select an item",
+                                        "emoji": true
+                                    },
+                                    "options": [
+                                        // { TODO: Remove 
+                                        //     "text": {
+                                        //         "type": "plain_text",
+                                        //         "text": "More Info",
+                                        //         "emoji": true
+                                        //     },
+                                        //     "value": JSON.stringify({"_id": interactionParams._id, "action": "more_info"})
+                                        // },
+                                        {
+                                            "text": {
+                                                "type": "plain_text",
+                                                "text": "Mark Complete",
+                                                "emoji": true
+                                            },
+                                            "value": JSON.stringify({"_id": interactionParams._id, "action": "mark_complete"})
+                                        }
+                                        // Temporarily Simplify
+                                        // {
+                                        //     "text": {
+                                        //         "type": "plain_text",
+                                        //         "text": "Add Models",
+                                        //         "emoji": true
+                                        //     },
+                                        //     "value": JSON.stringify({"_id": interactionParams._id, "action": "add_models"})
+                                        // },
+                                        // {
+                                        //     "text": {
+                                        //         "type": "plain_text",
+                                        //         "text": "Add Design Request",
+                                        //         "emoji": true
+                                        //     },
+                                        //     "value": JSON.stringify({"_id": interactionParams._id, "action": "add_design_request"})
+                                        // }
+                                    ]
+                                }
                             }
-                        }
-                    ]
+                        ]
                     }
                 }, (err, httpResponse, body) => {
                     if (err) console.log(err)
-                    console.log(result[0].request_params.request_body)
-                    //console.log(httpResponse)
-
-                    //console.log(body)
+                    //console.log(result[0].request_params.request_body)
+                    //console.log(httpResponse.body)
                 })
             });
         });
@@ -274,14 +355,14 @@ var interaction_handler = {
         })
     },
 
-    "markComplete": function(payload, res_url) {
+    "markComplete": function(payload, res_url, interactionParams) {
         MongoClient.connect(url, (err, db) => {
             if (err) throw err;
 
             // Declare Db object
             var dbo = db.db("model_request")
             
-            dbo.collection("model_requests").updateOne({"_id": new ObjectId(payload._id)}, {$set: {"request_params.completed": 1}})
+            dbo.collection("model_requests").updateOne({"_id": new ObjectId(interactionParams._id)}, {$set: {"request_params.completed": 1}})
                 .then((res) => {
                     if (res.modifiedCount != 1) {
                         console.log(`Error: ${res.modifiedCount} database entries edited`)
@@ -292,7 +373,6 @@ var interaction_handler = {
                 })
 
             axios.post(res_url, {
-                json: {
                     "blocks": [
                         {
                             "type": "section",
@@ -302,7 +382,10 @@ var interaction_handler = {
                             }
                         }
                     ]
-                }
+                }, (err, httpResponse, body) => {
+                if (err) console.log(err)
+                //console.log(result[0].request_params.request_body)
+                //console.log(httpResponse.body)
             })
         })
     },

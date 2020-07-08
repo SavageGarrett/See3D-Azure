@@ -47,7 +47,7 @@ router.post('/button', (req, res) => {
   try {
     // Parse payload
     let payload = JSON.parse(req.body.payload);
-    console.log(payload)
+    //console.log(payload)
 
     // Check for actions property before continuing
     if (payload.hasOwnProperty('actions')) {
@@ -82,8 +82,9 @@ router.post('/button', (req, res) => {
             interaction_handler.sendMoreInfo(interactionParams, payload.response_url);
             res.sendStatus(200)
           } else if (interactionParams.action === "mark_complete") {
-            interaction_handler.markComplete(interactionParams, payload.response_url);
+            interaction_handler.markComplete(payload, payload.response_url, interactionParams);
             res.sendStatus(200);
+            console.log('Model Request Successfully Marked as Completed')
           }
 
           // Handle Button Payloads
