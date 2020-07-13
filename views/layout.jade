@@ -279,3 +279,10 @@ mixin footer()
               script(src='js/jquery.validate.min.js')
               script(src='js/mail-script.js')
               script(src='js/main.js')
+  // Global site tag (gtag.js) - Google Analytics
+  script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-153533872-1')
+  script.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-153533872-1');
