@@ -1,1 +1,37 @@
 //Widget Mixins
+
+// Creates a card like that seen in the model kit section on the home page with a learning guide link
+// Text to display, Thingiverse Link for model Kit, Link to refer to, Alt text for image, Link to learning guide
+mixin model_kit(title, thingiverse_link, image_link, alt_text, learning_guide)
+  style.
+    .title h4 {
+      color: #005999 !important;
+    }
+    .learning-guide h5 {
+      color: black !important
+    }
+    .title h4:hover {
+      color: #7cc8ff !important;
+    }
+    .learning-guide h5:hover {
+      color: #7cc8ff !important;
+    }
+
+  .col-lg-4.col-xl-3.col-md-6
+    .single_catagory
+      a(href=thingiverse_link, class="title")
+        h4&attributes(attributes)=title
+      if learning_guide
+        a(href=learning_guide, class="learning-guide")
+          h5(style='margin-top: 10px;') Learning Guide
+      img(src=image_link, alt=learning_guide)
+      
+
+// Creates a card like that seen in the news section on the home page
+// Text to display, Link to refer to
+mixin link_card(title, link)
+  .col-lg-4.col-xl-3.col-md-6
+    .single_catagory
+      a(href=link)
+        h4&attributes(attributes)=title
+      // <p> <span>50</span> Available position</p>

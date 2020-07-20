@@ -2,7 +2,7 @@
 include ./layout.jade
 include ./mixins.jade
 
-+header("See3D - Request a Model")
++header("See3D - Request a Model", "Request a Model")
 
 // ================ contact section start =================
 section.contact-section.section_padding
@@ -41,8 +41,8 @@ section.contact-section.section_padding
           .mt-10
             p(style='color: black;') Braille Label for Shipping Box
             .confirm-switch
-              input#default-switch(aria-label='Braille labels on the shipping box', name='braille_label', type='checkbox')
-              label(for='default-switch')
+              input#default-switch(aria-label='Braille labels on the shipping box checkbox', name='braille_label', type='checkbox')
+              label(aria-hidden='true', for='default-switch')
           // End personal information
           br
           // Model Information
@@ -116,7 +116,7 @@ section.contact-section.section_padding
               div
                 input#iAm3.form-control.radio-input(onclick="textEnable('otherInput');", type='radio', name='iam', value='other')
                 label#iAm3Label.iamLabel(style='margin-right: 20px;', for='iAm3') Other: 
-                input#otherInput.form-control.textbox-resize(onclick="textEnable('otherInput');", type='text', name='otherPerson', maxlength='128' disabled='')
+                input#otherInput.form-control.textbox-resize(aria-label='other person input field', onclick="textEnable('otherInput');", type='text', name='otherPerson', maxlength='128' disabled='')
 
           .mt-10
             // Model Description
@@ -124,16 +124,16 @@ section.contact-section.section_padding
             .form-group.tabbed-group
               div
                 input#desc1.form-control.radio-input(type='radio', name='description', value='no description')
-                label.iamLabel(for='desc5') No Description
+                label.iamLabel(for='desc1') No Description
               div
                 input#desc2.form-control.radio-input(type='radio', name='description', value='email')
-                label.iamLabel(for='desc1') Email Description
+                label.iamLabel(for='desc2') Email Description
               div
                 input#desc3.form-control.radio-input(type='radio', name='description', value='braille')
-                label.iamLabel(for='desc2') Braille Description (Hard Copy)
+                label.iamLabel(for='desc3') Braille Description (Hard Copy)
               div
                 input#desc4.form-control.radio-input(type='radio', name='description', value='large print')
-                label.iamLabel(for='desc3') Large Print Description (Hard Copy)
+                label.iamLabel(for='desc4') Large Print Description (Hard Copy)
 
           // End Model Information
           br
@@ -146,12 +146,12 @@ section.contact-section.section_padding
             p(style='color: black;') Would you like to provide feedback
             .confirm-switch
               input#primary-switch(aria-label='checkbox if you would like to provide feedback about the model', name='feedback', type='checkbox')
-              label(for='primary-switch')
+              label(aria-hidden="true", for='primary-switch')
           .mt-10
             p(style='color: black;') Would you like to be featured in a See3D social media post?
             .confirm-switch
               input#confirm-switch(aria-label='checkbox if you would like to be featured in a see3d social media post', name='social_media', type='checkbox')
-              label(for='confirm-switch')
+              label(aria-hidden="true", for='confirm-switch')
           // End Internal Data
           br
           // Submit

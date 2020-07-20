@@ -14,6 +14,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 const { blogSubscribe } = require('../interaction_handler.js');
 const { query } = require('express');
+const axios = require('axios');
 
 /*
  * Start Slack Bot Routes
@@ -286,6 +287,58 @@ router.post('/subscribe', (req, res) => {
   res.render('subscribe', {email});
 });
 
+// Post Blog form
+router.post('/post_blog', (req, res) => {
+  // Validate Username and Password
+
+  // Parse out form separating files and fields
+  new formidable.IncomingForm().parse(req, (err, fields, files) => {
+    if (err) { // Catch and handle error
+      console.log(err);
+      throw err;
+    }
+
+    // Create new object to store blog post information
+    let blog_post = new Blog_Post(fields.article_title, fields.categories, fields.paragraph, fields.article_description, fields.alt_text);
+
+    // Store blog post and files
+    blog_post.store(res, files);
+  });
+});
+
+// Post Contact Form
+router.post('/contact_process', (req, res) => {
+  let form = req.body;
+  let submit = true;
+  res.render('contact', { submit });
+  axios.post(process.env.CONTACT_CHANNEL, {
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `*${form.name}*\n ${form.subject}`
+        }
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": `${form.message}\n *${form.email}*`
+        }
+      },
+      {
+        "type": "divider"
+      }
+    ]
+  }, (err, httpResponse, body) => {
+    if (err) console.log(err);
+  });
+});
+
 // Serve Page Routes
 router.get('/:fname', (req, res, next) => {
   // Get File Name from Request Parameters
@@ -301,6 +354,8 @@ router.get('/:fname', (req, res, next) => {
   // Serve Testimony Page If Query Exists and fname is correct
   if (query.testimony !== void 0 && fname_split[0] === "index") {
     res.render('testimony', { query });
+  } else if (query.model_kit !== void 0 && fname_split[0] === "index") {
+    res.render('model_kit', { query })
   }
 
 
@@ -347,6 +402,9 @@ router.get('/:fname', (req, res, next) => {
         break;
       case "request":
         res.render('request');
+        break;
+      case "asdfjkl":
+        res.sendFile(path.join(__dirname, '../public/new_site/html/sidebar.html'))
         break;
       default:
         res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
@@ -405,39 +463,34 @@ router.get('/img/:dirname/:fname', (req, res, next) => {
   res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${fname}`));
 });
 
+// Serve Image Files
+router.get('/img/:dirname/:dirname2/:fname', (req, res, next) => {
+  let fname = req.params.fname;
+  let dirname = req.params.dirname;
+  let dirname2 = req.params.dirname2;
+  res.sendFile(path.join(__dirname, `/../public/new_site/img/${dirname}/${dirname2}/${fname}`));
+});
+
 // Serve Resume Files
-router.get('/resume/:name', (req, res, next) => {
+router.get('/documents/:name', (req, res, next) => {
   let name = req.params.name;
   res.sendFile(path.join(__dirname, `/../public/new_site/resume/${name}`));
 })
 
-// Post Blog form
-router.post('/post_blog', (req, res) => {
-  // Validate Username and Password
+// Serve Resume Files
+router.get('/documents/:dirname1/:name', (req, res, next) => {
+  let dirname1 = req.params.dirname1;
+  let name = req.params.name;
+  res.sendFile(path.join(__dirname, `/../public/new_site/documents/${dirname1}/${name}`));
+})
 
-  // Parse out form separating files and fields
-  new formidable.IncomingForm().parse(req, (err, fields, files) => {
-    if (err) { // Catch and handle error
-      console.log(err);
-      throw err;
-    }
-
-    // Create new object to store blog post information
-    let blog_post = new Blog_Post(fields.article_title, fields.categories, fields.paragraph, fields.article_description, fields.alt_text);
-
-    // Store blog post and files
-    blog_post.store(res, files);
-  });
-});
-
-// Post Contact Form
-router.post('/contact_process', (req, res) => {
-  new formidable.IncomingForm().parse(req, (err, fields, files) => {
-    if (err) throw err;
-
-    console.log(fields)
-  });
-});
+// Serve Resume Files
+router.get('/documents/:dirname1/:dirname2/:name', (req, res, next) => {
+  let dirname1 = req.params.dirname1;
+  let dirname2 = req.params.dirname2;
+  let name = req.params.name;
+  res.sendFile(path.join(__dirname, `/../public/new_site/documents/${dirname1}/${dirname2}/${name}`));
+})
 
 /*
  * End Web Routes

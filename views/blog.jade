@@ -52,9 +52,9 @@ section.blog_area.section-padding
             form(action='#')
               .form-group
                 .input-group.mb-3
-                  input.form-control(id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
+                  input.form-control(aria-label='Search Within Blog Posts', id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
                   .input-group-append
-                    button.btn(type='button', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`")
+                    button.btn(aria-label='Submit Search', type='button', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`")
                       i.ti-search
               button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit', onClick="parent.location=`blog.html?search=${document.getElementById('search_field').value}`") Search
           //
