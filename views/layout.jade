@@ -3,7 +3,7 @@ mixin index_header(title)
   doctype html
   meta(charset='utf-8')
   meta(http-equiv='x-ua-compatible', content='ie=edge')
-  title See3D - 3D Printing for the Blind
+  title #{title}
   meta(name='description', content='')
   meta(name='viewport', content='width=device-width, initial-scale=1')
   // <link rel="manifest" href="site.webmanifest">
@@ -19,6 +19,7 @@ mixin index_header(title)
   link(rel='stylesheet', href='css/flaticon.css')
   link(rel='stylesheet', href='css/gijgo.css')
   link(rel='stylesheet', href='css/animate.min.css')
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   link(rel='stylesheet', href='css/slicknav.css')
   link(rel='stylesheet', href='css/style.css')
   link(rel='stylesheet', href='css/addins.css')
@@ -68,12 +69,37 @@ mixin index_header(title)
                         a(href='contact') Contact
               .col-xl-3.col-lg-3.d-none.d-lg-block
                 .Appointment
-                  //
-                    <div class="phone_num d-none d-xl-block">
-                    <a href="#">Log in</a>
-                    </div>
-                  .d-none.d-lg-block
-                    a.boxed-btn3(href='request_info') Request a Model
+                  // Script to toggle dropdown
+                  script.
+                    function toggleDropDown() {
+                      document.getElementById('login-dropdown').classList.toggle('active');
+                      document.getElementById('drop-arrow').classList.toggle('fa-arrow-left');
+                      document.getElementById('drop-arrow').classList.toggle('fa-arrow-down')
+                    }
+
+                  if global.profile
+                    .logged-in-card
+                      a.nickname #{global.profile.nickname[0].toUpperCase() + global.profile.nickname.substring(1)}
+                      a(href='#{global.profile.picture}')
+                        img(src='#{global.profile.picture}')
+                      button.arrow(onclick="toggleDropDown();")
+                        i#drop-arrow.fa.fa-arrow-left
+                      // TODO Pages based on roles
+                      ul#login-dropdown
+                        li
+                          a(href="/user") Profile
+                          hr
+                        li
+                          a(href="/admin") Admin
+                          hr
+                        li
+                          a(href="/logout") Logout
+                  else
+                    div(class="phone_num d-none d-xl-block")
+                      a(href='/login') Log in
+                    .d-none.d-lg-block
+                      a.boxed-btn3(href='request_info') Request a Model
+                    
               .col-12
                 .mobile_menu.d-block.d-lg-none
 // header-end
@@ -102,7 +128,7 @@ mixin header(title, heading)
       link(rel='stylesheet', href='css/flaticon.css')
       link(rel='stylesheet', href='css/gijgo.css')
       link(rel='stylesheet', href='css/animate.min.css')
-      link(rel='stylesheet', href='css/slick.css')
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
       link(rel='stylesheet', href='css/slicknav.css')
       link(rel='stylesheet', href='css/style.css')
       link(rel='stylesheet', href='css/addins.css')
@@ -152,8 +178,36 @@ mixin header(title, heading)
                             a(href='contact') Contact
                   .col-xl-3.col-lg-3.d-none.d-lg-block
                     .Appointment
-                      .d-none.d-lg-block
-                        a.boxed-btn3(href='request') Request a Model
+                      // Script to toggle dropdown
+                      script.
+                        function toggleDropDown() {
+                          document.getElementById('login-dropdown').classList.toggle('active');
+                          document.getElementById('drop-arrow').classList.toggle('fa-arrow-left');
+                          document.getElementById('drop-arrow').classList.toggle('fa-arrow-down')
+                        }
+
+                      if global.profile
+                        .logged-in-card
+                          a.nickname #{global.profile.nickname[0].toUpperCase() + global.profile.nickname.substring(1)}
+                          a(href='#{global.profile.picture}')
+                            img(src='#{global.profile.picture}')
+                          button.arrow(onclick="toggleDropDown();")
+                            i#drop-arrow.fa.fa-arrow-left
+                          // TODO Pages based on roles
+                          ul#login-dropdown
+                            li
+                              a(href="/user") Profile
+                              hr
+                            li
+                              a(href="/admin") Admin
+                              hr
+                            li
+                              a(href="/logout") Logout
+                      else
+                        div(class="phone_num d-none d-xl-block")
+                          a(href='/login') Log in
+                        .d-none.d-lg-block
+                          a.boxed-btn3(href='request_info') Request a Model
                   .col-12
                     .mobile_menu.d-block.d-lg-none
       // header-end

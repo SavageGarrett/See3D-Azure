@@ -593,6 +593,24 @@ var interaction_handler = {
                 db.close();
             })
         });
+    },
+
+    "setUserRoles": function (userProfile) {
+        MongoClient.connect(url, (err, db) => {
+            {useUnifiedTopology: true}
+            if (err) throw err;
+        
+            var dbo = db.db("user")
+
+            // Find user and retrieve roles
+            dbo.collection("user").find({"auth0_id": userProfile.id}).toArray((err, result) => {
+                if (err) throw err;
+                global.profile.roles = result[0].roles || "none";
+                //console.log(result[0])
+            });
+
+            db.close();
+        });
     }
 }
 

@@ -1,0 +1,19 @@
+doctype html
+include ./layout.jade
+include ./mixins.jade 
+
++header("See3D - User", "User")
+
+// about_start
+.popular_catagory_area
+  .container
+    .row
+      .col-lg-10
+        h1 Hello User
+        h1(style='font-size: 40px;') #{user.nickname}
+        .w-100
+        img(src=user.picture, style='border-radius: 50%;')
+        p.fix-font-20 #{userProfile}
+// about_end
+
++footer()

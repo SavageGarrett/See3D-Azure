@@ -131,3 +131,51 @@
 .footer_widget p {
     color: white !important;
 }
+
+/* Nav Bar Scroll Issue Fix */
+.header-area .main-header-area.sticky {
+    overflow: unset;
+}
+
+.slicknav_menu .slicknav_nav {
+    position: fixed;
+    top: 80px;
+}
+
+
+/* Profile Widget Styling */
+.logged-in-card {
+    position: fixed;
+    top: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 25px;
+    padding-left: 25px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.logged-in-card a.nickname {
+    margin-right: 15px;
+}
+
+.logged-in-card button.arrow {
+    margin-left: 15px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.logged-in-card a img {
+    width: 40px;
+    border-radius: 20px;
+}
+
+#login-dropdown {
+    display: none;
+    margin-top: 12px;
+}
+
+#login-dropdown.active {
+    display: block;
+}

@@ -2,17 +2,17 @@ doctype html
 include ./layout.jade
 include ./mixins.jade 
 
-+header("See3D - Error", "Error")
++header("See3D - Failure", "Failure")
 
 // about_start
 .popular_catagory_area
   .container
     .row
       .col-lg-10
-        h1(style='font-size: 40px;') 404 Page Not Found
+        h1(style='font-size: 40px;') Failure
       .w-100
-      p.fix-font-20 #{message}
       p.fix-font-20 #{error}
+      p.fix-font-20 #{error_description}
 // about_end
 
 +footer()

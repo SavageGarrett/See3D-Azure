@@ -345,11 +345,28 @@ router.get('/:fname', (req, res, next) => {
   let fname_split = req.params.fname.split('.');
   let fname = req.params.fname;
 
+  // Logged in Params
+  let logged = false, roles = undefined;
+
+  // Check if user is logged in to display Account Option
+  if (req.user != void 0) {
+    // Set Log Variable to be set
+    const { _raw, _json, ...userProfile } = req.user;
+
+    // Debug
+    //console.log(JSON.stringify(userProfile));
+
+    if (userProfile != void 0) global.profile = userProfile, logged = true;
+  }
+
+  // console.log(global.profile);
+  // console.log(logged);
+  // console.log(roles);
+
   // If Query is Defined Create Query
   if (req.query !== void 0) {
     var query = req.query
   }
-
 
   // Serve Testimony Page If Query Exists and fname is correct
   if (query.testimony !== void 0 && fname_split[0] === "index") {
@@ -407,7 +424,6 @@ router.get('/:fname', (req, res, next) => {
         res.sendFile(path.join(__dirname, '../public/new_site/html/sidebar.html'))
         break;
       default:
-        res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
         break;
     }
   } else { // Else forward request to error
