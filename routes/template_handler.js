@@ -188,9 +188,7 @@ let template_handler = {
                 for (let i = 0; i < result.length; i++) {
                     // Set proper month name to display
                     result[i].month = month[new Date(result[i].date).getMonth()]
-                    if (result[i].month.length > 3) {
-                        result[i].month = result[i].month.slice(result[i].month.length - 4, result[i].month.length - 1)
-                    }
+                    result[i].month = result[i].month.slice(0, 3)
 
                     // Look for articles to include from search query
                     if (query.hasOwnProperty('search') && (result[i].title.includes(query.search) || result[i].paragraph.includes(query.search) || result[i].article_description.includes(query.search))) {
