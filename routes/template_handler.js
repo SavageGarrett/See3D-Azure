@@ -244,6 +244,24 @@ let template_handler = {
                 db.close();
             });
         });
+    },
+
+    "blog_edit": () => {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, (err, db) => {
+                {useUnifiedTopology: true}
+                if (err) throw err;
+            
+                var dbo = db.db("blog")
+                dbo.collection("blog").find({}).sort({date: -1}).toArray((err, result) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(result);
+                });
+            });
+        });
     }
 }
 

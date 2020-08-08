@@ -253,6 +253,17 @@ router.post('/requests', (req, res) => {
  * Begin Web Routes
  */
 
+ // Middle Ware for User Roles
+// router.use((req, res, next) => {
+//   // Set User Roles
+//   if (req.user) {
+//     interaction_handler.setUserRoles(req);
+//   }
+  
+//   // Pass Request to Handler
+//   next();
+// })
+
 // Acme Challenge for SSL
 router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
   let id = req.params.id;
@@ -346,22 +357,23 @@ router.get('/:fname', (req, res, next) => {
   let fname = req.params.fname;
 
   // Logged in Params
-  let logged = false, roles = undefined;
+  // let logged = false, roles = undefined;
 
-  // Check if user is logged in to display Account Option
-  if (req.user != void 0) {
-    // Set Log Variable to be set
-    const { _raw, _json, ...userProfile } = req.user;
+  // // Check if user is logged in to display Account Option
+  // if (req.user != void 0) {
+  //   // Set Log Variable to be set
+  //   const { _raw, _json, ...userProfile } = req.user;
 
-    // Debug
-    //console.log(JSON.stringify(userProfile));
+  //   // Debug
+  //   //console.log(JSON.stringify(userProfile));
 
-    if (userProfile != void 0) global.profile = userProfile, logged = true;
-  }
+  //   if (userProfile != void 0) global.profile = userProfile, logged = true;
+  // }
 
   // console.log(global.profile);
   // console.log(logged);
   // console.log(roles);
+  //console.log(global.profile)
 
   // If Query is Defined Create Query
   if (req.query !== void 0) {

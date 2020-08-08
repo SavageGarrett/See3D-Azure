@@ -87,11 +87,13 @@ mixin index_header(title)
                       // TODO Pages based on roles
                       ul#login-dropdown
                         li
-                          a(href="/user") Profile
+                          a(href="/admin") Profile
                           hr
-                        li
-                          a(href="/admin") Admin
-                          hr
+                        if global.roles
+                          if global.roles.admin == true
+                            li
+                              a(href="/admin") Admin
+                              hr
                         li
                           a(href="/logout") Logout
                   else
@@ -105,8 +107,8 @@ mixin index_header(title)
 // header-end
 
 
-// Tab Title, H3 Displayed on Image
-mixin header(title, heading)
+// Tab Title, H3 Displayed on Image, if Admin Page
+mixin header(title, heading, admin)
   doctype html
   html.no-js(lang='en')
     head
@@ -132,6 +134,7 @@ mixin header(title, heading)
       link(rel='stylesheet', href='css/slicknav.css')
       link(rel='stylesheet', href='css/style.css')
       link(rel='stylesheet', href='css/addins.css')
+      link(rel='stylesheet', href='css/sidebar.css')
       // <link rel="stylesheet" href="css/responsive.css">
     body
       //if lte IE 9
@@ -196,11 +199,13 @@ mixin header(title, heading)
                           // TODO Pages based on roles
                           ul#login-dropdown
                             li
-                              a(href="/user") Profile
+                              a(href="/admin") Profile
                               hr
-                            li
-                              a(href="/admin") Admin
-                              hr
+                            if global.roles
+                              if global.roles.admin == true
+                                li
+                                  a(href="/admin") Admin
+                                  hr
                             li
                               a(href="/logout") Logout
                       else
@@ -210,14 +215,66 @@ mixin header(title, heading)
                           a.boxed-btn3(href='request_info') Request a Model
                   .col-12
                     .mobile_menu.d-block.d-lg-none
-      // header-end
+      if admin
+        style.
+          .header-area {
+            background-color: #001D38 !important;
+          }
+          .admin-disable {
+            display: none;
+          }
+          ul#sidebar-text {
+            margin-top: 100px;
+          }
+          #sidebar-text li:hover {
+            background-color: white;
+            color: #001D38 !important;
+            cursor: pointer;
+          }
+        script.
+          setTimeout(function() {
+            var width = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+            var navbar_on = true;
+            if (navbar_on && width > 600) {
+                document.getElementById("sideBar").classList.toggle('active');
+                document.getElementById('expandButton').classList.toggle('admin-disable')
+            }
+          }, 10)
+          
+          function openNav() {
+            document.getElementById("sideBar").classList.toggle('active');
+          }
+
+        #sideBar
+          .toggleButton#expandButton(onclick='openNav()')
+            button.fa.fa-arrow-circle-right
+          ul#sidebar-text
+            li 
+              a(onclick='displayContent(\'#profile\')') Profile
+
+            if global.roles
+              if global.roles.admin == true
+                li 
+                  a(onclick='displayContent(\'#blog_posts\')') Blog Posts
+                li 
+                  a(onclick='displayContent(\'#model_kits\')') Model Kits
+                li 
+                  a(onclick='displayContent(\'#learning_guides\')') Learning Guides
+                li 
+                  a(onclick='displayContent(\'#team_entries\')') Team Entries
+                li 
+                  a(onclick='displayContent(\'#gallery_entries\')') Gallery Entries
+
       // bradcam_area
-      .bradcam_area.bradcam_bg_1
-        .container
-          .row
-            .col-xl-12
-              .bradcam_text
-                h3&attributes(attributes)=heading
+      if !admin
+        .bradcam_area.bradcam_bg_1
+          .container
+            .row
+              .col-xl-12
+                .bradcam_text
+                  h3&attributes(attributes)=heading
       // / bradcam_area
       // about_start
 

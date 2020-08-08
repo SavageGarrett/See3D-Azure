@@ -99,6 +99,11 @@ app.use(passport.session());
 // Add Session Middleware
 app.use(flash());
 
+app.use(function (req, res, next) {
+  //if (req.session.hasOwnProperty('passport')) console.log(req.session.passport);
+  next()
+})
+
 // Handle auth failure error messages
 app.use(function (req, res, next) {
   if (req && req.query && req.query.error) {
@@ -111,21 +116,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(userInViews());
-
-// Add User Info Middleware
-app.use(function (req, res, next) {
-  if (req.user) {
-    const { _raw, _json, ...userProfile } = req.user;
-
-    //TODO Find out a better way to do this... 
-    //global variables for logins is a bad idea but it work for now until I have the console built out
-    global.profile = userProfile;
-
-    //TODO Optimize Database Interaction
-    interaction_handler.setUserRoles(userProfile);
-  }
-  next();
-});
 
 // Add Routes
 app.use('/', authRouter);

@@ -2,14 +2,78 @@ doctype html
 include ./layout.jade
 include ./mixins.jade 
 
-+header("See3D - User", "User")
++header("See3D - User", "User", true)
 
-// about_start
-.popular_catagory_area
+style.
+  div.profile_area {
+    display: none;
+  }
+
+  div.profile_area.active {
+    background-color: white;
+    display: block;
+    margin-left: 200px;
+  }
+
+  div.profile_area.active .container {
+    margin-top: 100px;
+  }
+
+.popular_catagory_area(id="profile", class="profile_area")
   .container
     .row
       .col-lg-10
-        h1 Hello User
-// about_end
+        div
+          img(src=user.picture, style='border-radius: 50%; float: left;')
+          h1(style='float: left; margin-top: 36px; margin-left: 20px;') #{user.nickname}
+        
+        //p.fix-font-20(style='clear: both;') #{userProfile}
+        p.fix-font-20(style='clear: both; padding-top: 20px; padding-left: 20px;') Email: #{user.emails[0].value}
+        //p.fix-font-20(style='clear: both; padding-left: 20px;') User ID:  #{user.id}
 
-+footer()
+if global.roles
+  if global.roles.admin == true
+    .popular_catagory_area(id="blog_posts", class="profile_area")
+      .container
+        .row
+          +edit_blog_posts()
+          for post in JSON.parse(blog)
+            +edit_blog_posts(post)
+
+
+    .popular_catagory_area(id="model_kits", class="profile_area")
+      .container
+        .row
+          .col-lg-10
+            h1 Model Kits
+
+    .popular_catagory_area(id="learning_guides", class="profile_area")
+      .container
+        .row
+          .col-lg-10
+            h1 Learning Guides
+
+    .popular_catagory_area(id="team_entries", class="profile_area")
+      .container
+        .row
+          .col-lg-10
+            h1 Team Entries
+
+    .popular_catagory_area(id="gallery_entries", class="profile_area")
+      .container
+        .row
+          .col-lg-10
+            h1 Gallery Entries
+
+script.
+  // Start out with Profile as active
+  document.querySelector('#profile').classList.add('active')
+  
+  // Change Active Content
+  function displayContent(id) {
+    // Remove Active Classes
+    for(let element of document.getElementsByClassName('profile_area')) {element.classList.remove('active')}
+    
+    // Add Active Class
+    document.querySelector(id).classList.add('active')
+  }

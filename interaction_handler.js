@@ -595,22 +595,51 @@ var interaction_handler = {
         });
     },
 
-    "setUserRoles": function (userProfile) {
-        MongoClient.connect(url, (err, db) => {
-            {useUnifiedTopology: true}
-            if (err) throw err;
+    "setUserRoles": function (req) {
+        // If Request has a User
+        if (req.user) {
+            const { _raw, _json, ...userProfile } = req.user;
         
-            var dbo = db.db("user")
+            // Prevent Duplicate Login Requests from Pinging Database
+            if (!(global.profile !== void 0 && global.profile.id !== void 0 && userProfile.id === global.profile.id)) {
+                //TODO Find out a better way to do this... 
+                //global variables for logins is a bad idea but it work for now until I have the console built out
+                global.profile = userProfile;
+            
+                //TODO Optimize Database Interaction
+                MongoClient.connect(url, (err, db) => {
+                    if (err) throw err;
+                
+                    var dbo = db.db("user")
+        
+                    // Find user and retrieve roles
+                    dbo.collection("user").find({"auth0_id": userProfile.id}).toArray((err, result) => {
+                        if (err) throw err;
+        
+                        // If Result Was Found
+                        if (result[0] != void 0) {
+                            // Set Roles
+                            if (global.profile != void 0) global.roles = result[0].roles || "none";
+                        } else { // No Result Found
+                            // console.log(userProfile)
+                            // Log to Database
+                            dbo.collection("user").insertOne({"auth0_id": global.profile.id, "username": global.profile.nickname, "picture": global.profile.picture, "emails": global.profile.emails}, (err, result) => {
+                                if (err) console.log(err);
+                                console.log(`Created new User ${result.insertedId}`);
+                                db.close();
+                            });
+                        }
+                    });
+        
+                    
+                });
+            }
 
-            // Find user and retrieve roles
-            dbo.collection("user").find({"auth0_id": userProfile.id}).toArray((err, result) => {
-                if (err) throw err;
-                global.profile.roles = result[0].roles || "none";
-                //console.log(result[0])
-            });
-
-            db.close();
-        });
+        } else {
+            global.profile = undefined;
+            global.roles = undefined;
+        }
+        
     }
 }
 
