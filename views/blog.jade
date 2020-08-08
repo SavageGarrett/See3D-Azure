@@ -25,7 +25,7 @@ section.blog_area.section-padding
             .blog_item_img(style="background-image: url('img/blog_posts/#{val._id}.jpg')")
               span(role='img', aria-label='#{val.alt_text}')
               a.blog_item_date(href='#')
-                h3 #{new Date(val.date).getDate()}
+                h3(style="text-align: center;") #{new Date(val.date).getDate()}
                 p #{val.month}
             .blog_details
               a.d-inline-block(href='blog.html?id=#{val._id}')
