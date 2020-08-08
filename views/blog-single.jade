@@ -2,6 +2,8 @@
 include ./layout.jade
 include ./mixins.jade
 
++header("See3D - Blog Post", result[0].title)
+
 //Change link colors to be more visible (Include Before Header so Styles will take precedence)
 style.
   .blog-link {
@@ -10,8 +12,29 @@ style.
   .blog-Link:hover {
     color: white !important;
   }
+  .bradcam_text {
+    background: rgba(0,0,0,0.5);
+    padding: 50px 0;
+    text-align: center !important;
+  }
 
-+header("See3D - Blog Post", result[0].title)
+  /* Change Blog Post Colors */
+  .blog_details h1, h2, h3, h4, h5, h6, a, p, div {
+    color: black;
+  }
+
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js')
+
+script.
+  // Convert Markdown to Html and inject with jquery
+  setTimeout(function(){
+    var converter = new showdown.Converter()
+    let markDown = `#{result[0].paragraph}`;
+    let htmlInject = converter.makeHtml(markDown)
+    $("body > section > div > div > div.col-lg-8.posts-list > div.single-post > div.blog_details").append(htmlInject);
+  }, 100)
+  
 
 // ================Blog Area =================
 section.blog_area.single-post-area.section-padding
@@ -34,15 +57,6 @@ section.blog_area.single-post-area.section-padding
                   a(href='#')
                     i.fa.fa-comments
                     |  #{result[0].comments.length} Comments
-
-            p.excert(style="color: black;")
-              // Insert Links or Other tags into paragraph from javascript variable
-              for text in post_body_text
-                if text.link
-                  a(href="#{text.link}" class="blog-link")
-                    | #{text.link}
-                if text.paragraph
-                  | #{text.paragraph}
               
         .navigation-top
           .d-sm-flex.justify-content-between.text-center

@@ -403,8 +403,8 @@ router.get('/:fname', (req, res, next) => {
       case "request":
         res.render('request');
         break;
-      case "asdfjkl":
-        res.sendFile(path.join(__dirname, '../public/new_site/html/sidebar.html'))
+      case "post_blog.html":
+        res.sendFile(path.join(__dirname, '../public/new_site/html/post_blog.html'))
         break;
       default:
         res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));

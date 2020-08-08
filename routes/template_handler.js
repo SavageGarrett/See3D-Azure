@@ -204,6 +204,7 @@ let template_handler = {
                     }
                 }
 
+                // If Single Blog Page
                 if (single && (!query.hasOwnProperty('search') && !query.hasOwnProperty('category'))) {
                     // Create Split Version of Paragraph, list of links, an array to store the text contained in posts
                     let new_paragraph = result[0].paragraph.split(/\<link\>.+\<\/link\>/), links = [], post_body_text = [];
@@ -233,8 +234,9 @@ let template_handler = {
                     }
 
                     // Send Individual post result and the fake tags injected in the text
+                    result = display;
                     res.render('blog-single', {result, post_body_text})
-                } else {
+                } else { // Blog Page
                     result = display;
                     res.render('blog', {result})
                 }

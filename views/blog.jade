@@ -11,10 +11,19 @@ section.blog_area.section-padding
     .row
       .col-lg-8.mb-5.mb-lg-0
         .blog_left_sidebar
+        style.
+          .blog_item_img {
+            width: 100%;
+            height: 500px;
+            background-position-x: center;
+            background-position-y: center;
+            background-size: cover;
+          }
+
         each val in result
           article.blog_item
-            .blog_item_img
-              img.card-img.rounded-0(src='img/blog_posts/#{val._id}.jpg', alt='#{val.alt_text}')
+            .blog_item_img(style="background-image: url('img/blog_posts/#{val._id}.jpg')")
+              span(role='img', aria-label='#{val.alt_text}')
               a.blog_item_date(href='#')
                 h3 #{new Date(val.date).getDate()}
                 p #{val.month}
@@ -36,16 +45,18 @@ section.blog_area.section-padding
 
         nav.blog-pagination.justify-content-center.d-flex
           ul.pagination
-            li.page-item
-              a.page-link(href='#', aria-label='Previous')
-                i.ti-angle-left
+            //
+              li.page-item
+                a.page-link(href='#', aria-label='Previous')
+                  i.ti-angle-left
             li.page-item
               a.page-link(href='#') 1
-            li.page-item.active
-              a.page-link(href='#') 2
-            li.page-item
-              a.page-link(href='#', aria-label='Next')
-                i.ti-angle-right
+            //
+              li.page-item.active
+                a.page-link(href='#') 2
+              li.page-item
+                a.page-link(href='#', aria-label='Next')
+                  i.ti-angle-right
       .col-lg-4
         .blog_right_sidebar
           aside.single_sidebar_widget.search_widget
