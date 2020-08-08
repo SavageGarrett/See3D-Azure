@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+
+  # web is set up with everything in the Dockerfile so the only thing 
+  # done here is the external port is bound to the one already configured 
+  # for the docker instance
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    ports:
+      - "8080:8080"
+
+  # db paths probably need changed here, I'm not sure what specifcally
+  # mongo is doing for us, but the website seems to work with it like this
+  db:
+    image: mongo:4.2.7
+    container_name: db
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - 27017:27017
+    command: mongod
+
+volumes:
+  mongodb:
+  mongodb_config:
