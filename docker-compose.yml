@@ -10,19 +10,23 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: web
+    env_file: 
+      - .env
     ports:
       - "8080:8080"
+    links:
+      - db
 
   # db paths probably need changed here, I'm not sure what specifcally
   # mongo is doing for us, but the website seems to work with it like this
   db:
-    image: mongo:4.2.7
+    image: mongo:4.4
     container_name: db
     volumes:
       - mongodb:/data/db
       - mongodb_config:/data/configdb
     ports:
-      - 27017:27017
+      - 27018:27017
     command: mongod
 
 volumes:

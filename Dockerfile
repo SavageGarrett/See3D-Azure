@@ -10,6 +10,7 @@ COPY package*.json ./
 
 # set up npm dependencies
 RUN npm install -g
+
 # for some reason this needs to be installed manually
 RUN npm install request
 

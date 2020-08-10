@@ -1,7 +1,8 @@
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 let ObjectId = require('mongodb').ObjectID;
-var url = "mongodb://localhost:27017/";
+require('dotenv').config()
+var url = `mongodb://db:${process.env.MONGO_PORT || 27017}/`;
 const fs = require('fs');
 let path = require('path');
 

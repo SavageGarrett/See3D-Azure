@@ -358,7 +358,6 @@ router.get('/:fname', (req, res, next) => {
     res.render('model_kit', { query })
   }
 
-
   // Check no extension or html extension or php extension
   if (fname_split[1] === void 0 || fname_split[1] === "html" || fname_split[1] === "php" || fname_split[1] === "ico") {
     // Serve Pages Based on Their Name
