@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Node.js in Docker",
+        "type": "docker",
+        "request": "launch",
+        "preLaunchTask": "Run Docker Container",
+        "platform": "node"
+      }
+    ]
+}
