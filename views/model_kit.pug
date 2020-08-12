@@ -1,0 +1,43 @@
+// Includes for page layout and individual widgets
+include ./layout.pug
+include ./mixins.pug
+
++header("See3D - Model Kit", "Model Kit")
+
+// https://www.thingiverse.com/see3dprinting/collections/united-states-kit
+// https://www.thingiverse.com/see3dprinting/collections/anatomy-kit
+
+// about_start
+.popular_catagory_area(style='padding-bottom: 0px;')
+  .container
+    .row
+      .col-lg-12
+        .section_title.mb-40
+          case query.model_kit
+            when "united-states-kit"
+              h3 United States Model Kit
+            when "anatomy-kit"
+              h3 Anatomy Model Kit
+    .row
+      // In the future these will be controlled by a database TODO
+      case query.model_kit
+        when "united-states-kit"
+          p.fix-font-20(style="width: 100%; margin-left: 2%;") A collection of models containing famous buildings, landmarks, geography, and the United States flag.
+
+          +model_kit("American Flag Model", "https://www.thingiverse.com/thing:910845", "img/kits/united-states-kit/usa_flag_1_preview_card.jpg", "American Flag 3D Model", "documents/kits/united-states-kit/American Flag.docx")
+          +model_kit("Statue of Liberty Model", "https://www.thingiverse.com/thing:65869", "img/kits/united-states-kit/liberty2_fixed_preview_card.jpg", "Statue of Liberty 3D Model", "documents/kits/united-states-kit/Statue of Liberty_.docx")
+          +model_kit("Capitol Building Model", "https://www.thingiverse.com/thing:461272", "img/kits/united-states-kit/CAPITOL_DISPLAY_preview_card.jpg", "Capitol Building 3D Model", "documents/kits/united-states-kit/Capitol Building_.docx")
+          +model_kit("White House Model", "https://www.thingiverse.com/thing:461235", "img/kits/united-states-kit/WHITE_HOUSE_DISPLAY_preview_card.jpg", "The White House 3D Model", "documents/kits/united-states-kit/The White House_.docx")
+          +model_kit("Topographic Model", "https://www.thingiverse.com/thing:634007", "img/kits/united-states-kit/IMG_4465_preview_card.jpg", "Topographic Map 3D Model", "documents/kits/united-states-kit/Topographic Map_.docx")
+          //+model_kit("Statue of Liberty Model", "https://www.thingiverse.com/thing:1826175", "img/kits/united-states-kit/liberty2_fixed_preview_card.jpg", "Precipitation Map 3D Model")
+
+        // FIX CSS ISSUES TODO
+        when "anatomy-kit"
+          p.fix-font-20(style="width: 100%; margin-left: 2%;") A collection of models containing different organs from the human body.
+
+          +model_kit("Intestine Model", "https://www.thingiverse.com/thing:1874604", "img/kits/anatomy-kit/9b617c28a4dafc0169f8194044cf563d_preview_card.jpg", "Intestine 3D Model")
+          +model_kit("Inner Ear Model", "https://www.thingiverse.com/thing:1527838", "img/kits/anatomy-kit/8e8d5d0d2d3e0e50d0b2130355d7d375_preview_card.jpg", "Inner Ear 3D Model")
+          +model_kit("Brain Stem Model", "https://www.thingiverse.com/thing:939904", "img/kits/anatomy-kit/cerebellum_and_brainstem_preview_card.jpg", "Brain Stem 3D Model")
+          +model_kit("Upper GI Tract Model", "https://www.thingiverse.com/thing:939607", "img/kits/anatomy-kit/Upper_GI_Hepatobiliary_small_preview_card.jpg", "Upper GI Tract 3D Model")
+
++footer()

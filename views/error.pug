@@ -1,0 +1,17 @@
+// Includes for page layout and individual widgets
+include ./layout.pug
+include ./mixins.pug
+
++header("See3D - 404 Not Found", "404")
+// / bradcam_area
+// about_start
+.popular_catagory_area
+  .container
+    .row
+      .col-lg-10
+        h1(style='font-size: 40px;') 404 Page Not Found
+      .w-100
+        p(class='fix-font-20')=err.message
+// about_end
+
++footer()
