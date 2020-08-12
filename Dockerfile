@@ -1,5 +1,5 @@
 # set the version of node to use
-FROM node:8.10.0
+FROM node:14.7.0
 
 # set the working directory for docker
 # I'm not sure if it should be here or not, but it builds so we can deal with that later

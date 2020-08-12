@@ -1,0 +1,54 @@
+include ./layout.pug
+include ./mixins.pug 
+
++header("See3D - Contact", "contact")
+
+script.
+  function contact_submit() {
+    document.getElementById('contactForm').submit();
+  }
+
+// ================ contact section start =================
+section.contact-section.section_padding
+  .container
+    .row
+      .col-12
+        h2.contact-title Get in Touch
+      if submit
+        .col-lg-8
+          p.fix-font-20 Thank you for Reaching out! We will get in contact with you soon.
+      else
+        .col-lg-8
+          form#contactForm.form-contact.contact_form(action='contact_process', method='post', novalidate='novalidate')
+            .row
+              .col-12
+                .form-group
+                  textarea#message.form-control.w-100(aria-label='Message to send to See3D', name='message', cols='30', rows='9', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter Message'", placeholder='Enter Message')
+              .col-sm-6
+                .form-group
+                  input#name.form-control(aria-label="Your Name", name='name', type='text', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter your name'", placeholder='Enter your name')
+              .col-sm-6
+                .form-group
+                  input#email.form-control(aria-label="Your E-Mail", name='email', type='email', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter email address'", placeholder='Enter email address')
+              .col-12
+                .form-group
+                  input#subject.form-control(aria-label="The subject which you are reaching out about" , name='subject', type='text', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Enter Subject'", placeholder='Enter Subject')
+            .form-group.mt-3
+              a.genric-btn.info(onclick='contact_submit()') Send Message
+
+      .col-lg-4
+        .media.contact-info
+          span.contact-info__icon
+            i.ti-home
+          .media-body
+            h3 The Ohio State University
+            p Columbus, OH 43210
+        .media.contact-info
+          span.contact-info__icon
+            i.ti-email
+          .media-body
+            h3 info@see3d.org
+            p Feel Free to Reach out Via E-Mail!
+// ================ contact section end =================
+
++footer()

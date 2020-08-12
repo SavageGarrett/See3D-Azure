@@ -3,3 +3,4 @@ node_modules/
 .env
 .sass-cache/
 public/new_site/scss/.sass-cache/
+.env_template
