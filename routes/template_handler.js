@@ -191,9 +191,9 @@ let template_handler = {
                     result[i].month = result[i].month.slice(0, 3)
 
                     // Look for articles to include from search query
-                    if (query.hasOwnProperty('search') && (result[i].title.includes(query.search) || result[i].paragraph.includes(query.search) || result[i].article_description.includes(query.search))) {
+                    if (query.hasOwnProperty('search') && (result[i].title.toLowerCase().includes(query.search.toLowerCase() || result[i].paragraph.toLowerCase().includes(query.search.toLowerCase()) || result[i].article_description.toLowerCase().includes(query.search.toLowerCase())))) {
                         display.push(result[i]);
-                    } else if (query.hasOwnProperty('category') && result[i].toLowerCase().includes(query.category.toLowerCase())) {
+                    } else if (query.hasOwnProperty('category') && result[i].toLowerCase()().includes(query.category.toLowerCase()())) {
                         // Look for category in comma separated list of categories if queried (2nd priority)
                         display.push(result[i]);
                     } else if (query.hasOwnProperty('id') && result[i]._id == query.id) {
@@ -206,36 +206,9 @@ let template_handler = {
 
                 // If Single Blog Page
                 if (single && (!query.hasOwnProperty('search') && !query.hasOwnProperty('category'))) {
-                    // Create Split Version of Paragraph, list of links, an array to store the text contained in posts
-                    let new_paragraph = result[0].paragraph.split(/\<link\>.+\<\/link\>/), links = [], post_body_text = [];
-                    
-                    // Create array to store whether each section of text is a link or a regular blog of text
-
-                    // Remove all links and add to array
-                    while (result[0].paragraph.includes('<link>')) {
-                        let match_data = result[0].paragraph.match(/\<link\>.+\<\/link\>/);
-                        links.push(result[0].paragraph.substr(match_data.index, match_data[0].length));
-                        result[0].paragraph = result[0].paragraph.replace(/\<link\>.+\<\/link\>/, '');
-                    }
-
-                    // Sanitize Links
-                    for (let i = 0; i < links.length; i++) {
-                        links[i] = links[i].replace('<link>', '');
-                        links[i] = links[i].replace('</link>', '');
-                    }
-
-                    // Add to array in order
-                    for (let j = 0; j < new_paragraph.length; j++) {
-                        post_body_text.push({paragraph: new_paragraph[j]});
-
-                        if (j in links) {
-                            post_body_text.push({link: links[j]});
-                        }
-                    }
-
                     // Send Individual post result and the fake tags injected in the text
                     result = display;
-                    res.render('blog-single', {result, post_body_text})
+                    res.render('blog-single', {result})
                 } else { // Blog Page
                     result = display;
                     res.render('blog', {result})
