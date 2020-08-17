@@ -255,10 +255,13 @@ h3 {
   color: #fff; }
 .owl-carousel .owl-nav div.owl-next {
   left: auto;
-  right: 150px; }
+  right: 150px;
+ }
   .owl-carousel .owl-nav div.owl-next i {
     position: relative;
-    right: 0; }
+    right: 0;
+    top: 0px;
+   }
 .owl-carousel .owl-nav div.owl-prev i {
   position: relative;
   top: 0px; }
