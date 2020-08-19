@@ -3,10 +3,10 @@ FROM node:14.7.0
 
 # set the working directory for docker
 # I'm not sure if it should be here or not, but it builds so we can deal with that later
-WORKDIR /
+WORKDIR /srv
 
 # copy package*.json over to the docker instance working directory
-COPY package*.json ./
+COPY /srv/package*.json ./
 
 # set up npm dependencies
 RUN npm install -g
@@ -15,7 +15,7 @@ RUN npm install -g
 RUN npm install request
 
 # copy everything else over to the docker instance
-COPY . .
+#COPY . .
 
 # set the port that docker will open for this instance
 EXPOSE 8080

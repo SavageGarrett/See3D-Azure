@@ -16,6 +16,10 @@ services:
       - "8080:8080"
     links:
       - db
+    volumes:
+      - type: volume
+        source: srv
+        target: /srv
 
   db:
     image: mongo:4.4
@@ -36,3 +40,5 @@ services:
 volumes:
   mongodb:
   mongodb_config:
+
+  srv:
