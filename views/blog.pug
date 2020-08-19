@@ -34,7 +34,8 @@ section.blog_area.section-padding
               ul.blog-info-link
                 li
                   a(href='#')
-                    i.fa.fa-user=val.category.split(',')[0]
+                    i.fa.fa-user
+                    | #{val.category.split(',')[0]}
                 //
                   li
                     a(href='#')

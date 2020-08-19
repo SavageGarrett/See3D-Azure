@@ -3,7 +3,7 @@ var path = require('path');
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 let ObjectId = require('mongodb').ObjectID;
-var url = "mongodb://localhost:27017/";
+var url = process.env.MONGO_URI || 'mongodb://localhost:27017/';
 
 // Month array to reference
 var month = new Array();
@@ -21,7 +21,7 @@ month[10] = "November";
 month[11] = "December";
 
 // Alt text of 94 images with their respective alt text
-let alt_text = {
+let alt_text_backup = {
     "Alligator 1.jpg": "Alligator 3D model",
     "Brainstem 1.jpg": "Brainstem with Braille",
     "Butterfly Chrysalis.jpg": "Butterfly Chrysalis 3D Print",
@@ -99,15 +99,69 @@ let alt_text = {
 
 
 let template_handler = {
+    "find_one": (collection, id) => {
+        console.log(id)
+        let find_one = new Promise((resolve, reject) => {
+            MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
+                if (err) throw err;
+            
+                var dbo = db.db(process.env.STRAPI_DB || 'test');
+                dbo.collection(collection)
+                    .find({ _id: id })
+                    .toArray((err, result) => {
+                        if (err) reject(err);
+
+                        // Resolve Promise with either results or void 0
+                        resolve(result.length > 0 ? result[0] : void 0)
+                    })
+            })
+        })
+
+        let fetchers = [ find_one ];
+        Promise.all(fetchers)
+            .then((result) => {
+                return result;
+            })
+            .catch((err) => {
+                console.log(err);
+                return void 0;
+            })
+    },
+
+    "get_images": () => {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
+                if (err) throw err;
+            
+                var dbo = db.db(process.env.STRAPI_DB || 'test');
+                dbo.collection('galleries')
+                    .find({})
+                    .sort( { createdAt: -1 } )
+                    .toArray((err, result) => {
+                        if (err) reject(err);
+
+                        // Resolve Promise with either results or void 0
+                        resolve(result.length > 0 ? result : void 0)
+                    })
+                
+                
+            })
+        })
+    },
+
     /**
-     * Serves gallery pages
+     * Renders Gallery page
      * 
-     * @param res response object to send page render
-     * @param pagenum the page number to server
+     * @param res Response Object
+     * @param pagenum Page Number
+     * @param results Results from Database
      */
-    "gallery": (res, pagenum) => {
-        // Read in names of images
-        let filenames = fs.readdirSync(path.join(__dirname, '../public/new_site/img/gallery/'));
+    "gallery_render": (res, pagenum, results) => {
+        let images = [], alt_text = [];
+        for (let result of results[0]) {
+            images.push(result.image || '');
+            alt_text.push(result.alt_text || '');
+        }
 
         // Declare arrays for template output
         let display = [], number_active = [], number = [], arrow_disp = [];
@@ -115,7 +169,7 @@ let template_handler = {
 
 
         // Serve first page if out of bounds (input validation)
-        if (pagenum > Math.ceil(filenames.length / 10) || isNaN(pagenum) || pagenum <= 1) {
+        if (pagenum > Math.ceil(images.length / 10) || isNaN(pagenum) || pagenum <= 1) {
             pagenum = 0;
         } else {
             // Offset page number for array indexing
@@ -123,14 +177,28 @@ let template_handler = {
         }
 
         // Loop through images on page
+        let image_url = [];
         for (let i = 0; i < 10; i++) {
             // Display image if in valid range by adding to array
-            if (pagenum * 10 + i < filenames.length) {
-                filenames[i] = filenames[pagenum * 10 + i];
+            if (pagenum * 10 + i < images.length) {
+                images[i] = images[pagenum * 10 + i];
+                let image_url = template_handler.find_one('upload_file', images[i]);
+                console.log(image_url)
+
                 display.push('block');
             } else {
-                filenames[i] = undefined;
+                images[i] = undefined;
                 display.push('none');
+            }
+        }
+
+        // Add alt text to images from active page
+        let arr_alt = [];
+        for (let j = 0; j < images.length; j++) {
+            if (alt_text.hasOwnProperty(images[j])) {
+                arr_alt.push(alt_text[images[j]]);
+            } else {
+                arr_alt.push("");
             }
         }
 
@@ -144,13 +212,13 @@ let template_handler = {
             arrow_disp = ['none', 'block'] // Sets display property for left/right arrow
             plus_arrow = 2;
             minus_arrow = 1;
-        } else if (pagenum == Math.ceil(filenames.length / 10)) { // Handle last page
+        } else if (pagenum == Math.ceil(images.length / 10)) { // Handle last page
             number = [pagenum - 2, pagenum - 1, pagenum];
             number_active = ['', '', 'active'];
             arrow_disp = ['block', 'none']
             plus_arrow = 0;
             minus_arrow = pagenum - 1;
-            console.log(minus_arrow)
+            //console.log(minus_arrow)
         } else { // Handle any other page
             number = [pagenum - 1, pagenum, pagenum + 1];
             number_active = ['', 'active', ''];
@@ -159,17 +227,28 @@ let template_handler = {
             minus_arrow = pagenum - 1;
         }
 
-        // Add alt text to images
-        let arr_alt = [];
-        for (let j = 0; j < filenames.length; j++) {
-            if (alt_text.hasOwnProperty(filenames[j])) {
-                arr_alt.push(alt_text[filenames[j]]);
-            } else {
-                arr_alt.push("");
-            }
-        }
+        // Render Page
+        res.render('gallery', {images, arr_alt, display, number_active, number, arrow_disp, plus_arrow, minus_arrow});
+    },
 
-        res.render('gallery', {filenames, arr_alt, display, number_active, number, arrow_disp, plus_arrow, minus_arrow});        
+    /**
+     * Serves gallery pages 
+     * 
+     * @param res response object to send page render
+     * @param pagenum the page number to server
+     */
+    "gallery": (res, pagenum) => {
+        // DB Call
+        var image_fetcher = [ template_handler.get_images() ];
+
+        Promise.all(image_fetcher)
+            .then((results) => {
+                console.log(results)
+                template_handler.gallery_render(res, pagenum, results)
+            })
+            .catch((err) => {
+                console.log(err)
+            })        
     },
 
     // Handles blog pages with their respective queries

@@ -339,6 +339,11 @@ router.post('/contact_process', (req, res) => {
   });
 });
 
+// Route pinged to scrape thingiverse when model kit is created
+router.get('/thingiverse_scrape', (req, res, next) => {
+
+})
+
 // Serve Page Routes
 router.get('/:fname', (req, res, next) => {
   // Get File Name from Request Parameters
