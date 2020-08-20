@@ -6,13 +6,13 @@ FROM node:14.7.0
 WORKDIR /srv
 
 # copy package*.json over to the docker instance working directory
-COPY /srv/package*.json ./
+#COPY /srv/package*.json ./
 
 # set up npm dependencies
-RUN npm install -g
+#RUN npm install -g
 
 # for some reason this needs to be installed manually
-RUN npm install request
+#RUN npm install request
 
 # copy everything else over to the docker instance
 #COPY . .
@@ -21,4 +21,7 @@ RUN npm install request
 EXPOSE 8080
 
 # start nodejs in the container
-CMD [ "npm", "start" ]
+#CMD [ "npm", "start" ]
+#CMD ["tail", "-f", "/dev/null"]
+#CMD [ "npm", "run", "devstart" ]
+CMD ["bash", "-c", "while true; do echo a; sleep 1; done"]

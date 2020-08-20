@@ -2,14 +2,11 @@ version: '3.2'
 
 services:
 
-  # web is set up with everything in the Dockerfile so the only thing 
-  # done here is the external port is bound to the one already configured 
-  # for the docker instance
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: node:14.7.0
+    working_dir: /srv
     container_name: web
+    command: tail -f /dev/null
     env_file: 
       - .env
     ports:
@@ -17,8 +14,8 @@ services:
     links:
       - db
     volumes:
-      - type: volume
-        source: srv
+      - type: bind
+        source: ./srv
         target: /srv
 
   db:
@@ -31,14 +28,12 @@ services:
       - type: volume
         source: mongodb_config
         target: /data/configdb
-      #- mongodb:/data/db
-      #- mongodb_config:/data/configdb
     ports:
       - 27018:27017
     command: mongod
 
 volumes:
+  srv:
+
   mongodb:
   mongodb_config:
-
-  srv:
