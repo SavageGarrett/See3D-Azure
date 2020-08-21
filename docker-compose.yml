@@ -6,7 +6,7 @@ services:
     image: node:14.7.0
     working_dir: /srv
     container_name: web
-    command: tail -f /dev/null
+    command: npm run devstart
     env_file: 
       - .env
     ports:
