@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node /srv/bin/www",
-    "devstart": "nodemon -e html,js,css /srv/bin/www"
+    "devstart": "nodemon /srv/bin/www"
   },
   "dependencies": {
     "axios": "^0.19.2",
