@@ -406,6 +406,9 @@ router.get('/:fname', (req, res, next) => {
       case "post_blog.html":
         res.sendFile(path.join(__dirname, '../public/new_site/html/post_blog.html'))
         break;
+      case "release":
+        res.render('release');
+        break;
       default:
         res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
         break;
