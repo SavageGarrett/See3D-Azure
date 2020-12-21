@@ -320,7 +320,8 @@ router.get('/:fname', (req, res, next) => {
         res.render('team');
         break;
       case "request":
-        res.render('request');
+        next();
+        //res.render('request');
         break;
       case "post_blog.html":
         res.sendFile(path.join(__dirname, '../public/new_site/html/post_blog.html'))
