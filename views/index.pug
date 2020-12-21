@@ -33,8 +33,8 @@ include ./mixins.pug
       .w-100
       .col-lg-10
         p.fix-font-20
-          | If you would like to support our mission, you can donate 
-          a.text-link(href='donate') Here
+          | If you would like to support our mission, you can 
+          a.text-link(href='donate') donate to us
           | .
     .row.justify-content-end
       .button-offset.d-lg-block
@@ -317,42 +317,13 @@ include ./mixins.pug
     .row
       .col-lg-12
         .candidate_active.owl-carousel
-          .single_candidates.text-center
-            .thumb
-              img(src='img/sponsors/innovation.png', alt='The Ohio State University Innovation Studio logo')
-            a(href='https://go.osu.edu/innovationstudio')
-              h4 The OSU Innovation Studio
-            // <p>Software Engineer</p>
-          .single_candidates.text-center
-            .thumb
-              img(src='img/sponsors/ge.png', alt='General Electric additive education program logo')
-            a(href='https://www.ge.com/additive/stories/ge-additive-education-program-0')
-              h4 GE Additive Education
-            // <p>Software Engineer</p>
-          .single_candidates.text-center
-            .thumb
-              img(src='img/sponsors/ic3d.png', alt='IC3D Printers logo')
-            a(href='https://ic3dprinters.com/')
-              h4 IC3D Printers
-            p -
-          .single_candidates.text-center
-            .thumb
-              img(src='img/sponsors/goodall.png', alt='Jane goodall roots and shoots logo')
-            a(href='https://janegoodall.org/our-work/our-approach/roots-shoots/')
-              h4 Jane Goodall's Roots and Shoots
-            // <p>Software Engineer</p>
-          .single_candidates.text-center
-            .thumb
-              img(src='img/sponsors/vora.png', alt='Vora Ventures logo')
-            a(href='https://www.voraventures.com/')
-              h4 Vora Ventures
-            p -
-          .single_candidates.text-center
-            .thumb
-              img(src='img/sponsors/geckotek.png', alt='GeckoTek logo')
-            a(href='https://www.geckotek.co/')
-              h4 GeckoTek
-            p -
+          +donator('img/sponsors/CapitalOne.jpg', 'Capital One Logo', 'https://www.capitalone.com/', 'Capital One')
+          +donator('img/sponsors/innovation.png', 'The Ohio State University Innovation Studio logo', 'https://go.osu.edu/innovationstudio', 'The OSU Innovation Studio')
+          +donator('img/sponsors/ge.png', 'General Electric additive education program logo', 'https://www.ge.com/additive/stories/ge-additive-education-program-0', 'GE Additive Education')
+          +donator('img/sponsors/ic3d.png', 'IC3D Printers logo', 'https://ic3dprinters.com/', 'IC3D Printers')
+          +donator('img/sponsors/goodall.png', 'Jane goodall roots and shoots logo', 'https://janegoodall.org/our-work/our-approach/roots-shoots/', 'Jane Goodall\'s Roots and Shoots')
+          +donator('img/sponsors/vora.png', 'Vora Ventures logo', 'https://www.voraventures.com/', 'Vora Ventures')
+          +donator('img/sponsors/geckotek.png', 'GeckoTek logo', 'https://www.geckotek.co/', 'GeckoTek')
 // featured_candidates_area_end
 // Company Card area (Potential Future Use)
 //
@@ -483,6 +454,8 @@ include ./mixins.pug
           h3 News
     .row
       +link_card("UATP Accessible Times Podcast", "https://utahatprogram.blogspot.com/2020/08/uatp-accessible-times-podcast-episode-2.html?m=1")
+      +link_card("Easterseals", "https://www.eastersealstech.com/2018/10/12/atu385-see3d-3d-printing-for-the-blind-with-caroline-karbowski/")
+      +link_card("Future Reflections", "https://www.nfb.org/images/nfb/publications/fr/fr39/1/fr390109.htm")
       +link_card("Journal of Science Education", "https://scholarworks.rit.edu/jsesd/vol23/iss1/6/")
       +link_card("Blind Abilities", "https://blindabilities.com/?p=2957")
       +link_card("TEDx Talk", "https://www.youtube.com/watch?v=uf_Qw8mcMh0&app=desktop")

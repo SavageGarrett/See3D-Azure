@@ -32,6 +32,46 @@ mixin model_kit(title, thingiverse_link, image_link, alt_text, learning_guide)
 mixin link_card(title, link)
   .col-lg-4.col-xl-3.col-md-6
     .single_catagory
-      a(href=link)
+      a(href=link, target='_blank')
         h4&attributes(attributes)=title
+
+      // optional extra text
       // <p> <span>50</span> Available position</p>
+
+mixin donator(image, alt_text, website, name)
+  .single_candidates.text-center
+    .thumb
+      img(src=image, alt=alt_text)
+    a(href=website)
+      h4&attributes(attributes)=name 
+    
+    // optional extra text
+    // <p>Software Engineer</p>
+
+mixin team_member(image, alt_text, name, occupation)
+  .row
+    .col-lg-11
+      .single_testmonial.d-flex.align-items-center
+        .thumb
+          img(src=image, alt=alt_text)
+          .quote_icon
+            i.Flaticon.flaticon-quote
+        .info
+          h2&attributes(attributes)=name
+          span&attributes(attributes)=occupation
+          .footer.footer-rst
+            .socail_links(style='margin-top: 20px;')
+              ul.team_social
+                // Social Link Button Addon
+                //
+                  <li>
+                  <a style="border-color: #005999 !important;" aria-label="Emily Kiehl linkedin" href="https://www.linkedin.com/in/emily-k-a1043313a/">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i>
+                  </a>
+                  </li>
+                //
+                  <li>
+                  <a style="border-color: #005999 !important;" aria-label="Emily Kiehl Resumé coming soon" href="#">
+                  <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                  </a>
+                  </li>

@@ -156,55 +156,6 @@ router.post('/button', (req, res) => {
   }
 });
 
-// Handle form submits
-router.post('/mdrequest', (req, res) => {
-  console.log(req.body);
-  interaction_handler.sendRequest(req.body)
-  request.post(hooks['model-requests'], {
-    json: {
-      "blocks": [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": `Model requested by ${req.body.first_name} ${req.body.last_name}`
-          }
-        },
-        {
-          type: "divider"
-        },
-        {
-          "type": "section",
-          "fields": [
-            {
-              "type": "plain_text",
-              "text": `Email: ${req.body.email}`,
-              "emoji": true
-            },
-            {
-              "type": "plain_text",
-              "text": ` `,
-              "emoji": true
-            },
-            {
-              "type": "plain_text",
-              "text": `Details: ${req.body.stl_file || req.body.model_details}`,
-              "emoji": true
-            }
-          ]
-        }
-      ]
-    }
-  }, (error, res, body) => {
-    if (error) {
-      console.error(error)
-      return
-    }
-    console.log(`Model Request Message Sent: ${res.statusCode}`)
-  })
-  res.render('donate', {name: req.body.name})
-});
-
 // Handle /requests user commands
 router.post('/requests', (req, res) => {
   let splitCommand = req.body.text.split(' ');
@@ -306,39 +257,6 @@ router.post('/post_blog', (req, res) => {
   });
 });
 
-// Post Contact Form
-router.post('/contact_process', (req, res) => {
-  let form = req.body;
-  let submit = true;
-  res.render('contact', { submit });
-  axios.post(process.env.CONTACT_CHANNEL, {
-    "blocks": [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `*${form.name}*\n ${form.subject}`
-        }
-      },
-      {
-        "type": "divider"
-      },
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": `${form.message}\n *${form.email}*`
-        }
-      },
-      {
-        "type": "divider"
-      }
-    ]
-  }, (err, httpResponse, body) => {
-    if (err) console.log(err);
-  });
-});
-
 // Serve Page Routes
 router.get('/:fname', (req, res, next) => {
   // Get File Name from Request Parameters
@@ -389,7 +307,8 @@ router.get('/:fname', (req, res, next) => {
         res.render('about');
         break;
       case "contact":
-        res.render('contact');
+        next();
+        //res.render('contact');
         break;
       case "get_involved":
         res.render('get_involved');
@@ -408,6 +327,9 @@ router.get('/:fname', (req, res, next) => {
         break;
       case "release":
         res.render('release');
+        break;
+      case "board":
+        res.render('board_members');
         break;
       default:
         res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
