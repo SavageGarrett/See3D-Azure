@@ -19,6 +19,36 @@ include ./mixins.pug
   .ilstration_img.wow.fadeInRight.d-none.d-lg-block.text-right(data-wow-duration='1s', data-wow-delay='.2s')
     img(src='img/banner/illustration.png', alt='Background image with blue see3d logo')
 // slider_area_end
+
+// impact_start
+.fix-bottom.popular_catagory_area
+  .container
+    .row
+      .col-lg-12
+        .section_title.mb-40
+          h3 Impact
+    .row
+      .col-lg-10
+        ul.unordered-list(style='padding-bottom: 13px;')
+          li
+            | Distributed over 1200 models since 2017
+          li
+            | Models sent to 15 states, 7 countries, and 12 organizations
+          li
+            | Connections made in 11 countries
+          li
+            | 9 organizations have awarded us grants, funding, or in-kind donations
+    .row.justify-content-center
+      .col-lg-10 
+        #amznCharityBanner
+          script(type='text/javascript').
+            (function() {var iFrame = document.createElement('iframe'); iFrame.style.display = 'none'; iFrame.style.border = "none"; iFrame.width = 310; iFrame.height = 256; iFrame.setAttribute && iFrame.setAttribute('scrolling', 'no'); iFrame.setAttribute('frameborder', '0'); setTimeout(function() {var contents = (iFrame.contentWindow) ? iFrame.contentWindow : (iFrame.contentDocument.document) ? iFrame.contentDocument.document : iFrame.contentDocument; contents.document.open(); contents.document.write(decodeURIComponent("%3Cdiv%20id%3D%22amznCharityBannerInner%22%3E%3Ca%20href%3D%22https%3A%2F%2Fsmile.amazon.com%2Fch%2F84-3805114%22%20target%3D%22_blank%22%3E%3Cdiv%20class%3D%22text%22%20height%3D%22%22%3E%3Cdiv%20class%3D%22support-wrapper%22%3E%3Cdiv%20class%3D%22support%22%20style%3D%22font-size%3A%2025px%3B%20line-height%3A%2028px%3B%20margin-top%3A%2029px%3B%20margin-bottom%3A%2029px%3B%22%3ESupport%20%3Cspan%20id%3D%22charity-name%22%20style%3D%22display%3A%20inline-block%3B%22%3ESee3D%20Inc.%3C%2Fspan%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cp%20class%3D%22when-shop%22%3EWhen%20you%20shop%20at%20%3Cb%3Esmile.amazon.com%2C%3C%2Fb%3E%3C%2Fp%3E%3Cp%20class%3D%22donates%22%3EAmazon%20donates.%3C%2Fp%3E%3C%2Fdiv%3E%3C%2Fa%3E%3C%2Fdiv%3E%3Cstyle%3E%23amznCharityBannerInner%7Bbackground-image%3Aurl(https%3A%2F%2Fm.media-amazon.com%2Fimages%2FG%2F01%2Fx-locale%2Fpaladin%2Fcharitycentral%2Fbanner-background-image._CB485922134_.png)%3Bwidth%3A300px%3Bheight%3A250px%3Bposition%3Arelative%7D%23amznCharityBannerInner%20a%7Bdisplay%3Ablock%3Bwidth%3A100%25%3Bheight%3A100%25%3Bposition%3Arelative%3Bcolor%3A%23000%3Btext-decoration%3Anone%7D.text%7Bposition%3Aabsolute%3Btop%3A20px%3Bleft%3A15px%3Bright%3A15px%3Bbottom%3A100px%7D.support-wrapper%7Boverflow%3Ahidden%3Bmax-height%3A86px%7D.support%7Bfont-family%3AArial%2Csans%3Bfont-weight%3A700%3Bline-height%3A28px%3Bfont-size%3A25px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D.when-shop%7Bfont-family%3AArial%2Csans%3Bfont-size%3A15px%3Bfont-weight%3A400%3Bline-height%3A25px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D.donates%7Bfont-family%3AArial%2Csans%3Bfont-size%3A15px%3Bfont-weight%3A400%3Bline-height%3A21px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D%3C%2Fstyle%3E")); contents.document.close(); iFrame.style.display = 'block';}); document.getElementById('amznCharityBanner').appendChild(iFrame); })();
+
+    .row.justify-content-center
+      .button-offset.d-lg-block
+        a.boxed-btn3.bg-fix(href='donate') Donate to our PayPal
+// impact_end
+
 // about_start
 .fix-bottom.popular_catagory_area
   .container
@@ -40,6 +70,29 @@ include ./mixins.pug
       .button-offset.d-lg-block
         a.boxed-btn3.bg-fix(href='about') More Info
 // about_end
+
+// about_start
+.fix-bottom.popular_catagory_area
+  .container
+    .row
+      .col-lg-12
+        .section_title.mb-40
+          h3 About Our Project
+    .row
+      .col-lg-10
+        p.fix-font-20
+          | See3D organizes the printing and distribution of 3D printed models for people who are blind. Anyone who is blind/has low vision, or is a parent or teacher of someone who is blind, can make a request for a model.
+      .w-100
+      .col-lg-10
+        p.fix-font-20
+          | If you would like to support our mission, you can 
+          a.text-link(href='donate') donate to us
+          | .
+    .row.justify-content-end
+      .button-offset.d-lg-block
+        a.boxed-btn3.bg-fix(href='about') More Info
+// about_end
+
 // get_involved_start
 .popular_catagory_area
   .container
@@ -55,6 +108,7 @@ include ./mixins.pug
       .button-offset.d-lg-block
         a.boxed-btn3.bg-fix(href='get_involved') More Info
 // get_involved_end
+
 // model_kits_start
 .fix-top.popular_catagory_area
   .container
@@ -78,6 +132,7 @@ include ./mixins.pug
           img(src='img/thingiverse/anatomy-kit.jpg', alt='Intestine 3D Model')
           // <p> <span>50</span> Available position</p>
 // model_kits_end
+
 // request_start
 .popular_catagory_area.fix-top
   .container
@@ -94,6 +149,7 @@ include ./mixins.pug
       .button-offset.d-lg-block
         a.boxed-btn3.bg-fix(href='request_info') Request a Model
 // request_end
+
 // job_searcing_wrap
 .job_searcing_wrap.overlay
   .container
@@ -110,6 +166,7 @@ include ./mixins.pug
             | We also accept in-kind donations of 3D printing supplies and some other blindness related items.
           a.boxed-btn3(href='get_involved') More Info
 // job_searcing_wrap end
+
 // job_listing_area_start
 //
   <div class="job_listing_area">
@@ -307,6 +364,7 @@ include ./mixins.pug
   </div>
   </div>
 // job_listing_area_end
+
 // featured_candidates_area_start
 .pad-top.fix-bottom.featured_candidates_area
   .container
@@ -445,6 +503,7 @@ include ./mixins.pug
                     a(href='?testimony=winslow_parker') Read More...
                     span - Winslow Parker
 // /testimonial_area
+
 // articles_start
 .fix-top.popular_catagory_area
   .container

@@ -1,0 +1,76 @@
+// For a full language guide check out
+// https://pugjs.org/language/attributes.html
+
+// This document will provide a quick guide to the most common features of pug you will use
+
+// Import Pug Mixins (Functions that give you code snippets)
+include ./layout.pug
+include ./mixins.pug
+
+// Use a mixin
++somemixin("Text 1", "Text 2")
+
+
+
+
+//** Sample Page Layout
+
+// Import Header
+// Page Title, Banner Text
++header("See3D - About", "About")
+
+// Page Content
+
++footer()
+
+//** End Sample Page Layout
+
+
+
+
+//** Pug Syntax Examples
+// Pug works based on tabs, and does not contain closing tags
+
+// Div class="example" with nested div of id="idexample" and class="classexample"
+.example
+    #idexample.classexample
+
+// Other Elements
+a.someclass#someid
+ul
+    li
+    li
+    li
+
+
+// Adding Attributes
+a.someclass(href="https://google.com") Google
+
+// Adding Text
+p Hello World
+
+p
+  | This is
+  | an example
+  | of a longer
+  | snipett of text 
+
+// These li elements are equivalent
+ul
+    li Hello World
+    li
+      | Hello World
+
+// Styling and Scripts from Html (I recommend using the css and js files contained in public,
+// but sometimes it makes more sense to just add it on the html side)
+
+style.
+    .someclass {
+        color: #bb0000;
+        width: 200px !important;
+    }
+
+script(type='text/javascript').
+    document.getElementById('idexample').classList.add('someclass')
+
+//** End Pug Syntax Examples
