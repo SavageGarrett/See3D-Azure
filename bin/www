@@ -15,8 +15,8 @@ require('dotenv').config()
 // SSL Certs on Production
 if (process.env.NODE_ENV == "production") {
   const options = {
-    cert: fs.readFileSync('/etc/letsencrypt/live/see3d.org/fullchain.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/see3d.org/privkey.pem')
+    key: fs.readFileSync('/etc/letsencrypt/live/see3d.org/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/see3d.org/fullchain.pem')
   };
   var secure_port = normalizePort(process.env.SECURE_PORT || '8081');
   console.log('Secure Server started on ' + normalizePort(process.env.SECURE_PORT || '8081'))

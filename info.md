@@ -174,6 +174,10 @@ sudo certbot renew
 # Run on running web server. Place in acme challenge in acme challenge folder served in routes.js.
 # The route is written to automatically locate whatever is placed in the acme challenge folder.
 # The server may need restarted to reflect this new change.
+
+# A script is ran at midnight on the first day of every month, which attempts to renew the ssl cert and restart production.
+# This script can cause errors if production is down and backup is up.
+# The logs for this script can be viewed at /home/see3d/logs/cert.log
 ```
 
 **Update Node Packages**
