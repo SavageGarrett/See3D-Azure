@@ -18,7 +18,7 @@ This should serve as a reference for navigation of the See3D code base
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
-## Running the Server on Your Machine
+## Running the Server on See3D Server
 You must first install npm and node.js on your terminal. You can do this by visiting https://nodejs.org/en/.
 
 Once you have installed these and cloned the git repository, you will have to create a .env file at the root directory of the repository, which defines the ports the code base runs on. Change NODE_ENV variable to production, if you would like to use the secure ports. (Requires cert files present at directory set in bin/www)
@@ -29,6 +29,7 @@ Once you have installed these and cloned the git repository, you will have to cr
 NODE_ENV=development
 
 # Web Server Ports
+# Ports 8080 to 8100 are opened for development
 PORT=8089
 SECURE_PORT=8090
 

@@ -31,7 +31,13 @@ var port = normalizePort(process.env.PORT || '8080');
 
 
 app.set('port', port);
-console.log('Server started on ' + normalizePort(process.env.PORT || '8080'))
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log(`Server running at http://40.76.54.72:${process.env.PORT}`)
+} else {
+  console.log('Server started on ' + normalizePort(process.env.PORT || '8080'))
+}
+
 
 
 /**
