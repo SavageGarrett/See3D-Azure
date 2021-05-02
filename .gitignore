@@ -1,5 +1,6 @@
 secret/
 node_modules/
+package-lock.json
 .env
 .sass-cache/
 public/new_site/scss/.sass-cache/
