@@ -187,8 +187,11 @@ let template_handler = {
                 // Loop through all results from db
                 for (let i = 0; i < result.length; i++) {
                     // Set proper month name to display
-                    result[i].month = month[new Date(result[i].date).getMonth()]
-                    result[i].month = result[i].month.slice(0, 3)
+                    console.log(result[i].date)
+                    var x = new Date(result[i].date)
+                    console.log(x)
+                    result[i].month = month[x.getMonth()].slice(0,3)
+                    console.log(result[i].month)
 
                     // Look for articles to include from search query
                     if (query.hasOwnProperty('search') && (result[i].title.toLowerCase().includes(query.search.toLowerCase() || result[i].paragraph.toLowerCase().includes(query.search.toLowerCase()) || result[i].article_description.toLowerCase().includes(query.search.toLowerCase())))) {
