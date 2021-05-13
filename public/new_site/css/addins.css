@@ -131,3 +131,9 @@
 .footer_widget p {
     color: white !important;
 }
+
+#amznCharityBanner {
+    display: flex !important;
+    justify-content: center !important;
+    padding-bottom: 20px !important;
+}
