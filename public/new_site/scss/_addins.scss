@@ -1,0 +1,139 @@
+/*
+    Custom CSS Addins for See3D
+    Created 06/03/2020
+*/
+.a{
+    color: #001d38;
+}
+
+.testimonial_area .single_testmonial .info{
+    font-size: 24px;
+}
+
+.header-area .main-header-area.sticky {
+    max-height: 89px;
+    overflow: hidden;
+}
+
+.testimonial_area {
+    background: #F5F7FA !important;
+}
+
+.tagline-addin {
+    margin-bottom: .75rem !important;
+    font-size: 22px !important;
+}
+
+.pad-top {
+    padding-top: 100px !important;
+}
+
+.fix-top {
+    padding-top: 0px !important;
+}
+
+.fix-bottom {
+    padding-bottom: 0px !important;
+}
+
+.fix-font-20 {
+    font-size: 20px !important;
+    color: #001D38 !important;
+}
+
+.text-link {
+    color: #007bff;
+}
+
+.text-link:hover {
+    color: #7A838B;
+}
+
+.button-offset {
+    padding-right: 100px;
+}
+
+.bg-fix:hover {
+    color: #005999 !important;
+}
+
+/*
+ * Model Kit Styling
+ */
+
+.single_catagory img {
+    max-width: 100%;
+}
+
+/*
+ * Input Styling
+ */
+
+.mt-10 {
+    filter: drop-shadow(-4px 4px 4px gray);
+}
+
+::-webkit-input-placeholder {
+    color: black;
+}
+
+::-moz-placeholder {
+    color: black;
+}
+
+::-ms-input-placeholder {
+    color: black;
+}
+
+:-moz-placeholder {
+    color: black;
+}
+
+/*
+ * News Section
+ */
+
+ .popular_catagory_area .single_catagory:hover {
+    border-color: #7cc8ff;
+ }
+
+/*
+ * Team Page Tweeks
+ */
+
+.team_social li a i {
+    color: #005999 !important;
+}
+
+.footer-rst {
+    background-color: rgba(255,255,255,0);
+}
+
+/*
+ * Footer Styling
+ */
+.socail_links ul li a i {
+    color: white;
+}
+
+.socail_links ul li a {
+    border-color: white !important;
+}
+
+.footer_widget ul li a{
+    color: white !important;
+}
+
+.footer_widget ul li a:hover{
+    color: #7cc8ff !important;
+}
+
+.footer_widget p {
+    color: white !important;
+}
+
+#amznCharityBanner {
+    display: flex !important;
+    justify-content: center !important;
+    padding-bottom: 20px !important;
+}
