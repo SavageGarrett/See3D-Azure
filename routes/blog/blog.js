@@ -36,16 +36,18 @@ class Blog_Post {
         
             var dbo = db.db("blog")
             dbo.collection("blog").insertOne(this, (err, result) => {
-                if (err) throw err;
+                if (err) {
+                    console.log ("Error Inserting Blog")
+                } else {
+                    // Save image as objectid name
+                    fs.renameSync(image.image_input.path, path.join(__dirname, `../../public/new_site/img/blog_posts/${result.insertedId}.jpg`), (err) => {
+                        if (err) console.log("Error Saving Image")
+                    })
+                    
+                    res.redirect(`/blog.html?id=${result.insertedId}`)
 
-                // Save image as objectid name
-                fs.renameSync(image.image_input.path, path.join(__dirname, `../../public/new_site/img/blog_posts/${result.insertedId}.jpg`), (err) => {
-                    if (err) throw err
-                })
-                
-                res.redirect(`/blog.html?id=${result.insertedId}`)
-
-                db.close();
+                    db.close();
+                }
             });
         });
     }

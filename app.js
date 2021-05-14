@@ -3,10 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var slackRouter = require('./routes/slack_routes')
 var indexRouter = require('./routes/index');
-var webRouter = require('./routes/web_routes');
 require('dotenv').config()
 
 var app = express();
@@ -41,6 +38,7 @@ app.use('/', indexRouter);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
+  res.render('error')
 });
 
 // error handler

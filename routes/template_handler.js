@@ -176,49 +176,52 @@ let template_handler = {
     "blog": (res, query) => {
         MongoClient.connect(url, (err, db) => {
             {useUnifiedTopology: true}
-            if (err) throw err;
-        
-            var dbo = db.db("blog")
-            dbo.collection("blog").find({}).sort({date: -1}).toArray((err, result) => {
-                if (err) throw err;
-                
-                let display = [], single = false;
+            if (err) {
+                console.log("Error Connecting to Database");
+                res.redirect('/404')
+            } else {
+                var dbo = db.db("blog")
+                dbo.collection("blog").find({}).sort({date: -1}).toArray((err, result) => {
+                    if (err) console.log("Error Fetching Blog Posts from Database"); next();
+                    
+                    let display = [], single = false;
 
-                // Loop through all results from db
-                for (let i = 0; i < result.length; i++) {
-                    // Set proper month name to display
-                    console.log(result[i].date)
-                    var x = new Date(result[i].date)
-                    console.log(x)
-                    result[i].month = month[x.getMonth()].slice(0,3)
-                    console.log(result[i].month)
+                    // Loop through all results from db
+                    for (let i = 0; i < result.length; i++) {
+                        // Set proper month name to display
+                        console.log(result[i].date)
+                        var x = new Date(result[i].date)
+                        console.log(x)
+                        result[i].month = month[x.getMonth()].slice(0,3)
+                        console.log(result[i].month)
 
-                    // Look for articles to include from search query
-                    if (query.hasOwnProperty('search') && (result[i].title.toLowerCase().includes(query.search.toLowerCase() || result[i].paragraph.toLowerCase().includes(query.search.toLowerCase()) || result[i].article_description.toLowerCase().includes(query.search.toLowerCase())))) {
-                        display.push(result[i]);
-                    } else if (query.hasOwnProperty('category') && result[i].toLowerCase()().includes(query.category.toLowerCase()())) {
-                        // Look for category in comma separated list of categories if queried (2nd priority)
-                        display.push(result[i]);
-                    } else if (query.hasOwnProperty('id') && result[i]._id == query.id) {
-                        display.push(result[i]);
-                        single = true;
-                    } else if (!query.hasOwnProperty('search') && !query.hasOwnProperty('category') && !query.hasOwnProperty('id')) {
-                        display.push(result[i])
+                        // Look for articles to include from search query
+                        if (query.hasOwnProperty('search') && (result[i].title.toLowerCase().includes(query.search.toLowerCase() || result[i].paragraph.toLowerCase().includes(query.search.toLowerCase()) || result[i].article_description.toLowerCase().includes(query.search.toLowerCase())))) {
+                            display.push(result[i]);
+                        } else if (query.hasOwnProperty('category') && result[i].toLowerCase()().includes(query.category.toLowerCase()())) {
+                            // Look for category in comma separated list of categories if queried (2nd priority)
+                            display.push(result[i]);
+                        } else if (query.hasOwnProperty('id') && result[i]._id == query.id) {
+                            display.push(result[i]);
+                            single = true;
+                        } else if (!query.hasOwnProperty('search') && !query.hasOwnProperty('category') && !query.hasOwnProperty('id')) {
+                            display.push(result[i])
+                        }
                     }
-                }
 
-                // If Single Blog Page
-                if (single && (!query.hasOwnProperty('search') && !query.hasOwnProperty('category'))) {
-                    // Send Individual post result and the fake tags injected in the text
-                    result = display;
-                    res.render('blog-single', {result})
-                } else { // Blog Page
-                    result = display;
-                    res.render('blog', {result})
-                }
+                    // If Single Blog Page
+                    if (single && (!query.hasOwnProperty('search') && !query.hasOwnProperty('category'))) {
+                        // Send Individual post result and the fake tags injected in the text
+                        result = display;
+                        res.render('blog-single', {result})
+                    } else { // Blog Page
+                        result = display;
+                        res.render('blog', {result})
+                    }
 
-                db.close();
-            });
+                    db.close();
+                });
+            }
         });
     }
 }
