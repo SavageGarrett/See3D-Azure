@@ -44,20 +44,8 @@
   color: #001D38 !important;
 }
 
-.text-link {
-  color: #007bff;
-}
-
-.text-link:hover {
-  color: #7A838B;
-}
-
 .button-offset {
   padding-right: 100px;
-}
-
-.bg-fix:hover {
-  color: #005999 !important;
 }
 
 /*
@@ -201,8 +189,12 @@ a:hover,
 
 a,
 button {
-  color: #1F1F1F;
+  color: #007bff;
   outline: medium none;
+}
+a:hover,
+button:hover {
+  color: #0056b3;
 }
 
 h1, h2, h3, h4, h5 {
@@ -530,11 +522,43 @@ h3 {
   cursor: pointer;
 }
 .boxed-btn3:hover {
-  color: #fff !important;
+  color: #005999 !important;
   border: 1px solid #005999;
   background: transparent;
 }
 .boxed-btn3:focus {
+  outline: none;
+}
+
+.boxed-btn3-dark-bg {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
+  background: #005999;
+  color: #fff;
+  display: inline-block;
+  padding: 13px 29px 13px 29px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  border: 0;
+  border: 1px solid transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  color: #fff !important;
+  text-transform: capitalize;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.boxed-btn3-dark-bg:hover {
+  color: #fff !important;
+  border: 1px solid #fff;
+  background: transparent;
+}
+.boxed-btn3-dark-bg:focus {
   outline: none;
 }
 
@@ -1074,7 +1098,7 @@ h3 {
 }
 @media (min-width: 1200px) and (max-width: 1500px) {
   .header-area .main-header-area .main-menu ul li a {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 .header-area .main-header-area .main-menu ul li a i {
@@ -2356,7 +2380,7 @@ h3 {
   margin-right: 10px;
 }
 .popular_catagory_area .single_catagory:hover {
-  border-color: #B2F2D0;
+  border-color: #7cc8ff;
 }
 .popular_catagory_area .single_catagory:hover h4 {
   color: #7cc8ff;
@@ -3480,7 +3504,7 @@ h3 {
   color: #2a2a2a;
 }
 .contact-info .media-body h3 a:hover {
-  color: #ff5e13;
+  color: #007bff;
 }
 .contact-info .media-body p {
   color: #8a8a8a;
@@ -3578,7 +3602,7 @@ h3 {
   margin-top: 0;
 }
 .contact-section .btn_2:hover {
-  background-color: #ff5e13;
+  background-color: #007bff;
 }
 
 .sample-text-area {
@@ -3596,7 +3620,7 @@ sup,
 sub,
 u,
 del {
-  color: #ff5e13;
+  color: #007bff;
 }
 
 h1 {
@@ -3725,22 +3749,22 @@ h6 {
 }
 .genric-btn.primary {
   color: #fff;
-  background: #ff5e13;
+  background: #007bff;
   border: 1px solid transparent;
 }
 .genric-btn.primary:hover {
-  color: #ff5e13;
-  border: 1px solid #ff5e13;
+  color: #007bff;
+  border: 1px solid #007bff;
   background: #fff;
 }
 .genric-btn.primary-border {
-  color: #ff5e13;
-  border: 1px solid #ff5e13;
+  color: #007bff;
+  border: 1px solid #007bff;
   background: #fff;
 }
 .genric-btn.primary-border:hover {
   color: #fff;
-  background: #ff5e13;
+  background: #007bff;
   border: 1px solid transparent;
 }
 .genric-btn.success {
@@ -3855,7 +3879,7 @@ h6 {
 .generic-blockquote {
   padding: 30px 50px 30px 30px;
   background: #f9f9ff;
-  border-left: 2px solid #ff5e13;
+  border-left: 2px solid #007bff;
 }
 
 .progress-table-wrap {
@@ -3965,7 +3989,7 @@ h6 {
   position: absolute;
   width: 14px;
   height: 14px;
-  border: 3px solid #ff5e13;
+  border: 3px solid #007bff;
   background: #fff;
   top: 4px;
   left: 0;
@@ -3977,7 +4001,7 @@ h6 {
 }
 .ordered-list li {
   list-style-type: decimal-leading-zero;
-  color: #ff5e13;
+  color: #007bff;
   font-weight: 500;
   line-height: 1.82em !important;
 }
@@ -3989,7 +4013,7 @@ h6 {
 .ordered-list-alpha li {
   margin-left: 30px;
   list-style-type: lower-alpha;
-  color: #ff5e13;
+  color: #007bff;
   font-weight: 500;
   line-height: 1.82em !important;
 }
@@ -4001,7 +4025,7 @@ h6 {
 .ordered-list-roman li {
   margin-left: 30px;
   list-style-type: lower-roman;
-  color: #ff5e13;
+  color: #007bff;
   font-weight: 500;
   line-height: 1.82em !important;
 }
@@ -4066,7 +4090,7 @@ h6 {
 }
 .single-input-primary:focus {
   outline: none;
-  border: 1px solid #ff5e13;
+  border: 1px solid #007bff;
 }
 
 .single-input-accent {
@@ -4123,7 +4147,7 @@ h6 {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: #ff5e13;
+  background: #007bff;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
@@ -4199,7 +4223,7 @@ h6 {
   left: 19px;
 }
 .primary-switch input:checked + label:before {
-  background: #ff5e13;
+  background: #007bff;
 }
 
 .confirm-switch {
@@ -4518,11 +4542,11 @@ h6 {
   padding-left: 20px;
 }
 .default-select .nice-select .list .option.selected {
-  color: #ff5e13;
+  color: #007bff;
   background: transparent;
 }
 .default-select .nice-select .list .option:hover {
-  color: #ff5e13;
+  color: #007bff;
   background: transparent;
 }
 .default-select .current {
@@ -4566,11 +4590,11 @@ h6 {
   padding-left: 45px;
 }
 .form-select .nice-select .list .option.selected {
-  color: #ff5e13;
+  color: #007bff;
   background: transparent;
 }
 .form-select .nice-select .list .option:hover {
-  color: #ff5e13;
+  color: #007bff;
   background: transparent;
 }
 .form-select .current {

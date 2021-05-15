@@ -23,7 +23,35 @@
 }
 .boxed-btn3 {
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
-    background: #005999;
+    background: $darkblue_button;
+	color: #fff;
+	display: inline-block;
+	padding: 13px 29px 13px 29px;
+	font-family: $font2;
+	font-size: 16px;
+    font-weight: 500;
+    border: 0;
+    border: 1px solid transparent;
+    @include border-radius(5px);
+    // width: 180px;
+    text-align: center;
+    color: #fff !important;
+    text-transform: capitalize;
+    @include transition(.3s);
+    cursor: pointer;
+    // letter-spacing: 2px;
+    &:hover{
+        color: $darkblue_button !important;
+        border: 1px solid $darkblue_button;
+        background:  transparent  ;
+    }
+    &:focus{
+        outline: none;
+    }
+}
+.boxed-btn3-dark-bg {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
+    background: $darkblue_button;
 	color: #fff;
 	display: inline-block;
 	padding: 13px 29px 13px 29px;
@@ -42,13 +70,14 @@
     // letter-spacing: 2px;
     &:hover{
         color: #fff !important;
-        border: 1px solid #005999;
+        border: 1px solid #fff;
         background:  transparent  ;
     }
     &:focus{
         outline: none;
     }
 }
+
 .boxed-btn4 {
 	display: inline-block;
 	padding: 11px 29px 13px 29px;

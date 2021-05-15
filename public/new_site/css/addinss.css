@@ -1,7 +1,6 @@
-/*
-    Custom CSS Addins for See3D
-    Created 06/03/2020
-*/
+/* Custom See3D Addins */
+
+
 .a{
     color: #001d38;
 }
@@ -39,14 +38,6 @@
 .fix-font-20 {
     font-size: 20px !important;
     color: #001D38 !important;
-}
-
-.text-link {
-    color: #007bff;
-}
-
-.text-link:hover {
-    color: #7A838B;
 }
 
 .button-offset {

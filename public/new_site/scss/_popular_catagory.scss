@@ -35,10 +35,10 @@
         }
         &:hover{
             h4{
-                color: $green_color;
+                color: $lightblue_color;
                 text-decoration: underline;
             }
-            border-color: #B2F2D0;
+            border-color: $lightblue_color;
         }
     }
 }
