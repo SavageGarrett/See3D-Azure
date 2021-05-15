@@ -500,7 +500,7 @@ h3 {
 
 .boxed-btn3 {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
-  background: #005999;
+  background: #02406d;
   color: #fff;
   display: inline-block;
   padding: 13px 29px 13px 29px;
@@ -522,8 +522,8 @@ h3 {
   cursor: pointer;
 }
 .boxed-btn3:hover {
-  color: #005999 !important;
-  border: 1px solid #005999;
+  color: #02406d !important;
+  border: 1px solid #02406d;
   background: transparent;
 }
 .boxed-btn3:focus {
@@ -532,7 +532,7 @@ h3 {
 
 .boxed-btn3-dark-bg {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#F91842+0,fd8e5e+100 */
-  background: #005999;
+  background: #02406d;
   color: #fff;
   display: inline-block;
   padding: 13px 29px 13px 29px;

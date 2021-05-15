@@ -1,0 +1,6 @@
+{
+    "ext": "js,json,pug,scss",
+    "events": {
+        "restart": "sh compile-sass.sh"
+    }
+}
