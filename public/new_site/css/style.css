@@ -125,6 +125,10 @@
   padding-bottom: 20px !important;
 }
 
+.slider_btn a:hover {
+  color: white !important;
+}
+
 .flex-center-start {
   display: -webkit-box;
   display: -ms-flexbox;

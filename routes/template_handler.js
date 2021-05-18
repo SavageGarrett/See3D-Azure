@@ -182,7 +182,10 @@ let template_handler = {
             } else {
                 var dbo = db.db("blog")
                 dbo.collection("blog").find({}).sort({date: -1}).toArray((err, result) => {
-                    if (err) console.log("Error Fetching Blog Posts from Database"); next();
+                    if (err) {
+                        console.log("Error Fetching Blog Posts from Database"); 
+                        res.redirect('/404');
+                    } 
                     
                     let display = [], single = false;
 
