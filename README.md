@@ -15,7 +15,7 @@ Defines environment variables for the express server to run on.
 The dev runner uses nodemon's autoreload feature to detect file changes
 `npm run dev`
 
-## Leaving the Server on for Someone to Check
+## Leaving the Server on for an extended period of time
 pm2 is used for leaving the server on for an extended period of time, because it allows for running multiple node instances at once. 
 pm2 runs headless, so when you leave the logs the server will stay running.
 pm2 instances stop when given a command
