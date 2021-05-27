@@ -62,11 +62,22 @@ section.blog_area.section-padding
             form(action='#')
               .form-group
                 .input-group.mb-3
-                  input.form-control(aria-label='Search Within Blog Posts', id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'")
+                  //- Define Blog Search Button and Input
+                  //- Key presses route to the blog page ?search= query
+                  script.
+                    function handleKeyPress(event) {
+                      if (event.keyCode == 13) {
+                        parent.location=`blog.html?search=${document.getElementById('search_field').value}`
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    }
+                  input.form-control(aria-label='Search text in Blog Posts', id='search_field', type='text', placeholder='Search Keyword', onfocus="this.placeholder = ''", onblur="this.placeholder = 'Search Keyword'", onkeypress='return handleKeyPress(event)')
                   .input-group-append
-                    button.btn(aria-label='Submit Search', type='button', onClick='parent.location=`blog.html?search=${document.getElementById(\'search_field\').value}`')
+                    button.btn(aria-label='Search Blog Posts', type='button', onClick='parent.location=`blog.html?search=${document.getElementById(\'search_field\').value}`')
                       i.ti-search
-              button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='submit', onClick='parent.location=`blog.html?search=${document.getElementById(\'search_field\').value}`') Search
+              button.button.rounded-0.primary-bg.text-white.w-100.btn_1.boxed-btn(type='button', onClick='parent.location=`blog.html?search=${document.getElementById(\'search_field\').value}`') Search
           //
             <aside class="single_sidebar_widget post_category_widget">
             <h4 class="widget_title">Category</h4>

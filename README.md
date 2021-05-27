@@ -14,3 +14,23 @@ Defines environment variables for the express server to run on.
 ### Running the Server
 The dev runner uses nodemon's autoreload feature to detect file changes
 `npm run dev`
+
+## Leaving the Server on for Someone to Check
+pm2 is used for leaving the server on for an extended period of time, because it allows for running multiple node instances at once. 
+pm2 runs headless, so when you leave the logs the server will stay running.
+pm2 instances stop when given a command
+pm2 is preinstalled on the see3d servers
+
+### Starting the Server
+Run the server headlessly
+`pm2 start bin/www`
+
+### Watch Running Logs
+View logs of all node code running on pm2
+`pm2 logs`
+
+### Stopping the Server
+`pm2 stop bin/www`
+
+### View Running node Instances
+`pm2 status`
