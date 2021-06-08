@@ -1026,7 +1026,7 @@ h3 {
 
 #amznCharityBanner {
   display: flex !important;
-  justify-content: center !important;
+  justify-content: left !important;
   padding-bottom: 20px !important;
 }
 
