@@ -34,6 +34,7 @@ $medium_device : 'only screen and (min-width: 992px) and (max-width: 1200px)';
 $tab_device:'only screen and (min-width: 768px) and (max-width: 991px)';
 $large_mobile: 'only screen and (min-width: 576px) and (max-width: 767px)';
 $tab:'(max-width: 991px)';
+$not_tab:'(min-width: 992px)';
 $small_mobile:'(max-width: 576px)';
 $xs_mobile:'(max-width: 420px)';
 $sm_mobile:'only screen and (min-width: 421px) and (max-width: 575px)';

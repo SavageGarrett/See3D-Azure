@@ -266,16 +266,10 @@
 
 // Hide request a model button in nav bar when not mobile
 .mobile-only-nav {
-    @media #{$mobile_device} {
+    @media #{$tab} {
         display: block !important;
     }
-    @media #{$tablet_device} {
-        display: block !important;
-    }
-    @media #{$mid_device} {
-        display: none !important;
-    }
-    @media #{$large_device} {
+    @media #{$not_tab} {
         display: none !important;
     }
 }

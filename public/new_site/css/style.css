@@ -1034,22 +1034,12 @@ h3 {
   color: white !important;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .mobile-only-nav {
     display: block !important;
   }
 }
-@media (min-width: 768px) and (max-width: 991px) {
-  .mobile-only-nav {
-    display: block !important;
-  }
-}
-@media (min-width: 992px) and (max-width: 1200px) {
-  .mobile-only-nav {
-    display: none !important;
-  }
-}
-@media (min-width: 1200px) and (max-width: 1500px) {
+@media (min-width: 992px) {
   .mobile-only-nav {
     display: none !important;
   }
