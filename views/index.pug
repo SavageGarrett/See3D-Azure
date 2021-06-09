@@ -34,7 +34,7 @@ include ./mixins.pug
           li.fix-font-20
             | Distributed over 1,400 models since 2017
           li.fix-font-20
-            | Models sent to 21 states, 9 countries, and 12 organizations
+            | Models sent to 23 states, 9 countries, and 23 organizations
           li.fix-font-20
             | Connections made in 18 countries
           li.fix-font-20
@@ -135,7 +135,7 @@ include ./mixins.pug
         .single_catagory
           a(href='/index?model_kit=united-states-kit')
             h4 United States Kit
-          img(src='img/thingiverse/united-states-kit.jpg', alt='State of Liberty 3D Model')
+          img(src='img/thingiverse/United-States-Kit.jpg', alt='United States 3D Model')
           // <p> <span>50</span> Available position</p>
       .col-lg-4.col-xl-3.col-md-6
         .single_catagory
@@ -534,105 +534,86 @@ include ./mixins.pug
 // articles_end
 
 // collaborations_start
-.fix-bottom.popular_catagory_area
+.testimonial_area
   .container
     .row
       .col-lg-12
-        .section_title.mb-40
-          h3 Collaborations Through The Years
-  .container
-    .row
-      .col-lg-10
-        p.fix-font-20
-          a(href='https://clovernook.org/')
-            h3 Clovernook Center for the Blind & Visually Impaired2
-      .w-50
-    .row 
-      .col-lg-10
-        p.fix-font-20
-          | Printed models for competitors in the Ohio Regional Braille Challenge (2018, 2019, 2020) hosted at Clovernook. We also donated models to 
-          a.text-link(href='https://www.youtube.com/watch?v=68IgAdVzkys') Empower Blind People 
-          | in Bishkek, Kyrgyzstan, 
-          a.text-link(href='https://www.facebook.com/PacelliAlumniNetwork/') Pacelli School for the Blind and Partially Sighted Children
-          | , Nigeria, 
-          a.text-link(href='https://tlecrehab.com/') TLEC Rehab Center for the Blind
-          | , Nigeria, St. Joseph's School for the Blind, Nigeria, Special School for the Blind in Abakalikki, Nigeria, and Mandokota School for the Blind, Malawi, by Clovernook’s collaborations.
-      .w-100
-  .container
-    .row
-      .col-lg-10
-        p.fix-font-20
-          a(href='https://ossb.ohio.gov/wps/portal/gov/ossb/')
-            h3 Ohio State School for the Blind (OSSB)
-      .w-50
-    .row 
-      .col-lg-10
-        p.fix-font-20
-          | Lead the Model Club (2018-present) where students print and design models of choice and models requested by their teachers. We also printed models for the 2020 OSSB Astronomy Summer camp. 
-      .w-100
-  .container
-    .row
-      .col-lg-10
-        p.fix-font-20
-          a(href='https://www.newportaquarium.com/')
-            h3 Newport Aquarium and 
-          a(href='https://www.cincyblind.org/')
-            h3 The Cincinnati Association for the Blind & Visually Impaired (CABVI)
-      .w-50
-    .row 
-      .col-lg-10
-        p.fix-font-20
-          | Newport: Created models of sea animals for the 2019 
-          a.text-link(href='https://www.cincyblind.org/press-release/cabvis-all-accessible-night-at-newport-aquarium/') All-Accessible Night at Newport Aquarium. 
-          | CABVI: Designed and printed their new logo so everyone could see the new design during the logo premier at their 2019 Annual Meeting. 
-      .w-100
-  .container
-    .row
-      .col-lg-10
-        p.fix-font-20
-          a(href='https://nfbohio.org/')
-            h3 The National Federation of the Blind of Ohio
-      .w-50
-    .row 
-      .col-lg-10
-        p.fix-font-20
-          | Created shark and astronomy models for the 
-          a.text-link(href='https://www.nfb.org/programs-services/nfb-bell-academy') Braille Enrichment for Literacy and Learning Academy 
-          | (2019 NFB BELL Academy) and the 2019 state convention.
-      .w-100
-  .container
-    .row
-      .col-lg-10
-        p.fix-font-20
-          a(href='https://www.htw-berlin.de/')
-            h3 Hochschule für Technik und Wirtschaft (HTW) Berlin (HTW Berlin - University of Applied Sciences)
-      .w-50
-    .row 
-      .col-lg-10
-        p.fix-font-20
-          | Collaborated with design students to design models related to COVID-19, floor plans, and astronomy. 
-      .w-100
-  .container
-    .row
-      .col-lg-10
-        p.fix-font-20
-          a(href='https://www.sciaccess.org/')
-            h3 SciAccess
-      .w-50
-    .row 
-      .col-lg-10
-        p.fix-font-20
-          | Printed astronomy models for a camp with 17 students in the United States and Australia at the 2020 virtual 
-          a.text-link(href='https://activities.osu.edu/involvement/student_organizations/find_a_student_org/?i=4df24af2-3d43-47c4-bbe8-88eba5167d4d&l=S&c=Columbus&page=1') SciAccess Zenith Space Mentorship Program.
-      .w-100
-// collaborations_end
-      
-
-
-
-
-
-
-
-
+        .section_title.text-center.mb-40
+          h3 Collaborations
+      .col-xl-12
+        .testmonial_active.owl-carousel
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/collaborations/Clovernook4.png', alt='Five cardboard boxes filled with braille magazines and a smaller empty box. Colorful models are arranged of the boxes to be packed in the empty boces.')
+                  .info.fix-font-20
+                    a(href='https://clovernook.org/') Clovernook Center for the Blind & Visually Impaired 
+                    p
+                      | Printed models for competitors in the Ohio Regional Braille Challenge (2018, 2019, 2020) hosted at Clovernook. We also donated models to 
+                      a.text-link(href='https://www.youtube.com/watch?v=68IgAdVzkys') Empower Blind People 
+                      | in Bishkek, Kyrgyzstan, 
+                      a.text-link(href='https://www.facebook.com/PacelliAlumniNetwork/') Pacelli School for the Blind and Partially Sighted Children
+                      | , Nigeria, 
+                      a.text-link(href='https://tlecrehab.com/') TLEC Rehab Center for the Blind
+                      | , Nigeria, St. Joseph's School for the Blind, Nigeria, Special School for the Blind in Abakalikki, Nigeria, and Mandokota School for the Blind, Malawi, by Clovernook’s collaborations.
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/collaborations/OSSB Taj Mahal.png', alt='Taj Mahal model from the Ohio State School for the Blind historic landmark model collection with four smaller 3D printed Taj Mahal models (dodo2000, 2015) printed by students in the OSSB Model Club. A large print and braille description written by students is also included to give historical context for the model.')
+                  .info.fix-font-20
+                    a(href='https://ossb.ohio.gov/wps/portal/gov/ossb/') Ohio State School for the Blind (OSSB)
+                    p
+                      | Lead the Model Club (2018-present) where students print and design models of choice and models requested by their teachers. We also printed models for the 2020 OSSB Astronomy Summer camp. 
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/collaborations/CAVBI and Sea Animals.png', alt='Blue sea creature models: Seahorse, fish in an anemone, frog, whale, shark, and toad, next to the CABVI logo: A blue square with the letters CA and the dot of an i on the top row next to them and the letters BV in the bottom row with the rest of the i next to them')
+                  .info.fix-font-20
+                    a(href='https://www.newportaquarium.com/') Newport Aquarium 
+                    | and 
+                    a(href='https://www.cincyblind.org/') The Cincinnati Association for the Blind & Visually Impaired (CABVI)
+                    p
+                      | Newport: Created models of sea animals for the 2019 
+                      a.text-link(href='https://www.cincyblind.org/press-release/cabvis-all-accessible-night-at-newport-aquarium/') All-Accessible Night at Newport Aquarium. </br>
+                      | CABVI: Designed and printed their new logo so everyone could see the new design during the logo premier at their 2019 Annual Meeting. 
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/collaborations/DNA2.png', alt='Green DNA Helix')
+                  .info.fix-font-20
+                    a(href='https://nfbohio.org/') The National Federation of the Blind of Ohio
+                    p
+                      | Created shark and astronomy models for the 
+                      a.text-link(href='https://www.nfb.org/programs-services/nfb-bell-academy') Braille Enrichment for Literacy and Learning Academy 
+                      | (2019 NFB BELL Academy) and the 2019 state convention.
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/collaborations/Braille Labeled Pegs.png', alt='Bar graph model showing 4 pegs with notches inside a box with 4 holes, so the pegs can be placed inside. The amount poking out of the box is the value displayed. The holes are circular shaped with a small rectangle notch at the top. There is a removable braille label stick that can slide into a slot on the top of the box so you can make you own labels for the cylinders.')
+                  .info.fix-font-20
+                    a(href='https://www.htw-berlin.de/') Hochschule für Technik und Wirtschaft (HTW) Berlin (HTW Berlin - University of Applied Sciences)
+                    p
+                      | Collaborated with design students to design models related to COVID-19, floor plans, and astronomy. 
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/collaborations/Astronomy2.png', alt='Two orbs in pink and yellow filament with various constellations embedded on them, along with a moon crater printed in white filament')
+                  .info.fix-font-20
+                    a(href='https://www.sciaccess.org/') SciAccess
+                    p
+                      | Printed astronomy models for a camp with 17 students in the United States and Australia at the 2020 virtual 
+                      a.text-link(href='https://activities.osu.edu/involvement/student_organizations/find_a_student_org/?i=4df24af2-3d43-47c4-bbe8-88eba5167d4d&l=S&c=Columbus&page=1') SciAccess Zenith Space Mentorship Program.
+// collaborations_end                  
 +footer()
