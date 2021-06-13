@@ -1045,6 +1045,18 @@ h3 {
   }
 }
 
+/* 
+    Nav Display on Every Page
+ */
+.slicknav_nav {
+  position: fixed !important;
+  top: 80px !important;
+}
+
+.header-area .main-header-area.sticky {
+  overflow: unset !important;
+}
+
 .header-area {
   left: 0;
   right: 0;

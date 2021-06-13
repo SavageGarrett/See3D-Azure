@@ -273,3 +273,15 @@
         display: none !important;
     }
 }
+
+/* 
+    Nav Display on Every Page
+ */
+.slicknav_nav {
+    position: fixed !important;
+    top: 80px !important;
+}
+
+.header-area .main-header-area.sticky {
+    overflow: unset !important;
+}
