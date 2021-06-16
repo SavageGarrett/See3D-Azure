@@ -12,46 +12,12 @@ include ./mixins.pug
     .row
       .col-lg-12
         .section_title.mb-40
-          h3 3D Printing
+          h3 Volunteer
     .row
       .col-lg-10
         p.fix-font-20
-          | Do you love 3D printing, but don't know what to make? Have excess filament? Want to intrigue students to design a model with a need? Ask us for suggestions!
-      .w-100
-      .col-lg-10
-        p.fix-font-20 You can help by
-      .w-100
-      .col-lg-10
-        ul.unordered-list(style='padding-bottom: 50px;')
-          li
-            | Printing multiple copies of common model requests (maps, famous landmarks, animals, and STEM concepts)
-          li Designing new models that do not have an STL file available online
-          li
-            | Donating 3D prints that are no longer being used (including previous model requests from See3D)
-    .row
-      .col-lg-12
-        .section_title.mb-40
-          h3 Braille
-    .row
-      .col-lg-10
-        p.fix-font-20
-          | Our models frequently include braille labels and descriptions, so people who are blind can explore and understand their model independently.
-      .w-100
-      .col-lg-10
-        p.fix-font-20 We can use your help to transcribe and/or emboss
-      .w-100
-      .col-lg-10
-        ul.unordered-list(style='padding-bottom: 13px;')
-          li We can use your help to transcribe and/or emboss
-          li Address labels
-          li Model labels
-      .w-100
-      .col-lg-10
-        p.fix-font-20
-          | We use Unified English Braille (UEB) for recipients requesting braille in English. We are looking to partner with people who are able to write braille in other languages, so we can reach a larger population.
-      .w-100
-      br
-      .col-lg-10
+          | See3D is a network of people who are enthusiastic about making the world more accessible for blind people with 3D printing. We collaborate on Slack to design, print, and distribute models that have been requested. 
+          | We also write descriptions of models and transcribe information into braille. Models printed by volunteers are sent to See3D in Ohio, and See3D distributes the models to the recipient
         p.fix-font-20
           | To volunteer with us,  
           a.text-link(href='https://forms.gle/ZXzzUMt3e3FLeDXW7') sign up to join our slack page
@@ -61,19 +27,76 @@ include ./mixins.pug
           a.text-link(href='https://docs.google.com/forms/d/1r1_kwl_5vQMl0bhuUKdiNFsWzfPj9qKaMsuYGpQERaQ/edit#responses') volunteer permission form
           | .
         p.fix-font-20
-          | If you are blind or visually impaired, we have provided some useful links for using slack.
-          br
-          a.text-link(href='https://slack.com/help/articles/360000411963-Use-a-screen-reader-with-Slack-on-desktop') Using Slack with a Screen Reader
-          br
-          a.text-link(href='https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts') Slack Keyboard Shortcuts
-        br
+          | If you are blind or visually impaired, we have provided some useful links for using Slack:
+          ul.unordered-list(style='padding-bottom: 1px;')
+            li
+              a.text-link(href='https://slack.com/help/articles/360000411963-Use-a-screen-reader-with-Slack-on-desktop') Using Slack with a Screen Reader
+            li
+              a.text-link(href='https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts') Slack Keyboard Shortcuts
         p.fix-font-20
           | To stay updated with what we are doing,  
           a.text-link(href='https://docs.google.com/forms/d/e/1FAIpQLSdII32MwHKMRojaJ5_U8DUQTai1ykE1erx8-maZvYW5Y9jjEg/viewform?usp=sf_link') join our E-Mail list
           | .
-    .row.justify-content-end
-      .button-offset.d-lg-block
-        a.boxed-btn3.bg-fix(href='index.html') Go Back
+    br
+    .row
+      .col-lg-12
+        .section_title.mb-40
+          h3 3D Printing
+    .row
+      .col-lg-10
+        p.fix-font-20
+          | Do you love 3D printing, but don't know what to make? Have excess filament? Want to intrigue students to design a model with a need? Ask us for suggestions!
+        .w-100
+      .col-lg-10
+        p.fix-font-20 Currently people who print models are only in the United States, but we have many international volunteers who design models. We hope to connect international volunteers with people outside the US who request models to decrease wait time from shipping. 
+      .w-100
+      .col-lg-10
+        p.fix-font-20 You can help by:
+      .w-100
+      .col-lg-10
+        ul.unordered-list(style='padding-bottom: 50px;')
+          li
+            | Printing multiple copies of common model requests (maps, famous landmarks, animals, and STEM concepts)
+          li Designing new models that do not have an STL file available online
+          li
+            | Donating 3D prints that are no longer being used (including previous model requests from See3D)
+          li 
+            | Editing existing STL files to make them more usable
+    .row
+      .col-lg-12
+        .section_title.mb-40
+          h3 Braille
+    .row
+      .col-lg-10
+        p.fix-font-20
+          | Our models frequently include braille labels and descriptions, so braille readers can explore and understand their model independently.
+      .w-100
+      .col-lg-10
+        p.fix-font-20 We can use your help to transcribe and/or emboss
+      .w-100
+      .col-lg-10
+        ul.unordered-list(style='padding-bottom: 13px;')
+          li Address Labels
+          li Model Labels (help model designers add accurate braille to their models)
+          li Model Descriptions
+      .w-100
+      .col-lg-10
+        p.fix-font-20
+          | We use Unified English Braille (UEB) for recipients requesting braille in English. We are looking to partner with people who are able to write braille in other languages, so we can reach a larger population.
+    .w-100
+    .row
+      .col-lg-12
+        .section_title.mb-40
+          h3 Additional Volunteer Opportunities
+      .row
+      .col-lg-10
+        ul.unordered-list(style='padding-bottom: 13px;')
+          li Write Descriptions / Guided Walkthroughs of Models 
+          li Clean and Package Models for Shipping (Cincinnati and Columbus OH)
+    
+  .row.justify-content-end
+    .button-offset.d-lg-block
+      a.boxed-btn3.bg-fix(href='index.html') Go Back
 // about_end
 
 +footer()
