@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "sh compile-sass.sh && nodemon bin/www"
+    "dev": "sh compile-sass.sh && nodemon bin/www",
+    "install": "npm ci"
   },
   "dependencies": {
     "axios": ">=0.21.1",
