@@ -1,11 +1,10 @@
 {
-  "name": "slackintegration",
+  "name": "express-server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "sh compile-sass.sh && nodemon bin/www",
-    "install": "npm ci"
+    "dev": "sh compile-sass.sh && nodemon bin/www"
   },
   "dependencies": {
     "axios": ">=0.21.1",

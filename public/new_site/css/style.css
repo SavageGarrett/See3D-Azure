@@ -1057,6 +1057,17 @@ h3 {
   overflow: unset !important;
 }
 
+/*
+    High Res White Logo Spacing
+*/
+.logo a img {
+  width: 120px !important;
+}
+
+.footer_logo a img {
+  width: 120px !important;
+}
+
 .header-area {
   left: 0;
   right: 0;
