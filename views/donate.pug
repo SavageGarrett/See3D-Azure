@@ -5,83 +5,149 @@ include ./mixins.pug
 +header("See3D - Donate", "Donate")
 
 // about_start
-.popular_catagory_area(style='padding-bottom: 0px;')
+.popular_catagory_area
   .container
     .row
       .col-lg-12
         .section_title.mb-40
-          h3 Donate to See3D
+          h3 Financially
     .row
-      p.fix-font-20
-        | Donations allow us to keep providing 3D models at no price to people who are blind. An average model costs about $5 to print, depending on the size. Click below to donate today!
+      .col-lg-10
+        p.fix-font-20
+          | Donations allow us to keep providing 3D models at no price to people who are blind. An average model costs about $5 to print, depending on the size. Click below to donate today!
     .row(style='display: block; text-align: center;')
       form(style='display: inline-block; margin-left:auto; margin-right: auto; text-align: left;', action='https://www.paypal.com/cgi-bin/webscr', method='post', target='_top')
         input(type='hidden', name='cmd', value='_s-xclick')
         input(type='hidden', name='hosted_button_id', value='CFQ4MENHYXSRU')
         input(type='image', src='img/donate/donate.png', border='0', name='submit', title='PayPal - The safer, easier way to pay online!', alt='Donate with PayPal button')
         img(alt='', border='0', src='https://www.paypal.com/en_US/i/scr/pixel.gif', width='1', height='1')
+
+    br
     .row
-      p.fix-font-20 A word from some of the people we have helped:
+      .col-lg-12
+        .section_title.mb-40
+          h3 In-Kind Donations 
+    .row
+      .col-lg-12
+        ul.unordered-list(style='padding-bottom: 13px;')
+          li PLA filament in any color
+          li Braille writing equipment and clear label stickers
+          li 3D printers
+          li Tools to clean 3D prints such as foam sanding blocks, tweezers, and heat embossers
+          li Cardboard boxes and packaging materials
+          li 3D printed models
+    
+
+      
+
+
+
+
+
+    //- .row
+    //-   p.fix-font-20 A word from some of the people we have helped:
 // about_end
-// testimonial_area
-.testimonial_area(style='padding-top: 0px;')
+
+
+
+
+
+//- // testimonial_area
+//- .testimonial_area(style='padding-top: 0px;')
+//-   .container
+//-     .row
+//-       .col-xl-12
+//-         .testmonial_active.owl-carousel
+//-           .single_carousel
+//-             .row
+//-               .col-lg-11
+//-                 .single_testmonial.d-flex.align-items-center
+//-                   .thumb
+//-                     img(src='img/testimonial/karen_arcos.png', alt='Karen Arcos')
+//-                     .quote_icon
+//-                       i.Flaticon.flaticon-quote
+//-                   .info
+//-                     p
+//-                       | "I had a vague idea what a castle looked like in terms of the base. The top and towers were completely new to me; I'd always heard of towers and castles but didn't imagine the towers were a part of the castle."
+//-                     a(href='/index.html?testimony=karen_arcos') Read More...
+//-                     span - Karen Arcos
+//-           .single_carousel
+//-             .row
+//-               .col-lg-11
+//-                 .single_testmonial.d-flex.align-items-center
+//-                   .thumb
+//-                     img(src='img/testimonial/rachel_hage.png', alt='Rachel Hage')
+//-                     .quote_icon
+//-                       i.Flaticon.flaticon-quote
+//-                   .info
+//-                     p
+//-                       | "This is a great organization, and I continue to promote it to other blind/visually impaired individuals to use as a source for learning tactilely."
+//-                     a(href='?testimony=rachel_hage') Read More...
+//-                     span - Rachel Hage
+//-           .single_carousel
+//-             .row
+//-               .col-lg-11
+//-                 .single_testmonial.d-flex.align-items-center
+//-                   .thumb
+//-                     img(src='img/testimonial/michelle_quinn.png', alt='Snowflake 3D models made for michelle quinn')
+//-                     .quote_icon
+//-                       i.Flaticon.flaticon-quote
+//-                   .info
+//-                     p
+//-                       | "See3D has been a wonderful and valuable resource for my students who are blind and visually impaired. They absolutely love the tactual models of their favorite movie characters such as R2D2 from Star Wars and the Minions."
+//-                     a(href='?testimony=michelle_quinn') Read More...
+//-                     span - Michelle Quinn
+//-           .single_carousel
+//-             .row
+//-               .col-lg-11
+//-                 .single_testmonial.d-flex.align-items-center
+//-                   .thumb
+//-                     img(src='img/testimonial/winslow_parker.png', alt='Klein bottle 3d models made for winslow parker')
+//-                     .quote_icon
+//-                       i.Flaticon.flaticon-quote
+//-                   .info
+//-                     p
+//-                       | "These weird shapes are fascinating and I find myself exploring the model while my brain is busy doing its thing. Thanks Caroline, all you other volunteers and those who contribute financially to this project. Very helpful and enlightening."
+//-                     a(href='?testimony=winslow_parker') Read More...
+//-                     span - Winslow Parker
+//- // /testimonial_area
+
+
+
+//amazon-smile 
+.popular_catagory_area
   .container
     .row
-      .col-xl-12
-        .testmonial_active.owl-carousel
-          .single_carousel
-            .row
-              .col-lg-11
-                .single_testmonial.d-flex.align-items-center
-                  .thumb
-                    img(src='img/testimonial/karen_arcos.png', alt='Karen Arcos')
-                    .quote_icon
-                      i.Flaticon.flaticon-quote
-                  .info
-                    p
-                      | "I had a vague idea what a castle looked like in terms of the base. The top and towers were completely new to me; I'd always heard of towers and castles but didn't imagine the towers were a part of the castle."
-                    a(href='/index.html?testimony=karen_arcos') Read More...
-                    span - Karen Arcos
-          .single_carousel
-            .row
-              .col-lg-11
-                .single_testmonial.d-flex.align-items-center
-                  .thumb
-                    img(src='img/testimonial/rachel_hage.png', alt='Rachel Hage')
-                    .quote_icon
-                      i.Flaticon.flaticon-quote
-                  .info
-                    p
-                      | "This is a great organization, and I continue to promote it to other blind/visually impaired individuals to use as a source for learning tactilely."
-                    a(href='?testimony=rachel_hage') Read More...
-                    span - Rachel Hage
-          .single_carousel
-            .row
-              .col-lg-11
-                .single_testmonial.d-flex.align-items-center
-                  .thumb
-                    img(src='img/testimonial/michelle_quinn.png', alt='Snowflake 3D models made for michelle quinn')
-                    .quote_icon
-                      i.Flaticon.flaticon-quote
-                  .info
-                    p
-                      | "See3D has been a wonderful and valuable resource for my students who are blind and visually impaired. They absolutely love the tactual models of their favorite movie characters such as R2D2 from Star Wars and the Minions."
-                    a(href='?testimony=michelle_quinn') Read More...
-                    span - Michelle Quinn
-          .single_carousel
-            .row
-              .col-lg-11
-                .single_testmonial.d-flex.align-items-center
-                  .thumb
-                    img(src='img/testimonial/winslow_parker.png', alt='Klein bottle 3d models made for winslow parker')
-                    .quote_icon
-                      i.Flaticon.flaticon-quote
-                  .info
-                    p
-                      | "These weird shapes are fascinating and I find myself exploring the model while my brain is busy doing its thing. Thanks Caroline, all you other volunteers and those who contribute financially to this project. Very helpful and enlightening."
-                    a(href='?testimony=winslow_parker') Read More...
-                    span - Winslow Parker
-// /testimonial_area
+      .col-lg-12
+        .section_title.mb-40
+          h3 Amazon Smile 
+    .row
+      .col-lg-10
+          p.fix-font-20
+            | Select See3D, Inc as your charity on AmazonSmile so we can receive 0.5% of your total purchases! To sign up, simply visit AmazonSmile to have See3D automatically selected as your charity. You may also visit smile.amazon.com and manually select See3D Inc as your charity.
+            | Disclaimer: only purchases made at 
+            a(href = 'www.smile.amazon.com') www.smile.amazon.com, 
+            | (not amazon.com) generate AmazonSmile donations.
+          .row.justify-content-center
+          .col-lg-12
+              #amznCharityBanner
+                script(type='text/javascript').
+                  (function() {var iFrame = document.createElement('iframe'); iFrame.style.display = 'none'; iFrame.style.border = "none"; iFrame.width = 310; iFrame.height = 256; iFrame.setAttribute && iFrame.setAttribute('scrolling', 'no'); iFrame.setAttribute('frameborder', '0'); setTimeout(function() {var contents = (iFrame.contentWindow) ? iFrame.contentWindow : (iFrame.contentDocument.document) ? iFrame.contentDocument.document : iFrame.contentDocument; contents.document.open(); contents.document.write(decodeURIComponent("%3Cdiv%20id%3D%22amznCharityBannerInner%22%3E%3Ca%20href%3D%22https%3A%2F%2Fsmile.amazon.com%2Fch%2F84-3805114%22%20target%3D%22_blank%22%3E%3Cdiv%20class%3D%22text%22%20height%3D%22%22%3E%3Cdiv%20class%3D%22support-wrapper%22%3E%3Cdiv%20class%3D%22support%22%20style%3D%22font-size%3A%2025px%3B%20line-height%3A%2028px%3B%20margin-top%3A%2029px%3B%20margin-bottom%3A%2029px%3B%22%3ESupport%20%3Cspan%20id%3D%22charity-name%22%20style%3D%22display%3A%20inline-block%3B%22%3ESee3D%20Inc.%3C%2Fspan%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cp%20class%3D%22when-shop%22%3EWhen%20you%20shop%20at%20%3Cb%3Esmile.amazon.com%2C%3C%2Fb%3E%3C%2Fp%3E%3Cp%20class%3D%22donates%22%3EAmazon%20donates.%3C%2Fp%3E%3C%2Fdiv%3E%3C%2Fa%3E%3C%2Fdiv%3E%3Cstyle%3E%23amznCharityBannerInner%7Bbackground-image%3Aurl(https%3A%2F%2Fm.media-amazon.com%2Fimages%2FG%2F01%2Fx-locale%2Fpaladin%2Fcharitycentral%2Fbanner-background-image._CB485922134_.png)%3Bwidth%3A300px%3Bheight%3A250px%3Bposition%3Arelative%7D%23amznCharityBannerInner%20a%7Bdisplay%3Ablock%3Bwidth%3A100%25%3Bheight%3A100%25%3Bposition%3Arelative%3Bcolor%3A%23000%3Btext-decoration%3Anone%7D.text%7Bposition%3Aabsolute%3Btop%3A20px%3Bleft%3A15px%3Bright%3A15px%3Bbottom%3A100px%7D.support-wrapper%7Boverflow%3Ahidden%3Bmax-height%3A86px%7D.support%7Bfont-family%3AArial%2Csans%3Bfont-weight%3A700%3Bline-height%3A28px%3Bfont-size%3A25px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D.when-shop%7Bfont-family%3AArial%2Csans%3Bfont-size%3A15px%3Bfont-weight%3A400%3Bline-height%3A25px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D.donates%7Bfont-family%3AArial%2Csans%3Bfont-size%3A15px%3Bfont-weight%3A400%3Bline-height%3A21px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D%3C%2Fstyle%3E")); contents.document.close(); iFrame.style.display = 'block';}); document.getElementById('amznCharityBanner').appendChild(iFrame); })();
+          .row 
+            h3 Thank you for your support!
+
+
+
+
+
+ 
+
+
+
+      
+
+
+//end of amazon-smile 
 
 
 +footer()
