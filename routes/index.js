@@ -136,6 +136,9 @@ router.get('/:fname', (req, res, next) => {
     case "board":
       res.render('board_members');
       break;
+    case "analytics":
+      res.render('analytics');
+      break;
     default:
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
       break;
