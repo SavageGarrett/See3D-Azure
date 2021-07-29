@@ -81,6 +81,7 @@ let alt_text = {
     "See3D banner.jpg": "See3D Banner",
     "Snowman Crater.jpg": "Snowman Crater 3D Print",
     "Statue of Liberty 2.jpg": "Statue of Liberty 3D Print",
+    "Team Photo.png": "See3D Team",
     "TEDx 4.png": "Caroline TEDx Talk",
     "TEDx far 1.png": "Caroline TEDx Talk",
     "Taj Mahal.jpg": "Taj Mahal 3D Print",
