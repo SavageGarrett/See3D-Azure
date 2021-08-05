@@ -145,7 +145,7 @@ let template_handler = {
 
                     // Update Cleaned Data
                     gallery_data.push({
-                        url: `http://localhost:8090${image_url}`,
+                        url: `https://localhost:8080${image_url}`,
                         alt_text: alt_text
                     })
                 }
