@@ -129,7 +129,10 @@ let template_handler = {
                 let gallery_data = [];
                 for (let i of response.data) {
                     // Get Available formats
-                    let image_formats = i.image.formats;
+                    let image_formats = {};
+                    if (i.hasOwnProperty('image') && i.image.hasOwnProperty('formats')) {
+                        image_formats = i.image.formats;
+                    }
 
                     // Get Image Url in order of desired available format
                     let image_url = '';
@@ -139,13 +142,13 @@ let template_handler = {
                         image_url = image_formats.large.url;
                     else if (image_formats.hasOwnProperty('small'))
                         image_url = image_formats.small.url;
-                    else
+                    else if (image_formats !== {})
                         image_url = i.image.url
                     let alt_text = i.alt_text
 
                     // Update Cleaned Data
                     gallery_data.push({
-                        url: `http://localhost:8090${image_url}`,
+                        url: `http://40.76.54.72:8090${image_url}`,
                         alt_text: alt_text
                     })
                 }
