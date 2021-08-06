@@ -3,11 +3,9 @@ var path = require('path');
 var mongo = require('mongodb');
 var MongoClient = mongo.MongoClient;
 let ObjectId = require('mongodb').ObjectID;
+let api = require('./api')
 var url = "mongodb://localhost:27017/";
 var axios = require('axios');
-const {
-    resolve
-} = require('path');
 
 // Month array to reference
 var month = new Array();
@@ -24,85 +22,37 @@ month[9] = "October";
 month[10] = "November";
 month[11] = "December";
 
-// Alt text of 94 images with their respective alt text
-// let alt_text = {
-//     "Alligator 1.jpg": "Alligator 3D model",
-//     "Brainstem 1.jpg": "Brainstem with Braille",
-//     "Butterfly Chrysalis.jpg": "Butterfly Chrysalis 3D Print",
-//     "Butterfly Life Cycle.jpg": "Stages of Butterfly lifecycle 3D Print",
-//     "CABVI Logo 2.jpg": "3D Logo raised of CABVI",
-//     "COVID 2.jpg": "3D model of COVID-19",
-//     "Cassandra Castle Brighter.jpg": "Cinderella Castle 3D model",
-//     "Caterpillar Articulated 3.jpg": "Caterpillar 3D Print",
-//     "Caterpillar Half 1.jpg": "Caterpillar 3D Print",
-//     "Caterpillar Half 2.jpg": "Caterpillar 3D Print",
-//     "Chicken Footprint.jpg": "Chicken Footprint imprint 3D Print",
-//     "Chinese Dragon.jpg": "Chinese Dragon 3D Print",
-//     "Chloroplast.jpg": "Chloroplast 3D Print",
-//     "Chromosomes 4.jpg": "Chromosomes 3D Print",
-//     "Constellation Centaurus.jpg": "Constellation Centaurus 3D Print",
-//     "Constellation Dome.jpg": "Constellations on a dome",
-//     "Curiosity Rover.jpg": "Curiosity Rover 3D Print",
-//     "DDI I-44 and MO-13 #2.jpg": "Double Diamond Intersection imprint",
-//     "DNA Green.jpg": "DNA 3D Print",
-//     "DSCF1742.jpg": "Castle 3D Print",
-//     "DSCF1743.jpg": "Castle 3D Print",
-//     "DSCF1754.jpg": "Brain 3D Print",
-//     "DSCF1790.jpg": "Biology 3D Print",
-//     "DSCF1794.jpg": "Cell Imprint 3D Print",
-//     "DSCF1806.jpg": "Ohio State Stadium 3D Print",
-//     "DSCF1815.jpg": "Office floorplan 3D print ",
-//     "Dodecahedron.jpg": "Dodecahedron 3D print",
-//     "EFEA1D04-BD01-4551-A6D1-1B6E12624170.jpg": "Various Maps 3D print",
-//     "Eye Model Cropped.jpg": "Eye 3D print",
-//     "Fish in Anemone.jpg": "Fish in Anemone 3D print",
-//     "IMG_1047_Facetune_14-05-2020-12-06-21.jpg": "Train 3D Print",
-//     "IMG_1210.jpg": "Topographical USA 3D Print",
-//     "IMG_1212.jpg": "US Capitol 3D Print",
-//     "IMG_1466_Facetune_08-06-2020-18-18-52.jpg": "Galaxy 3D Print",
-//     "IMG_1469.jpg": "Moon Topography 3D Print",
-//     "JWST.jpg": "Sattelite 3D Print",
-//     "K-9 Garrett 2.jpg": "K9 Robot Dog 3D Print",
-//     "Klein Bottle Photo.jpg": "Klein Bottle 3D Print",
-//     "Lighthouse.jpg": "Lighthouse 3D Print",
-//     "MakerX Brailler.jpg": "MakerX Brailler",
-//     "MakerX Models.jpg": "MakerX 3D Models",
-//     "MakerX Table 2.jpg": "MakerX Table ",
-//     "Milky Way Side 5.jpg": "Milky Way Side 3D Print",
-//     "Mt. Vesuvius.jpg": "Mt. Vesuvius 3D Print",
-//     "Orlando International Airport.jpg": "Orlando International Airport 3D Print",
-//     "Party Models.jpg": "Party Models 3D Print",
-//     "Planets.jpg": "Planets 3D Print",
-//     "Platonic Shapes.jpg": "Platonic Shapes 3D Print",
-//     "Protein Yellow Bigger.jpg": "Protein 3D Print",
-//     "Roof 1.jpg": "Roof 3D Print",
-//     "Roof 6.jpg": "Roof 3D Print",
-//     "Rose Model Full.jpg": "Rose 3D Print",
-//     "Rose Model Top.jpg": "Rose 3D Print",
-//     "Rose.jpg": "Rose 3D Print",
-//     "Rosen Shingle Creek Hotel big site of 2018 Convention.jpg": "Rosen Shingle Creek Hotel 3D Print",
-//     "Sea Creatures Blue Seahorse Fish Frog Whaleshark Toad.jpg": "Sea Creature 3D Prints",
-//     "See3D banner.jpg": "See3D Banner",
-//     "Snowman Crater.jpg": "Snowman Crater 3D Print",
-//     "Statue of Liberty 2.jpg": "Statue of Liberty 3D Print",
-//     "Team Photo.png": "See3D Team",
-//     "TEDx 4.png": "Caroline TEDx Talk",
-//     "TEDx far 1.png": "Caroline TEDx Talk",
-//     "Taj Mahal.jpg": "Taj Mahal 3D Print",
-//     "Tesseract.jpg": "Tesseract 3D Print",
-//     "USA Flag Model.jpg": "US Flag 3D Print",
-//     "USA Precipitation Map.jpg": "US Precipitation Map 3D Print",
-//     "USA Topographical blue 2.jpg": "US Topographical 3D Print",
-//     "USA Topographical.jpg": "US Topographical 3D Print",
-//     "UT Tower.jpg": "UT Tower 3D Print",
-//     "Water Drop 2.jpg": "Water Drop 3D Print",
-//     "butterfly eggs on leaf.jpg": "Monarch Eggs on Leaf 3D Print",
-//     "butterfly monarch egg.jpg": "Monarch Egg 3D Print",
-//     "iPhone Jamie 1.jpg": "iPhone 3D Print",
-//     "iPhone Jamie updated volume.jpg": "iPhone 3D Print"
-// }
+
 
 let template_handler = {
+
+    "index": async (res) => {
+        let title = "See3D - 3D Printing for the Blind"
+
+        // Grab News Links from API
+        let news_links = []
+
+        // Try to get news links
+        // TODO: Load Backup Data on Fail
+        try {
+            news_links = await api.get_axios_promise({
+                method: 'get',
+                url: 'https://see3d.org:8080/news-links',
+                headers: {
+                    'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`
+                }
+            })
+
+            news_links = news_links.data
+        } catch (error) {
+            console.log(error)
+        }
+
+        res.render('index', {
+            title, news_links
+        })
+    },
+
     /**
      * Serves gallery pages
      * 
@@ -110,12 +60,10 @@ let template_handler = {
      * @param pagenum the page number to serve
      */
     "gallery": (res, pagenum) => {
-        // Read in names of images
-        let filenames = fs.readdirSync(path.join(__dirname, '../public/new_site/img/gallery/'));
 
         var config = {
             method: 'get',
-            url: 'http://40.76.54.72:8090/galleries',
+            url: 'https://see3d.org:8080/galleries',
             headers: {
                 'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`
             }

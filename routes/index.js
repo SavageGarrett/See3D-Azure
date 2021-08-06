@@ -19,7 +19,6 @@ router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
 
 // Get Index Page
 router.get('/', (req, res, next) => {
-  let title = "See3D - 3D Printing for the Blind"
 
   // If Query is Defined Create Query
   if (req.query !== void 0) var query = req.query;
@@ -28,7 +27,7 @@ router.get('/', (req, res, next) => {
   if (query.testimony !== void 0) {
     res.render('testimony', { query });
   } else {
-    res.render('index', { title })
+    template_handler.index(res);
   }
   
 });
@@ -89,8 +88,7 @@ router.get('/:fname', (req, res, next) => {
       res.sendFile(path.join(__dirname, "../public/favicon.ico"));
       break;
     case "index": // Home Page
-      let title = "See3D - 3D Printing for the Blind"
-      res.render('index', { title })
+      template_handler.index(res);
       break;
     case "elements":
       // Send Elements Page
