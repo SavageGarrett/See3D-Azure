@@ -148,7 +148,7 @@ let template_handler = {
 
                     // Update Cleaned Data
                     gallery_data.push({
-                        url: `http://40.76.54.72:8090${image_url}`,
+                        url: `https://see3d.org:8080${image_url}`,
                         alt_text: alt_text
                     })
                 }

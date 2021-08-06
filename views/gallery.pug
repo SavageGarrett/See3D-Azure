@@ -4,6 +4,16 @@ include ./mixins.pug
 
 +header("See3D - Gallery", "Photo Gallery")
 
+//- Fix Wrong Color on Pagination Selector
+style.
+	body {
+		background: #F5F7FA !important;
+	}
+
+	.page-item.active .page-link {
+		background: #7cc8ff !important
+	}
+
 // / bradcam_area
 // about_start
 .popular_catagory_area

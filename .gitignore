@@ -4,3 +4,4 @@ node_modules/
 .sass-cache/
 public/new_site/scss/.sass-cache/
 .env_template
+ecosystem.config.js
