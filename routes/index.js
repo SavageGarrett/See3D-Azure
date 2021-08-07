@@ -119,7 +119,7 @@ router.get('/:fname', (req, res, next) => {
       res.render('request_info');
       break;
     case "team":
-      res.render('team');
+      template_handler.team(res);
       break;
     case "request":
       next();

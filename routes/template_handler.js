@@ -7,6 +7,9 @@ let api = require('./api')
 var url = "mongodb://localhost:27017/";
 var axios = require('axios');
 
+const dev_port = 8094
+const cms_url = (process.env.NODE_ENV !== 'production') ? `http://40.76.54.72:${dev_port}` : 'https://40.76.54.72:8080'
+
 // Month array to reference
 var month = new Array();
 month[0] = "January";
@@ -33,11 +36,10 @@ let template_handler = {
         let news_links = []
 
         // Try to get news links
-        // TODO: Load Backup Data on Fail
         try {
             news_links = await api.get_axios_promise({
                 method: 'get',
-                url: 'https://see3d.org:8080/news-links',
+                url: `${cms_url}/news-links`,
                 headers: {
                     'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`
                 }
@@ -48,8 +50,26 @@ let template_handler = {
             console.log(error)
         }
 
+        // Grab Sponsors from API
+        let sponsors = []
+
+        // Try to get sponsors
+        try {
+            sponsors = await api.get_axios_promise({
+                method: 'get',
+                url: `${cms_url}/sponsors`,
+                headers: {
+                    'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`
+                }
+            })
+
+            sponsors = sponsors.data
+        } catch (error) {
+            console.log(error)
+        }
+
         res.render('index', {
-            title, news_links
+            title, cms_url, news_links, sponsors
         })
     },
 
@@ -63,12 +83,13 @@ let template_handler = {
 
         var config = {
             method: 'get',
-            url: 'https://see3d.org:8080/galleries',
+            url: `${cms_url}/galleries`,
             headers: {
                 'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`
             }
         };
 
+        //TODO: Load Backup on Fail and Use Api.js
         axios(config)
             .then(function (response) {
                 //console.log(response.data) 
@@ -172,6 +193,30 @@ let template_handler = {
             .catch(function (error) {
                 console.log(error);
             });
+    },
+
+    "team": async (res) => {
+        // Grab Team Members from API
+        let team_members = []
+
+        // Try to get news links
+        try {
+            team_members = await api.get_axios_promise({
+                method: 'get',
+                url: `${cms_url}/team-members`,
+                headers: {
+                    'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`
+                }
+            })
+
+            team_members = team_members.data
+        } catch (error) {
+            console.log(error)
+        }
+
+        console.log(team_members)
+
+        res.render('team', { cms_url, team_members })
     },
 
     // Handles blog pages with their respective queries

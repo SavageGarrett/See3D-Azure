@@ -469,13 +469,17 @@ include ./mixins.pug
     .row
       .col-lg-12
         .candidate_active.owl-carousel
-          +donator('img/sponsors/CapitalOne.jpg', 'Capital One Logo', 'https://www.capitalone.com/', 'Capital One')
-          +donator('img/sponsors/innovation.png', 'The Ohio State University Innovation Studio logo', 'https://go.osu.edu/innovationstudio', 'The OSU Innovation Studio')
-          +donator('img/sponsors/ge.png', 'General Electric additive education program logo', 'https://www.ge.com/additive/stories/ge-additive-education-program-0', 'GE Additive Education')
-          +donator('img/sponsors/ic3d.png', 'IC3D Printers logo', 'https://ic3dprinters.com/', 'IC3D Printers')
-          +donator('img/sponsors/goodall.png', 'Jane goodall roots and shoots logo', 'https://janegoodall.org/our-work/our-approach/roots-shoots/', 'Jane Goodall\'s Roots and Shoots')
-          +donator('img/sponsors/vora.png', 'Vora Ventures logo', 'https://www.voraventures.com/', 'Vora Ventures')
-          +donator('img/sponsors/geckotek.png', 'GeckoTek logo', 'https://www.geckotek.co/', 'GeckoTek')
+          if sponsors.length > 0
+            each val in sponsors
+              +donator(`${cms_url}${val.image[0].url}`, val.alt_text, val.link, val.title)
+          else
+            +donator('img/sponsors/CapitalOne.jpg', 'Capital One Logo', 'https://www.capitalone.com/', 'Capital One')
+            +donator('img/sponsors/innovation.png', 'The Ohio State University Innovation Studio logo', 'https://go.osu.edu/innovationstudio', 'The OSU Innovation Studio')
+            +donator('img/sponsors/ge.png', 'General Electric additive education program logo', 'https://www.ge.com/additive/stories/ge-additive-education-program-0', 'GE Additive Education')
+            +donator('img/sponsors/ic3d.png', 'IC3D Printers logo', 'https://ic3dprinters.com/', 'IC3D Printers')
+            +donator('img/sponsors/goodall.png', 'Jane goodall roots and shoots logo', 'https://janegoodall.org/our-work/our-approach/roots-shoots/', 'Jane Goodall\'s Roots and Shoots')
+            +donator('img/sponsors/vora.png', 'Vora Ventures logo', 'https://www.voraventures.com/', 'Vora Ventures')
+            +donator('img/sponsors/geckotek.png', 'GeckoTek logo', 'https://www.geckotek.co/', 'GeckoTek')
 // featured_candidates_area_end
 // Company Card area (Potential Future Use)
 //
