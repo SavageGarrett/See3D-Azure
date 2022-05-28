@@ -31,6 +31,15 @@ if (process.env.NODE_ENV == "production") {
   });
 }
 
+// Redirect from www to https
+if (process.env.NODE_ENV == "production")
+{
+  app.use((req, res, next) => {
+    console.log(req.hostname);
+    next();
+  })
+}
+
 // Add Routes
 app.use('/', indexRouter);
 //app.use('/', webRouter);

@@ -1,35 +1,45 @@
 // Tab Title
 mixin index_header(title)
   doctype html
-  meta(charset='utf-8')
-  meta(http-equiv='x-ua-compatible', content='ie=edge')
-  title See3D - 3D Printing for the Blind
-  meta(name='description', content='')
-  meta(name='viewport', content='width=device-width, initial-scale=1')
-  // <link rel="manifest" href="site.webmanifest">
-  link(rel='icon', href='favicon.ico', type="image/icon")
-  // Place favicon.ico in the root directory
-  // CSS here
-  link(rel='stylesheet', href='css/bootstrap.min.css')
-  link(rel='stylesheet', href='css/owl.carousel.min.css')
-  link(rel='stylesheet', href='css/magnific-popup.css')
-  link(rel='stylesheet', href='css/font-awesome.min.css')
-  link(rel='stylesheet', href='css/themify-icons.css')
-  link(rel='stylesheet', href='css/nice-select.css')
-  link(rel='stylesheet', href='css/flaticon.css')
-  link(rel='stylesheet', href='css/gijgo.css')
-  link(rel='stylesheet', href='css/animate.min.css')
-  link(rel='stylesheet', href='css/slicknav.css')
-  link(rel='stylesheet', href='css/style.css')
-  // <link rel="stylesheet" href="css/responsive.css">
-  //if lte IE 9
-    p.browserupgrade
-      | You are using an 
-      strong outdated
-      |  browser. Please 
-      a(href='https://browsehappy.com/') upgrade your browser
-      |  to improve your experience and security.
-  // header-start
+  head
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='' src='https://www.googletagmanager.com/gtag/js?id=UA-153533872-1')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-153533872-1');
+
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    title See3D - 3D Printing for the Blind
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // <link rel="manifest" href="site.webmanifest">
+    link(rel='icon', href='favicon.ico', type="image/icon")
+    // Place favicon.ico in the root directory
+    // CSS here
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/owl.carousel.min.css')
+    link(rel='stylesheet', href='css/magnific-popup.css')
+    link(rel='stylesheet', href='css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/themify-icons.css')
+    link(rel='stylesheet', href='css/nice-select.css')
+    link(rel='stylesheet', href='css/flaticon.css')
+    link(rel='stylesheet', href='css/gijgo.css')
+    link(rel='stylesheet', href='css/animate.min.css')
+    link(rel='stylesheet', href='css/slicknav.css')
+    link(rel='stylesheet', href='css/style.css')
+    // <link rel="stylesheet" href="css/responsive.css">
+    //if lte IE 9
+      p.browserupgrade
+        | You are using an 
+        strong outdated
+        |  browser. Please 
+        a(href='https://browsehappy.com/') upgrade your browser
+        |  to improve your experience and security.
+    // header-start
+
   header
     .header-area
       #sticky-header.main-header-area
@@ -87,7 +97,15 @@ mixin index_header(title)
 mixin header(title, heading)
   doctype html
   html.no-js(lang='en')
-    head
+    head 
+      // Global site tag (gtag.js) - Google Analytics
+      script(async='' src='https://www.googletagmanager.com/gtag/js?id=UA-153533872-1')
+      script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-153533872-1');
+
       meta(charset='utf-8')
       meta(http-equiv='x-ua-compatible', content='ie=edge')
       title&attributes(attributes)=title
@@ -111,6 +129,7 @@ mixin header(title, heading)
       link(rel='stylesheet', href='css/style.css')
       // <link rel="stylesheet" href="css/responsive.css">
     body
+
       //if lte IE 9
         p.browserupgrade
           | You are using an 
@@ -194,20 +213,26 @@ mixin footer()
               .socail_links
                 ul
                   li
-                    a(aria-label='see3d facebook page', href='https://www.facebook.com/See3Dprintingfortheblind')
+                    a(aria-label='see3d facebook page', href='https://www.facebook.com/See3Dprintingfortheblind/')
                       i.ti-facebook
                   li
-                    a(aria-label='see3d linkedin page', href='https://www.linkedin.com/company/34946156')
-                      i.fa.fa-linkedin
-                  li
-                    a(aria-label='see3d twitter page', href='https://twitter.com/See3Dprinting')
+                    a(aria-label='see3d twitter page', href='https://twitter.com/see3dprinting?lang=en')
                       i.fa.fa-twitter
+                  li
+                    a(aria-label='see3d linkedin page', href='https://www.linkedin.com/company/34946156/')
+                      i.fa.fa-linkedin
                   li
                     a(aria-label='see3d instagram page', href='https://www.instagram.com/see.3d/')
                       i.fa.fa-instagram
                   li
                     a(aria-label='see3d thingiverse page', href='https://www.thingiverse.com/see3dprinting/collections')
-                      i.ti-facebook
+                      i.ti-download
+                  li
+                    a(aria-label='see3d Reddit page', href='https://www.reddit.com/user/See3DPrinting/')
+                      i.ti-reddit
+                  li
+                    a(aria-label='see3d TikTok Page', href='https://www.tiktok.com/@see3dprinting?')
+                      i.ti-tumblr
           .col-xl-2.col-md-6.col-lg-2
             .footer_widget.wow.fadeInUp(data-wow-duration='1.1s', data-wow-delay='.4s')
               h3.footer_title
@@ -289,10 +314,3 @@ mixin footer()
               script(src='js/jquery.validate.min.js')
               script(src='js/mail-script.js')
               script(src='js/main.js')
-  // Global site tag (gtag.js) - Google Analytics
-  script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-153533872-1')
-  script.
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-153533872-1');

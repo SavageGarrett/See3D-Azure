@@ -1045,6 +1045,10 @@ h3 {
   }
 }
 
+#navigation {
+  width: 750px !important;
+}
+
 /* 
     Nav Display on Every Page
  */

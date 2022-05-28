@@ -2,7 +2,7 @@
 
 // Creates a card like that seen in the model kit section on the home page with a learning guide link
 // Text to display, Thingiverse Link for model Kit, Link to refer to, Alt text for image, Link to learning guide
-mixin model_kit(title, thingiverse_link, image_link, alt_text, learning_guide)
+mixin model_kit(title, thingiverse_link, image_link, alt_text, learning_guide, brf_learning_guide)
   style.
     .title h4 {
       color: #005999 !important;
@@ -23,7 +23,10 @@ mixin model_kit(title, thingiverse_link, image_link, alt_text, learning_guide)
         h4&attributes(attributes)=title
       if learning_guide
         a(href=learning_guide, class="learning-guide")
-          h5(style='margin-top: 10px;') Learning Guide
+          h5(style='margin-top: 10px;') Word Doc Learning Guide
+      if brf_learning_guide 
+        a(href=brf_learning_guide, class="learning-guide")
+          h5(style='margin-top: 10px;') BRF Learning Guide
       img(src=image_link, alt=alt_text)
       
 

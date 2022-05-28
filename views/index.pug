@@ -16,6 +16,8 @@ include ./mixins.pug
               | A non-profit organization that manages the printing and distribution of 3D printed models for people who are blind.
             .slider_btn.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.5s')
               a.boxed-btn3(href='donate') Donate to See3D
+            .slider_btn.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.5s', style='margin-top: 20px;')
+              a.boxed-btn3(href='https://forms.gle/ybYM4iSU6FgjFVop8') Provide Feedback
   .ilstration_img.wow.fadeInRight.d-none.d-lg-block.text-right(data-wow-duration='1s', data-wow-delay='.2s')
     img(src='img/banner/illustration.png', alt='Background image with blue see3d logo')
 // slider_area_end
@@ -32,8 +34,7 @@ include ./mixins.pug
       .col-lg-12
         ul.unordered-list(style='padding-bottom: 13px;')
           li Distributed over 1,400 models since 2017
-          li Models sent to 23 states, 9 countries, and 23 organizations
-          li Connections made in 18 countries
+          li Models sent to 27 states, 17 countries, and 26 organizations
           li 13 organizations have awarded us grants, funding, or in-kind donations
           li You can support us via PayPal, check, AmazonSmile, or via in-kind donations
           li 
@@ -606,6 +607,7 @@ include ./mixins.pug
         .section_title.mb-40
           <h3 id="news"> News </h3>
     .row
+      +link_card("OSU - Growth 'model'", "https://www.osu.edu/features/2021/growth-model.html")
       +link_card("UATP Accessible Times Podcast", "https://utahatprogram.blogspot.com/2020/08/uatp-accessible-times-podcast-episode-2.html?m=1")
       +link_card("Easterseals", "https://www.eastersealstech.com/2018/10/12/atu385-see3d-3d-printing-for-the-blind-with-caroline-karbowski/")
       +link_card("Future Reflections", "https://www.nfb.org/images/nfb/publications/fr/fr39/1/fr390109.htm")
