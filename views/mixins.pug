@@ -22,13 +22,21 @@ mixin model_kit(title, thingiverse_link, image_link, alt_text, learning_guide, b
       a(href=thingiverse_link, class="title")
         h4&attributes(attributes)=title
       if learning_guide
-        a(href=learning_guide, class="learning-guide")
+        a(href=learning_guide, class="learning-guide doc")
           h5(style='margin-top: 10px;') Word Doc Learning Guide
       if brf_learning_guide 
-        a(href=brf_learning_guide, class="learning-guide")
+        a(href=brf_learning_guide, class="learning-guide brf")
           h5(style='margin-top: 10px;') BRF Learning Guide
       img(src=image_link, alt=alt_text)
-      
+///
+  for (let ele of document.getElementsByClassName("learning-guide brf"))
+  {
+      ele.addEventListener("click", function(){
+          gtag("event", "file_download", {
+              file_name: ele.href
+          });
+      })
+  }
 
 // Creates a card like that seen in the news section on the home page
 // Text to display, Link to refer to
