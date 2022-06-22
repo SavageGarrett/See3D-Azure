@@ -139,6 +139,9 @@ router.get('/:fname', (req, res, next) => {
     case "analytics":
       res.render('analytics');
       break;
+    case "aslmodels":
+      res.render('aslmodels');
+      break;
     default:
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
       break;
