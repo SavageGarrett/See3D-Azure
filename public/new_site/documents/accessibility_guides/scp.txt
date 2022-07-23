@@ -1,0 +1,14 @@
+SCP is useful for uploading documents to the see3d server, as we have not yet figured out how to upload files to VS Code yet in an accessible manner
+This writeup assumes some basic knowledge of traversing files in a linux system.
+
+1. On your local terminal or power shell you will use the scp command
+2. The scp command takes two arguments, first a source file and second a destination
+3. Here's an example usage first with powershell and second with a linux/mac terminal:
+Note the differences in backwards and forwards slashes used by windows vs. linux
+scp .\Downloads\test.png user@40.76.54.72:/home/user
+scp ./Downloads/test.png user@40.76.54.72:/home/user
+4. Make sure to replace the word user with the see3d server username you have been given
+5. This example shows uploading a file called test.png in the downloads folder to your home directory in the see3d linux server.
+6. The first argument is the local file on your machine
+7. The second argument is your see3d ssh login followed by a : and then followed by the directory to send the file to on the server.
+8. Upon running this command you will be prompted for your see3d password. Upon entering it you will be given the status of how far the file has uploaded.

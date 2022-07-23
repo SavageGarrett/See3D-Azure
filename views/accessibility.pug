@@ -1,0 +1,170 @@
+// A note from Garrett: I recommend working on this page iteratively - a few lines at a time
+// Getting ahead too far before testing for errors will cause you to lose track of errors and make them harder to find
+// I recommend using a working page, such as team.pug as a reference in case you have errors you are struggling to find
+// Make sure to pay attention to coding conventions which are outlined in some comments.
+// I've also remembered how annnoying tabbing with comments is in pug and you will want to be careful.
+// Make sure the comments before a line of code are at the same level of tabbing or further
+// Otherwise if they are at a lower tabbing level than the proceeding code, all code at that tabbing level will be commented out.
+// Visually this turns red for me, but I'm not sure if it notifies the screen reader for you.
+//end of note.
+
+// Note from Emril Bennett: It does not, but it will anounce if something is at a different tab level, so please, to any incoming blind developers, pay attention to your screen reader output.
+//if your screen reader is not anouncing tab leveling, feel free to consult the user guide for your particular product for configuration directions.
+//end of note.
+// First include the layout.pug file below this line. This will give you access to several mixins, which are useful for creating the the repeated header and footer.
+// You can do this by typing include ./layout.pug
+// This will not yet show anything visually on the website.
+include ./layout.pug 
+
+//include further mixins
+include ./mixins.pug 
+// Next, add the header of the page, by calling the header mixin. Remember calling mixins in pug require a + before the function call
+// the header function takes two parameters, first the title that will show up on the tab and second a page title which will display on the page
+// Tab Titles use the naming convention "See3D - Page Name" make sure to pay attention to capitalization
+// Page titles use a convention that the first letter of each word is capitalized
+// Make sure to confirm you see the header on the site before proceeding
++header("See3D - Accessibility", "Accessibility Resources")
+// Next, we are going to create some visual sections on the website.
+// First create a div element with a class of popular_catagory_area
+// Emril Bennett
+//That was added. 
+.popular_catagory_area
+  // This is going to set up the margins on either side of the page for the content
+  // This can be done by doing .popular_catagory_area
+  // pug automatically creates a div with a css class of classname by doing .classname
+  // Note: catagory is spelled wrong in the css class there is an a instead of an e in the word category because whoever created our template couldn't spell
+  // Tabbing up one level (2 spaces) create a div with class of container
+  //Emril Bennett
+  //Attempting to add the container div
+  .container 
+    // This tells a library called bootstrap we are going to create a container of horizontal rows
+    // Tabbing up another level (2 more spaces) create a div with class of row
+    //Emril Bennett
+    //attempts another div
+    .row
+      // This tells bootstrap we are defining the row of content
+      // Tabbing up another level (2 more spaces) create a div with a class of col-lg-12
+      //Emril Bennett
+      //interesting name for a class, but I will attempt.
+      .col-lg-12
+        // This is where the magic of bootstrap comes in
+    .row
+      .col-lg-12
+        h3 general 
+        // You can easily create vertically divided columns with the number on the end of the class. 12 denotes full width
+        // With the lg, lg can be replaced by sm, md, lg, or xl to control sizing based on different screen sizes
+        // In this example we use col-lg-12 to do full width on all screen sizes
+        // If this were to be replaced by two divs with col-lg-6 there will be 2 vertical columns next to each other on large screen sizes 
+        // Tabbing up another level (2 more spaces) create an h3 with text of Resources for Front End Development
+        // This can be done by typing h3 Text to Go Inside h3 Tag
+    .row
+      .col-lg-10
+        p-fix-font-20
+          |In order to get started with us, you will need to know your way around a few different applications.
+          |Firstly, Let's discuss slack.
+          |No matter the role, effective communication is essential to the organization, and knowing how to work efficiently through Slack will make your communication quicker, easier, and more effective.
+          | If you are blind or visually impaired, we have provided some useful links for using Slack:
+          ul.unordered-list(style='padding-bottom: 1px;')
+            li
+              a.text-link(href='https://slack.com/help/articles/360000411963-Use-a-screen-reader-with-Slack-on-desktop') Using Slack with a Screen Reader
+            li
+              a.text-link(href='https://slack.com/help/articles/201374536-Slack-keyboard-shortcuts') Slack Keyboard Shortcuts
+          |We hope this list of resources will help along your way as you learn to work efficiently in slack. 
+    //Before I create this row I want to mention that the Unordered list is a great scheme we should implement below.
+    .row
+      .col-lg-12
+        h3 Front End Development
+    
+      //Emril Bennett
+    //row div
+    .row
+      // Create another col-lg-12 div (tabbed 2 more spaces from the row div)♠
+    // Create another row div at the same tabbing as the first row div (both are encased next to each other in the container div)
+      //Emril Bennett
+      //Attempt collg12
+      .col-lg-12
+        // We are now go   ing to insert text inside of the new row
+        // Creating a new row gives some visual separation between the heading and the text
+        // Create an a tag with a class of text-link, that will temporarily link to see3d.org for testing purposes
+        // You can do so by typing a.text-link(href='https://see3d.org') Text that Someone Can Click to go to the Link
+        // Theres a lot in one line, so lets break it down.
+        // Followed by a class of .text-link, which styles it with some nice collors
+        // Folowed by href='link to go to on click' in parentheses
+        // Following the parentheses is the Text the Anchor Tag will display
+        // Go ahead an try to type it yourself if your struggling uncomment the following line and fix it's tabbing
+        //a.text-link(href='https://see3d.org:8083') Test Text
+        a.text-link(href='https://see3d.org:8083') Back to Homepage
+
+
+    // Now that you have successfully created a link on the website with the same tabbing add a link for each resource for the front end developer
+    // First it begins with the letter a, which is an anchor tag (essentially a link)
+    // Make sure each link has a brief description of what it is, as it is best practice for accessibility.
+
+    //now let's create some body text
+    .row
+      .col-lg-10
+        p.fix-font-20
+          |Front end development involves the management, adition, and or updating of a website's interface and content.
+          |Historically, this field of work has been dificult for team members and volunteers who are blind or low vision, due to it's reliance on visual aspects.
+          |Here at See3D, we believe in the freedom that comes when empowering individuals of all sight levels, to find the proper resources and live the life they want. With thisbelief in mind, our web development team has come together to create a list of resources for anyone interested in getting involved with us.
+          |We hope these resources help in your front end development journey, and improve your experience performing many common tasks. From log-in to editing, local to server side, their is sure to be a resource to fit your needs.
+    .row  
+  
+      .col-lg-12
+        h4 Account and Server
+    .row
+      .col-lg-12  
+        p.fix-font-20
+          |When you decide to get involved with us, an administrator will create an account for you.
+          |This account contains a user name and password which you will use to log in to your asure development server. 
+          |When you recieve your credentials from your administrator, be sure to have a look at the resources below.
+    .row
+      .col-lg-12 
+        a.text-link(href='https://see3d.org:8083') Test Page
+    .row
+      .col-lg-12
+        a.text-link(href='../documents/accessibility_guides/HowToLogIn.txt') Get started, learn how to log in. 
+    .row
+      .col-lg-12
+        p.fix-font-20
+          |In this document, you will learn how to log in and spin up your first web server.
+    .row 
+      .col-lg-12
+        a.text-link(href='../documents/accessibility_guides/scp.txt') Moving files is a regular task. Learn how to move files from your local machine to the See3D server. .
+        p.fix-font-20
+          |In this document, you will learn how to move files from your computer to the server. 
+          |Note: Some basic knowledge of how our servers work is necessary for understanding of this file, so we recommend viseting the
+          a.text-link(href='../documents/accessibility_guides/HowToLogIn.txt')  How to Log In File, 
+          |before moving on.  
+    .row 
+      .col-lg-10
+        p-fix-font-20
+          |Once you learn how to log in and move files, you may want to learn more advanced ways of managing your processes, so that you may keep sessions running longer and increase their efficiency.
+          a.text-link( href = '../documents/accessibility_guides/pm2.txt') Use this link to learn how to get the most out of your processes with pm2.
+          |We hope this document can help you when it comes time to manage your development processes. 
+      // Now that you have successfully created one section for the front end developer create a section for Marketing, Analytics, and Learning Plans.
+      // Each Section should have two .rows at the same tabbing level of the previous. The first .row containing the header and the second containing a sample link, which temporarily goes to see3d.org
+
+    .row
+      .col-lg-12 
+        h3 Marketing 
+    .row
+      .col-lg-12 
+        a.text-link(href='https://see3d.org:8083') Back to Homepage
+    .row
+      .col-lg-12 
+        h3 Learning Plans
+    .row
+      .col-lg-12 
+        a.text-link(href='https://see3d.org:8083') Back to Homepage
+    .row
+      .col-lg-12 
+        h3 Analytics
+    .row
+      .col-lg-12 
+        a.text-link(href='https://see3d.org:8083') Back to Homepage
+
+// Finally make a function call to footer (has no parameters and won't be tabbed at all)
++footer
+
+// This will add a footer to the bottom of the page with social media links and links to some pages, as well as a few other pieces of information

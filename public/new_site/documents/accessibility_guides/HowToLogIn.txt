@@ -1,0 +1,24 @@
+Signing in to the See3D Servers:
+
+1. Open Visual Studio Code
+2. Close the terminal if it is open by pressing Ctrl + `
+3. Press F1 and Search for and select Connect Current Window to host:
+4. Select 40.76.54.72 from the list of available hosts
+5. VS Code will prompt for your password, enter it to log in.
+6. Reopen the terminal in visual studio by pressing Ctrl + `
+7. cd into the See3D-Azure directory
+8. Type code . in order to open a VS code work space in the See3D-Azure directory
+9. Enter your password and you are now in the correct workspace, where you can search for files by pressing F1 and then backspace once.
+10. Close the first visual studio window to avoid confusion over which workspace is the correct one.
+11. If you struggle to identify, which workspace is the correct one try searching for a page such as team.pug. If you cannot see this, you are in the wrong workspace and that is the one to close.
+12. If using the VS Code terminal is less accessible, use ssh from powershell to establish a terminal connection.
+
+Running the See3D Web Servers:
+
+1. While your terminal is in the base of the See3D-Azure directory, run the command npm run dev and nodemon will spin up a web server.
+2. Listen for nodemon to announce the Secure port the web server is running on. If you accidentally use the insecure port, you will receive a security warning when viewing the page in a web browser.
+3. You can navigate to your live web server by going to https://see3d.org:portnumber Nodemon will automatically reload when a file is changed, but can be forcibly relaunched by running the command "rs"
+4. In the case a nodemon server is left running without being stopped, you will receive an error that the port failed to bind. Make sure to kill the server when you're done by spamming Ctrl + C a few times
+5. If a port fails to bind, you may change the port the server is running on by changing the PORT and SECURE_PORT variables in the .env file and rerunning. Available port options range from 8081 to 8100.
+6. If this happens, contact an admin to find and kill the fragmented process, and continue developing while working on a different port.
+7. When done make sure to logout by running the exit command in powershell or vs code terminal and by pressing F1 and searching and selecting Close Remote Host.

@@ -1,0 +1,33 @@
+Leaving The Server Running for an Extended Period of Time
+At see3d we use a process manager called pm2 in order to leave servers running and automatically restart if an error occurs.
+
+With the see3d code base, a file called ecosystem.config.js has been preconfigured to give details to pm2 on how to run the server including:
+- Name of the Server (See3D Production Site)
+- Command to run the server (node bin/www)
+- Flag to autorestart if the server errors or crashes
+
+You can start the see3d server by running the command:
+pm2 start
+
+This will spit out a table of information telling you the id's and names of servers running and the state they are in.
+
+You can see this table again by running the command:
+pm2 status
+
+If using a screen reader, listen closely for the id followed by the name to identify which server you want to execute the following commands.
+We are going to use an id of 0 as an example for the following commands.
+
+You can stop the server by running:
+pm2 stop 0
+
+You can restart the server by running:
+pm2 restart 0
+
+When in a stopped state, you can start the server by running:
+pm2 start 0
+
+You can view the server logs by running:
+pm2 logs 0
+
+You can remove the server from the list by running:
+pm2 delete 0
