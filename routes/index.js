@@ -141,6 +141,8 @@ router.get('/:fname', (req, res, next) => {
       break;
     case "accessibility":
       res.render('accessibility');
+    case "aslmodels":
+      res.render('aslmodels');
       break;
     default:
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
