@@ -45,6 +45,11 @@ router.post('/subscribe', (req, res) => {
   res.render('subscribe', {email});
 });
 
+// Get Blog Subscribers
+router.get('/get_subscribers', (req, res) => {
+  interaction_handler.retrieveBlogSubs(res);
+})
+
 // Post Blog form
 router.post('/post_blog', (req, res) => {
   // Validate Username and Password
