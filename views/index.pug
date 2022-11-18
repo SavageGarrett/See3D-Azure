@@ -10,13 +10,17 @@ include ./mixins.pug
     .container
       .row.align-items-center
         .col-lg-7.col-md-6
-        +homeContent('See3D','A non-profit organization that manages the printing and distribution of 3D printed models for people who are blind.','Donate to See3D',
-        'https://forms.gle/ybYM4iSU6FgjFVop8','Provide Feedback')
-
+          .slider_text
+            h3.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.3s') See3D
+            p.tagline-addin.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.4s')
+              | A non-profit organization that manages the printing and distribution of 3D printed models for people who are blind.
+            .slider_btn.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.5s')
+              a.boxed-btn3(href='donate') Donate to See3D
+            .slider_btn.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.5s', style='margin-top: 20px;')
+              a.boxed-btn3(href='https://forms.gle/ybYM4iSU6FgjFVop8') Provide Feedback
   .ilstration_img.wow.fadeInRight.d-none.d-lg-block.text-right(data-wow-duration='1s', data-wow-delay='.2s')
     img(src='img/banner/illustration.png', alt='Background image with blue see3d logo')
 // slider_area_end
-
 // impact_start
 .popular_catagory_area
   .container
@@ -29,7 +33,7 @@ include ./mixins.pug
       .col-lg-12
         ul.unordered-list(style='padding-bottom: 13px;')
           li Distributed over 2,400 models since 2017
-          li Models sent to 33 states, 17 countries, and 26 organizations
+          li Models sent to 34 states, 20 countries, and 28 organizations
           li 13 organizations have awarded us grants, funding, or in-kind donations
           li You can support us via PayPal, check, AmazonSmile, or via in-kind donations
           li 
@@ -41,17 +45,22 @@ include ./mixins.pug
              (function() {var iFrame = document.createElement('iframe'); iFrame.style.display = 'none'; iFrame.style.border = "none"; iFrame.width = 310; iFrame.height = 256; iFrame.setAttribute && iFrame.setAttribute('scrolling', 'no'); iFrame.setAttribute('frameborder', '0'); setTimeout(function() {var contents = (iFrame.contentWindow) ? iFrame.contentWindow : (iFrame.contentDocument.document) ? iFrame.contentDocument.document : iFrame.contentDocument; contents.document.open(); contents.document.write(decodeURIComponent("%3Cdiv%20id%3D%22amznCharityBannerInner%22%3E%3Ca%20href%3D%22https%3A%2F%2Fsmile.amazon.com%2Fch%2F84-3805114%22%20target%3D%22_blank%22%3E%3Cdiv%20class%3D%22text%22%20height%3D%22%22%3E%3Cdiv%20class%3D%22support-wrapper%22%3E%3Cdiv%20class%3D%22support%22%20style%3D%22font-size%3A%2025px%3B%20line-height%3A%2028px%3B%20margin-top%3A%2029px%3B%20margin-bottom%3A%2029px%3B%22%3ESupport%20%3Cspan%20id%3D%22charity-name%22%20style%3D%22display%3A%20inline-block%3B%22%3ESee3D%20Inc.%3C%2Fspan%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cp%20class%3D%22when-shop%22%3EWhen%20you%20shop%20at%20%3Cb%3Esmile.amazon.com%2C%3C%2Fb%3E%3C%2Fp%3E%3Cp%20class%3D%22donates%22%3EAmazon%20donates.%3C%2Fp%3E%3C%2Fdiv%3E%3C%2Fa%3E%3C%2Fdiv%3E%3Cstyle%3E%23amznCharityBannerInner%7Bbackground-image%3Aurl(https%3A%2F%2Fm.media-amazon.com%2Fimages%2FG%2F01%2Fx-locale%2Fpaladin%2Fcharitycentral%2Fbanner-background-image._CB485922134_.png)%3Bwidth%3A300px%3Bheight%3A250px%3Bposition%3Arelative%7D%23amznCharityBannerInner%20a%7Bdisplay%3Ablock%3Bwidth%3A100%25%3Bheight%3A100%25%3Bposition%3Arelative%3Bcolor%3A%23000%3Btext-decoration%3Anone%7D.text%7Bposition%3Aabsolute%3Btop%3A20px%3Bleft%3A15px%3Bright%3A15px%3Bbottom%3A100px%7D.support-wrapper%7Boverflow%3Ahidden%3Bmax-height%3A86px%7D.support%7Bfont-family%3AArial%2Csans%3Bfont-weight%3A700%3Bline-height%3A28px%3Bfont-size%3A25px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D.when-shop%7Bfont-family%3AArial%2Csans%3Bfont-size%3A15px%3Bfont-weight%3A400%3Bline-height%3A25px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D.donates%7Bfont-family%3AArial%2Csans%3Bfont-size%3A15px%3Bfont-weight%3A400%3Bline-height%3A21px%3Bcolor%3A%23333%3Btext-align%3Acenter%3Bmargin%3A0%3Bpadding%3A0%3Bbackground%3A0%200%7D%3C%2Fstyle%3E")); contents.document.close(); iFrame.style.display = 'block';}); document.getElementById('amznCharityBanner').appendChild(iFrame); })();
 
 // impact_end
-
 // job_searcing_wrap
 .job_searcing_wrap.overlay
   .container
     .row
       .col-lg-5.offset-lg-1.col-md-6
-        +searching_text('Donate to See3D', 'Click Below to Support us Financially', 'https://see3d.org/donate', 'Donate')
-        +searching_text('In-Kind Donations', 'We also accept in-kind donations of 3D printing supplies and some other blindness related items.', 'https://see3d.org/get_involved', 'More Info')
-
+        .searching_text
+          h3 Donate to See3D
+          p Click Below to Support us Financially
+          a.boxed-btn3-dark-bg(href='donate') Donate
+      .col-lg-5.offset-lg-1.col-md-6
+        .searching_text
+          h3 In-Kind Donations
+          p
+            | We also accept in-kind donations of 3D printing supplies and some other blindness related items.
+          a.boxed-btn3-dark-bg(href='get_involved') More Info
 // job_searcing_wrap end
-
 // about_start
 .popular_catagory_area
   .container
@@ -73,7 +82,6 @@ include ./mixins.pug
       .button-offset.d-lg-block
         a.boxed-btn3.bg-fix(href='about') More Info
 // about_end
-
 // request_start
 .popular_catagory_area.fix-top
   .container
@@ -90,8 +98,6 @@ include ./mixins.pug
       .button-offset.d-lg-block
         a.boxed-btn3.bg-fix(href='request_info') Request a Model
 // request_end
-
-
 // get_involved_start
 .popular_catagory_area.fix-top
   .container
@@ -107,8 +113,6 @@ include ./mixins.pug
       .button-offset.d-lg-block
         a.boxed-btn3(href='get_involved') More Info
 // get_involved_end
-
-
 // collaborations_start
 .testimonial_area.fix-top
   .container
@@ -134,7 +138,6 @@ include ./mixins.pug
                       | , Nigeria, 
                       a.text-link(href='https://tlecrehab.com/') TLEC Rehab Center for the Blind
                       | , Nigeria, St. Joseph's School for the Blind, Nigeria, Special School for the Blind in Abakalikki, Nigeria, and Mandokota School for the Blind, Malawi, by Clovernook’s collaborations.
-          
           .single_carousel
             .row
               .col-lg-11
@@ -193,8 +196,6 @@ include ./mixins.pug
                       | Printed astronomy models for a camp with 17 students in the United States and Australia at the 2020 virtual 
                       a.text-link(href='https://activities.osu.edu/involvement/student_organizations/find_a_student_org/?i=4df24af2-3d43-47c4-bbe8-88eba5167d4d&l=S&c=Columbus&page=1') SciAccess Zenith Space Mentorship Program.
 // collaborations_end
-
-
 // model_kits_start
 .fix-top.fix-bottom.popular_catagory_area
   .container
@@ -206,13 +207,19 @@ include ./mixins.pug
           | See3D now offers educational model kits that walk you through the model piece by piece. If you would like to request a model kit, please  indicate that in the model description on the request form.
     .row
       .col-lg-4.col-xl-3.col-md-6
-        +catagory('/index?model_kit=united-states-kit','United States Kit','img/thingiverse/United-States-Kit.jpg','United States 3D Model')
-        +catagory('/index?model_kit=anatomy-kit','Anatomy Kit','img/thingiverse/Anatomy-Kit.jpg','Intestine 3D Model')
-
-
+        .single_catagory
+          a(href='/index?model_kit=united-states-kit')
+            h4 United States Kit
+          img(src='img/thingiverse/United-States-Kit.jpg', alt='United States 3D Model')
+          // <p> <span>50</span> Available position</p>
+      .col-lg-4.col-xl-3.col-md-6
+        .single_catagory
+          a(href='/index?model_kit=anatomy-kit')
+            h4 Anatomy Kit
+          img(src='img/thingiverse/Anatomy-Kit.jpg', alt='Intestine 3D Model')
+          // <p> <span>50</span> Available position</p>
 // model_kits_end
        
-
 // six2020_start
 .fix-bottom.popular_catagory_area
   .container
@@ -233,7 +240,6 @@ include ./mixins.pug
           li Interviewed Model Recipients and wrote Blog Posts
 
 // six2020_end
-
 // featured_candidates_area_start
 .pad-top.fix-bottom.featured_candidates_area
   .container
@@ -252,8 +258,10 @@ include ./mixins.pug
           +donator('img/sponsors/vora.png', 'Vora Ventures logo', 'https://www.voraventures.com/', 'Vora Ventures')
           +donator('img/sponsors/geckotek.png', 'GeckoTek logo', 'https://www.geckotek.co/', 'GeckoTek')
           +donator('img/sponsors/SocietyForScienceLogo.jpg', 'Society for Science Logo', 'https://www.societyforscience.org/','Society For Science')
+          +donator('img/sponsors/clovernook.png', 'Clovernook Logo', 'https://clovernook.org/','Clovernook')
+          +donator('img/sponsors/exactmetrology.png', 'Exactmetrology Logo', 'https://www.exactmetrology.com/','Exactmetrology')
+          +donator('img/sponsors/dirdim.png', 'Dirdim Logo', 'http://www.dirdim.com/','Dirdim')
 // featured_candidates_area_end
-
 .testimonial_area
   .container
     .row
@@ -262,21 +270,61 @@ include ./mixins.pug
           h3 Testimonials
       .col-xl-12
         .testmonial_active.owl-carousel
-          +testmonial('img/testimonial/karen_arcos.png','Karen Arcos',
-          'I had a vague idea what a castle looked like in terms of the base. The top and towers were completely new to me; \'d always heard of towers and castles but didn\'t imagine the towers were a part of the castle.',
-          '/index?testimony=karen_arcos','Read More...','- Karen Arcos')
-          +testmonial('img/testimonial/rachel_hage.png','Rachel Hage',
-          'This is a great organization, and I continue to promote it to other blind/visually impaired individuals to use as a source for learning tactilely.',
-          '?testimony=rachel_hage','Read More...','- Rachel Hage')
-          +testmonial('img/testimonial/michelle_quinn.png','Snowflake 3D models made for michelle quinn',
-          'See3D has been a wonderful and valuable resource for my students who are blind and visually impaired. They absolutely love the tactual models of their favorite movie characters such as R2D2 from Star Wars and the Minions.',
-          '?testimony=michelle_quinn','Read More...','- Michelle Quinn')
-          +testmonial('img/testimonial/winslow_parker.png','Klein bottle 3d models made for winslow parker',
-          'These weird shapes are fascinating and I find myself exploring the model while my brain is busy doing its thing. Thanks Caroline, all you other volunteers and those who contribute financially to this project. Very helpful and enlightening.',
-          '?testimony=winslow_parker','Read More...','- Winslow Parker')
-
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/testimonial/karen_arcos.png', alt='Karen Arcos')
+                    .quote_icon
+                      i.Flaticon.flaticon-quote
+                  // Added the class fix-font-20 to change font size - Viren
+                  .info.fix-font-20
+                    p
+                      | "I had a vague idea what a castle looked like in terms of the base. The top and towers were completely new to me; I'd always heard of towers and castles but didn't imagine the towers were a part of the castle."
+                    // Added the class text-link to all Read More Links - Viren
+                    a(href='/index?testimony=karen_arcos') Read More... 
+                    span - Karen Arcos
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/testimonial/rachel_hage.png', alt='Rachel Hage')
+                    .quote_icon
+                      i.Flaticon.flaticon-quote
+                  .info.fix-font-20
+                    p
+                      | "This is a great organization, and I continue to promote it to other blind/visually impaired individuals to use as a source for learning tactilely."
+                    a(href='?testimony=rachel_hage') Read More...
+                    span - Rachel Hage
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/testimonial/michelle_quinn.png', alt='Snowflake 3D models made for michelle quinn')
+                    .quote_icon
+                      i.Flaticon.flaticon-quote
+                  .info.fix-font-20
+                    p
+                      | "See3D has been a wonderful and valuable resource for my students who are blind and visually impaired. They absolutely love the tactual models of their favorite movie characters such as R2D2 from Star Wars and the Minions."
+                    a(href='?testimony=michelle_quinn') Read More...
+                    span - Michelle Quinn
+          .single_carousel
+            .row
+              .col-lg-11
+                .single_testmonial.d-flex.align-items-center
+                  .thumb
+                    img(src='img/testimonial/winslow_parker.png', alt='Klein bottle 3d models made for winslow parker')
+                    .quote_icon
+                      i.Flaticon.flaticon-quote
+                  .info.fix-font-20
+                    p
+                      | "These weird shapes are fascinating and I find myself exploring the model while my brain is busy doing its thing. Thanks Caroline, all you other volunteers and those who contribute financially to this project. Very helpful and enlightening."
+                    a(href='?testimony=winslow_parker') Read More...
+                    span - Winslow Parker
 // /testimonial_area
-
 // articles_start
 .fix-top.popular_catagory_area
   .container
@@ -296,3 +344,4 @@ include ./mixins.pug
 // articles_end
           
 +footer()
+
