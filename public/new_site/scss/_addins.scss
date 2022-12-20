@@ -11,11 +11,6 @@
     font-size: 24px;
 }
 
-.header-area .main-header-area.sticky {
-    max-height: 89px;
-    overflow: hidden;
-}
-
 .testimonial_area {
     background: #F5F7FA !important;
 }
@@ -141,11 +136,6 @@
 
 .testimonial_area .single_testmonial .info{
     font-size: 24px;
-}
-
-.header-area .main-header-area.sticky {
-    max-height: 89px;
-    overflow: hidden;
 }
 
 .testimonial_area {
@@ -288,7 +278,9 @@
 }
 
 .header-area .main-header-area.sticky {
+    height: 115px !important;
     overflow: unset !important;
+    top: -71px !important;
 }
 
 /*
