@@ -1045,8 +1045,8 @@ h3 {
   }
 }
 
-#navigation {
-  width: 750px !important;
+.navigation {
+  width: 825px !important;
 }
 
 /* 
@@ -1235,7 +1235,11 @@ h3 {
 .header-area .main-header-area .main-menu {
   text-align: center;
 }
+.header-area .main-header-area .main-menu ul {
+  display: flex;
+}
 .header-area .main-header-area .main-menu ul li {
+  width: flex;
   display: inline-block;
   position: relative;
   margin: 0 25px;

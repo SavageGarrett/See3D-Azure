@@ -160,7 +160,9 @@
         .main-menu{
             text-align: center;
             ul{
+                display: flex;
                 li{
+                    width: flex;
                     display: inline-block;
                     position: relative;
                     margin: 0 25px;
