@@ -58,87 +58,93 @@ include ./mixins.pug
           | Our organization's tax forms are available for public inspection as per IRS requirements. Please send us your name, email or street address and we will send you a copy. 
     
     
-    .progress-table-wrap
-      .progress-table
+    .progress-table(style="background: #F5F7FA !important; margin-top: 40px;")
+      .section_title.mb-40
+        .country 
+          h3 Countries
+      p.fix-font-20
+        | Below is a list of countries which we have sent 3D models to over the years.
+
+      .col-lg-30  
+        .table-row
+          .country
+            img(src="img/elements/f2.jpg", alt="United States")
+            | USA
+          .country
+            img(src="img/elements/f1.jpg", alt="Canada")
+            | Canada
+          .country
+            img(src="https://flagcdn.com/w40/kg.png" width = 49.985 height = 29.985, alt="Bishkek")
+            | Bishkek 
+
+        .table-row
+          .country
+            img(src="https://flagcdn.com/w40/kg.png" width = 49.985 height = 29.985, alt="Kyrgzstan")
+            | Kyrgzstan
+          .country
+            img(src="https://flagcdn.com/w40/ni.png" width = 49.985 height = 29.985, alt=" Nicaragua")
+            | Nicaragua
+          .country
+            img(src="https://flagcdn.com/w40/gy.png" width = 49.985 height = 29.985, alt="Guyana")
+            | Guyana
+
+        .table-row
+          .country
+            img(src="https://flagcdn.com/w40/in.png" width = 49.985 height = 29.985, alt="India")
+            | India
+          .country
+            img(src="img/elements/f3.jpg", alt="Australia")
+            | Australia
+          .country
+            img(src="https://flagcdn.com/w40/mw.png" width = 49.985 height = 29.985, alt="Malawi")
+            | Malawi
+
+        .table-row
+          .country
+            img(src="https://flagcdn.com/w40/ng.png" width = 49.985 height = 29.985, alt="Nigeria")
+            | Nigeria
+          .country
+            img(src="https://flagcdn.com/w40/ke.png" width = 49.985 height = 29.985, alt="Kenya")
+            | Kenya
+          .country
+            img(src="https://flagcdn.com/w40/ke.png" width = 49.985 height = 29.985, alt="Mombosa")
+            | Mombosa
+
+        .table-row
+          .country
+            img(src="https://flagcdn.com/w40/ug.png" width = 49.985 height = 29.985, alt="Uganda")
+            | Uganda
+          .country
+            img(src="https://flagcdn.com/w40/so.png" width = 49.985 height = 29.985, alt="Somalia")
+            | Somalia
+          .country
+            img(src="https://flagcdn.com/w40/et.png" width = 49.985 height = 29.985, alt="Ethiopia")
+            | Ethiopia
+
+        .table-row
+          .country
+            img(src="https://flagcdn.com/w40/tz.png" width = 49.985 height = 29.985, alt="Tanzania")
+            | Tanzania
+          .country
+            img(src="https://flagcdn.com/w40/rw.png" width = 49.985 height = 29.985, alt="Rwanda")
+            | Rwanda
+          .country
+            img(src="https://flagcdn.com/w40/bi.png" width = 49.985 height = 29.985, alt="Burundi")
+            | Burundi
+
+        .table-row
+          .country
+            img(src="https://flagcdn.com/w40/za.png" width = 49.985 height = 29.985, alt="South Africa")
+            | South Africa
+
+    .row(style="margin-top: 40px;")
+      .col-lg-12
         .section_title.mb-40
-          .country 
-            h3 Countries
-        p.fix-font-20
-          | Below is a list of countries which we have sent 3D models to over the years.
-
-        .col-lg-30  
-          .table-row
-            .country
-              img(src="img/elements/f2.jpg", alt="United States")
-              | USA
-            .country
-              img(src="img/elements/f1.jpg", alt="Canada")
-              | Canada
-            .country
-              img(src="https://flagcdn.com/w40/kg.png" width = 49.985 height = 29.985, alt="Bishkek")
-              | Bishkek 
-
-          .table-row
-            .country
-              img(src="https://flagcdn.com/w40/kg.png" width = 49.985 height = 29.985, alt="Kyrgzstan")
-              | Kyrgzstan
-            .country
-              img(src="https://flagcdn.com/w40/ni.png" width = 49.985 height = 29.985, alt=" Nicaragua")
-              | Nicaragua
-            .country
-              img(src="https://flagcdn.com/w40/gy.png" width = 49.985 height = 29.985, alt="Guyana")
-              | Guyana
-
-          .table-row
-            .country
-              img(src="https://flagcdn.com/w40/in.png" width = 49.985 height = 29.985, alt="India")
-              | India
-            .country
-              img(src="img/elements/f3.jpg", alt="Australia")
-              | Australia
-            .country
-              img(src="https://flagcdn.com/w40/mw.png" width = 49.985 height = 29.985, alt="Malawi")
-              | Malawi
-
-          .table-row
-            .country
-              img(src="https://flagcdn.com/w40/ng.png" width = 49.985 height = 29.985, alt="Nigeria")
-              | Nigeria
-            .country
-              img(src="https://flagcdn.com/w40/ke.png" width = 49.985 height = 29.985, alt="Kenya")
-              | Kenya
-            .country
-              img(src="https://flagcdn.com/w40/ke.png" width = 49.985 height = 29.985, alt="Mombosa")
-              | Mombosa
-
-          .table-row
-            .country
-              img(src="https://flagcdn.com/w40/ug.png" width = 49.985 height = 29.985, alt="Uganda")
-              | Uganda
-            .country
-              img(src="https://flagcdn.com/w40/so.png" width = 49.985 height = 29.985, alt="Somalia")
-              | Somalia
-            .country
-              img(src="https://flagcdn.com/w40/et.png" width = 49.985 height = 29.985, alt="Ethiopia")
-              | Ethiopia
-
-          .table-row
-            .country
-              img(src="https://flagcdn.com/w40/tz.png" width = 49.985 height = 29.985, alt="Tanzania")
-              | Tanzania
-            .country
-              img(src="https://flagcdn.com/w40/rw.png" width = 49.985 height = 29.985, alt="Rwanda")
-              | Rwanda
-            .country
-              img(src="https://flagcdn.com/w40/bi.png" width = 49.985 height = 29.985, alt="Burundi")
-              | Burundi
-
-          .table-row
-            .country
-              img(src="https://flagcdn.com/w40/za.png" width = 49.985 height = 29.985, alt="South Africa")
-              | South Africa
+          h3 U.S. States
+        p.fixfont-20 Below is a map containing all the states which See3D has sent a model to. See3D's goal is to send a model to every state in America.
+        img#usa-map(src="./img/latest_usa_map.png" alt="An image of a map which contains all but 16 states filled in.")
           
-    .row.justify-content-end
+    .row.justify-content-end(style="margin-top: 20px;")
       .button-offset.d-lg-block
         a.boxed-btn3.bg-fix(href='index.html') Go Back
 

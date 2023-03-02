@@ -1064,6 +1064,13 @@ h3 {
   width: 120px !important;
 }
 
+/* 
+    USA Flag
+*/
+#usa-map {
+  width: 80% !important;
+}
+
 .header-area {
   left: 0;
   right: 0;
