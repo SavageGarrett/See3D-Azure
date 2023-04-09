@@ -24,7 +24,8 @@ var interaction_handler = {
         'ssemarketing',
         'advoter',
         'swooflia',
-        'buycodeshop'
+        'buycodeshop',
+        'data-backup-store.com'
     ],
 
     "retrieveBlogSubs": function(res_route) {
@@ -57,7 +58,13 @@ var interaction_handler = {
                         else return false;
                     });
                     console.log('Successfully retrieved blog subscribers results')
-                    res_route.json(filtered_result);
+
+                    let comma_separated = '';
+                    for (let entry of filtered_result) {
+                        comma_separated += entry.email + ", "
+                    }
+
+                    res_route.send(comma_separated);
                     db.close();
                 }
             });
