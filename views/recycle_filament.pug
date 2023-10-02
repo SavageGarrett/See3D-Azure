@@ -1,0 +1,62 @@
+
+include ./layout.pug
+include ./mixins.pug
+
++header("See3D - Recycle Filament", "Recycle Filament")
+
+// about_start
+.popular_catagory_area
+  .container
+    .row
+      .col-lg-12
+        .section_title.mb-40
+          h3 Filament Recycling
+    .row
+      .col-lg-10
+        p.fix-font-20
+          | You can recycle your filament via our collaboration with Printerior! Please mail your scraps of PLA and PETG filament, following the steps below and See3D receives discounts to purchase new filament to make more models for people who are blind or have low vision.
+        p.fix-font-20
+          | Here are the steps:
+        ol.ordered-list(style='padding-bottom: 1px;')
+            li 
+                span.span-fix 
+                    | Set up collection bins for each type of filament you use. Varieties of PLA and PETG must be separated as well (PLA+, Wood or Fiber filled, Glow in the dark, etc). You can even add this 
+                    a.text-link(href='img/recycling/recycling_box_sign.png') See3D recycling 
+                    | sign by your bin to spread the word!
+                ol.ordered-list-alpha
+                    li 
+                        span.span-fix Sorting by color is not necessary, but helpful
+                    li 
+                        span.span-fix If the parts have paint, glue or bed adhesives they cannot accept them. If it can be washed off before, please do.
+            li
+                span.span-fix Put each filament variant in a separate bag and label it with the type of filament.
+            li 
+                span.span-fix 
+                    | Print and handwrite or electronically edit the 
+                    a.text-link(href='img/recycling/recycling_tag.pdf') See3D Consumer Recycling Tag 
+                    | and print. The Business should be See3D and the email address is info@see3d.org. Please use your name for the name fields and include the filament types on the Materials & Weights line. You do not need to include the weight.
+                ol.ordered-list-alpha
+                    li
+                        span.span-fix  You can also handwrite or type the contents of the tag on a separate piece of paper and use that as the tag. Please include exactly what is below:
+                    ul.unordered-list
+                        li.ul
+                            span.span-fix First Name 
+                        li.ul
+                            span.span-fix Last Name
+                        li.ul
+                            span.span-fix Business: See3D
+                        li.ul
+                            span.span-fix Materials & Weights 
+                        li.ul
+                            span.span-fix Mail or drop off your filament at: Printerior 5145 Delmar Blvd, Suite 100 St. Louis, MO 63108
+    style.
+        .span-fix {
+            color: #001D38 !important;
+            font-size: 1rem !important;
+        }
+
+        .ul {
+            list-style-type: none !important;
+        }
+
++footer()

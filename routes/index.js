@@ -149,6 +149,9 @@ router.get('/:fname', (req, res, next) => {
     case "aslmodels":
       res.render('aslmodels');
       break;
+    case "recycle_filament":
+      res.render('recycle_filament');
+      break;
     default:
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
       break;
