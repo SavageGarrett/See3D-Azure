@@ -152,6 +152,12 @@ router.get('/:fname', (req, res, next) => {
     case "recycle_filament":
       res.render('recycle_filament');
       break;
+    case "privacy-policy":
+      res.sendFile(path.join(__dirname, '../public/new_site/documents/legal/privacy_policy.docx'));
+      break;
+    case "terms-of-use":
+      res.sendFile(path.join(__dirname, '../public/new_site/documents/legal/terms_of_use.docx'));
+      break;
     default:
       res.sendFile(path.join(__dirname, `../public/new_site/html/${fname}`));
       break;
