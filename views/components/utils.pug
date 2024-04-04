@@ -5,7 +5,8 @@ mixin showdown(markdownText, parentSelector)
       var customShowdownStyling = {
         type: 'output', // or 'lang' for language extensions
         filter: function (text, converter, options) {
-          var modifiedText = text.replace(/<ul>/g, '<ul class="unordered-list">');
+          var modifiedText = text.replace(/<ul>/g, '<ul class="unordered-list" style="padding-bottom: 13px;">');
+          modifiedText = modifiedText.replace(/<p>/g, '<p class="fix-font-20">');
 
           return modifiedText;
         }
