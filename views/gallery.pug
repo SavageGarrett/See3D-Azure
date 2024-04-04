@@ -21,7 +21,7 @@ style.
 		.row.gallery-item
 			each val, index in gallery_data
 				.col-md-4
-					a.img-pop-up(aria-label='View Image in Gallery Viewer', href=val alt=val.alt_text)
+					a.img-pop-up(aria-label='View Image in Gallery Viewer', href=val.url alt=val.alt_text)
 						.single-gallery-image(alt=val.alt_text style=`background: url('${val.url}');`)
 // about_end
 nav.blog-pagination.justify-content-center.d-flex(style='margin-bottom: 40px;')
