@@ -157,6 +157,7 @@ router.get('/:fname', (req, res, next) => {
       break;
     case 'accessibility':
       res.render('accessibility');
+      break;
     case 'aslmodels':
       res.render('aslmodels');
       break;
