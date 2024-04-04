@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "sh compile-sass.sh && nodemon bin/www"
+    "dev": "sh compile-sass.sh && nodemon bin/www",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "axios": ">=0.21.1",
@@ -20,5 +24,10 @@
     "nodemon": "^3.1.0",
     "package.json": "^2.0.1",
     "pug": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
   }
 }
