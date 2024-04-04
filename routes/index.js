@@ -77,7 +77,7 @@ router.post('/post_blog', (req, res) => {
 });
 
 // Serve Page Routes
-router.get('/:fname', (req, res, next) => {
+router.get('/:fname', async (req, res, next) => {
   // Strip File Names for Link Compatability
   let fname_split = req.params.fname.split('.');
   let fname = req.params.fname;
@@ -110,7 +110,7 @@ router.get('/:fname', (req, res, next) => {
       break;
     case 'gallery':
       // Handle Gallery
-      template_handler.gallery(res, req.query.p);
+      await template_handler.gallery(res, req.query.p);
       break;
     case 'blog':
       // Handle Blog

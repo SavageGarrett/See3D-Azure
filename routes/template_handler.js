@@ -107,125 +107,116 @@ let template_handler = {
    * @param res response object to send page render
    * @param pagenum the page number to serve
    */
-  gallery: (res, pagenum) => {
-    // Read in names of images
-    let filenames = fs.readdirSync(
-      path.join(__dirname, '../public/img/gallery/')
-    );
-
-    var config = {
+  gallery: async (res, pagenum) => {
+    let config = {
       method: 'get',
-      url: `http://40.76.54.72:8090/galleries`,
+      url: 'http://localhost:1337/api/gallery-photos?populate=*',
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
       },
     };
 
-    axios(config)
-      .then(function (response) {
-        //console.log(response.data)
+    try {
+      const { data } = await axios.request(config);
+      const gallery_data = data.data.map((val) => {
+        const imageFormats = val.attributes.image.data.attributes.formats;
 
-        // Loop Through Gallery Data and Add Useful Data
-        let gallery_data = [];
-        for (let i of response.data) {
-          // Get Available formats
-          let image_formats = i.image.formats;
+        let selectedUrl = '';
 
-          // Get Image Url in order of desired available format
-          let image_url = '';
-          if (image_formats.hasOwnProperty('medium'))
-            image_url = image_formats.medium.url;
-          else if (image_formats.hasOwnProperty('large'))
-            image_url = image_formats.large.url;
-          else if (image_formats.hasOwnProperty('small'))
-            image_url = image_formats.small.url;
-          else image_url = i.image.url;
-          let alt_text = i.alt_text;
-
-          // Update Cleaned Data
-          gallery_data.push({
-            url: `https://see3d.org:8080${image_url}`,
-            alt_text: alt_text,
-          });
+        // Prioritize selection based on the best available size, with 'large' being the maximum desired size
+        if (imageFormats.medium) {
+          selectedUrl = imageFormats.large.url;
+        } else if (imageFormats.large) {
+          selectedUrl = imageFormats.medium.url;
+        } else if (imageFormats.small) {
+          selectedUrl = imageFormats.small.url;
+        } else if (imageFormats.thumbnail) {
+          selectedUrl = imageFormats.thumbnail.url;
         }
 
-        // Declare arrays for template output
-        let display = [],
-          number_active = [],
-          number = [],
-          arrow_disp = [];
-        let plus_arrow, minus_arrow;
-        const items_per_page = 12;
-
-        // Serve first page if out of bounds (input validation)
-        if (
-          pagenum > Math.ceil(gallery_data.length / items_per_page) ||
-          isNaN(pagenum) ||
-          pagenum <= 1
-        ) {
-          pagenum = 0;
-        } else {
-          // Offset page number for array indexing
-          pagenum--;
-        }
-
-        let filenames = [];
-        let arr_alt = [];
-        // Loop through images on page
-        for (let i = 0; i < items_per_page; i++) {
-          // Display image if in valid range by adding to array
-          if (pagenum * items_per_page + i < gallery_data.length) {
-            filenames[i] = gallery_data[pagenum * items_per_page + i].url;
-            arr_alt[i] = gallery_data[pagenum * items_per_page + i].alt_text;
-            display.push('block');
-          } else {
-            filenames[i] = undefined;
-            display.push('none');
-          }
-        }
-
-        // Reset page number to true page number
-        pagenum++;
-
-        // Serve pagination via arrays (ignores edge cases of 3 or less pages)
-        if (pagenum == 1) {
-          // Handle first page
-          number = [pagenum, pagenum + 1, pagenum + 2];
-          number_active = ['active', '', ''];
-          arrow_disp = ['none', 'block']; // Sets display property for left/right arrow
-          plus_arrow = 2;
-          minus_arrow = 1;
-        } else if (pagenum == Math.ceil(gallery_data.length / items_per_page)) {
-          // Handle last page
-          number = [pagenum - 2, pagenum - 1, pagenum];
-          number_active = ['', '', 'active'];
-          arrow_disp = ['block', 'none'];
-          plus_arrow = 0;
-          minus_arrow = pagenum - 1;
-          console.log(minus_arrow);
-        } else {
-          // Handle any other page
-          number = [pagenum - 1, pagenum, pagenum + 1];
-          number_active = ['', 'active', ''];
-          arrow_disp = ['block', 'block'];
-          plus_arrow = pagenum + 1;
-          minus_arrow = pagenum - 1;
-        }
-
-        res.render('gallery', {
-          filenames,
-          arr_alt,
-          display,
-          number_active,
-          number,
-          arrow_disp,
-          plus_arrow,
-          minus_arrow,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+        return {
+          url: `http://localhost:1337${selectedUrl}`,
+          alt_text: val.attributes.image.data.attributes.alternativeText,
+        };
       });
+
+      console.log('TEST: ' + data.data.length);
+
+      // Declare arrays for template output
+      let display = [],
+        number_active = [],
+        number = [],
+        arrow_disp = [];
+      let plus_arrow, minus_arrow;
+      const items_per_page = 12;
+
+      // Serve first page if out of bounds (input validation)
+      if (
+        pagenum > Math.ceil(gallery_data.length / items_per_page) ||
+        isNaN(pagenum) ||
+        pagenum <= 1
+      ) {
+        pagenum = 0;
+      } else {
+        // Offset page number for array indexing
+        pagenum--;
+      }
+
+      let filenames = [];
+      let arr_alt = [];
+      // Loop through images on page
+      for (let i = 0; i < items_per_page; i++) {
+        // Display image if in valid range by adding to array
+        if (pagenum * items_per_page + i < gallery_data.length) {
+          filenames[i] = gallery_data[pagenum * items_per_page + i].url;
+          arr_alt[i] = gallery_data[pagenum * items_per_page + i].alt_text;
+          display.push('block');
+        } else {
+          filenames[i] = undefined;
+          display.push('none');
+        }
+      }
+
+      // Reset page number to true page number
+      pagenum++;
+
+      // Serve pagination via arrays (ignores edge cases of 3 or less pages)
+      if (pagenum == 1) {
+        // Handle first page
+        number = [pagenum, pagenum + 1, pagenum + 2];
+        number_active = ['active', '', ''];
+        arrow_disp = ['none', 'block']; // Sets display property for left/right arrow
+        plus_arrow = 2;
+        minus_arrow = 1;
+      } else if (pagenum == Math.ceil(gallery_data.length / items_per_page)) {
+        // Handle last page
+        number = [pagenum - 2, pagenum - 1, pagenum];
+        number_active = ['', '', 'active'];
+        arrow_disp = ['block', 'none'];
+        plus_arrow = 0;
+        minus_arrow = pagenum - 1;
+      } else {
+        // Handle any other page
+        number = [pagenum - 1, pagenum, pagenum + 1];
+        number_active = ['', 'active', ''];
+        arrow_disp = ['block', 'block'];
+        plus_arrow = pagenum + 1;
+        minus_arrow = pagenum - 1;
+      }
+
+      res.render('gallery', {
+        filenames,
+        arr_alt,
+        display,
+        number_active,
+        number,
+        arrow_disp,
+        plus_arrow,
+        minus_arrow,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   // Handles blog pages with their respective queries
