@@ -1,23 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
 
 // fonts
-$font1:  'Roboto', sans-serif;
-$font2:  'Roboto', sans-serif;
+$font1: 'Roboto', sans-serif;
+$font2: 'Roboto', sans-serif;
 // fonts-size
 
-$heading-color:#001D38;
+$heading-color: #001d38;
 $gray-color: #bebebe;
 $gray-color-2: #bdbdbd;
 
-$theme-color: #1F1F1F;
+$theme-color: #1f1f1f;
 $theme-color2: #007bff;
 
-$gray-color3:#5c5c5c;
-$white_color:#fff;
+$gray-color3: #5c5c5c;
+$white_color: #fff;
 $lightblue_color: #7cc8ff;
 $darkblue_color: #0056b3;
 $darkblue_button: #02406d;
-
 
 $font_1: #666666;
 $font_2: #646464;
@@ -30,15 +29,15 @@ $border_color: #fdcb9e;
 $footer_bg: #303030;
 $sidebar_bg: #fbf9ff;
 
-$medium_device : 'only screen and (min-width: 992px) and (max-width: 1200px)';
-$tab_device:'only screen and (min-width: 768px) and (max-width: 991px)';
+$medium_device: 'only screen and (min-width: 992px) and (max-width: 1200px)';
+$tab_device: 'only screen and (min-width: 768px) and (max-width: 991px)';
 $large_mobile: 'only screen and (min-width: 576px) and (max-width: 767px)';
-$tab:'(max-width: 991px)';
-$not_tab:'(min-width: 992px)';
-$small_mobile:'(max-width: 576px)';
-$xs_mobile:'(max-width: 420px)';
-$sm_mobile:'only screen and (min-width: 421px) and (max-width: 575px)';
-$big_screen:'only screen and (min-width: 1200px) and (max-width: 1440px)';
+$tab: '(max-width: 991px)';
+$not_tab: '(min-width: 992px)';
+$small_mobile: '(max-width: 576px)';
+$xs_mobile: '(max-width: 420px)';
+$sm_mobile: 'only screen and (min-width: 421px) and (max-width: 575px)';
+$big_screen: 'only screen and (min-width: 1200px) and (max-width: 1440px)';
 $extra_big_screen: 'only screen and (min-width: 1200px) and (max-width: 3640px)';
 
 // ,,,,,,,,,,,

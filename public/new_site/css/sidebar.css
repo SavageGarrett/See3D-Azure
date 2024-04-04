@@ -1,45 +1,37 @@
 * {
-
-margin: 0px;
-padding: 0px;
-font-family: sans-serif;
-
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
 }
 
 #sideBar {
-position: fixed;
-width: 200px;
-height: 100%;
-background:  #005999;
-left: -200px;
-transition: 0.5s;
-
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  background: #005999;
+  left: -200px;
+  transition: 0.5s;
 }
 
 #sideBar.active {
-left: 0px;
-
+  left: 0px;
 }
 
-
 #sideBar ul li {
-list-style: none;
-font-weight: bold;
-color: white;
-padding: 15px 10px;
-
+  list-style: none;
+  font-weight: bold;
+  color: white;
+  padding: 15px 10px;
 }
 
 #sideBar .toggleButton {
-position: absolute;
-left: 200px;
-top: 400px;
+  position: absolute;
+  left: 200px;
+  top: 400px;
 }
 
 #sideBar .toggleButton .fa-arrow-circle-right {
-
-background: #005999;
-height: 40px;
-width: 40px;
-
+  background: #005999;
+  height: 40px;
+  width: 40px;
 }

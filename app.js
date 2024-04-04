@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
-require('dotenv').config()
+require('dotenv').config();
 
 var app = express();
 
@@ -19,8 +19,8 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 // Redirect to https
-if (process.env.NODE_ENV == "production") {
-  app.use ((req, res, next) => {
+if (process.env.NODE_ENV == 'production') {
+  app.use((req, res, next) => {
     if (req.secure) {
       // request was via https, so do no special handling
       next();
@@ -32,12 +32,11 @@ if (process.env.NODE_ENV == "production") {
 }
 
 // Redirect from www to https
-if (process.env.NODE_ENV == "production")
-{
+if (process.env.NODE_ENV == 'production') {
   app.use((req, res, next) => {
     console.log(req.hostname);
     next();
-  })
+  });
 }
 
 // Add Routes
@@ -47,7 +46,7 @@ app.use('/', indexRouter);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
-  res.render('error')
+  res.render('error');
 });
 
 // error handler
