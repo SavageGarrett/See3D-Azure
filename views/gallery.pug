@@ -19,10 +19,10 @@ style.
 .popular_catagory_area
 	.container
 		.row.gallery-item
-			each val, index in filenames
+			each val, index in gallery_data
 				.col-md-4
-					a.img-pop-up(aria-label='View Image in Gallery Viewer', href=val alt=arr_alt[index])
-						.single-gallery-image(alt=arr_alt[index] style=`background: url('${val}'); display: ${display[0]};`)
+					a.img-pop-up(aria-label='View Image in Gallery Viewer', href=val alt=val.alt_text)
+						.single-gallery-image(alt=val.alt_text style=`background: url('${val.url}');`)
 // about_end
 nav.blog-pagination.justify-content-center.d-flex(style='margin-bottom: 40px;')
 	ul.pagination

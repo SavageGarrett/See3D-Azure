@@ -108,11 +108,19 @@ let template_handler = {
    * @param pagenum the page number to serve
    */
   gallery: async (res, pagenum) => {
+    let pageNumber = parseInt(pagenum);
+    if (isNaN(pageNumber)) pageNumber = 1;
+
+    const items_per_page = 12;
     let config = {
       method: 'get',
       url: 'http://localhost:1337/api/gallery-photos?populate=*',
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+      },
+      params: {
+        'pagination[page]': pageNumber.toString(),
+        'pagination[pageSize]': items_per_page,
       },
     };
 
@@ -124,9 +132,9 @@ let template_handler = {
         let selectedUrl = '';
 
         // Prioritize selection based on the best available size, with 'large' being the maximum desired size
-        if (imageFormats.medium) {
+        if (imageFormats.large) {
           selectedUrl = imageFormats.large.url;
-        } else if (imageFormats.large) {
+        } else if (imageFormats.medium) {
           selectedUrl = imageFormats.medium.url;
         } else if (imageFormats.small) {
           selectedUrl = imageFormats.small.url;
@@ -140,74 +148,40 @@ let template_handler = {
         };
       });
 
-      console.log('TEST: ' + data.data.length);
+      const { pageCount } = data.meta.pagination;
 
       // Declare arrays for template output
-      let display = [],
-        number_active = [],
+      let number_active = [],
         number = [],
         arrow_disp = [];
       let plus_arrow, minus_arrow;
-      const items_per_page = 12;
-
-      // Serve first page if out of bounds (input validation)
-      if (
-        pagenum > Math.ceil(gallery_data.length / items_per_page) ||
-        isNaN(pagenum) ||
-        pagenum <= 1
-      ) {
-        pagenum = 0;
-      } else {
-        // Offset page number for array indexing
-        pagenum--;
-      }
-
-      let filenames = [];
-      let arr_alt = [];
-      // Loop through images on page
-      for (let i = 0; i < items_per_page; i++) {
-        // Display image if in valid range by adding to array
-        if (pagenum * items_per_page + i < gallery_data.length) {
-          filenames[i] = gallery_data[pagenum * items_per_page + i].url;
-          arr_alt[i] = gallery_data[pagenum * items_per_page + i].alt_text;
-          display.push('block');
-        } else {
-          filenames[i] = undefined;
-          display.push('none');
-        }
-      }
-
-      // Reset page number to true page number
-      pagenum++;
 
       // Serve pagination via arrays (ignores edge cases of 3 or less pages)
-      if (pagenum == 1) {
+      if (pageNumber == 1) {
         // Handle first page
-        number = [pagenum, pagenum + 1, pagenum + 2];
+        number = [pageNumber, pageNumber + 1, pageNumber + 2];
         number_active = ['active', '', ''];
         arrow_disp = ['none', 'block']; // Sets display property for left/right arrow
         plus_arrow = 2;
         minus_arrow = 1;
-      } else if (pagenum == Math.ceil(gallery_data.length / items_per_page)) {
+      } else if (pageNumber == pageCount) {
         // Handle last page
-        number = [pagenum - 2, pagenum - 1, pagenum];
+        number = [pageNumber - 2, pageNumber - 1, pageNumber];
         number_active = ['', '', 'active'];
         arrow_disp = ['block', 'none'];
         plus_arrow = 0;
-        minus_arrow = pagenum - 1;
+        minus_arrow = pageNumber - 1;
       } else {
         // Handle any other page
-        number = [pagenum - 1, pagenum, pagenum + 1];
+        number = [pageNumber - 1, pageNumber, pageNumber + 1];
         number_active = ['', 'active', ''];
         arrow_disp = ['block', 'block'];
-        plus_arrow = pagenum + 1;
-        minus_arrow = pagenum - 1;
+        plus_arrow = pageNumber + 1;
+        minus_arrow = pageNumber - 1;
       }
 
       res.render('gallery', {
-        filenames,
-        arr_alt,
-        display,
+        gallery_data,
         number_active,
         number,
         arrow_disp,
