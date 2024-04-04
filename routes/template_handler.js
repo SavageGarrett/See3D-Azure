@@ -6,6 +6,7 @@ let ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/';
 var axios = require('axios');
 const { resolve } = require('path');
+const { STRAPI_URL } = require('./constants');
 
 // Month array to reference
 var month = new Array();
@@ -143,12 +144,14 @@ let template_handler = {
         }
 
         return {
-          url: `http://localhost:1337${selectedUrl}`,
+          url: `${STRAPI_URL}${selectedUrl}`,
           alt_text: val.attributes.image.data.attributes.alternativeText,
         };
       });
 
       const { pageCount } = data.meta.pagination;
+
+      if (pageNumber > pageCount) res.redirect(`/gallery?p=${pageCount}`);
 
       // Declare arrays for template output
       let number_active = [],
