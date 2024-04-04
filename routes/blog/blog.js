@@ -32,7 +32,7 @@ class Blog_Post {
     // Add blog post to database
     MongoClient.connect(url, (err, db) => {
       {
-        useUnifiedTopology: true;
+        true;
       }
       if (err) throw err;
 
@@ -46,7 +46,7 @@ class Blog_Post {
             image.image_input.path,
             path.join(
               __dirname,
-              `../../public/new_site/img/blog_posts/${result.insertedId}.jpg`
+              `../../public/img/blog_posts/${result.insertedId}.jpg`
             ),
             (err) => {
               if (err) console.log('Error Saving Image');

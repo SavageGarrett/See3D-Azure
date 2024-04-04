@@ -163,7 +163,7 @@ switch (fname_split[0]) {
 	  // Send a static file from public folder
       case "elements":
         // Send Elements Page
-        res.sendFile(path.join(__dirname, "../public/new_site/html/elements.html"));
+        res.sendFile(path.join(__dirname, "../public/html/elements.html"));
         break;
 	  // Call separate function to handle page
       case "gallery":

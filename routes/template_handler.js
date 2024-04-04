@@ -110,7 +110,7 @@ let template_handler = {
   gallery: (res, pagenum) => {
     // Read in names of images
     let filenames = fs.readdirSync(
-      path.join(__dirname, '../public/new_site/img/gallery/')
+      path.join(__dirname, '../public/img/gallery/')
     );
 
     var config = {
@@ -232,7 +232,7 @@ let template_handler = {
   blog: (res, query) => {
     MongoClient.connect(url, (err, db) => {
       {
-        useUnifiedTopology: true;
+        true;
       }
       if (err) {
         console.log('Error Connecting to Database');
