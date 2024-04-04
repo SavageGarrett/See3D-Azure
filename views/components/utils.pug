@@ -1,0 +1,24 @@
+mixin showdown(markdownText, parentSelector)
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      // Ensure customShowdownStyling is accessible
+      var customShowdownStyling = {
+        type: 'output', // or 'lang' for language extensions
+        filter: function (text, converter, options) {
+          var modifiedText = text.replace(/<ul>/g, '<ul class="unordered-list">');
+
+          return modifiedText;
+        }
+      };
+
+      showdown.extension('customShowdownStyling', customShowdownStyling);
+      var converter = new showdown.Converter({extensions: ['customShowdownStyling']});
+      
+      var markDown = `!{markdownText}`;
+      var htmlInject = converter.makeHtml(markDown);
+
+      // Use the parentSelector to target the right element
+      document.querySelector('!{parentSelector}').innerHTML += htmlInject;
+    });
+
+    
