@@ -3,4 +3,6 @@ exports.STRAPI_URL =
     ? `https://localhost:${process.env.STRAPI_PORT}`
     : `http://localhost:${process.env.STRAPI_PORT}`;
 
+exports.INDEX_PAGE = '/api/index-page';
+
 exports.GALLERY_PHOTOS = '/api/gallery-photos';

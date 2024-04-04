@@ -6,7 +6,7 @@ let ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/';
 var axios = require('axios');
 const { resolve } = require('path');
-const { STRAPI_URL, GALLERY_PHOTOS } = require('./constants');
+const { STRAPI_URL, GALLERY_PHOTOS, INDEX_PAGE } = require('./constants');
 const { getStrapiResource } = require('./util');
 
 // Month array to reference
@@ -102,7 +102,13 @@ month[11] = 'December';
 //     "iPhone Jamie updated volume.jpg": "iPhone 3D Print"
 // }
 
-let template_handler = {
+const template_handler = {
+  indexPage: async (res) => {
+    const { data } = await getStrapiResource(INDEX_PAGE, {});
+    console.log(data);
+    res.render('index', data.data.attributes);
+  },
+
   /**
    * Serves gallery pages
    *

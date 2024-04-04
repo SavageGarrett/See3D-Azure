@@ -20,7 +20,7 @@ router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
 });
 
 // Get Index Page
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   let title = 'See3D - 3D Printing for the Blind';
 
   // If Query is Defined Create Query
@@ -30,7 +30,7 @@ router.get('/', (req, res, next) => {
   if (query.testimony !== void 0) {
     res.render('testimony', { query });
   } else {
-    res.render('index', { title });
+    await template_handler.indexPage(res);
   }
 });
 
