@@ -6,7 +6,8 @@ let ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/';
 var axios = require('axios');
 const { resolve } = require('path');
-const { STRAPI_URL } = require('./constants');
+const { STRAPI_URL, GALLERY_PHOTOS } = require('./constants');
+const { getStrapiResource } = require('./util');
 
 // Month array to reference
 var month = new Array();
@@ -113,20 +114,12 @@ let template_handler = {
     if (isNaN(pageNumber)) pageNumber = 1;
 
     const items_per_page = 12;
-    let config = {
-      method: 'get',
-      url: 'http://localhost:1337/api/gallery-photos?populate=*',
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
-      },
-      params: {
-        'pagination[page]': pageNumber.toString(),
-        'pagination[pageSize]': items_per_page,
-      },
-    };
 
     try {
-      const { data } = await axios.request(config);
+      const { data } = await getStrapiResource(GALLERY_PHOTOS, {
+        'pagination[page]': pageNumber.toString(),
+        'pagination[pageSize]': items_per_page,
+      });
       const gallery_data = data.data.map((val) => {
         const imageFormats = val.attributes.image.data.attributes.formats;
 
