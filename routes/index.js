@@ -21,8 +21,6 @@ router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
 
 // Get Index Page
 router.get('/', async (req, res, next) => {
-  let title = 'See3D - 3D Printing for the Blind';
-
   // If Query is Defined Create Query
   if (req.query !== void 0) var query = req.query;
 
@@ -101,8 +99,7 @@ router.get('/:fname', async (req, res, next) => {
       res.sendFile(path.join(__dirname, '../public/favicon.ico'));
       break;
     case 'index': // Home Page
-      let title = 'See3D - 3D Printing for the Blind';
-      res.render('index', { title });
+      await template_handler.indexPage(res);
       break;
     case 'elements':
       // Send Elements Page
