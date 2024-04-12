@@ -6,3 +6,4 @@ exports.STRAPI_URL =
 exports.INDEX_PAGE = '/api/index-page';
 
 exports.GALLERY_PHOTOS = '/api/gallery-photos';
+exports.BLOG_ARTICLES = '/api/blogs';

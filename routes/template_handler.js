@@ -1,12 +1,18 @@
 var fs = require('fs');
 var path = require('path');
 var mongo = require('mongodb');
+const dayjs = require('dayjs');
 var MongoClient = mongo.MongoClient;
 let ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/';
 var axios = require('axios');
 const { resolve } = require('path');
-const { STRAPI_URL, GALLERY_PHOTOS, INDEX_PAGE } = require('./constants');
+const {
+  STRAPI_URL,
+  GALLERY_PHOTOS,
+  INDEX_PAGE,
+  BLOG_ARTICLES,
+} = require('./constants');
 const { getStrapiResource } = require('./util');
 
 // Month array to reference
@@ -105,7 +111,6 @@ month[11] = 'December';
 const template_handler = {
   indexPage: async (res) => {
     const { data } = await getStrapiResource(INDEX_PAGE, {});
-    console.log(data);
     res.render('index', data.data.attributes);
   },
 
@@ -196,102 +201,34 @@ const template_handler = {
   },
 
   // Handles blog pages with their respective queries
-  blog: (res, query) => {
-    MongoClient.connect(url, (err, db) => {
-      {
-        true;
-      }
-      if (err) {
-        console.log('Error Connecting to Database');
-        res.redirect('/404');
-      } else {
-        var dbo = db.db('blog');
-        dbo
-          .collection('blog')
-          .find({})
-          .sort({
-            date: -1,
-          })
-          .toArray((err, result) => {
-            if (err) {
-              console.log('Error Fetching Blog Posts from Database');
-              res.redirect('/404');
-            }
-
-            let display = [],
-              single = false;
-
-            // Loop through all results from db
-            for (let i = 0; i < result.length; i++) {
-              // Set proper month name to display
-              console.log(result[i].date);
-              var x = new Date(result[i].date);
-              console.log(x);
-              result[i].month = month[x.getMonth()].slice(0, 3);
-              console.log(result[i].month);
-
-              // Look for articles to include from search query
-              if (
-                query.hasOwnProperty('search') &&
-                result[i].title
-                  .toLowerCase()
-                  .includes(
-                    query.search.toLowerCase() ||
-                      result[i].paragraph
-                        .toLowerCase()
-                        .includes(query.search.toLowerCase()) ||
-                      result[i].article_description
-                        .toLowerCase()
-                        .includes(query.search.toLowerCase())
-                  )
-              ) {
-                display.push(result[i]);
-              } else if (
-                query.hasOwnProperty('category') &&
-                result[i]
-                  .toLowerCase()()
-                  .includes(query.category.toLowerCase()())
-              ) {
-                // Look for category in comma separated list of categories if queried (2nd priority)
-                display.push(result[i]);
-              } else if (
-                query.hasOwnProperty('id') &&
-                result[i]._id == query.id
-              ) {
-                display.push(result[i]);
-                single = true;
-              } else if (
-                !query.hasOwnProperty('search') &&
-                !query.hasOwnProperty('category') &&
-                !query.hasOwnProperty('id')
-              ) {
-                display.push(result[i]);
-              }
-            }
-
-            // If Single Blog Page
-            if (
-              single &&
-              !query.hasOwnProperty('search') &&
-              !query.hasOwnProperty('category')
-            ) {
-              // Send Individual post result and the fake tags injected in the text
-              result = display;
-              res.render('blog-single', {
-                result,
-              });
-            } else {
-              // Blog Page
-              result = display;
-              res.render('blog', {
-                result,
-              });
-            }
-
-            db.close();
-          });
-      }
+  blog: async (res, query) => {
+    const { data } = await getStrapiResource(BLOG_ARTICLES, {
+      sort: ['date:desc'],
     });
+
+    const posts = data.data.map((val) => {
+      const post = { ...val };
+      post.attributes.day = dayjs(post.attributes.date).date();
+      post.attributes.month = dayjs(post.attributes.date).format('MMM');
+
+      return post;
+    });
+
+    if (query.id) {
+      const post = posts.find((val) => {
+        return val.id == query.id;
+      });
+
+      res.render('blog-single', {
+        post,
+        strapi_url: STRAPI_URL,
+      });
+    } else {
+      res.render('blog', {
+        posts,
+        strapi_url: STRAPI_URL,
+      });
+    }
   },
 };
 

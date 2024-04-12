@@ -110,8 +110,7 @@ router.get('/:fname', async (req, res, next) => {
       await template_handler.gallery(res, req.query.p);
       break;
     case 'blog':
-      // Handle Blog
-      template_handler.blog(res, req.query);
+      await template_handler.blog(res, req.query);
       break;
     case 'donate':
       res.render('donate');
