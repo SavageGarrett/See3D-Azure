@@ -11,14 +11,6 @@ const formidable = require('formidable');
  * Web Routes
  */
 
-// Acme Challenge for SSL
-router.get('/.well-known/acme-challenge/:id', (req, res, next) => {
-  let id = req.params.id;
-  res.sendFile(
-    path.join(__dirname, `../public/.well-known/acme-challenge/${id}`)
-  );
-});
-
 // Get Index Page
 router.get('/', async (req, res, next) => {
   // If Query is Defined Create Query
@@ -47,31 +39,6 @@ router.post('/subscribe', (req, res) => {
 // Get Blog Subscribers
 router.get('/get_subscribers', (req, res) => {
   interaction_handler.retrieveBlogSubs(res);
-});
-
-// Post Blog form
-router.post('/post_blog', (req, res) => {
-  // Validate Username and Password
-
-  // Parse out form separating files and fields
-  new formidable.IncomingForm().parse(req, (err, fields, files) => {
-    if (err) {
-      // Catch and handle error
-      console.log('Error Processing Blog Post Form');
-    } else {
-      // Create new object to store blog post information
-      let blog_post = new Blog_Post(
-        fields.article_title,
-        fields.categories,
-        fields.paragraph,
-        fields.article_description,
-        fields.alt_text
-      );
-
-      // Store blog post and files
-      blog_post.store(res, files);
-    }
-  });
 });
 
 // Serve Page Routes
