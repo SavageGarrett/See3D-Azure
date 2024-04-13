@@ -142,7 +142,7 @@ router.get('/:fname', async (req, res, next) => {
       res.render('release');
       break;
     case 'board':
-      res.render('board_members');
+      await template_handler.boardPage(res);
       break;
     case 'analytics':
       res.render('analytics');

@@ -2,7 +2,7 @@ include ./components/layout.pug
 include ./components/mixins.pug
 
 
-+header("See3D - Board Members", "Board Members")
++header(tabTitle, pageTitle)
 
 // about_start
 .testimonial_area
@@ -16,13 +16,13 @@ include ./components/mixins.pug
           .quote_icon {
           display: none;
           }
-        +team_member('img/team/caroline3.jpg', 'caroline karbowski head shot', 'Caroline Karbowski - CEO and Founder', 'Graduate student in Sensory Impairments and Inclusion, with a focus on Orientation and Mobility (O&M) at The Ohio State University, Certified Braille Transcriber')
-        +team_member('img/team/emily.jpg', 'emily kiehl head shot', 'Emily Kiehl', 'Information Technology and MBA at University of Cincinnati')
-        +team_member('img/team/garrett.png', 'garrett carder head shot', 'Garrett Carder - CTO', 'Software Engineer @ Hyper Solutions Inc.')
-        +team_member('img/team/LindsayYazzalino.jpg', 'Lindsay Yazzolino touching a tactile bird', 'Lindsay Yazzolino', 'Nonvisual designer creating "hand-catching" tactile experiences; air travel enthusiast; AstroAccess Ambassador')
-        +team_member('img/team/SamuelFoulkes.jpg', 'Samuel Foulkes outside wearing a jacket and scarf', 'Samuel Foulkes', 'Director of Braille Production & Accessible Innovation at Clovernook Center for the Blind & Visually Impaired')
-        +team_member('img/team/DrewPinta.jpg', 'Drew Pinta wearing a black suit with an orange tie', 'Drew Pinta', 'Attorney at Carlile Patchen & Murphy LLP')
-        +team_member('img/team/cecelia.jpg', 'school photo of cecelia peirano', 'Cecelia Peirano', 'Retired Teacher of the Visually Impaired at Ohio State School for the Blind')
+        each val in teamMembers
+          +team_member(
+            strapi_url + val.profilePhoto.data.attributes.url,
+            val.profilePhoto.data.attributes.alternativeText,
+            val.name + (val.title !== null ? ` - ${val.title}` : ''),
+            val.occupation
+          )
 // about_end
 
 +footer()

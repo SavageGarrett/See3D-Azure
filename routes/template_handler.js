@@ -1,34 +1,13 @@
-var fs = require('fs');
-var path = require('path');
-var mongo = require('mongodb');
 const dayjs = require('dayjs');
-var MongoClient = mongo.MongoClient;
-let ObjectId = require('mongodb').ObjectID;
-var url = 'mongodb://localhost:27017/';
-var axios = require('axios');
-const { resolve } = require('path');
 const {
   STRAPI_URL,
   GALLERY_PHOTOS,
   INDEX_PAGE,
   BLOG_ARTICLES,
+  BOARD_PAGE,
+  DEFAULT_QUERY_STRING,
 } = require('./constants');
-const { getStrapiResource } = require('./util');
-
-// Month array to reference
-var month = new Array();
-month[0] = 'January';
-month[1] = 'February';
-month[2] = 'March';
-month[3] = 'April';
-month[4] = 'May';
-month[5] = 'June';
-month[6] = 'July';
-month[7] = 'August';
-month[8] = 'September';
-month[9] = 'October';
-month[10] = 'November';
-month[11] = 'December';
+const { getStrapiResource, constructQueryString } = require('./util');
 
 // Alt text of 94 images with their respective alt text
 // let alt_text = {
@@ -109,9 +88,36 @@ month[11] = 'December';
 // }
 
 const template_handler = {
+  /**
+   * Serves index page
+   *
+   * @param res response object to send page render
+   */
   indexPage: async (res) => {
-    const { data } = await getStrapiResource(INDEX_PAGE, {});
+    const { data } = await getStrapiResource(
+      INDEX_PAGE,
+      {},
+      DEFAULT_QUERY_STRING
+    );
     res.render('index', data.data.attributes);
+  },
+
+  /**
+   * Serves board members page
+   *
+   * @param res response object to send page render
+   */
+  boardPage: async (res) => {
+    const queryString = constructQueryString({
+      populate: ['teamMembers', 'teamMembers.profilePhoto'],
+    });
+
+    const { data } = await getStrapiResource(BOARD_PAGE, {}, queryString);
+
+    res.render('board_members', {
+      ...data.data.attributes,
+      strapi_url: STRAPI_URL,
+    });
   },
 
   /**
@@ -127,10 +133,14 @@ const template_handler = {
     const items_per_page = 12;
 
     try {
-      const { data } = await getStrapiResource(GALLERY_PHOTOS, {
-        'pagination[page]': pageNumber.toString(),
-        'pagination[pageSize]': items_per_page,
-      });
+      const { data } = await getStrapiResource(
+        GALLERY_PHOTOS,
+        {
+          'pagination[page]': pageNumber.toString(),
+          'pagination[pageSize]': items_per_page,
+        },
+        DEFAULT_QUERY_STRING
+      );
       const gallery_data = data.data.map((val) => {
         const imageFormats = val.attributes.image.data.attributes.formats;
 
@@ -200,11 +210,20 @@ const template_handler = {
     }
   },
 
-  // Handles blog pages with their respective queries
+  /**
+   * Serves list of blog entries and single blog pages
+   *
+   * @param res response object to send page render
+   * @param query filtered options
+   */
   blog: async (res, query) => {
-    const { data } = await getStrapiResource(BLOG_ARTICLES, {
-      sort: ['date:desc'],
-    });
+    const { data } = await getStrapiResource(
+      BLOG_ARTICLES,
+      {
+        sort: ['date:desc'],
+      },
+      DEFAULT_QUERY_STRING
+    );
 
     const posts = data.data.map((val) => {
       const post = { ...val };
