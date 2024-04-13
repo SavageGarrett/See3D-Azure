@@ -3,9 +3,7 @@ var router = express.Router();
 let interaction_handler = require('../interaction_handler.js');
 require('dotenv').config();
 var path = require('path');
-let template_handler = require('./template_handler.js');
-let Blog_Post = require('./blog/blog.js');
-const formidable = require('formidable');
+let templateHandler = require('./templateHandler.js');
 
 /*
  * Web Routes
@@ -20,7 +18,7 @@ router.get('/', async (req, res, next) => {
   if (query.testimony !== void 0) {
     res.render('testimony', { query });
   } else {
-    await template_handler.indexPage(res);
+    await templateHandler.indexPage(res);
   }
 });
 
@@ -66,7 +64,7 @@ router.get('/:fname', async (req, res, next) => {
       res.sendFile(path.join(__dirname, '../public/favicon.ico'));
       break;
     case 'index': // Home Page
-      await template_handler.indexPage(res);
+      await templateHandler.indexPage(res);
       break;
     case 'elements':
       // Send Elements Page
@@ -74,10 +72,10 @@ router.get('/:fname', async (req, res, next) => {
       break;
     case 'gallery':
       // Handle Gallery
-      await template_handler.gallery(res, req.query.p);
+      await templateHandler.gallery(res, req.query.p);
       break;
     case 'blog':
-      await template_handler.blog(res, req.query);
+      await templateHandler.blog(res, req.query);
       break;
     case 'donate':
       res.render('donate');
@@ -96,7 +94,7 @@ router.get('/:fname', async (req, res, next) => {
       res.render('request_info');
       break;
     case 'team':
-      await template_handler.teamPage(res);
+      await templateHandler.teamPage(res);
       break;
     case 'request':
       next();
@@ -109,7 +107,7 @@ router.get('/:fname', async (req, res, next) => {
       res.render('release');
       break;
     case 'board':
-      await template_handler.boardPage(res);
+      await templateHandler.boardPage(res);
       break;
     case 'analytics':
       res.render('analytics');
@@ -139,103 +137,45 @@ router.get('/:fname', async (req, res, next) => {
   }
 });
 
-// Route php requests that had directory on old server to index
-router.get('/:dirname/:fname', (req, res, next) => {
-  let fname = req.params.fname;
+// Serve files from various directories recursively
+router.get('/:type/*', (req, res) => {
+  const type = req.params.type; // 'css', 'js', 'img', 'fonts', 'documents'
+  const filePath = req.params[0]; // Capture all following path segments
+  let basePath = '';
 
-  // Redirect PHP pages from old site link
-  if (fname.includes('.php')) {
-    res.redirect('/');
-  } else {
-    // Pass On Request to 404 Handler
-    next();
+  switch (type) {
+    case 'css':
+      basePath = '../public/css';
+      break;
+    case 'js':
+      basePath = '../public/js';
+      break;
+    case 'img':
+      basePath = '../public/img';
+      break;
+    case 'fonts':
+      basePath = '../public/fonts';
+      break;
+    case 'documents':
+      basePath = '../public/documents';
+      break;
+    default:
+      // Handle unknown type
+      return res.status(404).send('Resource not found');
   }
-});
 
-// Serve CSS Files
-router.get('/css/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/css/${fname}`));
-});
+  const fullPath = path.join(__dirname, basePath, filePath);
 
-// Serve JavaScript Files
-router.get('/js/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/js/${fname}`));
-});
-
-// Serve Javascript Files
-router.get('/js/:dirname/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  let dirname = req.params.dirname;
-  res.sendFile(path.join(__dirname, `/../public/js/${dirname}/${fname}`));
-});
-
-// Serve Font Files
-router.get('/fonts/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/fonts/${fname}`));
-});
-
-// Serve Image Files
-router.get('/img/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  res.sendFile(path.join(__dirname, `/../public/img/${fname}`));
-});
-
-// Serve Image Files
-router.get('/img/:dirname/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  let dirname = req.params.dirname;
-  res.sendFile(path.join(__dirname, `/../public/img/${dirname}/${fname}`));
-});
-
-// Serve Image Files
-router.get('/img/:dirname/:dirname2/:fname', (req, res, next) => {
-  let fname = req.params.fname;
-  let dirname = req.params.dirname;
-  let dirname2 = req.params.dirname2;
-  res.sendFile(
-    path.join(__dirname, `/../public/img/${dirname}/${dirname2}/${fname}`)
-  );
-});
-
-// Serve Resume Files
-router.get('/documents/:name', (req, res, next) => {
-  let name = req.params.name;
-  res.sendFile(path.join(__dirname, `/../public/resume/${name}`));
-});
-
-// Serve Resume Files
-router.get('/documents/:dirname1/:name', (req, res, next) => {
-  let dirname1 = req.params.dirname1;
-  let name = req.params.name;
-  res.sendFile(
-    path.join(__dirname, `/../public/documents/${dirname1}/${name}`)
-  );
-});
-
-// Serve Resume Files
-router.get('/documents/:dirname1/:dirname2/:name', (req, res, next) => {
-  let dirname1 = req.params.dirname1;
-  let dirname2 = req.params.dirname2;
-  let name = req.params.name;
-
-  try {
-    res.sendFile(
-      path.join(
-        __dirname,
-        `/../public/documents/${dirname1}/${dirname2}/${name}`
-      )
-    );
-  } catch (error) {
-    console.log(
-      `Invalid Document Attempted: documents/${dirname1}/${dirname2}/${name}`
-    );
-
-    // Redirect to Index
-    res.redirect('/');
-  }
+  res.sendFile(fullPath, function (err) {
+    if (err) {
+      console.log(`Error sending file: ${fullPath}`);
+      if (err.status === 404) {
+        res.status(404).send('File not found');
+      } else {
+        res.status(500).send('Server error');
+      }
+    }
+  });
 });
 
 module.exports = router;
