@@ -6,6 +6,7 @@ const {
   BLOG_ARTICLES,
   BOARD_PAGE,
   DEFAULT_QUERY_STRING,
+  TEAM_PAGE,
 } = require('./constants');
 const { getStrapiResource, constructQueryString } = require('./util');
 
@@ -115,6 +116,24 @@ const template_handler = {
     const { data } = await getStrapiResource(BOARD_PAGE, {}, queryString);
 
     res.render('board_members', {
+      ...data.data.attributes,
+      strapi_url: STRAPI_URL,
+    });
+  },
+
+  /**
+   * Serves team members page
+   *
+   * @param res response object to send page render
+   */
+  teamPage: async (res) => {
+    const queryString = constructQueryString({
+      populate: ['teamMembers', 'teamMembers.profilePhoto'],
+    });
+
+    const { data } = await getStrapiResource(TEAM_PAGE, {}, queryString);
+
+    res.render('team', {
       ...data.data.attributes,
       strapi_url: STRAPI_URL,
     });

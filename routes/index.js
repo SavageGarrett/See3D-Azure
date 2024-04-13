@@ -129,7 +129,7 @@ router.get('/:fname', async (req, res, next) => {
       res.render('request_info');
       break;
     case 'team':
-      res.render('team');
+      await template_handler.teamPage(res);
       break;
     case 'request':
       next();
