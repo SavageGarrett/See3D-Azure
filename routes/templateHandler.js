@@ -7,6 +7,7 @@ const {
   BOARD_PAGE,
   DEFAULT_QUERY_STRING,
   TEAM_PAGE,
+  GET_INVOLVED_PAGE,
 } = require('./constants');
 const { getStrapiResource, constructQueryString } = require('./util');
 
@@ -101,6 +102,21 @@ const template_handler = {
       DEFAULT_QUERY_STRING
     );
     res.render('index', data.data.attributes);
+  },
+
+  /**
+   * Serves index page
+   *
+   * @param res response object to send page render
+   */
+  getInvolvedPage: async (res) => {
+    const { data } = await getStrapiResource(
+      GET_INVOLVED_PAGE,
+      {},
+      DEFAULT_QUERY_STRING
+    );
+
+    res.render('get_involved', data.data.attributes);
   },
 
   /**

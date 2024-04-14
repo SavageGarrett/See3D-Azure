@@ -88,7 +88,7 @@ router.get('/:fname', async (req, res, next) => {
       //res.render('contact');
       break;
     case 'get_involved':
-      res.render('get_involved');
+      await templateHandler.getInvolvedPage(res);
       break;
     case 'request_info':
       res.render('request_info');

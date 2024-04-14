@@ -15,6 +15,7 @@ exports.DEFAULT_QUERY_STRING = 'populate=*';
  * Page API Constants
  */
 exports.INDEX_PAGE = '/api/index-page';
+exports.GET_INVOLVED_PAGE = '/api/get-involved-page';
 exports.BOARD_PAGE = '/api/board-page';
 exports.TEAM_PAGE = '/api/team-page';
 

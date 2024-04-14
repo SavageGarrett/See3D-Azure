@@ -7,6 +7,7 @@ mixin showdown(markdownText, parentSelector)
         filter: function (text, converter, options) {
           var modifiedText = text.replace(/<ul>/g, '<ul class="unordered-list" style="padding-bottom: 13px;">');
           modifiedText = modifiedText.replace(/<p>/g, '<p class="fix-font-20">');
+          modifiedText = modifiedText.replace(/<h3[^>]*>(.*?)<\/h3>/gs, '<div class="section_title mb-20 mt-10"><h3>$1</h3></div>');
 
           return modifiedText;
         }
