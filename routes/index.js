@@ -83,10 +83,6 @@ router.get('/:fname', async (req, res, next) => {
     case 'about':
       res.render('about');
       break;
-    case 'contact':
-      next();
-      //res.render('contact');
-      break;
     case 'get_involved':
       await templateHandler.getInvolvedPage(res);
       break;
@@ -96,10 +92,6 @@ router.get('/:fname', async (req, res, next) => {
     case 'team':
       await templateHandler.teamPage(res);
       break;
-    case 'request':
-      next();
-      //res.render('request');
-      break;
     case 'post_blog.html':
       res.sendFile(path.join(__dirname, '../public/html/post_blog.html'));
       break;
@@ -108,9 +100,6 @@ router.get('/:fname', async (req, res, next) => {
       break;
     case 'board':
       await templateHandler.boardPage(res);
-      break;
-    case 'analytics':
-      res.render('analytics');
       break;
     case 'accessibility':
       res.render('accessibility');
