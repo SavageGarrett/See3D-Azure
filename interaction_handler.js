@@ -25,7 +25,10 @@ var interaction_handler = {
         'advoter',
         'swooflia',
         'buycodeshop',
-        'data-backup-store.com'
+        'data-backup-store.com',
+        'rightbliss.beauty',
+        'silesia.life',
+        'brasswire.me'
     ],
 
     "retrieveBlogSubs": function(res_route) {
