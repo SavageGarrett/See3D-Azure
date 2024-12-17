@@ -17,7 +17,9 @@ include ./mixins.pug
             .slider_btn.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.5s')
               a.boxed-btn3(href='donate') Donate to See3D
             .slider_btn.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.5s', style='margin-top: 20px;')
-              a.boxed-btn3(href='https://forms.gle/ybYM4iSU6FgjFVop8') Provide Feedback
+              a.boxed-btn3(href='https://forms.gle/ybYM4iSU6FgjFVop8') Individual Model Feedback Form
+            .slider_btn.wow.fadeInLeft(data-wow-duration='1s', data-wow-delay='.5s', style='margin-top: 20px;')
+              a.boxed-btn3(href='https://docs.google.com/forms/d/105hHCZY6RE4PxBhhmT3Yb66vuRIg3FAc8QM72XWh2Hg/viewform') Learning Guide Feedback Form
   .ilstration_img.wow.fadeInRight.d-none.d-lg-block.text-right(data-wow-duration='1s', data-wow-delay='.2s')
     img(src='img/banner/illustration.png', alt='Background image with blue see3d logo')
 // slider_area_end
@@ -216,7 +218,7 @@ include ./mixins.pug
         .single_catagory
           a(href='/index?model_kit=united-states-kit')
             h4 United States Kit
-          img(src='img/thingiverse/United-States-Kit.jpg', alt='United States 3D Model')
+          img(src='img/thingiverse/United-States-Kit.png', alt='United States 3D Model')
           // <p> <span>50</span> Available position</p>
       .col-lg-4.col-xl-3.col-md-6
         .single_catagory
@@ -267,11 +269,13 @@ include ./mixins.pug
           +donator('img/sponsors/exactmetrology.png', 'Exact Metrology Logo', 'https://www.exactmetrology.com/','Exact Metrology')
           +donator('img/sponsors/dirdim.png', 'Direct Dimensions', 'http://www.dirdim.com/','Direct Dimensions')
           +donator('img/sponsors/elegoo.png', 'Elegoo', 'https://www.elegoo.com/', 'Elegoo')
-          +donator('img/sponsors/enterprise_holdings.jpg', 'Enterprise Holdings Foundation', '#', 'Enterprise Holdings Foundation')
+          +donator('img/sponsors/enterprise_holdings_foundation.jpg', 'Enterprise Holdings Foundation', '#', 'Enterprise Holdings Foundation')
           +donator('img/sponsors/thestandard.jpg', 'The Standard', 'https://www.standard.com/', 'The Standard')
           +donator('img/sponsors/carlile_patchen_murphy.jpg', 'Carlile Patchen & Murphy', 'https://www.cpmlaw.com/', 'Carlile Patchen & Murphy')
           +donator('img/sponsors/sycamore_church.jpg', 'Sycamore Presbyterian Church', 'https://www.sycamorechurch.org/', 'Sycamore Presbyterian Church')
           +donator('img/sponsors/hueforge.jpg', 'Hue Forge', 'https://shop.thehueforge.com/', 'Hue Forge')
+          +donator('img/sponsors/ohio_epa.jpg', 'Ohio EPA - Recycle Ohio Grant Program', 'https://epa.ohio.gov/home', 'Ohio EPA - Recycle Ohio Grant Program')
+
 
 
 // featured_candidates_area_end
