@@ -1,4 +1,3 @@
-
 include ./layout.pug
 include ./mixins.pug
 
@@ -21,7 +20,7 @@ include ./mixins.pug
             li 
                 span.span-fix 
                     | Set up collection bins for each type of filament you use. Varieties of PLA and PETG must be separated as well (PLA+, Wood or Fiber filled, Glow in the dark, etc). You can even add this 
-                    a.text-link(href='img/recycling/recycling_box_sign.png') See3D recycling 
+                    a.text-link(href='img/recycling/recycling_box_sign_printerior.pdf') Printerior 
                     | sign by your bin to spread the word!
                 ol.ordered-list-alpha
                     li 
@@ -48,7 +47,37 @@ include ./mixins.pug
                         li.ul
                             span.span-fix Materials & Weights 
                         li.ul
-                            span.span-fix Mail or drop off your filament at: Printerior 5145 Delmar Blvd, Suite 100 St. Louis, MO 63108
+                            span.span-fix Mail or drop off your filament at: Printerior Designs, 670 Goddard Avenue. Chesterfield, MO 63005
+    .row
+      .col-lg-10
+        p.fix-font-20
+          | We also have specific recycling signs for different filament types that you can use:
+        ul.unordered-list
+          li
+            span.span-fix
+              a.text-link(href='img/recycling/recycle-pla.png') PLA Filament Recycling Sign
+              |  - Use this sign for standard PLA filament
+          li
+            span.span-fix
+              a.text-link(href='img/recycling/recycle-pla-plus.png') PLA+ Filament Recycling Sign
+              |  - Use this sign for PLA+ and enhanced PLA variants
+          li
+            span.span-fix
+              a.text-link(href='img/recycling/recycle-petg.png') PETG Filament Recycling Sign
+              |  - Use this sign for PETG filament
+        p.fix-font-20
+          | These signs can be printed and displayed near your collection bins to help identify the correct filament type for recycling.
+        p.fix-font-20
+          | For detailed instructions about the recycling program, please refer to the 
+          a.text-link(href='img/recycling/recycling_box_sign_printerior.pdf') Printerior Recycling Program Instructions
+          | .
+    .row
+      .col-lg-10
+        .sponsor-section.mt-5.pt-4.border-top
+          p.fix-font-20.text-center
+            | This program is sponsored in part by:
+          .text-center.mb-3
+            img(src='img/sponsors/ohio_epa.jpg', alt='Ohio EPA Logo', style='max-width: 200px; height: auto;')
     style.
         .span-fix {
             color: #001D38 !important;
