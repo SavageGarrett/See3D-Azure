@@ -203,9 +203,9 @@ mixin footer()
         .row
           .col-xl-3.col-md-6.col-lg-3
             .footer_widget.wow.fadeInUp(data-wow-duration='1s', data-wow-delay='.3s')
-              .footer_logo
-                a(href='#')
-                  img(src='img/logo.png', alt='white See3D logo')
+              .guidestar-seal.mt-3.mb-3
+                a(href='https://www.guidestar.org/profile/shared/eb212fec-f939-4814-8d40-5e2f47308eab', target='_blank')
+                  img(src='https://widgets.guidestar.org/TransparencySeal/9857794', alt='GuideStar Gold Seal of Transparency')
               p
                 | info@see3d.org 
                 br
@@ -287,6 +287,9 @@ mixin footer()
               |  by 
               a(href='https://colorlib.com', target='_blank') Colorlib
               // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+            .legal-links.text-center.mt-2
+              a(href='new_site/documents/legal/See3D Privacy Policy 2-7-2025.pdf', target='_blank', style='margin-right: 20px; color: #666; text-decoration: none;') Privacy Policy
+              a(href='new_site/documents/legal/See3D, Inc terms of service 2-7-2025.pdf', target='_blank', style='color: #666; text-decoration: none;') Terms of Service
               // / footer end
               // JS here
               script(src='js/vendor/modernizr-3.5.0.min.js')
