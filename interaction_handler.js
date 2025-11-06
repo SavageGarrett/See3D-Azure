@@ -28,7 +28,8 @@ var interaction_handler = {
         'data-backup-store.com',
         'rightbliss.beauty',
         'silesia.life',
-        'brasswire.me'
+        'brasswire.me',
+        'example.com'
     ],
 
     "retrieveBlogSubs": function(res_route) {

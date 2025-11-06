@@ -15,20 +15,114 @@ include ./mixins.pug
       .col-lg-10
         p.fix-font-20
           | Donations allow us to keep providing 3D models at no price to people who are blind. An average 6 inch model costs about $40 to print and a learning guide costs about $100 to produce. Click below to donate today!
-        p.fix-font-20
-          | Credit card donations can be processed through paypal.
-    .row(style='display: block; text-align: center;')
-      form(style='display: inline-block; margin-left:auto; margin-right: auto; text-align: left;', action='https://www.paypal.com/cgi-bin/webscr', method='post', target='_top')
-        input(type='hidden', name='cmd', value='_s-xclick')
-        input(type='hidden', name='hosted_button_id', value='CFQ4MENHYXSRU')
-        input(type='image', src='img/donate/donate.png', border='0', name='submit', title='PayPal - The safer, easier way to pay online!', alt='Donate with PayPal button')
-        img(alt='Donate with paypal', border='0', src='https://www.paypal.com/en_US/i/scr/pixel.gif', width='1', height='1')
-    .row(style='display: block; text-align: center;')
-      a(href='https://account.venmo.com/u/See3D')
-        img(alt='Donate with Venmo', src='img/donate/venmo.png', height='168px')
-    .row(style='display: block; text-align: center;')
+    
+    // Giving Tuesday Counter - Integrated
+    .row.justify-content-center.mb-5
+      .col-lg-10
+        .giving-tuesday-box(style='background: linear-gradient(135deg, #02406d 0%, #5db2ff 100%); border-radius: 15px; padding: 35px; box-shadow: 0 10px 30px rgba(2,64,109,0.3); margin: 20px 0; border: 3px solid #7cc8ff;')
+          .row.align-items-center
+            .col-md-12.text-center.mb-3
+              h4(style='color: white; font-weight: bold; font-size: 28px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;') 🎁 2025 Giving Tuesday Impact
+              p(style='color: rgba(255,255,255,0.95); font-size: 15px; line-height: 1.6; margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto;')
+                | Giving Tuesday (December 2nd) is a global generosity movement that takes place the Tuesday after Thanksgiving. It's a day dedicated to giving back and supporting causes that matter. Your donation helps us provide 3D models to people who are blind at no cost.
+            .col-md-6.text-center(style='border-right: 2px solid rgba(255,255,255,0.3);')
+              .stat-box(style='padding: 15px;')
+                p(style='color: rgba(255,255,255,0.9); font-size: 16px; margin-bottom: 8px; font-weight: 500;') Total Donated
+                p#giving-tuesday-total(style='color: white; font-size: 42px; font-weight: bold; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);') -
+            .col-md-6.text-center
+              .stat-box(style='padding: 15px;')
+                p(style='color: rgba(255,255,255,0.9); font-size: 16px; margin-bottom: 8px; font-weight: 500;') Total Donors
+                p#giving-tuesday-count(style='color: white; font-size: 42px; font-weight: bold; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);') -
+            .col-md-12.text-center.mt-4
+              p(style='color: rgba(255,255,255,0.95); font-size: 14px; margin: 0 0 20px 0; font-style: italic;') Donations from any source will be included in this total
+              .donation-buttons(style='display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;')
+                form(style='display: inline-block;', action='https://www.paypal.com/cgi-bin/webscr', method='post', target='_top')
+                  input(type='hidden', name='cmd', value='_s-xclick')
+                  input(type='hidden', name='hosted_button_id', value='CFQ4MENHYXSRU')
+                  input(type='image', src='img/donate/donate.png', border='0', name='submit', title='PayPal - The safer, easier way to pay online!', alt='Donate with PayPal button', style='height: 140px; transition: transform 0.2s;')
+                  img(alt='Donate with paypal', border='0', src='https://www.paypal.com/en_US/i/scr/pixel.gif', width='1', height='1')
+                a(href='https://account.venmo.com/u/See3D', style='display: inline-block; background: white; padding: 10px 15px; border-radius: 8px;')
+                  img(alt='Donate with Venmo', src='img/donate/venmo.png', height='140px', style='transition: transform 0.2s; display: block;')
+    
+    .row(style='display: block; text-align: center; margin-top: 30px;')
       a(href='https://www.igive.com/index.cfm/causetoolbox/joinlink')
-        img(alt='Show with I Give and donate to see3d', src='img/donate/igive.png', height='168px')
+        img(alt='Show with I Give and donate to see3d', src='img/donate/igive.png', style='max-height: 168px; max-width: 100%; width: auto; height: auto;')
+    
+    style.
+      .donation-buttons img:hover,
+      .donation-buttons input[type="image"]:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+      @media (max-width: 768px) {
+        .giving-tuesday-box .col-md-6 {
+          border-right: none !important;
+          border-bottom: 2px solid rgba(255,255,255,0.3);
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+        }
+        .giving-tuesday-box .col-md-6:last-of-type {
+          border-bottom: none;
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+      }
+    
+    script.
+      (function(){
+        var CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRECscLxIyWSZp9_5iVdfGr32jqBl-7RgFFu3dBtgiEnShyxIsfY3JZv5VriWNoJuQu-ZNsld1MHEMF/pub?gid=0&single=true&output=csv';
+        function formatUSD(x){
+          try { return x.toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:0}); } catch(e){ return '$' + Math.round(x); }
+        }
+        function cleanAmount(v){
+          if(v == null) return NaN;
+          var s = String(v).trim().replace(/[^0-9.\-]/g,'');
+          return s ? parseFloat(s) : NaN;
+        }
+        function toInt(v){
+          var n = parseInt(String(v).trim(), 10);
+          return isNaN(n) ? 0 : n;
+        }
+        function update(total, donors){
+          var totalEl = document.getElementById('giving-tuesday-total');
+          var donorsEl = document.getElementById('giving-tuesday-count');
+          if(totalEl) totalEl.textContent = formatUSD(total);
+          if(donorsEl) donorsEl.textContent = String(donors);
+        }
+        fetch(CSV_URL, { cache: 'no-store' })
+          .then(function(res){ return res.text(); })
+          .then(function(csv){
+            var linesAll = csv.split(/\r?\n/);
+            // find first non-empty line as header
+            var headerLineIdx = -1;
+            for(var i=0;i<linesAll.length;i++){
+              if(linesAll[i] && linesAll[i].trim().length){ headerLineIdx = i; break; }
+            }
+            if(headerLineIdx === -1){ update(0,0); return; }
+            var headers = linesAll[headerLineIdx].split(',').map(function(h){ return h.trim().toLowerCase(); });
+            // find next non-empty data line
+            var dataLine = null;
+            for(var j=headerLineIdx+1;j<linesAll.length;j++){
+              var ln = linesAll[j];
+              if(!ln) continue;
+              if(ln.trim().length === 0) continue;
+              // skip lines that are just commas or quotes
+              if(ln.replace(/[",\s]/g,'').length === 0) continue;
+              dataLine = ln; break;
+            }
+            if(!dataLine){ update(0,0); return; }
+            var cols = dataLine.split(',');
+            var idxAmount = headers.findIndex(function(h){ return h.indexOf('total money raised') !== -1 || h.indexOf('amount') !== -1; });
+            var idxDonations = headers.findIndex(function(h){ return h.indexOf('# of donations') !== -1 || h.indexOf('donations') !== -1; });
+            var total = 0;
+            var donors = 0;
+            if(idxAmount >= 0) total = cleanAmount(cols[idxAmount]);
+            if(idxDonations >= 0) donors = toInt(cols[idxDonations]);
+            if(!isFinite(total)) total = 0;
+            update(total, donors);
+          })
+          .catch(function(){ update(0,0); });
+      })()
 
     br
     br
