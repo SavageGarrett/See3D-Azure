@@ -83,6 +83,29 @@ include ./mixins.pug
           var n = parseInt(String(v).trim(), 10);
           return isNaN(n) ? 0 : n;
         }
+        function parseCsvLine(line){
+          var result = [];
+          var current = '';
+          var inQuotes = false;
+          for(var i = 0; i < line.length; i++){
+            var ch = line[i];
+            if(ch === '"'){
+              if(inQuotes && i + 1 < line.length && line[i+1] === '"'){
+                current += '"';
+                i++;
+              } else {
+                inQuotes = !inQuotes;
+              }
+            } else if(ch === ',' && !inQuotes){
+              result.push(current);
+              current = '';
+            } else {
+              current += ch;
+            }
+          }
+          result.push(current);
+          return result;
+        }
         function update(total, donors){
           var totalEl = document.getElementById('giving-tuesday-total');
           var donorsEl = document.getElementById('giving-tuesday-count');
@@ -99,7 +122,7 @@ include ./mixins.pug
               if(linesAll[i] && linesAll[i].trim().length){ headerLineIdx = i; break; }
             }
             if(headerLineIdx === -1){ update(0,0); return; }
-            var headers = linesAll[headerLineIdx].split(',').map(function(h){ return h.trim().toLowerCase(); });
+            var headers = parseCsvLine(linesAll[headerLineIdx]).map(function(h){ return h.trim().toLowerCase(); });
             // find next non-empty data line
             var dataLine = null;
             for(var j=headerLineIdx+1;j<linesAll.length;j++){
@@ -111,7 +134,7 @@ include ./mixins.pug
               dataLine = ln; break;
             }
             if(!dataLine){ update(0,0); return; }
-            var cols = dataLine.split(',');
+            var cols = parseCsvLine(dataLine);
             var idxAmount = headers.findIndex(function(h){ return h.indexOf('total money raised') !== -1 || h.indexOf('amount') !== -1; });
             var idxDonations = headers.findIndex(function(h){ return h.indexOf('# of donations') !== -1 || h.indexOf('donations') !== -1; });
             var total = 0;
